@@ -115,3 +115,11 @@ components/        # Reusable UI components
 lib/               # Utility and API helpers
 atoms/             # Jotai atoms for global state
 ```
+
+## 🚨 Note  
+Ensure your **cookies** and **middleware** configurations adapt based on `NODE_ENV`.  
+Use secure settings in production and relaxed ones in development for smoother debugging.
+
+## 🚀 Future Functionalities  
+- Add RSS feed support
+
