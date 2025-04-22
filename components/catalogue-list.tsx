@@ -18,7 +18,7 @@ export default function CatalogueList() {
   if (!search) {
 
     if (catalogues.state === "loading") {
-      return <div>Loading...</div>;
+      return <div>Loading</div>;
     }
 
     if (catalogues.state === "hasError") {

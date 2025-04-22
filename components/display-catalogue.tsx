@@ -6,7 +6,7 @@ export default function DisplayCatalogue({ catalogue }: { catalogue: CatalogueWi
   return (
     <div className="my-6">
       <div className="flex justify-center">
-        <div className="flex justify-center font-bold text-2xl bg-[#023047] rounded-lg p-3 text-[#F6F8E3] max-w-min min-w-max">
+        <div className="truncate flex justify-center font-bold text-lg sm:text-2xl bg-[#023047] rounded-lg p-3 text-[#F6F8E3] max-w-min min-w-60 sm:min-w-max">
           {catalogue.name}
         </div>
       </div>

@@ -3,7 +3,7 @@
 import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import { useAtomValue } from "jotai"
-import { nameWebsiteAtom, selectedCatalogueAtomLoadable, selectedWebsiteAtomLoadable, urlWebsiteAtom } from "@/store/atoms/selectedAtom"
+import { nameWebsiteAtom, selectedCatalogueAtomLoadable, urlWebsiteAtom } from "@/store/atoms/selectedAtom"
 import { putWebsite } from "@/actions/put"
 import { userAtom } from "@/store/atoms/userAtom"
 
