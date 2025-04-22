@@ -1,0 +1,36 @@
+services:
+  db:
+    image: postgres:17
+    restart: always
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=mysecretpassword
+    ports:
+      - "5432:5432"
+    networks:
+      - prisma-network
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    command: postgres -c listen_addresses='*'
+
+  web:
+    image: suryanshu09/webmellon:latest
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgres://postgres:mysecretpassword@db:5432/postgres
+    env_file:
+      - .env
+    command: >
+      sh -c "npx prisma migrate deploy && npx prisma generate && npm run dev"
+    networks:
+      - prisma-network
+
+networks:
+  prisma-network:
+
+volumes:
+  pgdata:
