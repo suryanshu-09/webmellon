@@ -51,7 +51,7 @@ export function SonnerDeleteCatalogue() {
       })
 
       // Reload if you're not managing state updates manually
-    } catch (err) {
+    } catch (_) {
       toast.error("Error", {
         description: "Something went wrong while deleting the catalogue.",
         action: {

@@ -26,7 +26,7 @@ export function EditWebsite() {
   const setName = useSetAtom(nameWebsiteAtom);
   const setUrl = useSetAtom(urlWebsiteAtom);
   return (
-    <Tabs defaultValue="edit" className="w-[400px]">
+    <Tabs defaultValue="edit" className="w-[300px] sm:w-[400px]">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="edit">Edit Websites</TabsTrigger>
         <TabsTrigger value="add">Add a Website</TabsTrigger>
@@ -65,7 +65,7 @@ export function EditWebsite() {
               />
             </div>
           </CardContent>
-          <CardFooter className="flex justify-between">
+          <CardFooter className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <SonnerUpdateWebsite />
             <SonnerDeleteWebsite />
           </CardFooter>
@@ -99,7 +99,7 @@ export function EditWebsite() {
               />
             </div>
           </CardContent>
-          <CardFooter className="flex justify-end">
+          <CardFooter className="grid grid-cols-1">
             <SonnerAddWebsite />
           </CardFooter>
         </Card>

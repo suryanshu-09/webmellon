@@ -55,7 +55,7 @@ export function SonnerUpdateCatalogue() {
       })
 
 
-    } catch (error) {
+    } catch (_) {
       toast.error("Update failed", {
         description: "Something went wrong while updating.",
         action: {
@@ -65,7 +65,6 @@ export function SonnerUpdateCatalogue() {
           },
         },
       })
-      console.log(error)
     }
   }
 

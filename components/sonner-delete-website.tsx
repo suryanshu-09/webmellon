@@ -52,7 +52,7 @@ export function SonnerDeleteWebsite() {
       })
 
       // Reload if you're not managing state updates manually
-    } catch (err) {
+    } catch (_) {
       toast.error("Error", {
         description: "Something went wrong while deleting the website.",
         action: {

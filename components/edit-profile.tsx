@@ -34,7 +34,7 @@ export function EditProfile() {
   const user: Session["user"] | null = useAtomValue(userAtom);
 
   return (
-    <Card className="w-[350px] mt-3">
+    <Card className="w-[300px] sm:w-[350px] mt-3">
       <CardHeader>
         <div className="flex justify-between items-start">
           <div>
@@ -50,7 +50,7 @@ export function EditProfile() {
       <CardContent>
         <form>
           <div className="grid w-full items-center gap-4">
-            <div className="flex flex-col space-y-1.5">
+            <div className="flex flex-col space-y-2 sm:space-y-3">
               <Label htmlFor="name">Name</Label>
               <div className="border rounded-md p-2">{user?.name}</div>
               <Label htmlFor="email">Email</Label>

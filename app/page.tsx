@@ -11,17 +11,17 @@ export default async function Home() {
     redirect("/dashboard");
   }
   return (
-    <div className="min-h-screen flex flex-col text-nowrap">
+    <div className="min-h-screen flex flex-col">
       <div className="flex-grow">
         <AppBar />
-        <div className="m-28 lg:m-32 xl:m-36">
-          <div className="flex justify-center mt-6 animate-slide-up">
-            <div className="font-semibold text-3xl lg:text-5xl xl:text-8xl">Welcome to
-              <span className="font-light italic font-serif text-4xl lg:text-6xl xl:text-9xl text-[#FB8500] pl-1">WebMellon</span>
+        <div className="mt-28 lg:mt-32 xl:mt-36">
+          <div className="flex justify-center mt-6 animate-slide-up text-nowrap">
+            <div className="font-semibold text-xl sm:text-3xl lg:text-5xl xl:text-8xl">Welcome to
+              <span className="font-light italic font-serif text-2xl sm:text-4xl lg:text-6xl xl:text-9xl text-[#FB8500] pl-1">WebMellon</span>
             </div>
           </div>
-          <div className="flex justify-center mt-6 text-sm lg:text-base xl:text-lg align-baseline animate-slide-up">
-            <span className="font-semibold">
+          <div className="flex justify-center mt-6 text-sm lg:text-base xl:text-lg animate-slide-up text-center">
+            <span className="sm:font-semibold">
               Your personal bookmark. Organise your frequently visited
               <span className="font-serif font-normal text-[#FB8500] lg:text-lg xl:text-2xl italic px-0.75 lg:px-1">
                 Catalgue
@@ -32,12 +32,12 @@ export default async function Home() {
             </span>
           </div>
           <div className="flex justify-center mb-6 text-sm lg:text-base xl:text-lg animate-slide-up">
-            <span className="font-semibold">
+            <span className="sm:font-semibold">
               All your
               <span className="font-serif font-normal text-[#FB8500] lg:text-lg xl:text-2xl italic px-1">
                 Websites
               </span>
-              <span className="font-semibold">
+              <span className="sm:font-semibold">
                 in one place.
               </span>
             </span>

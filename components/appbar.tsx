@@ -15,8 +15,8 @@ export default function AppBar() {
   return (
     <div className="w-full">
       <div className="flex justify-between p-3 bg-[#023047] rounded-lg fixed z-50 top-0 left-0 right-0 m-3 shadow" >
-        <div className="p-2 flex jusitfy-center font-serif font-medium italic text-3xl text-[#FB8500]">WebMellon</div>
-        <div className="flex items-center justify-center text-[#F6F8E3] text-xl -x-2 min-w-48">
+        <div className="p-2 flex jusitfy-center items-center font-serif sm:font-medium italic text-xl sm:text-3xl text-[#FB8500]">WebMellon</div>
+        <div className="flex items-center justify-center text-[#F6F8E3] sm:text-xl -x-2 sm:min-w-48">
           {
             isEditPage ?
               <div className="hidden md:block">
@@ -28,10 +28,10 @@ export default function AppBar() {
               : isDashboard ?
                 <div>Catalogue</div>
                 : isProfile ? <div>Profile</div>
-                  : <div></div>
+                  : <></>
           }
         </div>
-        <div className="flex items-center justify-end p-2 md:min-w-48">
+        <div className="flex items-center justify-end p-2 sm:min-w-48">
           {(session) ? <Profile /> : <AppBarSignIn />}
         </div>
       </div >

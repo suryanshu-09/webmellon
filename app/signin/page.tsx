@@ -10,11 +10,11 @@ export default async function SignIn() {
   }
   return (
     <div className="h-screen w-screen border flex items-center justify-center">
-      <div className="p-20 border rounded-lg bg-amber-100">
-        <div className="flex justify-center">
-          <span className="font-bold text-2xl">
+      <div className="p-12 sm:p-20 border rounded-lg bg-amber-100">
+        <div className="flex justify-center text-nowrap">
+          <span className="font-bold text-lg sm:text-2xl">
             SignUp to
-            <span className="italic pl-1 font-serif font-light text-3xl text-[#FB8500]">
+            <span className="italic pl-1 font-serif font-light text-xl sm:text-3xl text-[#FB8500]">
               WebMellon
             </span>
           </span>

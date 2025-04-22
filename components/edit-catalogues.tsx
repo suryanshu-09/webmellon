@@ -33,7 +33,7 @@ export const editCatalogueSchema = z.object({
 export function EditCatalogue() {
   const setName = useSetAtom(nameCatalogueAtom)
   return (
-    <Tabs defaultValue="edit" className="w-[400px]">
+    <Tabs defaultValue="edit" className="w-[300px] sm:w-[400px]">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="edit">Edit Catalogues</TabsTrigger>
         <TabsTrigger value="add">Add a Catalogue</TabsTrigger>
@@ -60,7 +60,7 @@ export function EditCatalogue() {
               />
             </div>
           </CardContent>
-          <CardFooter className="flex justify-between">
+          <CardFooter className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <SonnerUpdateCatalogue />
             <SonnerDeleteCatalogue />
           </CardFooter>
@@ -82,7 +82,7 @@ export function EditCatalogue() {
                 onChange={(e) => setName(e.target.value)} />
             </div>
           </CardContent>
-          <CardFooter className="flex justify-end">
+          <CardFooter className="grid grid-cols-1">
             <SonnerAddCatalogue />
           </CardFooter>
         </Card>
