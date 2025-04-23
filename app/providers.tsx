@@ -39,7 +39,7 @@ export const Providers = ({
     <JotaiProvider store={store}>
       <SessionProvider session={session}>
         {children}
-      </SessionProvider>
-    </JotaiProvider>
+      </SessionProvider >
+    </JotaiProvider >
   )
 }

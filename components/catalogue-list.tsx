@@ -9,8 +9,10 @@ import { Button } from "@/components/ui/button";
 import { catalogueById } from "@/store/atoms/catalogueAtom";
 import { X } from "lucide-react";
 import Link from "next/link";
+import { usePersistedDashboardAtom } from "@/hooks/usePersistedDashboardAtom"
 
 export default function CatalogueList() {
+  usePersistedDashboardAtom()
   const [catalogues] = useAtom(everythingAtomLoadable);
   const { search, catalogueId } = useAtomValue(dashboardAtom);
   const setDashboardAtom = useSetAtom(dashboardAtom)
