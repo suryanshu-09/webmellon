@@ -1,9 +1,8 @@
 import { auth } from "@/lib/auth";
 import AppBar from "@/components/appbar";
 import { redirect } from "next/navigation";
-import Image from "next/image";
 import Footer from "@/components/footer";
-import { AspectRatio } from "@/components/ui/aspect-ratio"
+import { LoadImage } from "@/components/load-image";
 
 export default async function Home() {
   const session = await auth();
@@ -42,17 +41,7 @@ export default async function Home() {
               </span>
             </span>
           </div>
-          <div className="animate-slide-up relative flex justify-center w-[90%] mx-auto"
-            style={{ animationDelay: "0.1s" }}>
-            <AspectRatio ratio={16 / 9}>
-              <Image
-                src="/assets/demo.jpg"
-                alt="Demo JPG"
-                className="rounded-lg object-cover"
-                fill
-              />
-            </AspectRatio>
-          </div>
+          <LoadImage />
         </div>
       </div>
       <Footer />
