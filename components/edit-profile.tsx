@@ -29,6 +29,8 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { User } from "@/prisma/generated/zod"
 import { Session } from "next-auth"
+import ExportData from "./export-data"
+import ImportData from "./import-data"
 
 export function EditProfile() {
   const user: Session["user"] | null = useAtomValue(userAtom);
@@ -59,7 +61,7 @@ export function EditProfile() {
           </div>
         </form>
       </CardContent>
-      <CardFooter className="flex justify-end mt-2">
+      <CardFooter className="grid grid-cols-1 gap-4">
         <AlertDialog>
           <AlertDialogTrigger asChild><Button variant="destructive">Delete User</Button></AlertDialogTrigger>
           <AlertDialogContent>
@@ -79,6 +81,10 @@ export function EditProfile() {
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <ImportData />
+          <ExportData />
+        </div>
       </CardFooter>
     </Card >
   )

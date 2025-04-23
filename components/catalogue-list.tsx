@@ -9,7 +9,8 @@ import { Button } from "@/components/ui/button";
 import { catalogueById } from "@/store/atoms/catalogueAtom";
 import { X } from "lucide-react";
 import Link from "next/link";
-import { usePersistedDashboardAtom } from "@/hooks/usePersistedDashboardAtom"
+import { usePersistedDashboardAtom } from "@/hooks/use-persisted-dashboard-atom"
+import { Skeleton } from "./ui/skeleton";
 
 export default function CatalogueList() {
   usePersistedDashboardAtom()
@@ -20,14 +21,34 @@ export default function CatalogueList() {
   if (!search) {
 
     if (catalogues.state === "loading") {
-      return <div>Loading</div>;
+      return (
+        <div className="h-screen w-screen mt-12">
+          <div className="flex flex-col items-center">
+            {Array.from({ length: 3 }).map((_, idx) => (
+              <>
+                <Skeleton key={idx} className="rounded-lg p-3 w-60 h-15" />
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 my-6 w-full px-4">
+                  {Array.from({ length: 6 }).map((_, idx) => (
+                    <Skeleton
+                      key={idx}
+                      className="border rounded-lg p-3 w-full h-15"
+                    />
+                  ))}
+                </div>
+              </>
+            ))
+            }
+          </div>
+        </div>
+      )
+
     }
 
     if (catalogues.state === "hasError") {
       return <div>Error</div>;
     }
     if (catalogues.state === "hasData" && Array.isArray(catalogues.data)) {
-
       if (catalogues.data.length === 0) {
         return (
           <div className="flex justify-center mt-4">
@@ -47,7 +68,7 @@ export default function CatalogueList() {
       return (
         <div className="m-3">
           {catalogues.data.map((cat: CatalogueWithWebsites, index: number) => {
-            const delay = 0.1 + index * 0.2;
+            const delay = 0.1 + index * 0.15;
             return (
               <div
                 key={cat.id}
