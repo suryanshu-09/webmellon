@@ -7,14 +7,14 @@ import { Website } from "@/prisma/generated/zod"
 export default function DisplayWebsite({ website }: { website: Website }) {
   return (
     <div className="flex justify-around">
-      <div className="border rounded-lg p-3 mt-3 bg-[#8ACED7] max-w-108 min-w-70 sm:min-w-108 flex justify-center items-center">
+      <div className="border rounded-lg p-3 mt-3 bg-[#8ACED7] dark:bg-[#17171A] max-w-108 min-w-70 sm:min-w-108 flex justify-center items-center">
         <div>
           <Avatar>
             <AvatarImage src={website.favicon} />
             <AvatarFallback>{website.name.slice(0, 2)}</AvatarFallback>
           </Avatar>
         </div>
-        <div className="">
+        <div>
           <LinkWithArrow link={website.url} name={website.name}></LinkWithArrow>
         </div>
       </div>

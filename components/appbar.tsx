@@ -14,7 +14,7 @@ export default function AppBar() {
   const isProfile = pathname.startsWith('/user');
   return (
     <div className="w-full">
-      <div className="flex justify-between p-3 bg-[#023047] rounded-lg fixed z-50 top-0 left-0 right-0 m-3 shadow" >
+      <div className="flex justify-between p-3 bg-[#023047] dark:bg-sky-900 rounded-lg fixed z-50 top-0 left-0 right-0 m-3 shadow" >
         <div className="p-2 flex jusitfy-center items-center font-serif sm:font-medium italic text-xl sm:text-3xl text-[#FB8500]">WebMellon</div>
         <div className="flex items-center justify-center text-[#F6F8E3] sm:text-xl -x-2 sm:min-w-48">
           {

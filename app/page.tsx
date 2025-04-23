@@ -16,7 +16,7 @@ export default async function Home() {
         <AppBar />
         <div className="mt-28 lg:mt-32 xl:mt-36">
           <div className="flex justify-center mt-6 animate-slide-up text-nowrap">
-            <div className="font-semibold text-xl sm:text-3xl lg:text-5xl xl:text-8xl">Welcome to
+            <div className="font-semibold text-xl sm:text-3xl lg:text-5xl xl:text-8xl dark:text-white">Welcome to
               <span className="font-light italic font-serif text-2xl sm:text-4xl lg:text-6xl xl:text-9xl text-[#FB8500] pl-1">WebMellon</span>
             </div>
           </div>
@@ -42,13 +42,18 @@ export default async function Home() {
               </span>
             </span>
           </div>
-          <div className="animate-slide-up relative flex justify-center w-full h-[250px] sm:h-[280px] md:h-[400px] lg:h-[500px] xl:h-[860px]"
+          <div className="animate-slide-up relative flex justify-center w-[90%] mx-auto"
             style={{ animationDelay: "0.1s" }}>
             <AspectRatio ratio={16 / 9}>
-              <Image src="/assets/demo.jpg" alt="Demo JPG" className="rounded-lg object-cover" fill />
+              <Image
+                src="/assets/demo.jpg"
+                alt="Demo JPG"
+                className="rounded-lg object-cover"
+                fill
+              />
             </AspectRatio>
           </div>
-        </div >
+        </div>
       </div>
       <Footer />
     </div>

@@ -13,6 +13,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { SignOutButton } from "@/components/sign-out-button"
 import { userAtom } from "@/store/atoms/userAtom"
 import { redirect } from "next/navigation"
+import { ModeToggle } from "./mode-toggle"
 
 export default function Profile() {
   const [user] = useAtom(userAtom)
@@ -35,6 +36,7 @@ export default function Profile() {
         <DropdownMenuItem onSelect={() => redirect("/dashboard")}>Home</DropdownMenuItem>
         <DropdownMenuItem onSelect={() => redirect("/user")}>Profile</DropdownMenuItem>
         <DropdownMenuItem onSelect={() => redirect("/edit")}> Edit</DropdownMenuItem>
+        <DropdownMenuItem><ModeToggle />Theme</DropdownMenuItem>
         <DropdownMenuItem><SignOutButton /></DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu >

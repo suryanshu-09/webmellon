@@ -3,7 +3,7 @@ import { Label } from "@/components/ui/label";
 
 export function SignInCard() {
   return (
-    <div className="mt-6">
+    <div className="mt-6 dark:text-zinc-950">
       <Label className="w-full h-12 border rounded-md flex bg-white justify-center items-center mb-3" onClick={loginGoogle}>
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="currentColor" viewBox="0 0 16 16">
