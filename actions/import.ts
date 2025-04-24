@@ -6,32 +6,54 @@ import type { Website } from '@/prisma/generated/zod'
 export async function importJSON(file: any, userId: string) {
   const text = await file.text();
   const data = JSON.parse(text);
+
   try {
     for (const catalogue of data) {
-      await prisma.catalogue.upsert({
+      const savedCatalogue = await prisma.catalogue.upsert({
         where: {
-          user_catalogue_name_unique: {
-            name: catalogue.name,
-            userId
-          },
+          user_catalogue_name_unique: { name: catalogue.name, userId }
         },
         update: {},
-        create: {
-          name: catalogue.name,
-          userId,
-          websites: {
-            create: catalogue.websites.map((website: Website) => ({
-              name: website.name,
-              url: website.url,
-              favicon: website.favicon,
-              userId
-            })),
-          },
-        },
-      })
+        create: { name: catalogue.name, userId }
+      });
+
+      // Process websites one by one to catch individual errors
+      for (const site of catalogue.websites) {
+        try {
+          await prisma.website.upsert({
+            where: {
+              user_website_url_unique: { userId, url: site.url }
+            },
+            update: {
+              favicon: site.favicon
+            },
+            create: {
+              name: site.name,
+              url: site.url,
+              favicon: site.favicon,
+              userId,
+              catalogueId: savedCatalogue.id
+            }
+          });
+        } catch (err) {
+          // Log the specific site that caused the error
+          console.error(`Error processing site:`, {
+            name: site.name,
+            url: site.url,
+            catalogue: catalogue.name,
+            error: err.message
+          });
+
+          // Option 1: Skip this site and continue with others
+          continue;
+
+          // Option 2: Throw a more specific error
+          // throw new Error(`Failed to process site "${site.name}" (${site.url}) in catalogue "${catalogue.name}": ${err.message}`);
+        }
+      }
     }
   } catch (err) {
-    console.log(err)
-    throw new Error('Whoopsie we got an error')
+    console.error('Import error:', err);
+    throw new Error('Failed to import data');
   }
 }
