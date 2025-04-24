@@ -36,19 +36,20 @@ export async function importJSON(file: any, userId: string) {
             }
           });
         } catch (err) {
-          // Log the specific site that caused the error
-          console.error(`Error processing site:`, {
-            name: site.name,
-            url: site.url,
-            catalogue: catalogue.name,
-            error: err.message
-          });
-
-          // Option 1: Skip this site and continue with others
+          if (err instanceof Error) {
+            console.error(`Error processing site:`, {
+              name: site.name,
+              url: site.url,
+              catalogue: catalogue.name,
+              error: err.message
+            });
+          } else {
+            console.error('Unknown error processing site:', {
+              site,
+              error: err
+            });
+          }
           continue;
-
-          // Option 2: Throw a more specific error
-          // throw new Error(`Failed to process site "${site.name}" (${site.url}) in catalogue "${catalogue.name}": ${err.message}`);
         }
       }
     }
