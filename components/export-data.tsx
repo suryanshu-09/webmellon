@@ -15,13 +15,10 @@ export default function ExportData() {
 
     const exportData = everything.data?.map((catalogue: CatalogueWithWebsites) => ({
       name: catalogue.name,
-      id: catalogue.id,
       websites: catalogue.websites.map((website: Website) => ({
         name: website.name,
         url: website.url,
-        id: website.id,
         favicon: website.favicon,
-        catalogueId: website.catalogueId,
       })),
     }))
 
