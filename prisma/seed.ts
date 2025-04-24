@@ -401,7 +401,10 @@ const catalogues = {
     { name: "Maoist Communist Union", url: "https://maoistcommunistunion.com" },
     { name: "Counter View", url: "https://www.counterview.net" },
     { name: "NODO50", url: "https://info.nodo50.org" },
-    { name: "The Worker", url: "https://theworker.news" }
+    { name: "The Worker", url: "https://theworker.news" },
+    { name: "The Red Spectre", url: "https://theredspectre.com/index.html" },
+    { name: "High Tide Books", url: "https://hightidebooks.wordpress.com/" },
+
   ]
 }
 
