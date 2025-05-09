@@ -3,7 +3,7 @@ import CatalogueList from "@/components/catalogue-list";
 import Footer from "@/components/footer";
 import { CommandDialogDemo } from "@/components/search";
 
-export default async function Dashboard() {
+export default function Dashboard() {
   return (
     <div className="min-h-screen flex flex-col">
       <div className="flex-grow">
@@ -12,7 +12,7 @@ export default async function Dashboard() {
           <CommandDialogDemo />
         </div>
         <CatalogueList />
-      </div >
+      </div>
       <Footer />
     </div>
   );
