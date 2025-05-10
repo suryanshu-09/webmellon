@@ -14,20 +14,20 @@ services:
       - pgdata:/var/lib/postgresql/data
     command: postgres -c listen_addresses='*'
 
-  # web:
-  #   image: suryanshu09/webmellon:latest
-  #   depends_on:
-  #     - db
-  #   ports:
-  #     - "3000:3000"
-  #   environment:
-  #     DATABASE_URL: postgres://postgres:mysecretpassword@db:5432/postgres
-  #   env_file:
-  #     - .env
-  #   command: >
-  #     sh -c "npx prisma migrate deploy && npx prisma generate && npm run dev"
-  #   networks:
-  #     - prisma-network
+  web:
+    image: suryanshu09/webmellon:latest
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgres://postgres:mysecretpassword@db:5432/postgres
+    env_file:
+      - .env
+    command: >
+      sh -c "npx prisma migrate deploy && npx prisma generate && npm run dev"
+    networks:
+      - prisma-network
 
 networks:
   prisma-network:
