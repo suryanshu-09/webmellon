@@ -26,13 +26,13 @@ export default function CatalogueList() {
         <div className="min-h-screen flex flex-col items-center mt-12 px-4">
           {Array.from({ length: 3 }).map((_, outerIdx) => (
             <div key={outerIdx} className="w-full max-w-screen mb-12">
-              <Skeleton className="rounded-lg w-60 h-15 mb-6 mx-auto" />
+              <Skeleton className="rounded-lg w-60 h-14 mb-6 mx-auto" />
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
                 {Array.from({ length: 6 }).map((_, innerIdx) => (
                   <Skeleton
                     key={innerIdx}
-                    className="border rounded-lg p-3 w-[60%] h-15 mx-auto"
+                    className="border rounded-lg p-3 w-[60%] sm:w-[80%] lg:w-[60%] h-14 mx-auto"
                   />
                 ))}
               </div>
