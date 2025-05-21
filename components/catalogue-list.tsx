@@ -32,7 +32,7 @@ export default function CatalogueList() {
                 {Array.from({ length: 6 }).map((_, innerIdx) => (
                   <Skeleton
                     key={innerIdx}
-                    className="border rounded-lg p-3 w-[60%] sm:w-[80%] lg:w-[60%] h-14 mx-auto"
+                    className="border rounded-lg p-3 w-[80%] lg:w-[70%] xl:[60%] h-14 mx-auto"
                   />
                 ))}
               </div>
