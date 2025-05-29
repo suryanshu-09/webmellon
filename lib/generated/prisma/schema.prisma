@@ -14,6 +14,34 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model YtRSS {
+  id        Int    @id @default(autoincrement())
+  channelId String
+  userId    String
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, channelId], name: "user_ytrss_channelId_unique")
+}
+
+model NewsRSS {
+  id     Int    @id @default(autoincrement())
+  url    String
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, url], name: "user_newsrss_url_unique")
+}
+
+model WpRSS {
+  id     Int    @id @default(autoincrement())
+  url    String
+  image  Int
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, url], name: "user_wprss_url_unique")
+}
+
 model Catalogue {
   id       Int       @id @default(autoincrement())
   name     String
@@ -50,6 +78,9 @@ model User {
   updatedAt     DateTime    @updatedAt
   catalogues    Catalogue[]
   websites      Website[]
+  yt            YtRSS[]
+  wp            WpRSS[]
+  news          NewsRSS[]
 }
 
 model Account {

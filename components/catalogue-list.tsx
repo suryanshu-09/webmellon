@@ -3,7 +3,7 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import { CatalogueWithWebsites } from "@/types/types";
 import DisplayCatalogue from "@/components/display-catalogue";
-import { everythingAtom } from "@/store/atoms/everythingAtom";
+import { everythingAtomLoadable } from "@/store/atoms/everythingAtom";
 import { dashboardAtom } from "@/store/atoms/dashboardAtom";
 import { Button } from "@/components/ui/button";
 import { catalogueById } from "@/store/atoms/catalogueAtom";
@@ -14,14 +14,14 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function CatalogueList() {
   usePersistedDashboardAtom();
-  const { data: catalogues, loading } = useAtomValue(everythingAtom);
+  const everything = useAtomValue(everythingAtomLoadable);
   const { search, catalogueId } = useAtomValue(dashboardAtom);
   const setDashboardAtom = useSetAtom(dashboardAtom);
   const catalogue: CatalogueWithWebsites | null = useAtomValue(
     catalogueById(catalogueId),
   );
   if (!search) {
-    if (loading) {
+    if (everything.state != "hasData") {
       return (
         <div className="min-h-screen flex flex-col items-center mt-12 px-4">
           {Array.from({ length: 3 }).map((_, outerIdx) => (
@@ -42,8 +42,9 @@ export default function CatalogueList() {
       );
     }
 
-    if (Array.isArray(catalogues)) {
-      if (catalogues.length === 0) {
+    if (everything.state == "hasData") {
+      const catalogues = everything.data as CatalogueWithWebsites[];
+      if (catalogues?.length === 0) {
         return (
           <div className="flex justify-center mt-4">
             <div className="flex justify-center mt-6 text-lg">
@@ -61,7 +62,7 @@ export default function CatalogueList() {
       }
       return (
         <div className="m-3">
-          {catalogues.map((cat: CatalogueWithWebsites, index: number) => {
+          {catalogues?.map((cat: CatalogueWithWebsites, index: number) => {
             const delay = 0.1 + index * 0.15;
             return (
               <div
@@ -82,6 +83,7 @@ export default function CatalogueList() {
       <div className="m-3">
         <div className="flex justify-end">
           <Button
+            className="hover:cursor-pointer"
             onClick={() =>
               setDashboardAtom({ search: false, catalogueId: NaN })
             }

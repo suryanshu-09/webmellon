@@ -1,5 +1,5 @@
-"use client"
-import { useAtom } from "jotai"
+"use client";
+import { useAtom } from "jotai";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,16 +7,16 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { SignOutButton } from "@/components/sign-out-button"
-import { userAtom } from "@/store/atoms/userAtom"
-import { redirect } from "next/navigation"
-import { ModeToggle } from "./mode-toggle"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { SignOutButton } from "@/components/sign-out-button";
+import { userAtom } from "@/store/atoms/userAtom";
+import { redirect } from "next/navigation";
+import { ModeToggle } from "./mode-toggle";
 
 export default function Profile() {
-  const [user] = useAtom(userAtom)
+  const [user] = useAtom(userAtom);
 
   return (
     <DropdownMenu>
@@ -33,12 +33,41 @@ export default function Profile() {
       <DropdownMenuContent>
         <DropdownMenuLabel>Accout</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onSelect={() => redirect("/dashboard")}>Home</DropdownMenuItem>
-        <DropdownMenuItem onSelect={() => redirect("/user")}>Profile</DropdownMenuItem>
-        <DropdownMenuItem onSelect={() => redirect("/edit")}> Edit</DropdownMenuItem>
-        <DropdownMenuItem><ModeToggle />Theme</DropdownMenuItem>
-        <DropdownMenuItem><SignOutButton /></DropdownMenuItem>
+        <DropdownMenuItem onSelect={() => redirect("/dashboard")}>
+          Home
+        </DropdownMenuItem>
+        <DropdownMenuItem onSelect={() => redirect("/user")}>
+          Profile
+        </DropdownMenuItem>
+        <DropdownMenuItem onSelect={() => redirect("/edit")}>
+          Edit
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onSelect={() => redirect("/feed/ytfeed")}
+          className="sm:hidden"
+        >
+          Youtube
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onSelect={() => redirect("/feed/newsfeed")}
+          className="sm:hidden"
+        >
+          News
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onSelect={() => redirect("/feed/wpfeed")}
+          className="sm:hidden"
+        >
+          WordPress
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <ModeToggle />
+          Theme
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <SignOutButton />
+        </DropdownMenuItem>
       </DropdownMenuContent>
-    </DropdownMenu >
-  )
+    </DropdownMenu>
+  );
 }

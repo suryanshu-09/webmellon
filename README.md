@@ -1,6 +1,8 @@
-# 📚 WebMellon – Bookmark Aggregator App
+# 📚 WebMellon – Bookmark Aggregator App with customisable RSS Feed
 
 WebMellon is a full-stack bookmark aggregator that lets users create, manage, and organize catalogues of websites. Built with the modern web stack – including Next.js, Prisma, and Tailwind – WebMellon is optimized for clarity, performance, and extensibility.
+
+Now with **Feed** - an RSS reader for Youtube, WordPress and all your favourite News websites.
 
 ---
 
@@ -17,6 +19,7 @@ WebMellon is a full-stack bookmark aggregator that lets users create, manage, an
 - **Containerization**: Docker + Docker Compose
 - **CI/CD Pipeline**: Github workflow and Vercel
 - **Database**: PostgreSQL
+- **RSS Parser**: rss-parser
 
 ---
 
@@ -26,7 +29,12 @@ If you want to simply try the application, go to:
 
 👉 [https://webmellon.vercel.app](https://webmellon.vercel.app)
 
+Use **Guest Login** if you don't want to signup with your github or gmail account.
+
+\*Note: Guests cannot access special routes like edit and profile.
+
 ![A Glance at the App](./public/assets/demo.jpg)
+![RSS Feed](./public/assets/demofeed.jpg)
 
 ---
 
@@ -116,10 +124,7 @@ lib/               # Utility and API helpers
 atoms/             # Jotai atoms for global state
 ```
 
-## 🚨 Note  
+## 🚨 Note
+
 Ensure your **cookies** and **middleware** configurations adapt based on `NODE_ENV`.  
 Use secure settings in production and relaxed ones in development for smoother debugging.
-
-## 🚀 Future Functionalities  
-- Add RSS feed support
-

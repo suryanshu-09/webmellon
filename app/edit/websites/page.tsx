@@ -9,12 +9,16 @@ export default function Edit() {
         <AppBar />
         <div className="w-screen flex justify-center mt-36">
           <div className="mt-12">
-            <div className="font-bold font-xl">Edit <span className="italic underline">Websites</span></div>
+            <div className="font-bold font-xl">
+              Edit <span className="italic underline">Websites</span>
+            </div>
             <EditWebsite />
           </div>
         </div>
       </div>
-      <Footer />
+      <div className="mt-12">
+        <Footer />
+      </div>
     </div>
-  )
+  );
 }

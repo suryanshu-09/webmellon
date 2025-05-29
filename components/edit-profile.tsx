@@ -1,7 +1,7 @@
-"use client"
-import * as React from "react"
+"use client";
+import * as React from "react";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -9,12 +9,12 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { useAtomValue } from "jotai"
-import { Label } from "@/components/ui/label"
-import { userAtom } from "@/store/atoms/userAtom"
-import { deleteUser } from "@/actions/delete"
-import { logout } from "@/actions/auth"
+} from "@/components/ui/card";
+import { useAtomValue } from "jotai";
+import { Label } from "@/components/ui/label";
+import { userAtom } from "@/store/atoms/userAtom";
+import { deleteUser } from "@/actions/delete";
+import { logout } from "@/actions/auth";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -25,27 +25,31 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { User } from "@/prisma/generated/zod"
-import { Session } from "next-auth"
-import ExportData from "./export-data"
-import ImportData from "./import-data"
+} from "@/components/ui/alert-dialog";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { User } from "@/prisma/generated/zod";
+import { Session } from "next-auth";
+import ExportData from "@/components/export-data";
+import ImportData from "@/components/import-data";
 
 export function EditProfile() {
   const user: Session["user"] | null = useAtomValue(userAtom);
 
   return (
-    <Card className="w-[300px] sm:w-[350px] mt-3">
+    <Card className="w-[90vw] sm:w-[350px] mt-3">
       <CardHeader>
         <div className="flex justify-between items-start">
           <div>
             <CardTitle>Manage Your Profile</CardTitle>
-            <CardDescription>Bird&apos;s Eye View of your account</CardDescription>
+            <CardDescription>
+              Bird&apos;s Eye View of your account
+            </CardDescription>
           </div>
           <Avatar className="">
             <AvatarImage src={user?.image ?? ""} />
-            <AvatarFallback>{user?.name?.slice(0, 2).toUpperCase() ?? "WM"}</AvatarFallback>
+            <AvatarFallback>
+              {user?.name?.slice(0, 2).toUpperCase() ?? "WM"}
+            </AvatarFallback>
           </Avatar>
         </div>
       </CardHeader>
@@ -63,21 +67,27 @@ export function EditProfile() {
       </CardContent>
       <CardFooter className="grid grid-cols-1 gap-4">
         <AlertDialog>
-          <AlertDialogTrigger asChild><Button variant="destructive">Delete User</Button></AlertDialogTrigger>
+          <AlertDialogTrigger asChild>
+            <Button variant="destructive">Delete User</Button>
+          </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
               <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
               <AlertDialogDescription>
-                This action cannot be undone. This will permanently delete your account
-                and remove your data from our servers.
+                This action cannot be undone. This will permanently delete your
+                account and remove your data from our servers.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={async () => {
-                await deleteUser(user as User)
-                logout();
-              }}>Continue</AlertDialogAction>
+              <AlertDialogAction
+                onClick={async () => {
+                  await deleteUser(user as User);
+                  logout();
+                }}
+              >
+                Continue
+              </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
@@ -86,6 +96,6 @@ export function EditProfile() {
           <ExportData />
         </div>
       </CardFooter>
-    </Card >
-  )
+    </Card>
+  );
 }

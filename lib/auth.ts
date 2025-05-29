@@ -1,8 +1,9 @@
 import NextAuth, { type NextAuthConfig } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { prisma } from "./db";
+import { prisma } from "@/lib/db";
 
 export const authOptions: NextAuthConfig = {
   cookies: {
@@ -20,6 +21,18 @@ export const authOptions: NextAuthConfig = {
   },
   useSecureCookies: process.env.NODE_ENV === "production",
   providers: [
+    CredentialsProvider({
+      name: "Guest Login",
+      async authorize() {
+        return {
+          id: process.env.GUEST_ID,
+          name: "WM",
+          email: "pleaselogin",
+          image: "",
+          userType: "guest",
+        };
+      },
+    }),
     GitHubProvider({
       clientId: process.env.GITHUB_ID ?? "",
       clientSecret: process.env.GITHUB_SECRET ?? "",
@@ -28,12 +41,12 @@ export const authOptions: NextAuthConfig = {
           scope: "read:user user:email",
         },
       },
-      profile(profile: any) {
+      profile(profile) {
         let email = profile.email;
 
         if (!email && Array.isArray(profile.emails)) {
-          const primary = profile.emails.find((e: any) => e.primary && e.verified);
-          const fallback = profile.emails.find((e: any) => e.verified);
+          const primary = profile.emails.find((e) => e.primary && e.verified);
+          const fallback = profile.emails.find((e) => e.verified);
           email = primary?.email || fallback?.email || null;
         }
 
@@ -79,8 +92,8 @@ export const authOptions: NextAuthConfig = {
     },
   },
   pages: {
-    signIn: '/signin',
-    error: '/error'
+    signIn: "/signin",
+    error: "/error",
   },
 };
 

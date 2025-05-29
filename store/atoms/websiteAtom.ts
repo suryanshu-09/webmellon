@@ -1,20 +1,22 @@
 import { Catalogue } from "@/prisma/generated/zod";
 import { atom } from "jotai";
 import { atomFamily } from "jotai/utils";
-import { everythingAtom } from "@/store/atoms/everythingAtom";
+import { everythingAtomLoadable } from "@/store/atoms/everythingAtom";
 import { CatalogueWithWebsites } from "@/types/types";
 
 export const websitesAtom = atomFamily((catalogueId: number | undefined) =>
   atom((get) => {
-    const { data: result, loading } = get(everythingAtom);
+    const everything = get(everythingAtomLoadable);
 
-    if (catalogueId === undefined) {
+    if (everything.state == "loading") {
       const allwebsites = get(allWebsitesAtom);
       return allwebsites;
     }
 
-    if (!loading && Array.isArray(result)) {
-      const catalogue = result.find((c: Catalogue) => c.id === catalogueId);
+    if (everything.state == "hasData" && Array.isArray(everything.data)) {
+      const catalogue = everything.data.find(
+        (c: Catalogue) => c.id === catalogueId,
+      );
       return catalogue ? catalogue.websites : [];
     }
 
@@ -23,11 +25,11 @@ export const websitesAtom = atomFamily((catalogueId: number | undefined) =>
 );
 
 export const allWebsitesAtom = atom((get) => {
-  const { data: everything, loading } = get(everythingAtom);
+  const everything = get(everythingAtomLoadable);
 
-  if (!loading && Array.isArray(everything)) {
+  if (everything.state == "hasData" && Array.isArray(everything.data)) {
     // Flatten the nested arrays into a single array
-    const websites = everything.flatMap(
+    const websites = everything.data.flatMap(
       (cat: CatalogueWithWebsites) => cat.websites,
     );
     return websites;

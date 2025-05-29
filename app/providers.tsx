@@ -6,9 +6,16 @@ import { Provider as JotaiProvider, createStore } from "jotai";
 import { Session } from "next-auth";
 import { userAtom } from "@/store/atoms/userAtom";
 import { everythingAtom } from "@/store/atoms/everythingAtom";
-import { fetchEverything } from "@/actions/fetch";
+import {
+  fetchEverything,
+  fetchNewsFeed,
+  fetchWPFeed,
+  fetchYTFeed,
+} from "@/actions/fetch";
 import { User } from "@/prisma/generated/zod/index";
 import { CatalogueWithWebsites } from "@/types/types";
+import { getNews, getWP, getYT } from "@/store/atoms/feedAtom";
+import { YtRSS, NewsRSS, WpRSS } from "@/prisma/zod";
 
 export const Providers = ({
   children,
@@ -31,7 +38,16 @@ export const Providers = ({
         const everything: CatalogueWithWebsites[] = await fetchEverything(
           session.user as User,
         );
-        store.set(everythingAtom, { data: everything, loading: false });
+        store.set(everythingAtom, everything);
+
+        const wpFeed: WpRSS[] = await fetchWPFeed(session.user as User);
+        store.set(getWP, wpFeed);
+
+        const ytFeed: YtRSS[] = await fetchYTFeed(session.user as User);
+        store.set(getYT, ytFeed);
+
+        const newsFeed: NewsRSS[] = await fetchNewsFeed(session.user as User);
+        store.set(getNews, newsFeed);
       }
     };
     fetchData();

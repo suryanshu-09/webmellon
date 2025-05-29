@@ -1,13 +1,17 @@
-"use server"
+"use server";
 
 import { signIn, signOut } from "@/lib/auth";
 
 export const loginGoogle = async () => {
-  await signIn("google", { redirectTo: "/dashboard" })
+  await signIn("google", { redirectTo: "/dashboard" });
 };
 
 export const loginGithub = async () => {
-  await signIn("github", { redirectTo: "/dashboard" })
+  await signIn("github", { redirectTo: "/dashboard" });
+};
+
+export const loginGuest = async () => {
+  await signIn("credentials", { redirectTo: "/dashboard" });
 };
 
 export const logout = async () => {

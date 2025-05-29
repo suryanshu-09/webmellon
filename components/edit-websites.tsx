@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {
   Card,
   CardContent,
@@ -6,27 +6,22 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "./ui/tabs"
-import { SelectEdit } from "@/components/select"
-import { useSetAtom } from "jotai"
-import { nameWebsiteAtom, urlWebsiteAtom } from "@/store/atoms/selectedAtom"
-import { SonnerDeleteWebsite } from "@/components/sonner-delete-website"
-import { SonnerUpdateWebsite } from "@/components/sonner-update-website"
-import { SonnerAddWebsite } from "@/components/sonner-add-website"
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { SelectEdit } from "@/components/select";
+import { useSetAtom } from "jotai";
+import { nameWebsiteAtom, urlWebsiteAtom } from "@/store/atoms/selectedAtom";
+import { SonnerDeleteWebsite } from "@/components/sonner-delete-website";
+import { SonnerUpdateWebsite } from "@/components/sonner-update-website";
+import { SonnerAddWebsite } from "@/components/sonner-add-website";
 
 export function EditWebsite() {
   const setName = useSetAtom(nameWebsiteAtom);
   const setUrl = useSetAtom(urlWebsiteAtom);
   return (
-    <Tabs defaultValue="edit" className="w-[300px] sm:w-[400px]">
+    <Tabs defaultValue="edit" className="w-[90vw] sm:w-[400px]">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="edit">Edit Websites</TabsTrigger>
         <TabsTrigger value="add">Add a Website</TabsTrigger>
@@ -36,7 +31,8 @@ export function EditWebsite() {
           <CardHeader>
             <CardTitle>Edit</CardTitle>
             <CardDescription>
-              Make changes to your Websites here. Click save when you&apos;re done.
+              Make changes to your Websites here. Click save when you&apos;re
+              done.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
@@ -75,26 +71,28 @@ export function EditWebsite() {
         <Card>
           <CardHeader>
             <CardTitle>Add</CardTitle>
-            <CardDescription>
-              Add your Website here.
-            </CardDescription>
+            <CardDescription>Add your Website here.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="space-y-1">
-              <Label htmlFor="name">Select a Catalogue to add the website to</Label>
+              <Label htmlFor="name">
+                Select a Catalogue to add the website to
+              </Label>
               <SelectEdit dataType="catalogue"></SelectEdit>
             </div>
             <div className="space-y-1">
               <Label htmlFor="current">New Website</Label>
-              <Input id="current"
+              <Input
+                id="current"
                 placeholder="Name"
-                onChange={(e) => setName(e.target.value)} />
+                onChange={(e) => setName(e.target.value)}
+              />
             </div>
             <div className="space-y-1">
               <Label htmlFor="username">URL</Label>
               <Input
                 id="url"
-                placeholder="New URL"
+                placeholder="URL"
                 onChange={(e) => setUrl(e.target.value)}
               />
             </div>
@@ -104,6 +102,6 @@ export function EditWebsite() {
           </CardFooter>
         </Card>
       </TabsContent>
-    </Tabs >
-  )
+    </Tabs>
+  );
 }
