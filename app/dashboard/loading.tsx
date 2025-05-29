@@ -1,7 +1,7 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import AppBar from "@/components/appbar";
 import Footer from "@/components/footer";
-import { CommandDialogDemo } from "@/components/search";
+import { Search } from "@/components/search";
 
 export default function LoadDashboard() {
   return (
@@ -9,7 +9,7 @@ export default function LoadDashboard() {
       <div className="flex-grow">
         <AppBar />
         <div className="flex justify-center mt-30">
-          <CommandDialogDemo />
+          <Search />
         </div>
 
         <div className="min-h-screen flex flex-col items-center mt-12 px-4">
@@ -29,7 +29,9 @@ export default function LoadDashboard() {
           ))}
         </div>
       </div>
-      <Footer />
+      <div className="mt-12">
+        <Footer />
+      </div>
     </div>
   );
 }

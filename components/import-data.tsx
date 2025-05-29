@@ -1,21 +1,21 @@
-'use client'
+"use client";
 
-import { ChangeEvent } from 'react'
-import { Button } from '@/components/ui/button'
-import { importJSON } from '@/actions/import'
-import { userAtom } from '@/store/atoms/userAtom'
-import { useAtomValue } from 'jotai'
-import { toast } from 'sonner'
+import { ChangeEvent } from "react";
+import { Button } from "@/components/ui/button";
+import { importJSON } from "@/actions/import";
+import { userAtom } from "@/store/atoms/userAtom";
+import { useAtomValue } from "jotai";
+import { toast } from "sonner";
 
 export default function ImportData() {
   const user = useAtomValue(userAtom);
 
   const handleFile = async (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (!file) return
+    const file = e.target.files?.[0];
+    if (!file) return;
 
-    if (file.type !== 'application/json') {
-      throw new Error('Please select a valid JSON file.')
+    if (file.type !== "application/json") {
+      throw new Error("Please select a valid JSON file.");
     }
 
     try {
@@ -25,24 +25,23 @@ export default function ImportData() {
         action: {
           label: "Close",
           onClick: () => {
-            window.location.reload()
+            window.location.reload();
           },
         },
-      })
-
-    } catch (err) {
+      });
+    } catch {
       toast.error("Data NOT imported", {
         description: "Please verify your json and try again",
         action: {
           label: "Close",
           onClick: () => {
-            window.location.reload()
+            window.location.reload();
           },
         },
-      })
-      throw new Error('Whoopsie we got an error')
+      });
+      throw new Error("Whoopsie we got an error");
     }
-  }
+  };
 
   return (
     <div>
@@ -50,14 +49,16 @@ export default function ImportData() {
         type="file"
         accept=".json,application/json"
         onChange={handleFile}
-        className='hidden'
+        className="hidden"
       />
       <Button
-        onClick={() => document.querySelector<HTMLInputElement>('input[type=file]')?.click()}
-        className='bg-green-600 w-full'
+        onClick={() =>
+          document.querySelector<HTMLInputElement>("input[type=file]")?.click()
+        }
+        className="bg-green-600 w-full"
       >
         Import Data
       </Button>
     </div>
-  )
+  );
 }

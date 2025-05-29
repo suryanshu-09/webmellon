@@ -1,13 +1,13 @@
 import { atom } from "jotai";
-import { everythingAtom } from "@/store/atoms/everythingAtom";
+import { everythingAtomLoadable } from "@/store/atoms/everythingAtom";
 import { CatalogueWithWebsites } from "@/types/types";
 import { atomFamily } from "jotai/utils";
 import { Catalogue } from "@/prisma/generated/zod";
 
 export const catalogueAtom = atom((get) => {
-  const { data: catalogues, loading } = get(everythingAtom);
-  if (!loading && Array.isArray(catalogues)) {
-    return catalogues.map((catalogue: CatalogueWithWebsites) => ({
+  const everything = get(everythingAtomLoadable);
+  if (everything.state == "hasData" && Array.isArray(everything.data)) {
+    return everything.data.map((catalogue: CatalogueWithWebsites) => ({
       id: catalogue.id,
       name: catalogue.name,
       userId: catalogue.userId,
@@ -18,10 +18,10 @@ export const catalogueAtom = atom((get) => {
 
 export const catalogueById = atomFamily((catalogueId: number) =>
   atom((get) => {
-    const { data: result, loading } = get(everythingAtom);
+    const everything = get(everythingAtomLoadable);
 
-    if (!loading && Array.isArray(result)) {
-      const catalogue = result.find(
+    if (everything.state == "hasData" && Array.isArray(everything.data)) {
+      const catalogue = everything.data.find(
         (c: Catalogue) => c.id === catalogueId,
       ) as CatalogueWithWebsites;
       return catalogue || null;

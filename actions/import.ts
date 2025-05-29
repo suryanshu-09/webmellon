@@ -1,39 +1,64 @@
-'use server'
+"use server";
 
-import { prisma } from '@/lib/db'
-import type { Website } from '@/prisma/generated/zod'
+import { prisma } from "@/lib/db";
 
-export async function importJSON(file: any, userId: string) {
+export async function importJSON(file: File, userId: string) {
   const text = await file.text();
   const data = JSON.parse(text);
 
   try {
-    for (const catalogue of data) {
-      const savedCatalogue = await prisma.catalogue.upsert({
+    for (const wp of data.WordPress) {
+      await prisma.wpRSS.upsert({
         where: {
-          user_catalogue_name_unique: { name: catalogue.name, userId }
+          user_wprss_url_unique: { userId, url: wp.url },
         },
         update: {},
-        create: { name: catalogue.name, userId }
+        create: { url: wp.url, userId, image: wp.image },
+      });
+    }
+    for (const yt of data.YouTube) {
+      await prisma.ytRSS.upsert({
+        where: {
+          user_ytrss_channelId_unique: { userId, channelId: yt.channelId },
+        },
+        update: {},
+        create: { userId, channelId: yt.channelId },
+      });
+    }
+    for (const news of data.News) {
+      await prisma.newsRSS.upsert({
+        where: {
+          user_newsrss_url_unique: { userId, url: news.url },
+        },
+        update: {},
+        create: { userId, url: news.url },
+      });
+    }
+    for (const catalogue of data.Catalogues) {
+      const savedCatalogue = await prisma.catalogue.upsert({
+        where: {
+          user_catalogue_name_unique: { name: catalogue.name, userId },
+        },
+        update: {},
+        create: { name: catalogue.name, userId },
       });
 
-      // Process websites one by one to catch individual errors
       for (const site of catalogue.websites) {
         try {
           await prisma.website.upsert({
             where: {
-              user_website_url_unique: { userId, url: site.url }
+              user_website_url_unique: { userId, url: site.url },
             },
             update: {
-              favicon: site.favicon
+              favicon: site.favicon,
             },
             create: {
               name: site.name,
               url: site.url,
               favicon: site.favicon,
               userId,
-              catalogueId: savedCatalogue.id
-            }
+              catalogueId: savedCatalogue.id,
+            },
           });
         } catch (err) {
           if (err instanceof Error) {
@@ -41,12 +66,12 @@ export async function importJSON(file: any, userId: string) {
               name: site.name,
               url: site.url,
               catalogue: catalogue.name,
-              error: err.message
+              error: err.message,
             });
           } else {
-            console.error('Unknown error processing site:', {
+            console.error("Unknown error processing site:", {
               site,
-              error: err
+              error: err,
             });
           }
           continue;
@@ -54,7 +79,7 @@ export async function importJSON(file: any, userId: string) {
       }
     }
   } catch (err) {
-    console.error('Import error:', err);
-    throw new Error('Failed to import data');
+    console.error("Import error:", err);
+    throw new Error("Failed to import data");
   }
 }

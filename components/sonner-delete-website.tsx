@@ -1,26 +1,22 @@
-"use client"
+"use client";
 
-import { toast } from "sonner"
-import { Button } from "@/components/ui/button"
-import { useAtomValue } from "jotai"
-import { selectedWebsiteAtomLoadable } from "@/store/atoms/selectedAtom"
-import { deleteWebsite } from "@/actions/delete"
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { useAtomValue } from "jotai";
+import { selectedWebsiteAtomLoadable } from "@/store/atoms/selectedAtom";
+import { deleteWebsite } from "@/actions/delete";
 
 export function SonnerDeleteWebsite() {
-  const selectedWebsite = useAtomValue(selectedWebsiteAtomLoadable)
+  const selectedWebsite = useAtomValue(selectedWebsiteAtomLoadable);
 
   // Show loading state until the data is fetched
   if (selectedWebsite.state === "loading") {
-    return (
-      <div>Loading...</div>
-    )
+    return <div>Loading...</div>;
   }
 
   // Show error if something went wrong during fetch
   if (selectedWebsite.state === "hasError") {
-    return (
-      <div>Error loading website</div>
-    )
+    return <div>Error loading website</div>;
   }
 
   const handleDelete = async () => {
@@ -30,44 +26,44 @@ export function SonnerDeleteWebsite() {
         action: {
           label: "Close",
           onClick: () => {
-            window.location.reload()
+            window.location.reload();
           },
         },
-      })
-      return
+      });
+      return;
     }
 
     try {
-      console.log(selectedWebsite.data)
-      await deleteWebsite(selectedWebsite.data)
+      console.log(selectedWebsite.data);
+      await deleteWebsite(selectedWebsite.data);
 
       toast.success("Website Deleted", {
         description: `Successfully deleted ${selectedWebsite.data.name}`,
         action: {
           label: "Close",
           onClick: () => {
-            window.location.reload()
+            window.location.reload();
           },
         },
-      })
+      });
 
       // Reload if you're not managing state updates manually
-    } catch (_) {
+    } catch {
       toast.error("Error", {
         description: "Something went wrong while deleting the website.",
         action: {
           label: "Close",
           onClick: () => {
-            window.location.reload()
+            window.location.reload();
           },
         },
-      })
+      });
     }
-  }
+  };
 
   return (
     <Button variant="destructive" onClick={handleDelete}>
       Delete Website
     </Button>
-  )
+  );
 }

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {
   Card,
   CardContent,
@@ -6,23 +6,17 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Input } from "./ui/input"
-import { Label } from "./ui/label"
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs"
-import { SelectEdit } from "./select"
-import { useSetAtom } from "jotai"
-import { nameCatalogueAtom } from "@/store/atoms/selectedAtom"
-import { SonnerDeleteCatalogue } from "@/components/sonner-delete-catalogue"
-import { SonnerUpdateCatalogue } from "@/components/sonner-update-catalogue"
-import { SonnerAddCatalogue } from "@/components/sonner-add-catalogue"
-import { z } from "zod"
-
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { SelectEdit } from "@/components/select";
+import { useSetAtom } from "jotai";
+import { nameCatalogueAtom } from "@/store/atoms/selectedAtom";
+import { SonnerDeleteCatalogue } from "@/components/sonner-delete-catalogue";
+import { SonnerUpdateCatalogue } from "@/components/sonner-update-catalogue";
+import { SonnerAddCatalogue } from "@/components/sonner-add-catalogue";
+import { z } from "zod";
 
 export const editCatalogueSchema = z.object({
   nameCatalogue: z
@@ -31,7 +25,7 @@ export const editCatalogueSchema = z.object({
 });
 
 export function EditCatalogue() {
-  const setName = useSetAtom(nameCatalogueAtom)
+  const setName = useSetAtom(nameCatalogueAtom);
   return (
     <Tabs defaultValue="edit" className="w-[300px] sm:w-[400px]">
       <TabsList className="grid w-full grid-cols-2">
@@ -43,7 +37,8 @@ export function EditCatalogue() {
           <CardHeader>
             <CardTitle>Edit</CardTitle>
             <CardDescription>
-              Make changes to your catalogues here. Click save when you&apos;re done.
+              Make changes to your catalogues here. Click save when you&apos;re
+              done.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
@@ -70,16 +65,16 @@ export function EditCatalogue() {
         <Card>
           <CardHeader>
             <CardTitle>Add</CardTitle>
-            <CardDescription>
-              Add your catalogue here.
-            </CardDescription>
+            <CardDescription>Add your catalogue here.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="space-y-1">
               <Label htmlFor="current">New Catalogue</Label>
-              <Input id="current"
+              <Input
+                id="current"
                 placeholder="Name"
-                onChange={(e) => setName(e.target.value)} />
+                onChange={(e) => setName(e.target.value)}
+              />
             </div>
           </CardContent>
           <CardFooter className="grid grid-cols-1">
@@ -87,6 +82,6 @@ export function EditCatalogue() {
           </CardFooter>
         </Card>
       </TabsContent>
-    </Tabs >
-  )
+    </Tabs>
+  );
 }

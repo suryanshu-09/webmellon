@@ -2,25 +2,50 @@
 
 import { useCallback } from "react";
 import { useAtomValue } from "jotai";
-import { everythingAtom } from "@/store/atoms/everythingAtom";
+import { everythingAtomLoadable } from "@/store/atoms/everythingAtom";
 import { Button } from "@/components/ui/button";
 import type { CatalogueWithWebsites } from "@/types/types";
 import { Website } from "@/prisma/generated/zod";
+import { getNews, getWP, getYT } from "@/store/atoms/feedAtom";
 
 export default function ExportData() {
-  const { data: everything, loading } = useAtomValue(everythingAtom);
+  const everything = useAtomValue(everythingAtomLoadable);
+  const yt = useAtomValue(getYT);
+  const wp = useAtomValue(getWP);
+  const news = useAtomValue(getNews);
 
   const handleExport = useCallback(() => {
-    if (loading) return;
+    if (everything.state != "hasData") return;
 
-    const exportData = everything?.map((catalogue: CatalogueWithWebsites) => ({
-      name: catalogue.name,
-      websites: catalogue.websites.map((website: Website) => ({
-        name: website.name,
-        url: website.url,
-        favicon: website.favicon,
-      })),
+    const Catalogues = everything.data?.map(
+      (catalogue: CatalogueWithWebsites) => ({
+        name: catalogue.name,
+        websites: catalogue.websites.map((website: Website) => ({
+          name: website.name,
+          url: website.url,
+          favicon: website.favicon,
+        })),
+      }),
+    );
+    const WordPress = wp?.map((pub) => ({
+      image: pub.image,
+      url: pub.url,
     }));
+
+    const News = news?.map((pub) => ({
+      url: pub.url,
+    }));
+
+    const Youtube = yt?.map((channel) => ({
+      channelId: channel.channelId,
+    }));
+
+    const exportData = {
+      Catalogues,
+      WordPress,
+      Youtube,
+      News,
+    };
 
     const json = JSON.stringify(exportData, null, 2);
     const blob = new Blob([json], { type: "application/json" });
@@ -35,7 +60,7 @@ export default function ExportData() {
 
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
-  }, [everything, loading]);
+  }, [everything]);
 
   return (
     <Button onClick={handleExport} className="bg-blue-600">

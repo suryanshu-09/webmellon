@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import { prisma } from "@/lib/db";
 import { User } from "@/lib/generated/prisma";
@@ -6,14 +6,17 @@ import { User } from "@/lib/generated/prisma";
 export async function fetchEverything(user: User) {
   const everything = await prisma.user.findUnique({
     where: {
-      id: user.id
+      id: user.id,
     },
     include: {
       catalogues: {
         include: {
-          websites: true
-        }
-      }
+          websites: true,
+        },
+      },
+      wp: true,
+      yt: true,
+      news: true,
     },
   });
 
@@ -26,10 +29,10 @@ export async function fetchEverything(user: User) {
 export async function fetchAllCatalogues(user: User) {
   const catalogues = await prisma.user.findMany({
     where: {
-      id: user.id
+      id: user.id,
     },
     include: {
-      catalogues: true
+      catalogues: true,
     },
   });
 
@@ -43,12 +46,12 @@ export async function fetchAllCatalogues(user: User) {
 export async function fetchCatalogueAll(id: number) {
   const catalogue = await prisma.catalogue.findUnique({
     where: {
-      id
+      id,
     },
     include: {
-      websites: true
-    }
-  })
+      websites: true,
+    },
+  });
 
   if (!catalogue) {
     throw new Error(`Catalogue with ID ${id} not found`);
@@ -60,9 +63,9 @@ export async function fetchCatalogueAll(id: number) {
 export async function fetchCatalogue(id: number) {
   const catalogue = await prisma.catalogue.findUnique({
     where: {
-      id
-    }
-  })
+      id,
+    },
+  });
 
   if (!catalogue) {
     throw new Error(`Catalogue with ID ${id} not found`);
@@ -74,11 +77,11 @@ export async function fetchCatalogue(id: number) {
 export async function fetchAllWebsites(user: User) {
   const [websites] = await prisma.user.findMany({
     where: {
-      id: user.id
+      id: user.id,
     },
     include: {
-      websites: true
-    }
+      websites: true,
+    },
   });
 
   if (!websites) {
@@ -91,13 +94,55 @@ export async function fetchAllWebsites(user: User) {
 export async function fetchWebsite(id: number) {
   const website = await prisma.website.findUnique({
     where: {
-      id
-    }
-  })
+      id,
+    },
+  });
 
   if (!website) {
     throw new Error(`Website with ID ${id} not found`);
   }
 
   return website;
+}
+
+export async function fetchYTFeed(user: User) {
+  const ytFeed = await prisma.ytRSS.findMany({
+    where: {
+      userId: user.id,
+    },
+  });
+
+  if (!ytFeed) {
+    throw new Error(`ytFeed not found`);
+  }
+
+  return ytFeed;
+}
+
+export async function fetchWPFeed(user: User) {
+  const wpFeed = await prisma.wpRSS.findMany({
+    where: {
+      userId: user.id,
+    },
+  });
+
+  if (!wpFeed) {
+    throw new Error(`wpFeed not found`);
+  }
+
+  return wpFeed;
+}
+
+export async function fetchNewsFeed(user: User) {
+  const newsFeed = await prisma.newsRSS.findMany({
+    where: {
+      userId: user.id,
+    },
+  });
+
+  if (!newsFeed) {
+    throw new Error(`newsFeed not found`);
+  }
+
+  return newsFeed;
 }

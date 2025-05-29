@@ -28,12 +28,12 @@ export const authOptions: NextAuthConfig = {
           scope: "read:user user:email",
         },
       },
-      profile(profile: any) {
+      profile(profile) {
         let email = profile.email;
 
         if (!email && Array.isArray(profile.emails)) {
-          const primary = profile.emails.find((e: any) => e.primary && e.verified);
-          const fallback = profile.emails.find((e: any) => e.verified);
+          const primary = profile.emails.find((e) => e.primary && e.verified);
+          const fallback = profile.emails.find((e) => e.verified);
           email = primary?.email || fallback?.email || null;
         }
 
@@ -79,8 +79,8 @@ export const authOptions: NextAuthConfig = {
     },
   },
   pages: {
-    signIn: '/signin',
-    error: '/error'
+    signIn: "/signin",
+    error: "/error",
   },
 };
 

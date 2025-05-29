@@ -14,6 +14,21 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
+ * Model YtRSS
+ * 
+ */
+export type YtRSS = $Result.DefaultSelection<Prisma.$YtRSSPayload>
+/**
+ * Model NewsRSS
+ * 
+ */
+export type NewsRSS = $Result.DefaultSelection<Prisma.$NewsRSSPayload>
+/**
+ * Model WpRSS
+ * 
+ */
+export type WpRSS = $Result.DefaultSelection<Prisma.$WpRSSPayload>
+/**
  * Model Catalogue
  * 
  */
@@ -51,8 +66,8 @@ export type VerificationToken = $Result.DefaultSelection<Prisma.$VerificationTok
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Catalogues
- * const catalogues = await prisma.catalogue.findMany()
+ * // Fetch zero or more YtRSSES
+ * const ytRSSES = await prisma.ytRSS.findMany()
  * ```
  *
  *
@@ -72,8 +87,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Catalogues
-   * const catalogues = await prisma.catalogue.findMany()
+   * // Fetch zero or more YtRSSES
+   * const ytRSSES = await prisma.ytRSS.findMany()
    * ```
    *
    *
@@ -170,6 +185,36 @@ export class PrismaClient<
   }>>
 
       /**
+   * `prisma.ytRSS`: Exposes CRUD operations for the **YtRSS** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more YtRSSES
+    * const ytRSSES = await prisma.ytRSS.findMany()
+    * ```
+    */
+  get ytRSS(): Prisma.YtRSSDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.newsRSS`: Exposes CRUD operations for the **NewsRSS** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more NewsRSSES
+    * const newsRSSES = await prisma.newsRSS.findMany()
+    * ```
+    */
+  get newsRSS(): Prisma.NewsRSSDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.wpRSS`: Exposes CRUD operations for the **WpRSS** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more WpRSSES
+    * const wpRSSES = await prisma.wpRSS.findMany()
+    * ```
+    */
+  get wpRSS(): Prisma.WpRSSDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.catalogue`: Exposes CRUD operations for the **Catalogue** model.
     * Example usage:
     * ```ts
@@ -286,8 +331,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.6.0
-   * Query Engine version: f676762280b54cd07c770017ed3711ddde35f37a
+   * Prisma Client JS version: 6.8.2
+   * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
    */
   export type PrismaVersion = {
     client: string
@@ -668,6 +713,9 @@ export namespace Prisma {
 
 
   export const ModelName: {
+    YtRSS: 'YtRSS',
+    NewsRSS: 'NewsRSS',
+    WpRSS: 'WpRSS',
     Catalogue: 'Catalogue',
     Website: 'Website',
     User: 'User',
@@ -692,10 +740,232 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "catalogue" | "website" | "user" | "account" | "session" | "verificationToken"
+      modelProps: "ytRSS" | "newsRSS" | "wpRSS" | "catalogue" | "website" | "user" | "account" | "session" | "verificationToken"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
+      YtRSS: {
+        payload: Prisma.$YtRSSPayload<ExtArgs>
+        fields: Prisma.YtRSSFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.YtRSSFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$YtRSSPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.YtRSSFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$YtRSSPayload>
+          }
+          findFirst: {
+            args: Prisma.YtRSSFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$YtRSSPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.YtRSSFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$YtRSSPayload>
+          }
+          findMany: {
+            args: Prisma.YtRSSFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$YtRSSPayload>[]
+          }
+          create: {
+            args: Prisma.YtRSSCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$YtRSSPayload>
+          }
+          createMany: {
+            args: Prisma.YtRSSCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.YtRSSCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$YtRSSPayload>[]
+          }
+          delete: {
+            args: Prisma.YtRSSDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$YtRSSPayload>
+          }
+          update: {
+            args: Prisma.YtRSSUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$YtRSSPayload>
+          }
+          deleteMany: {
+            args: Prisma.YtRSSDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.YtRSSUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.YtRSSUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$YtRSSPayload>[]
+          }
+          upsert: {
+            args: Prisma.YtRSSUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$YtRSSPayload>
+          }
+          aggregate: {
+            args: Prisma.YtRSSAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateYtRSS>
+          }
+          groupBy: {
+            args: Prisma.YtRSSGroupByArgs<ExtArgs>
+            result: $Utils.Optional<YtRSSGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.YtRSSCountArgs<ExtArgs>
+            result: $Utils.Optional<YtRSSCountAggregateOutputType> | number
+          }
+        }
+      }
+      NewsRSS: {
+        payload: Prisma.$NewsRSSPayload<ExtArgs>
+        fields: Prisma.NewsRSSFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.NewsRSSFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsRSSPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.NewsRSSFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsRSSPayload>
+          }
+          findFirst: {
+            args: Prisma.NewsRSSFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsRSSPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.NewsRSSFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsRSSPayload>
+          }
+          findMany: {
+            args: Prisma.NewsRSSFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsRSSPayload>[]
+          }
+          create: {
+            args: Prisma.NewsRSSCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsRSSPayload>
+          }
+          createMany: {
+            args: Prisma.NewsRSSCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.NewsRSSCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsRSSPayload>[]
+          }
+          delete: {
+            args: Prisma.NewsRSSDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsRSSPayload>
+          }
+          update: {
+            args: Prisma.NewsRSSUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsRSSPayload>
+          }
+          deleteMany: {
+            args: Prisma.NewsRSSDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.NewsRSSUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.NewsRSSUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsRSSPayload>[]
+          }
+          upsert: {
+            args: Prisma.NewsRSSUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsRSSPayload>
+          }
+          aggregate: {
+            args: Prisma.NewsRSSAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateNewsRSS>
+          }
+          groupBy: {
+            args: Prisma.NewsRSSGroupByArgs<ExtArgs>
+            result: $Utils.Optional<NewsRSSGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.NewsRSSCountArgs<ExtArgs>
+            result: $Utils.Optional<NewsRSSCountAggregateOutputType> | number
+          }
+        }
+      }
+      WpRSS: {
+        payload: Prisma.$WpRSSPayload<ExtArgs>
+        fields: Prisma.WpRSSFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.WpRSSFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WpRSSPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.WpRSSFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WpRSSPayload>
+          }
+          findFirst: {
+            args: Prisma.WpRSSFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WpRSSPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.WpRSSFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WpRSSPayload>
+          }
+          findMany: {
+            args: Prisma.WpRSSFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WpRSSPayload>[]
+          }
+          create: {
+            args: Prisma.WpRSSCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WpRSSPayload>
+          }
+          createMany: {
+            args: Prisma.WpRSSCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.WpRSSCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WpRSSPayload>[]
+          }
+          delete: {
+            args: Prisma.WpRSSDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WpRSSPayload>
+          }
+          update: {
+            args: Prisma.WpRSSUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WpRSSPayload>
+          }
+          deleteMany: {
+            args: Prisma.WpRSSDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.WpRSSUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.WpRSSUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WpRSSPayload>[]
+          }
+          upsert: {
+            args: Prisma.WpRSSUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WpRSSPayload>
+          }
+          aggregate: {
+            args: Prisma.WpRSSAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateWpRSS>
+          }
+          groupBy: {
+            args: Prisma.WpRSSGroupByArgs<ExtArgs>
+            result: $Utils.Optional<WpRSSGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.WpRSSCountArgs<ExtArgs>
+            result: $Utils.Optional<WpRSSCountAggregateOutputType> | number
+          }
+        }
+      }
       Catalogue: {
         payload: Prisma.$CataloguePayload<ExtArgs>
         fields: Prisma.CatalogueFieldRefs
@@ -1224,6 +1494,9 @@ export namespace Prisma {
     omit?: Prisma.GlobalOmitConfig
   }
   export type GlobalOmitConfig = {
+    ytRSS?: YtRSSOmit
+    newsRSS?: NewsRSSOmit
+    wpRSS?: WpRSSOmit
     catalogue?: CatalogueOmit
     website?: WebsiteOmit
     user?: UserOmit
@@ -1359,6 +1632,9 @@ export namespace Prisma {
     sessions: number
     catalogues: number
     websites: number
+    yt: number
+    wp: number
+    news: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1366,6 +1642,9 @@ export namespace Prisma {
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     catalogues?: boolean | UserCountOutputTypeCountCataloguesArgs
     websites?: boolean | UserCountOutputTypeCountWebsitesArgs
+    yt?: boolean | UserCountOutputTypeCountYtArgs
+    wp?: boolean | UserCountOutputTypeCountWpArgs
+    news?: boolean | UserCountOutputTypeCountNewsArgs
   }
 
   // Custom InputTypes
@@ -1407,10 +1686,3246 @@ export namespace Prisma {
     where?: WebsiteWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountYtArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: YtRSSWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountWpArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WpRSSWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountNewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NewsRSSWhereInput
+  }
+
 
   /**
    * Models
    */
+
+  /**
+   * Model YtRSS
+   */
+
+  export type AggregateYtRSS = {
+    _count: YtRSSCountAggregateOutputType | null
+    _avg: YtRSSAvgAggregateOutputType | null
+    _sum: YtRSSSumAggregateOutputType | null
+    _min: YtRSSMinAggregateOutputType | null
+    _max: YtRSSMaxAggregateOutputType | null
+  }
+
+  export type YtRSSAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type YtRSSSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type YtRSSMinAggregateOutputType = {
+    id: number | null
+    channelId: string | null
+    userId: string | null
+  }
+
+  export type YtRSSMaxAggregateOutputType = {
+    id: number | null
+    channelId: string | null
+    userId: string | null
+  }
+
+  export type YtRSSCountAggregateOutputType = {
+    id: number
+    channelId: number
+    userId: number
+    _all: number
+  }
+
+
+  export type YtRSSAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type YtRSSSumAggregateInputType = {
+    id?: true
+  }
+
+  export type YtRSSMinAggregateInputType = {
+    id?: true
+    channelId?: true
+    userId?: true
+  }
+
+  export type YtRSSMaxAggregateInputType = {
+    id?: true
+    channelId?: true
+    userId?: true
+  }
+
+  export type YtRSSCountAggregateInputType = {
+    id?: true
+    channelId?: true
+    userId?: true
+    _all?: true
+  }
+
+  export type YtRSSAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which YtRSS to aggregate.
+     */
+    where?: YtRSSWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of YtRSSES to fetch.
+     */
+    orderBy?: YtRSSOrderByWithRelationInput | YtRSSOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: YtRSSWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` YtRSSES from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` YtRSSES.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned YtRSSES
+    **/
+    _count?: true | YtRSSCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: YtRSSAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: YtRSSSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: YtRSSMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: YtRSSMaxAggregateInputType
+  }
+
+  export type GetYtRSSAggregateType<T extends YtRSSAggregateArgs> = {
+        [P in keyof T & keyof AggregateYtRSS]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateYtRSS[P]>
+      : GetScalarType<T[P], AggregateYtRSS[P]>
+  }
+
+
+
+
+  export type YtRSSGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: YtRSSWhereInput
+    orderBy?: YtRSSOrderByWithAggregationInput | YtRSSOrderByWithAggregationInput[]
+    by: YtRSSScalarFieldEnum[] | YtRSSScalarFieldEnum
+    having?: YtRSSScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: YtRSSCountAggregateInputType | true
+    _avg?: YtRSSAvgAggregateInputType
+    _sum?: YtRSSSumAggregateInputType
+    _min?: YtRSSMinAggregateInputType
+    _max?: YtRSSMaxAggregateInputType
+  }
+
+  export type YtRSSGroupByOutputType = {
+    id: number
+    channelId: string
+    userId: string
+    _count: YtRSSCountAggregateOutputType | null
+    _avg: YtRSSAvgAggregateOutputType | null
+    _sum: YtRSSSumAggregateOutputType | null
+    _min: YtRSSMinAggregateOutputType | null
+    _max: YtRSSMaxAggregateOutputType | null
+  }
+
+  type GetYtRSSGroupByPayload<T extends YtRSSGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<YtRSSGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof YtRSSGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], YtRSSGroupByOutputType[P]>
+            : GetScalarType<T[P], YtRSSGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type YtRSSSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    channelId?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["ytRSS"]>
+
+  export type YtRSSSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    channelId?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["ytRSS"]>
+
+  export type YtRSSSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    channelId?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["ytRSS"]>
+
+  export type YtRSSSelectScalar = {
+    id?: boolean
+    channelId?: boolean
+    userId?: boolean
+  }
+
+  export type YtRSSOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "channelId" | "userId", ExtArgs["result"]["ytRSS"]>
+  export type YtRSSInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type YtRSSIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type YtRSSIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $YtRSSPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "YtRSS"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      channelId: string
+      userId: string
+    }, ExtArgs["result"]["ytRSS"]>
+    composites: {}
+  }
+
+  type YtRSSGetPayload<S extends boolean | null | undefined | YtRSSDefaultArgs> = $Result.GetResult<Prisma.$YtRSSPayload, S>
+
+  type YtRSSCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<YtRSSFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: YtRSSCountAggregateInputType | true
+    }
+
+  export interface YtRSSDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['YtRSS'], meta: { name: 'YtRSS' } }
+    /**
+     * Find zero or one YtRSS that matches the filter.
+     * @param {YtRSSFindUniqueArgs} args - Arguments to find a YtRSS
+     * @example
+     * // Get one YtRSS
+     * const ytRSS = await prisma.ytRSS.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends YtRSSFindUniqueArgs>(args: SelectSubset<T, YtRSSFindUniqueArgs<ExtArgs>>): Prisma__YtRSSClient<$Result.GetResult<Prisma.$YtRSSPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one YtRSS that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {YtRSSFindUniqueOrThrowArgs} args - Arguments to find a YtRSS
+     * @example
+     * // Get one YtRSS
+     * const ytRSS = await prisma.ytRSS.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends YtRSSFindUniqueOrThrowArgs>(args: SelectSubset<T, YtRSSFindUniqueOrThrowArgs<ExtArgs>>): Prisma__YtRSSClient<$Result.GetResult<Prisma.$YtRSSPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first YtRSS that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {YtRSSFindFirstArgs} args - Arguments to find a YtRSS
+     * @example
+     * // Get one YtRSS
+     * const ytRSS = await prisma.ytRSS.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends YtRSSFindFirstArgs>(args?: SelectSubset<T, YtRSSFindFirstArgs<ExtArgs>>): Prisma__YtRSSClient<$Result.GetResult<Prisma.$YtRSSPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first YtRSS that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {YtRSSFindFirstOrThrowArgs} args - Arguments to find a YtRSS
+     * @example
+     * // Get one YtRSS
+     * const ytRSS = await prisma.ytRSS.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends YtRSSFindFirstOrThrowArgs>(args?: SelectSubset<T, YtRSSFindFirstOrThrowArgs<ExtArgs>>): Prisma__YtRSSClient<$Result.GetResult<Prisma.$YtRSSPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more YtRSSES that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {YtRSSFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all YtRSSES
+     * const ytRSSES = await prisma.ytRSS.findMany()
+     * 
+     * // Get first 10 YtRSSES
+     * const ytRSSES = await prisma.ytRSS.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const ytRSSWithIdOnly = await prisma.ytRSS.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends YtRSSFindManyArgs>(args?: SelectSubset<T, YtRSSFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$YtRSSPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a YtRSS.
+     * @param {YtRSSCreateArgs} args - Arguments to create a YtRSS.
+     * @example
+     * // Create one YtRSS
+     * const YtRSS = await prisma.ytRSS.create({
+     *   data: {
+     *     // ... data to create a YtRSS
+     *   }
+     * })
+     * 
+     */
+    create<T extends YtRSSCreateArgs>(args: SelectSubset<T, YtRSSCreateArgs<ExtArgs>>): Prisma__YtRSSClient<$Result.GetResult<Prisma.$YtRSSPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many YtRSSES.
+     * @param {YtRSSCreateManyArgs} args - Arguments to create many YtRSSES.
+     * @example
+     * // Create many YtRSSES
+     * const ytRSS = await prisma.ytRSS.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends YtRSSCreateManyArgs>(args?: SelectSubset<T, YtRSSCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many YtRSSES and returns the data saved in the database.
+     * @param {YtRSSCreateManyAndReturnArgs} args - Arguments to create many YtRSSES.
+     * @example
+     * // Create many YtRSSES
+     * const ytRSS = await prisma.ytRSS.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many YtRSSES and only return the `id`
+     * const ytRSSWithIdOnly = await prisma.ytRSS.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends YtRSSCreateManyAndReturnArgs>(args?: SelectSubset<T, YtRSSCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$YtRSSPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a YtRSS.
+     * @param {YtRSSDeleteArgs} args - Arguments to delete one YtRSS.
+     * @example
+     * // Delete one YtRSS
+     * const YtRSS = await prisma.ytRSS.delete({
+     *   where: {
+     *     // ... filter to delete one YtRSS
+     *   }
+     * })
+     * 
+     */
+    delete<T extends YtRSSDeleteArgs>(args: SelectSubset<T, YtRSSDeleteArgs<ExtArgs>>): Prisma__YtRSSClient<$Result.GetResult<Prisma.$YtRSSPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one YtRSS.
+     * @param {YtRSSUpdateArgs} args - Arguments to update one YtRSS.
+     * @example
+     * // Update one YtRSS
+     * const ytRSS = await prisma.ytRSS.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends YtRSSUpdateArgs>(args: SelectSubset<T, YtRSSUpdateArgs<ExtArgs>>): Prisma__YtRSSClient<$Result.GetResult<Prisma.$YtRSSPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more YtRSSES.
+     * @param {YtRSSDeleteManyArgs} args - Arguments to filter YtRSSES to delete.
+     * @example
+     * // Delete a few YtRSSES
+     * const { count } = await prisma.ytRSS.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends YtRSSDeleteManyArgs>(args?: SelectSubset<T, YtRSSDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more YtRSSES.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {YtRSSUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many YtRSSES
+     * const ytRSS = await prisma.ytRSS.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends YtRSSUpdateManyArgs>(args: SelectSubset<T, YtRSSUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more YtRSSES and returns the data updated in the database.
+     * @param {YtRSSUpdateManyAndReturnArgs} args - Arguments to update many YtRSSES.
+     * @example
+     * // Update many YtRSSES
+     * const ytRSS = await prisma.ytRSS.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more YtRSSES and only return the `id`
+     * const ytRSSWithIdOnly = await prisma.ytRSS.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends YtRSSUpdateManyAndReturnArgs>(args: SelectSubset<T, YtRSSUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$YtRSSPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one YtRSS.
+     * @param {YtRSSUpsertArgs} args - Arguments to update or create a YtRSS.
+     * @example
+     * // Update or create a YtRSS
+     * const ytRSS = await prisma.ytRSS.upsert({
+     *   create: {
+     *     // ... data to create a YtRSS
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the YtRSS we want to update
+     *   }
+     * })
+     */
+    upsert<T extends YtRSSUpsertArgs>(args: SelectSubset<T, YtRSSUpsertArgs<ExtArgs>>): Prisma__YtRSSClient<$Result.GetResult<Prisma.$YtRSSPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of YtRSSES.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {YtRSSCountArgs} args - Arguments to filter YtRSSES to count.
+     * @example
+     * // Count the number of YtRSSES
+     * const count = await prisma.ytRSS.count({
+     *   where: {
+     *     // ... the filter for the YtRSSES we want to count
+     *   }
+     * })
+    **/
+    count<T extends YtRSSCountArgs>(
+      args?: Subset<T, YtRSSCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], YtRSSCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a YtRSS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {YtRSSAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends YtRSSAggregateArgs>(args: Subset<T, YtRSSAggregateArgs>): Prisma.PrismaPromise<GetYtRSSAggregateType<T>>
+
+    /**
+     * Group by YtRSS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {YtRSSGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends YtRSSGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: YtRSSGroupByArgs['orderBy'] }
+        : { orderBy?: YtRSSGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, YtRSSGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetYtRSSGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the YtRSS model
+   */
+  readonly fields: YtRSSFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for YtRSS.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__YtRSSClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the YtRSS model
+   */
+  interface YtRSSFieldRefs {
+    readonly id: FieldRef<"YtRSS", 'Int'>
+    readonly channelId: FieldRef<"YtRSS", 'String'>
+    readonly userId: FieldRef<"YtRSS", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * YtRSS findUnique
+   */
+  export type YtRSSFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the YtRSS
+     */
+    select?: YtRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the YtRSS
+     */
+    omit?: YtRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: YtRSSInclude<ExtArgs> | null
+    /**
+     * Filter, which YtRSS to fetch.
+     */
+    where: YtRSSWhereUniqueInput
+  }
+
+  /**
+   * YtRSS findUniqueOrThrow
+   */
+  export type YtRSSFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the YtRSS
+     */
+    select?: YtRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the YtRSS
+     */
+    omit?: YtRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: YtRSSInclude<ExtArgs> | null
+    /**
+     * Filter, which YtRSS to fetch.
+     */
+    where: YtRSSWhereUniqueInput
+  }
+
+  /**
+   * YtRSS findFirst
+   */
+  export type YtRSSFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the YtRSS
+     */
+    select?: YtRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the YtRSS
+     */
+    omit?: YtRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: YtRSSInclude<ExtArgs> | null
+    /**
+     * Filter, which YtRSS to fetch.
+     */
+    where?: YtRSSWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of YtRSSES to fetch.
+     */
+    orderBy?: YtRSSOrderByWithRelationInput | YtRSSOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for YtRSSES.
+     */
+    cursor?: YtRSSWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` YtRSSES from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` YtRSSES.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of YtRSSES.
+     */
+    distinct?: YtRSSScalarFieldEnum | YtRSSScalarFieldEnum[]
+  }
+
+  /**
+   * YtRSS findFirstOrThrow
+   */
+  export type YtRSSFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the YtRSS
+     */
+    select?: YtRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the YtRSS
+     */
+    omit?: YtRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: YtRSSInclude<ExtArgs> | null
+    /**
+     * Filter, which YtRSS to fetch.
+     */
+    where?: YtRSSWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of YtRSSES to fetch.
+     */
+    orderBy?: YtRSSOrderByWithRelationInput | YtRSSOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for YtRSSES.
+     */
+    cursor?: YtRSSWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` YtRSSES from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` YtRSSES.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of YtRSSES.
+     */
+    distinct?: YtRSSScalarFieldEnum | YtRSSScalarFieldEnum[]
+  }
+
+  /**
+   * YtRSS findMany
+   */
+  export type YtRSSFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the YtRSS
+     */
+    select?: YtRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the YtRSS
+     */
+    omit?: YtRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: YtRSSInclude<ExtArgs> | null
+    /**
+     * Filter, which YtRSSES to fetch.
+     */
+    where?: YtRSSWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of YtRSSES to fetch.
+     */
+    orderBy?: YtRSSOrderByWithRelationInput | YtRSSOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing YtRSSES.
+     */
+    cursor?: YtRSSWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` YtRSSES from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` YtRSSES.
+     */
+    skip?: number
+    distinct?: YtRSSScalarFieldEnum | YtRSSScalarFieldEnum[]
+  }
+
+  /**
+   * YtRSS create
+   */
+  export type YtRSSCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the YtRSS
+     */
+    select?: YtRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the YtRSS
+     */
+    omit?: YtRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: YtRSSInclude<ExtArgs> | null
+    /**
+     * The data needed to create a YtRSS.
+     */
+    data: XOR<YtRSSCreateInput, YtRSSUncheckedCreateInput>
+  }
+
+  /**
+   * YtRSS createMany
+   */
+  export type YtRSSCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many YtRSSES.
+     */
+    data: YtRSSCreateManyInput | YtRSSCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * YtRSS createManyAndReturn
+   */
+  export type YtRSSCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the YtRSS
+     */
+    select?: YtRSSSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the YtRSS
+     */
+    omit?: YtRSSOmit<ExtArgs> | null
+    /**
+     * The data used to create many YtRSSES.
+     */
+    data: YtRSSCreateManyInput | YtRSSCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: YtRSSIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * YtRSS update
+   */
+  export type YtRSSUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the YtRSS
+     */
+    select?: YtRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the YtRSS
+     */
+    omit?: YtRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: YtRSSInclude<ExtArgs> | null
+    /**
+     * The data needed to update a YtRSS.
+     */
+    data: XOR<YtRSSUpdateInput, YtRSSUncheckedUpdateInput>
+    /**
+     * Choose, which YtRSS to update.
+     */
+    where: YtRSSWhereUniqueInput
+  }
+
+  /**
+   * YtRSS updateMany
+   */
+  export type YtRSSUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update YtRSSES.
+     */
+    data: XOR<YtRSSUpdateManyMutationInput, YtRSSUncheckedUpdateManyInput>
+    /**
+     * Filter which YtRSSES to update
+     */
+    where?: YtRSSWhereInput
+    /**
+     * Limit how many YtRSSES to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * YtRSS updateManyAndReturn
+   */
+  export type YtRSSUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the YtRSS
+     */
+    select?: YtRSSSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the YtRSS
+     */
+    omit?: YtRSSOmit<ExtArgs> | null
+    /**
+     * The data used to update YtRSSES.
+     */
+    data: XOR<YtRSSUpdateManyMutationInput, YtRSSUncheckedUpdateManyInput>
+    /**
+     * Filter which YtRSSES to update
+     */
+    where?: YtRSSWhereInput
+    /**
+     * Limit how many YtRSSES to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: YtRSSIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * YtRSS upsert
+   */
+  export type YtRSSUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the YtRSS
+     */
+    select?: YtRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the YtRSS
+     */
+    omit?: YtRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: YtRSSInclude<ExtArgs> | null
+    /**
+     * The filter to search for the YtRSS to update in case it exists.
+     */
+    where: YtRSSWhereUniqueInput
+    /**
+     * In case the YtRSS found by the `where` argument doesn't exist, create a new YtRSS with this data.
+     */
+    create: XOR<YtRSSCreateInput, YtRSSUncheckedCreateInput>
+    /**
+     * In case the YtRSS was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<YtRSSUpdateInput, YtRSSUncheckedUpdateInput>
+  }
+
+  /**
+   * YtRSS delete
+   */
+  export type YtRSSDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the YtRSS
+     */
+    select?: YtRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the YtRSS
+     */
+    omit?: YtRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: YtRSSInclude<ExtArgs> | null
+    /**
+     * Filter which YtRSS to delete.
+     */
+    where: YtRSSWhereUniqueInput
+  }
+
+  /**
+   * YtRSS deleteMany
+   */
+  export type YtRSSDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which YtRSSES to delete
+     */
+    where?: YtRSSWhereInput
+    /**
+     * Limit how many YtRSSES to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * YtRSS without action
+   */
+  export type YtRSSDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the YtRSS
+     */
+    select?: YtRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the YtRSS
+     */
+    omit?: YtRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: YtRSSInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model NewsRSS
+   */
+
+  export type AggregateNewsRSS = {
+    _count: NewsRSSCountAggregateOutputType | null
+    _avg: NewsRSSAvgAggregateOutputType | null
+    _sum: NewsRSSSumAggregateOutputType | null
+    _min: NewsRSSMinAggregateOutputType | null
+    _max: NewsRSSMaxAggregateOutputType | null
+  }
+
+  export type NewsRSSAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type NewsRSSSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type NewsRSSMinAggregateOutputType = {
+    id: number | null
+    url: string | null
+    userId: string | null
+  }
+
+  export type NewsRSSMaxAggregateOutputType = {
+    id: number | null
+    url: string | null
+    userId: string | null
+  }
+
+  export type NewsRSSCountAggregateOutputType = {
+    id: number
+    url: number
+    userId: number
+    _all: number
+  }
+
+
+  export type NewsRSSAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type NewsRSSSumAggregateInputType = {
+    id?: true
+  }
+
+  export type NewsRSSMinAggregateInputType = {
+    id?: true
+    url?: true
+    userId?: true
+  }
+
+  export type NewsRSSMaxAggregateInputType = {
+    id?: true
+    url?: true
+    userId?: true
+  }
+
+  export type NewsRSSCountAggregateInputType = {
+    id?: true
+    url?: true
+    userId?: true
+    _all?: true
+  }
+
+  export type NewsRSSAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which NewsRSS to aggregate.
+     */
+    where?: NewsRSSWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NewsRSSES to fetch.
+     */
+    orderBy?: NewsRSSOrderByWithRelationInput | NewsRSSOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: NewsRSSWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NewsRSSES from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NewsRSSES.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned NewsRSSES
+    **/
+    _count?: true | NewsRSSCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: NewsRSSAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: NewsRSSSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NewsRSSMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NewsRSSMaxAggregateInputType
+  }
+
+  export type GetNewsRSSAggregateType<T extends NewsRSSAggregateArgs> = {
+        [P in keyof T & keyof AggregateNewsRSS]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNewsRSS[P]>
+      : GetScalarType<T[P], AggregateNewsRSS[P]>
+  }
+
+
+
+
+  export type NewsRSSGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NewsRSSWhereInput
+    orderBy?: NewsRSSOrderByWithAggregationInput | NewsRSSOrderByWithAggregationInput[]
+    by: NewsRSSScalarFieldEnum[] | NewsRSSScalarFieldEnum
+    having?: NewsRSSScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NewsRSSCountAggregateInputType | true
+    _avg?: NewsRSSAvgAggregateInputType
+    _sum?: NewsRSSSumAggregateInputType
+    _min?: NewsRSSMinAggregateInputType
+    _max?: NewsRSSMaxAggregateInputType
+  }
+
+  export type NewsRSSGroupByOutputType = {
+    id: number
+    url: string
+    userId: string
+    _count: NewsRSSCountAggregateOutputType | null
+    _avg: NewsRSSAvgAggregateOutputType | null
+    _sum: NewsRSSSumAggregateOutputType | null
+    _min: NewsRSSMinAggregateOutputType | null
+    _max: NewsRSSMaxAggregateOutputType | null
+  }
+
+  type GetNewsRSSGroupByPayload<T extends NewsRSSGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NewsRSSGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NewsRSSGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NewsRSSGroupByOutputType[P]>
+            : GetScalarType<T[P], NewsRSSGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type NewsRSSSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    url?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["newsRSS"]>
+
+  export type NewsRSSSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    url?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["newsRSS"]>
+
+  export type NewsRSSSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    url?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["newsRSS"]>
+
+  export type NewsRSSSelectScalar = {
+    id?: boolean
+    url?: boolean
+    userId?: boolean
+  }
+
+  export type NewsRSSOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "userId", ExtArgs["result"]["newsRSS"]>
+  export type NewsRSSInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type NewsRSSIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type NewsRSSIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $NewsRSSPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "NewsRSS"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      url: string
+      userId: string
+    }, ExtArgs["result"]["newsRSS"]>
+    composites: {}
+  }
+
+  type NewsRSSGetPayload<S extends boolean | null | undefined | NewsRSSDefaultArgs> = $Result.GetResult<Prisma.$NewsRSSPayload, S>
+
+  type NewsRSSCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<NewsRSSFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: NewsRSSCountAggregateInputType | true
+    }
+
+  export interface NewsRSSDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['NewsRSS'], meta: { name: 'NewsRSS' } }
+    /**
+     * Find zero or one NewsRSS that matches the filter.
+     * @param {NewsRSSFindUniqueArgs} args - Arguments to find a NewsRSS
+     * @example
+     * // Get one NewsRSS
+     * const newsRSS = await prisma.newsRSS.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends NewsRSSFindUniqueArgs>(args: SelectSubset<T, NewsRSSFindUniqueArgs<ExtArgs>>): Prisma__NewsRSSClient<$Result.GetResult<Prisma.$NewsRSSPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one NewsRSS that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {NewsRSSFindUniqueOrThrowArgs} args - Arguments to find a NewsRSS
+     * @example
+     * // Get one NewsRSS
+     * const newsRSS = await prisma.newsRSS.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends NewsRSSFindUniqueOrThrowArgs>(args: SelectSubset<T, NewsRSSFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NewsRSSClient<$Result.GetResult<Prisma.$NewsRSSPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first NewsRSS that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsRSSFindFirstArgs} args - Arguments to find a NewsRSS
+     * @example
+     * // Get one NewsRSS
+     * const newsRSS = await prisma.newsRSS.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends NewsRSSFindFirstArgs>(args?: SelectSubset<T, NewsRSSFindFirstArgs<ExtArgs>>): Prisma__NewsRSSClient<$Result.GetResult<Prisma.$NewsRSSPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first NewsRSS that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsRSSFindFirstOrThrowArgs} args - Arguments to find a NewsRSS
+     * @example
+     * // Get one NewsRSS
+     * const newsRSS = await prisma.newsRSS.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends NewsRSSFindFirstOrThrowArgs>(args?: SelectSubset<T, NewsRSSFindFirstOrThrowArgs<ExtArgs>>): Prisma__NewsRSSClient<$Result.GetResult<Prisma.$NewsRSSPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more NewsRSSES that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsRSSFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all NewsRSSES
+     * const newsRSSES = await prisma.newsRSS.findMany()
+     * 
+     * // Get first 10 NewsRSSES
+     * const newsRSSES = await prisma.newsRSS.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const newsRSSWithIdOnly = await prisma.newsRSS.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends NewsRSSFindManyArgs>(args?: SelectSubset<T, NewsRSSFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsRSSPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a NewsRSS.
+     * @param {NewsRSSCreateArgs} args - Arguments to create a NewsRSS.
+     * @example
+     * // Create one NewsRSS
+     * const NewsRSS = await prisma.newsRSS.create({
+     *   data: {
+     *     // ... data to create a NewsRSS
+     *   }
+     * })
+     * 
+     */
+    create<T extends NewsRSSCreateArgs>(args: SelectSubset<T, NewsRSSCreateArgs<ExtArgs>>): Prisma__NewsRSSClient<$Result.GetResult<Prisma.$NewsRSSPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many NewsRSSES.
+     * @param {NewsRSSCreateManyArgs} args - Arguments to create many NewsRSSES.
+     * @example
+     * // Create many NewsRSSES
+     * const newsRSS = await prisma.newsRSS.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends NewsRSSCreateManyArgs>(args?: SelectSubset<T, NewsRSSCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many NewsRSSES and returns the data saved in the database.
+     * @param {NewsRSSCreateManyAndReturnArgs} args - Arguments to create many NewsRSSES.
+     * @example
+     * // Create many NewsRSSES
+     * const newsRSS = await prisma.newsRSS.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many NewsRSSES and only return the `id`
+     * const newsRSSWithIdOnly = await prisma.newsRSS.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends NewsRSSCreateManyAndReturnArgs>(args?: SelectSubset<T, NewsRSSCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsRSSPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a NewsRSS.
+     * @param {NewsRSSDeleteArgs} args - Arguments to delete one NewsRSS.
+     * @example
+     * // Delete one NewsRSS
+     * const NewsRSS = await prisma.newsRSS.delete({
+     *   where: {
+     *     // ... filter to delete one NewsRSS
+     *   }
+     * })
+     * 
+     */
+    delete<T extends NewsRSSDeleteArgs>(args: SelectSubset<T, NewsRSSDeleteArgs<ExtArgs>>): Prisma__NewsRSSClient<$Result.GetResult<Prisma.$NewsRSSPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one NewsRSS.
+     * @param {NewsRSSUpdateArgs} args - Arguments to update one NewsRSS.
+     * @example
+     * // Update one NewsRSS
+     * const newsRSS = await prisma.newsRSS.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends NewsRSSUpdateArgs>(args: SelectSubset<T, NewsRSSUpdateArgs<ExtArgs>>): Prisma__NewsRSSClient<$Result.GetResult<Prisma.$NewsRSSPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more NewsRSSES.
+     * @param {NewsRSSDeleteManyArgs} args - Arguments to filter NewsRSSES to delete.
+     * @example
+     * // Delete a few NewsRSSES
+     * const { count } = await prisma.newsRSS.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends NewsRSSDeleteManyArgs>(args?: SelectSubset<T, NewsRSSDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more NewsRSSES.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsRSSUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many NewsRSSES
+     * const newsRSS = await prisma.newsRSS.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends NewsRSSUpdateManyArgs>(args: SelectSubset<T, NewsRSSUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more NewsRSSES and returns the data updated in the database.
+     * @param {NewsRSSUpdateManyAndReturnArgs} args - Arguments to update many NewsRSSES.
+     * @example
+     * // Update many NewsRSSES
+     * const newsRSS = await prisma.newsRSS.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more NewsRSSES and only return the `id`
+     * const newsRSSWithIdOnly = await prisma.newsRSS.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends NewsRSSUpdateManyAndReturnArgs>(args: SelectSubset<T, NewsRSSUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsRSSPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one NewsRSS.
+     * @param {NewsRSSUpsertArgs} args - Arguments to update or create a NewsRSS.
+     * @example
+     * // Update or create a NewsRSS
+     * const newsRSS = await prisma.newsRSS.upsert({
+     *   create: {
+     *     // ... data to create a NewsRSS
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the NewsRSS we want to update
+     *   }
+     * })
+     */
+    upsert<T extends NewsRSSUpsertArgs>(args: SelectSubset<T, NewsRSSUpsertArgs<ExtArgs>>): Prisma__NewsRSSClient<$Result.GetResult<Prisma.$NewsRSSPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of NewsRSSES.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsRSSCountArgs} args - Arguments to filter NewsRSSES to count.
+     * @example
+     * // Count the number of NewsRSSES
+     * const count = await prisma.newsRSS.count({
+     *   where: {
+     *     // ... the filter for the NewsRSSES we want to count
+     *   }
+     * })
+    **/
+    count<T extends NewsRSSCountArgs>(
+      args?: Subset<T, NewsRSSCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NewsRSSCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a NewsRSS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsRSSAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NewsRSSAggregateArgs>(args: Subset<T, NewsRSSAggregateArgs>): Prisma.PrismaPromise<GetNewsRSSAggregateType<T>>
+
+    /**
+     * Group by NewsRSS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsRSSGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends NewsRSSGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: NewsRSSGroupByArgs['orderBy'] }
+        : { orderBy?: NewsRSSGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, NewsRSSGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNewsRSSGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the NewsRSS model
+   */
+  readonly fields: NewsRSSFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for NewsRSS.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__NewsRSSClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the NewsRSS model
+   */
+  interface NewsRSSFieldRefs {
+    readonly id: FieldRef<"NewsRSS", 'Int'>
+    readonly url: FieldRef<"NewsRSS", 'String'>
+    readonly userId: FieldRef<"NewsRSS", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * NewsRSS findUnique
+   */
+  export type NewsRSSFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsRSS
+     */
+    select?: NewsRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsRSS
+     */
+    omit?: NewsRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsRSSInclude<ExtArgs> | null
+    /**
+     * Filter, which NewsRSS to fetch.
+     */
+    where: NewsRSSWhereUniqueInput
+  }
+
+  /**
+   * NewsRSS findUniqueOrThrow
+   */
+  export type NewsRSSFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsRSS
+     */
+    select?: NewsRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsRSS
+     */
+    omit?: NewsRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsRSSInclude<ExtArgs> | null
+    /**
+     * Filter, which NewsRSS to fetch.
+     */
+    where: NewsRSSWhereUniqueInput
+  }
+
+  /**
+   * NewsRSS findFirst
+   */
+  export type NewsRSSFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsRSS
+     */
+    select?: NewsRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsRSS
+     */
+    omit?: NewsRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsRSSInclude<ExtArgs> | null
+    /**
+     * Filter, which NewsRSS to fetch.
+     */
+    where?: NewsRSSWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NewsRSSES to fetch.
+     */
+    orderBy?: NewsRSSOrderByWithRelationInput | NewsRSSOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for NewsRSSES.
+     */
+    cursor?: NewsRSSWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NewsRSSES from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NewsRSSES.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of NewsRSSES.
+     */
+    distinct?: NewsRSSScalarFieldEnum | NewsRSSScalarFieldEnum[]
+  }
+
+  /**
+   * NewsRSS findFirstOrThrow
+   */
+  export type NewsRSSFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsRSS
+     */
+    select?: NewsRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsRSS
+     */
+    omit?: NewsRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsRSSInclude<ExtArgs> | null
+    /**
+     * Filter, which NewsRSS to fetch.
+     */
+    where?: NewsRSSWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NewsRSSES to fetch.
+     */
+    orderBy?: NewsRSSOrderByWithRelationInput | NewsRSSOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for NewsRSSES.
+     */
+    cursor?: NewsRSSWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NewsRSSES from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NewsRSSES.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of NewsRSSES.
+     */
+    distinct?: NewsRSSScalarFieldEnum | NewsRSSScalarFieldEnum[]
+  }
+
+  /**
+   * NewsRSS findMany
+   */
+  export type NewsRSSFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsRSS
+     */
+    select?: NewsRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsRSS
+     */
+    omit?: NewsRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsRSSInclude<ExtArgs> | null
+    /**
+     * Filter, which NewsRSSES to fetch.
+     */
+    where?: NewsRSSWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NewsRSSES to fetch.
+     */
+    orderBy?: NewsRSSOrderByWithRelationInput | NewsRSSOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing NewsRSSES.
+     */
+    cursor?: NewsRSSWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NewsRSSES from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NewsRSSES.
+     */
+    skip?: number
+    distinct?: NewsRSSScalarFieldEnum | NewsRSSScalarFieldEnum[]
+  }
+
+  /**
+   * NewsRSS create
+   */
+  export type NewsRSSCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsRSS
+     */
+    select?: NewsRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsRSS
+     */
+    omit?: NewsRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsRSSInclude<ExtArgs> | null
+    /**
+     * The data needed to create a NewsRSS.
+     */
+    data: XOR<NewsRSSCreateInput, NewsRSSUncheckedCreateInput>
+  }
+
+  /**
+   * NewsRSS createMany
+   */
+  export type NewsRSSCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many NewsRSSES.
+     */
+    data: NewsRSSCreateManyInput | NewsRSSCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * NewsRSS createManyAndReturn
+   */
+  export type NewsRSSCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsRSS
+     */
+    select?: NewsRSSSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsRSS
+     */
+    omit?: NewsRSSOmit<ExtArgs> | null
+    /**
+     * The data used to create many NewsRSSES.
+     */
+    data: NewsRSSCreateManyInput | NewsRSSCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsRSSIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * NewsRSS update
+   */
+  export type NewsRSSUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsRSS
+     */
+    select?: NewsRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsRSS
+     */
+    omit?: NewsRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsRSSInclude<ExtArgs> | null
+    /**
+     * The data needed to update a NewsRSS.
+     */
+    data: XOR<NewsRSSUpdateInput, NewsRSSUncheckedUpdateInput>
+    /**
+     * Choose, which NewsRSS to update.
+     */
+    where: NewsRSSWhereUniqueInput
+  }
+
+  /**
+   * NewsRSS updateMany
+   */
+  export type NewsRSSUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update NewsRSSES.
+     */
+    data: XOR<NewsRSSUpdateManyMutationInput, NewsRSSUncheckedUpdateManyInput>
+    /**
+     * Filter which NewsRSSES to update
+     */
+    where?: NewsRSSWhereInput
+    /**
+     * Limit how many NewsRSSES to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * NewsRSS updateManyAndReturn
+   */
+  export type NewsRSSUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsRSS
+     */
+    select?: NewsRSSSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsRSS
+     */
+    omit?: NewsRSSOmit<ExtArgs> | null
+    /**
+     * The data used to update NewsRSSES.
+     */
+    data: XOR<NewsRSSUpdateManyMutationInput, NewsRSSUncheckedUpdateManyInput>
+    /**
+     * Filter which NewsRSSES to update
+     */
+    where?: NewsRSSWhereInput
+    /**
+     * Limit how many NewsRSSES to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsRSSIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * NewsRSS upsert
+   */
+  export type NewsRSSUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsRSS
+     */
+    select?: NewsRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsRSS
+     */
+    omit?: NewsRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsRSSInclude<ExtArgs> | null
+    /**
+     * The filter to search for the NewsRSS to update in case it exists.
+     */
+    where: NewsRSSWhereUniqueInput
+    /**
+     * In case the NewsRSS found by the `where` argument doesn't exist, create a new NewsRSS with this data.
+     */
+    create: XOR<NewsRSSCreateInput, NewsRSSUncheckedCreateInput>
+    /**
+     * In case the NewsRSS was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<NewsRSSUpdateInput, NewsRSSUncheckedUpdateInput>
+  }
+
+  /**
+   * NewsRSS delete
+   */
+  export type NewsRSSDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsRSS
+     */
+    select?: NewsRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsRSS
+     */
+    omit?: NewsRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsRSSInclude<ExtArgs> | null
+    /**
+     * Filter which NewsRSS to delete.
+     */
+    where: NewsRSSWhereUniqueInput
+  }
+
+  /**
+   * NewsRSS deleteMany
+   */
+  export type NewsRSSDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which NewsRSSES to delete
+     */
+    where?: NewsRSSWhereInput
+    /**
+     * Limit how many NewsRSSES to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * NewsRSS without action
+   */
+  export type NewsRSSDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsRSS
+     */
+    select?: NewsRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsRSS
+     */
+    omit?: NewsRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsRSSInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model WpRSS
+   */
+
+  export type AggregateWpRSS = {
+    _count: WpRSSCountAggregateOutputType | null
+    _avg: WpRSSAvgAggregateOutputType | null
+    _sum: WpRSSSumAggregateOutputType | null
+    _min: WpRSSMinAggregateOutputType | null
+    _max: WpRSSMaxAggregateOutputType | null
+  }
+
+  export type WpRSSAvgAggregateOutputType = {
+    id: number | null
+    image: number | null
+  }
+
+  export type WpRSSSumAggregateOutputType = {
+    id: number | null
+    image: number | null
+  }
+
+  export type WpRSSMinAggregateOutputType = {
+    id: number | null
+    url: string | null
+    image: number | null
+    userId: string | null
+  }
+
+  export type WpRSSMaxAggregateOutputType = {
+    id: number | null
+    url: string | null
+    image: number | null
+    userId: string | null
+  }
+
+  export type WpRSSCountAggregateOutputType = {
+    id: number
+    url: number
+    image: number
+    userId: number
+    _all: number
+  }
+
+
+  export type WpRSSAvgAggregateInputType = {
+    id?: true
+    image?: true
+  }
+
+  export type WpRSSSumAggregateInputType = {
+    id?: true
+    image?: true
+  }
+
+  export type WpRSSMinAggregateInputType = {
+    id?: true
+    url?: true
+    image?: true
+    userId?: true
+  }
+
+  export type WpRSSMaxAggregateInputType = {
+    id?: true
+    url?: true
+    image?: true
+    userId?: true
+  }
+
+  export type WpRSSCountAggregateInputType = {
+    id?: true
+    url?: true
+    image?: true
+    userId?: true
+    _all?: true
+  }
+
+  export type WpRSSAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WpRSS to aggregate.
+     */
+    where?: WpRSSWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WpRSSES to fetch.
+     */
+    orderBy?: WpRSSOrderByWithRelationInput | WpRSSOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: WpRSSWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WpRSSES from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WpRSSES.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned WpRSSES
+    **/
+    _count?: true | WpRSSCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: WpRSSAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: WpRSSSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: WpRSSMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: WpRSSMaxAggregateInputType
+  }
+
+  export type GetWpRSSAggregateType<T extends WpRSSAggregateArgs> = {
+        [P in keyof T & keyof AggregateWpRSS]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateWpRSS[P]>
+      : GetScalarType<T[P], AggregateWpRSS[P]>
+  }
+
+
+
+
+  export type WpRSSGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WpRSSWhereInput
+    orderBy?: WpRSSOrderByWithAggregationInput | WpRSSOrderByWithAggregationInput[]
+    by: WpRSSScalarFieldEnum[] | WpRSSScalarFieldEnum
+    having?: WpRSSScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: WpRSSCountAggregateInputType | true
+    _avg?: WpRSSAvgAggregateInputType
+    _sum?: WpRSSSumAggregateInputType
+    _min?: WpRSSMinAggregateInputType
+    _max?: WpRSSMaxAggregateInputType
+  }
+
+  export type WpRSSGroupByOutputType = {
+    id: number
+    url: string
+    image: number
+    userId: string
+    _count: WpRSSCountAggregateOutputType | null
+    _avg: WpRSSAvgAggregateOutputType | null
+    _sum: WpRSSSumAggregateOutputType | null
+    _min: WpRSSMinAggregateOutputType | null
+    _max: WpRSSMaxAggregateOutputType | null
+  }
+
+  type GetWpRSSGroupByPayload<T extends WpRSSGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<WpRSSGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof WpRSSGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], WpRSSGroupByOutputType[P]>
+            : GetScalarType<T[P], WpRSSGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type WpRSSSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    url?: boolean
+    image?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["wpRSS"]>
+
+  export type WpRSSSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    url?: boolean
+    image?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["wpRSS"]>
+
+  export type WpRSSSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    url?: boolean
+    image?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["wpRSS"]>
+
+  export type WpRSSSelectScalar = {
+    id?: boolean
+    url?: boolean
+    image?: boolean
+    userId?: boolean
+  }
+
+  export type WpRSSOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "image" | "userId", ExtArgs["result"]["wpRSS"]>
+  export type WpRSSInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type WpRSSIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type WpRSSIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $WpRSSPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "WpRSS"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      url: string
+      image: number
+      userId: string
+    }, ExtArgs["result"]["wpRSS"]>
+    composites: {}
+  }
+
+  type WpRSSGetPayload<S extends boolean | null | undefined | WpRSSDefaultArgs> = $Result.GetResult<Prisma.$WpRSSPayload, S>
+
+  type WpRSSCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<WpRSSFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: WpRSSCountAggregateInputType | true
+    }
+
+  export interface WpRSSDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['WpRSS'], meta: { name: 'WpRSS' } }
+    /**
+     * Find zero or one WpRSS that matches the filter.
+     * @param {WpRSSFindUniqueArgs} args - Arguments to find a WpRSS
+     * @example
+     * // Get one WpRSS
+     * const wpRSS = await prisma.wpRSS.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends WpRSSFindUniqueArgs>(args: SelectSubset<T, WpRSSFindUniqueArgs<ExtArgs>>): Prisma__WpRSSClient<$Result.GetResult<Prisma.$WpRSSPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one WpRSS that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {WpRSSFindUniqueOrThrowArgs} args - Arguments to find a WpRSS
+     * @example
+     * // Get one WpRSS
+     * const wpRSS = await prisma.wpRSS.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends WpRSSFindUniqueOrThrowArgs>(args: SelectSubset<T, WpRSSFindUniqueOrThrowArgs<ExtArgs>>): Prisma__WpRSSClient<$Result.GetResult<Prisma.$WpRSSPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WpRSS that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WpRSSFindFirstArgs} args - Arguments to find a WpRSS
+     * @example
+     * // Get one WpRSS
+     * const wpRSS = await prisma.wpRSS.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends WpRSSFindFirstArgs>(args?: SelectSubset<T, WpRSSFindFirstArgs<ExtArgs>>): Prisma__WpRSSClient<$Result.GetResult<Prisma.$WpRSSPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WpRSS that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WpRSSFindFirstOrThrowArgs} args - Arguments to find a WpRSS
+     * @example
+     * // Get one WpRSS
+     * const wpRSS = await prisma.wpRSS.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends WpRSSFindFirstOrThrowArgs>(args?: SelectSubset<T, WpRSSFindFirstOrThrowArgs<ExtArgs>>): Prisma__WpRSSClient<$Result.GetResult<Prisma.$WpRSSPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more WpRSSES that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WpRSSFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all WpRSSES
+     * const wpRSSES = await prisma.wpRSS.findMany()
+     * 
+     * // Get first 10 WpRSSES
+     * const wpRSSES = await prisma.wpRSS.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const wpRSSWithIdOnly = await prisma.wpRSS.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends WpRSSFindManyArgs>(args?: SelectSubset<T, WpRSSFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WpRSSPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a WpRSS.
+     * @param {WpRSSCreateArgs} args - Arguments to create a WpRSS.
+     * @example
+     * // Create one WpRSS
+     * const WpRSS = await prisma.wpRSS.create({
+     *   data: {
+     *     // ... data to create a WpRSS
+     *   }
+     * })
+     * 
+     */
+    create<T extends WpRSSCreateArgs>(args: SelectSubset<T, WpRSSCreateArgs<ExtArgs>>): Prisma__WpRSSClient<$Result.GetResult<Prisma.$WpRSSPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many WpRSSES.
+     * @param {WpRSSCreateManyArgs} args - Arguments to create many WpRSSES.
+     * @example
+     * // Create many WpRSSES
+     * const wpRSS = await prisma.wpRSS.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends WpRSSCreateManyArgs>(args?: SelectSubset<T, WpRSSCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many WpRSSES and returns the data saved in the database.
+     * @param {WpRSSCreateManyAndReturnArgs} args - Arguments to create many WpRSSES.
+     * @example
+     * // Create many WpRSSES
+     * const wpRSS = await prisma.wpRSS.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many WpRSSES and only return the `id`
+     * const wpRSSWithIdOnly = await prisma.wpRSS.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends WpRSSCreateManyAndReturnArgs>(args?: SelectSubset<T, WpRSSCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WpRSSPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a WpRSS.
+     * @param {WpRSSDeleteArgs} args - Arguments to delete one WpRSS.
+     * @example
+     * // Delete one WpRSS
+     * const WpRSS = await prisma.wpRSS.delete({
+     *   where: {
+     *     // ... filter to delete one WpRSS
+     *   }
+     * })
+     * 
+     */
+    delete<T extends WpRSSDeleteArgs>(args: SelectSubset<T, WpRSSDeleteArgs<ExtArgs>>): Prisma__WpRSSClient<$Result.GetResult<Prisma.$WpRSSPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one WpRSS.
+     * @param {WpRSSUpdateArgs} args - Arguments to update one WpRSS.
+     * @example
+     * // Update one WpRSS
+     * const wpRSS = await prisma.wpRSS.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends WpRSSUpdateArgs>(args: SelectSubset<T, WpRSSUpdateArgs<ExtArgs>>): Prisma__WpRSSClient<$Result.GetResult<Prisma.$WpRSSPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more WpRSSES.
+     * @param {WpRSSDeleteManyArgs} args - Arguments to filter WpRSSES to delete.
+     * @example
+     * // Delete a few WpRSSES
+     * const { count } = await prisma.wpRSS.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends WpRSSDeleteManyArgs>(args?: SelectSubset<T, WpRSSDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WpRSSES.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WpRSSUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many WpRSSES
+     * const wpRSS = await prisma.wpRSS.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends WpRSSUpdateManyArgs>(args: SelectSubset<T, WpRSSUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WpRSSES and returns the data updated in the database.
+     * @param {WpRSSUpdateManyAndReturnArgs} args - Arguments to update many WpRSSES.
+     * @example
+     * // Update many WpRSSES
+     * const wpRSS = await prisma.wpRSS.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more WpRSSES and only return the `id`
+     * const wpRSSWithIdOnly = await prisma.wpRSS.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends WpRSSUpdateManyAndReturnArgs>(args: SelectSubset<T, WpRSSUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WpRSSPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one WpRSS.
+     * @param {WpRSSUpsertArgs} args - Arguments to update or create a WpRSS.
+     * @example
+     * // Update or create a WpRSS
+     * const wpRSS = await prisma.wpRSS.upsert({
+     *   create: {
+     *     // ... data to create a WpRSS
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the WpRSS we want to update
+     *   }
+     * })
+     */
+    upsert<T extends WpRSSUpsertArgs>(args: SelectSubset<T, WpRSSUpsertArgs<ExtArgs>>): Prisma__WpRSSClient<$Result.GetResult<Prisma.$WpRSSPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of WpRSSES.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WpRSSCountArgs} args - Arguments to filter WpRSSES to count.
+     * @example
+     * // Count the number of WpRSSES
+     * const count = await prisma.wpRSS.count({
+     *   where: {
+     *     // ... the filter for the WpRSSES we want to count
+     *   }
+     * })
+    **/
+    count<T extends WpRSSCountArgs>(
+      args?: Subset<T, WpRSSCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], WpRSSCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a WpRSS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WpRSSAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends WpRSSAggregateArgs>(args: Subset<T, WpRSSAggregateArgs>): Prisma.PrismaPromise<GetWpRSSAggregateType<T>>
+
+    /**
+     * Group by WpRSS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WpRSSGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends WpRSSGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: WpRSSGroupByArgs['orderBy'] }
+        : { orderBy?: WpRSSGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, WpRSSGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetWpRSSGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the WpRSS model
+   */
+  readonly fields: WpRSSFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for WpRSS.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__WpRSSClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the WpRSS model
+   */
+  interface WpRSSFieldRefs {
+    readonly id: FieldRef<"WpRSS", 'Int'>
+    readonly url: FieldRef<"WpRSS", 'String'>
+    readonly image: FieldRef<"WpRSS", 'Int'>
+    readonly userId: FieldRef<"WpRSS", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * WpRSS findUnique
+   */
+  export type WpRSSFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WpRSS
+     */
+    select?: WpRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WpRSS
+     */
+    omit?: WpRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WpRSSInclude<ExtArgs> | null
+    /**
+     * Filter, which WpRSS to fetch.
+     */
+    where: WpRSSWhereUniqueInput
+  }
+
+  /**
+   * WpRSS findUniqueOrThrow
+   */
+  export type WpRSSFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WpRSS
+     */
+    select?: WpRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WpRSS
+     */
+    omit?: WpRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WpRSSInclude<ExtArgs> | null
+    /**
+     * Filter, which WpRSS to fetch.
+     */
+    where: WpRSSWhereUniqueInput
+  }
+
+  /**
+   * WpRSS findFirst
+   */
+  export type WpRSSFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WpRSS
+     */
+    select?: WpRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WpRSS
+     */
+    omit?: WpRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WpRSSInclude<ExtArgs> | null
+    /**
+     * Filter, which WpRSS to fetch.
+     */
+    where?: WpRSSWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WpRSSES to fetch.
+     */
+    orderBy?: WpRSSOrderByWithRelationInput | WpRSSOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WpRSSES.
+     */
+    cursor?: WpRSSWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WpRSSES from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WpRSSES.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WpRSSES.
+     */
+    distinct?: WpRSSScalarFieldEnum | WpRSSScalarFieldEnum[]
+  }
+
+  /**
+   * WpRSS findFirstOrThrow
+   */
+  export type WpRSSFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WpRSS
+     */
+    select?: WpRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WpRSS
+     */
+    omit?: WpRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WpRSSInclude<ExtArgs> | null
+    /**
+     * Filter, which WpRSS to fetch.
+     */
+    where?: WpRSSWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WpRSSES to fetch.
+     */
+    orderBy?: WpRSSOrderByWithRelationInput | WpRSSOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WpRSSES.
+     */
+    cursor?: WpRSSWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WpRSSES from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WpRSSES.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WpRSSES.
+     */
+    distinct?: WpRSSScalarFieldEnum | WpRSSScalarFieldEnum[]
+  }
+
+  /**
+   * WpRSS findMany
+   */
+  export type WpRSSFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WpRSS
+     */
+    select?: WpRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WpRSS
+     */
+    omit?: WpRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WpRSSInclude<ExtArgs> | null
+    /**
+     * Filter, which WpRSSES to fetch.
+     */
+    where?: WpRSSWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WpRSSES to fetch.
+     */
+    orderBy?: WpRSSOrderByWithRelationInput | WpRSSOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing WpRSSES.
+     */
+    cursor?: WpRSSWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WpRSSES from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WpRSSES.
+     */
+    skip?: number
+    distinct?: WpRSSScalarFieldEnum | WpRSSScalarFieldEnum[]
+  }
+
+  /**
+   * WpRSS create
+   */
+  export type WpRSSCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WpRSS
+     */
+    select?: WpRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WpRSS
+     */
+    omit?: WpRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WpRSSInclude<ExtArgs> | null
+    /**
+     * The data needed to create a WpRSS.
+     */
+    data: XOR<WpRSSCreateInput, WpRSSUncheckedCreateInput>
+  }
+
+  /**
+   * WpRSS createMany
+   */
+  export type WpRSSCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many WpRSSES.
+     */
+    data: WpRSSCreateManyInput | WpRSSCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * WpRSS createManyAndReturn
+   */
+  export type WpRSSCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WpRSS
+     */
+    select?: WpRSSSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WpRSS
+     */
+    omit?: WpRSSOmit<ExtArgs> | null
+    /**
+     * The data used to create many WpRSSES.
+     */
+    data: WpRSSCreateManyInput | WpRSSCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WpRSSIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * WpRSS update
+   */
+  export type WpRSSUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WpRSS
+     */
+    select?: WpRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WpRSS
+     */
+    omit?: WpRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WpRSSInclude<ExtArgs> | null
+    /**
+     * The data needed to update a WpRSS.
+     */
+    data: XOR<WpRSSUpdateInput, WpRSSUncheckedUpdateInput>
+    /**
+     * Choose, which WpRSS to update.
+     */
+    where: WpRSSWhereUniqueInput
+  }
+
+  /**
+   * WpRSS updateMany
+   */
+  export type WpRSSUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update WpRSSES.
+     */
+    data: XOR<WpRSSUpdateManyMutationInput, WpRSSUncheckedUpdateManyInput>
+    /**
+     * Filter which WpRSSES to update
+     */
+    where?: WpRSSWhereInput
+    /**
+     * Limit how many WpRSSES to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * WpRSS updateManyAndReturn
+   */
+  export type WpRSSUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WpRSS
+     */
+    select?: WpRSSSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WpRSS
+     */
+    omit?: WpRSSOmit<ExtArgs> | null
+    /**
+     * The data used to update WpRSSES.
+     */
+    data: XOR<WpRSSUpdateManyMutationInput, WpRSSUncheckedUpdateManyInput>
+    /**
+     * Filter which WpRSSES to update
+     */
+    where?: WpRSSWhereInput
+    /**
+     * Limit how many WpRSSES to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WpRSSIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * WpRSS upsert
+   */
+  export type WpRSSUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WpRSS
+     */
+    select?: WpRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WpRSS
+     */
+    omit?: WpRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WpRSSInclude<ExtArgs> | null
+    /**
+     * The filter to search for the WpRSS to update in case it exists.
+     */
+    where: WpRSSWhereUniqueInput
+    /**
+     * In case the WpRSS found by the `where` argument doesn't exist, create a new WpRSS with this data.
+     */
+    create: XOR<WpRSSCreateInput, WpRSSUncheckedCreateInput>
+    /**
+     * In case the WpRSS was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<WpRSSUpdateInput, WpRSSUncheckedUpdateInput>
+  }
+
+  /**
+   * WpRSS delete
+   */
+  export type WpRSSDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WpRSS
+     */
+    select?: WpRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WpRSS
+     */
+    omit?: WpRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WpRSSInclude<ExtArgs> | null
+    /**
+     * Filter which WpRSS to delete.
+     */
+    where: WpRSSWhereUniqueInput
+  }
+
+  /**
+   * WpRSS deleteMany
+   */
+  export type WpRSSDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WpRSSES to delete
+     */
+    where?: WpRSSWhereInput
+    /**
+     * Limit how many WpRSSES to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * WpRSS without action
+   */
+  export type WpRSSDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WpRSS
+     */
+    select?: WpRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WpRSS
+     */
+    omit?: WpRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WpRSSInclude<ExtArgs> | null
+  }
+
 
   /**
    * Model Catalogue
@@ -3809,6 +7324,9 @@ export namespace Prisma {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     catalogues?: boolean | User$cataloguesArgs<ExtArgs>
     websites?: boolean | User$websitesArgs<ExtArgs>
+    yt?: boolean | User$ytArgs<ExtArgs>
+    wp?: boolean | User$wpArgs<ExtArgs>
+    news?: boolean | User$newsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3848,6 +7366,9 @@ export namespace Prisma {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     catalogues?: boolean | User$cataloguesArgs<ExtArgs>
     websites?: boolean | User$websitesArgs<ExtArgs>
+    yt?: boolean | User$ytArgs<ExtArgs>
+    wp?: boolean | User$wpArgs<ExtArgs>
+    news?: boolean | User$newsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3860,6 +7381,9 @@ export namespace Prisma {
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       catalogues: Prisma.$CataloguePayload<ExtArgs>[]
       websites: Prisma.$WebsitePayload<ExtArgs>[]
+      yt: Prisma.$YtRSSPayload<ExtArgs>[]
+      wp: Prisma.$WpRSSPayload<ExtArgs>[]
+      news: Prisma.$NewsRSSPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4267,6 +7791,9 @@ export namespace Prisma {
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     catalogues<T extends User$cataloguesArgs<ExtArgs> = {}>(args?: Subset<T, User$cataloguesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CataloguePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     websites<T extends User$websitesArgs<ExtArgs> = {}>(args?: Subset<T, User$websitesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WebsitePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    yt<T extends User$ytArgs<ExtArgs> = {}>(args?: Subset<T, User$ytArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$YtRSSPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    wp<T extends User$wpArgs<ExtArgs> = {}>(args?: Subset<T, User$wpArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WpRSSPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    news<T extends User$newsArgs<ExtArgs> = {}>(args?: Subset<T, User$newsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsRSSPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4784,6 +8311,78 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: WebsiteScalarFieldEnum | WebsiteScalarFieldEnum[]
+  }
+
+  /**
+   * User.yt
+   */
+  export type User$ytArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the YtRSS
+     */
+    select?: YtRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the YtRSS
+     */
+    omit?: YtRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: YtRSSInclude<ExtArgs> | null
+    where?: YtRSSWhereInput
+    orderBy?: YtRSSOrderByWithRelationInput | YtRSSOrderByWithRelationInput[]
+    cursor?: YtRSSWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: YtRSSScalarFieldEnum | YtRSSScalarFieldEnum[]
+  }
+
+  /**
+   * User.wp
+   */
+  export type User$wpArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WpRSS
+     */
+    select?: WpRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WpRSS
+     */
+    omit?: WpRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WpRSSInclude<ExtArgs> | null
+    where?: WpRSSWhereInput
+    orderBy?: WpRSSOrderByWithRelationInput | WpRSSOrderByWithRelationInput[]
+    cursor?: WpRSSWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: WpRSSScalarFieldEnum | WpRSSScalarFieldEnum[]
+  }
+
+  /**
+   * User.news
+   */
+  export type User$newsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsRSS
+     */
+    select?: NewsRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsRSS
+     */
+    omit?: NewsRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsRSSInclude<ExtArgs> | null
+    where?: NewsRSSWhereInput
+    orderBy?: NewsRSSOrderByWithRelationInput | NewsRSSOrderByWithRelationInput[]
+    cursor?: NewsRSSWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NewsRSSScalarFieldEnum | NewsRSSScalarFieldEnum[]
   }
 
   /**
@@ -8042,6 +11641,34 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+  export const YtRSSScalarFieldEnum: {
+    id: 'id',
+    channelId: 'channelId',
+    userId: 'userId'
+  };
+
+  export type YtRSSScalarFieldEnum = (typeof YtRSSScalarFieldEnum)[keyof typeof YtRSSScalarFieldEnum]
+
+
+  export const NewsRSSScalarFieldEnum: {
+    id: 'id',
+    url: 'url',
+    userId: 'userId'
+  };
+
+  export type NewsRSSScalarFieldEnum = (typeof NewsRSSScalarFieldEnum)[keyof typeof NewsRSSScalarFieldEnum]
+
+
+  export const WpRSSScalarFieldEnum: {
+    id: 'id',
+    url: 'url',
+    image: 'image',
+    userId: 'userId'
+  };
+
+  export type WpRSSScalarFieldEnum = (typeof WpRSSScalarFieldEnum)[keyof typeof WpRSSScalarFieldEnum]
+
+
   export const CatalogueScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -8203,6 +11830,155 @@ export namespace Prisma {
    */
 
 
+  export type YtRSSWhereInput = {
+    AND?: YtRSSWhereInput | YtRSSWhereInput[]
+    OR?: YtRSSWhereInput[]
+    NOT?: YtRSSWhereInput | YtRSSWhereInput[]
+    id?: IntFilter<"YtRSS"> | number
+    channelId?: StringFilter<"YtRSS"> | string
+    userId?: StringFilter<"YtRSS"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type YtRSSOrderByWithRelationInput = {
+    id?: SortOrder
+    channelId?: SortOrder
+    userId?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type YtRSSWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    user_ytrss_channelId_unique?: YtRSSUser_ytrss_channelId_uniqueCompoundUniqueInput
+    AND?: YtRSSWhereInput | YtRSSWhereInput[]
+    OR?: YtRSSWhereInput[]
+    NOT?: YtRSSWhereInput | YtRSSWhereInput[]
+    channelId?: StringFilter<"YtRSS"> | string
+    userId?: StringFilter<"YtRSS"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "user_ytrss_channelId_unique">
+
+  export type YtRSSOrderByWithAggregationInput = {
+    id?: SortOrder
+    channelId?: SortOrder
+    userId?: SortOrder
+    _count?: YtRSSCountOrderByAggregateInput
+    _avg?: YtRSSAvgOrderByAggregateInput
+    _max?: YtRSSMaxOrderByAggregateInput
+    _min?: YtRSSMinOrderByAggregateInput
+    _sum?: YtRSSSumOrderByAggregateInput
+  }
+
+  export type YtRSSScalarWhereWithAggregatesInput = {
+    AND?: YtRSSScalarWhereWithAggregatesInput | YtRSSScalarWhereWithAggregatesInput[]
+    OR?: YtRSSScalarWhereWithAggregatesInput[]
+    NOT?: YtRSSScalarWhereWithAggregatesInput | YtRSSScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"YtRSS"> | number
+    channelId?: StringWithAggregatesFilter<"YtRSS"> | string
+    userId?: StringWithAggregatesFilter<"YtRSS"> | string
+  }
+
+  export type NewsRSSWhereInput = {
+    AND?: NewsRSSWhereInput | NewsRSSWhereInput[]
+    OR?: NewsRSSWhereInput[]
+    NOT?: NewsRSSWhereInput | NewsRSSWhereInput[]
+    id?: IntFilter<"NewsRSS"> | number
+    url?: StringFilter<"NewsRSS"> | string
+    userId?: StringFilter<"NewsRSS"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type NewsRSSOrderByWithRelationInput = {
+    id?: SortOrder
+    url?: SortOrder
+    userId?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type NewsRSSWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    user_newsrss_url_unique?: NewsRSSUser_newsrss_url_uniqueCompoundUniqueInput
+    AND?: NewsRSSWhereInput | NewsRSSWhereInput[]
+    OR?: NewsRSSWhereInput[]
+    NOT?: NewsRSSWhereInput | NewsRSSWhereInput[]
+    url?: StringFilter<"NewsRSS"> | string
+    userId?: StringFilter<"NewsRSS"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "user_newsrss_url_unique">
+
+  export type NewsRSSOrderByWithAggregationInput = {
+    id?: SortOrder
+    url?: SortOrder
+    userId?: SortOrder
+    _count?: NewsRSSCountOrderByAggregateInput
+    _avg?: NewsRSSAvgOrderByAggregateInput
+    _max?: NewsRSSMaxOrderByAggregateInput
+    _min?: NewsRSSMinOrderByAggregateInput
+    _sum?: NewsRSSSumOrderByAggregateInput
+  }
+
+  export type NewsRSSScalarWhereWithAggregatesInput = {
+    AND?: NewsRSSScalarWhereWithAggregatesInput | NewsRSSScalarWhereWithAggregatesInput[]
+    OR?: NewsRSSScalarWhereWithAggregatesInput[]
+    NOT?: NewsRSSScalarWhereWithAggregatesInput | NewsRSSScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"NewsRSS"> | number
+    url?: StringWithAggregatesFilter<"NewsRSS"> | string
+    userId?: StringWithAggregatesFilter<"NewsRSS"> | string
+  }
+
+  export type WpRSSWhereInput = {
+    AND?: WpRSSWhereInput | WpRSSWhereInput[]
+    OR?: WpRSSWhereInput[]
+    NOT?: WpRSSWhereInput | WpRSSWhereInput[]
+    id?: IntFilter<"WpRSS"> | number
+    url?: StringFilter<"WpRSS"> | string
+    image?: IntFilter<"WpRSS"> | number
+    userId?: StringFilter<"WpRSS"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type WpRSSOrderByWithRelationInput = {
+    id?: SortOrder
+    url?: SortOrder
+    image?: SortOrder
+    userId?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type WpRSSWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    user_wprss_url_unique?: WpRSSUser_wprss_url_uniqueCompoundUniqueInput
+    AND?: WpRSSWhereInput | WpRSSWhereInput[]
+    OR?: WpRSSWhereInput[]
+    NOT?: WpRSSWhereInput | WpRSSWhereInput[]
+    url?: StringFilter<"WpRSS"> | string
+    image?: IntFilter<"WpRSS"> | number
+    userId?: StringFilter<"WpRSS"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "user_wprss_url_unique">
+
+  export type WpRSSOrderByWithAggregationInput = {
+    id?: SortOrder
+    url?: SortOrder
+    image?: SortOrder
+    userId?: SortOrder
+    _count?: WpRSSCountOrderByAggregateInput
+    _avg?: WpRSSAvgOrderByAggregateInput
+    _max?: WpRSSMaxOrderByAggregateInput
+    _min?: WpRSSMinOrderByAggregateInput
+    _sum?: WpRSSSumOrderByAggregateInput
+  }
+
+  export type WpRSSScalarWhereWithAggregatesInput = {
+    AND?: WpRSSScalarWhereWithAggregatesInput | WpRSSScalarWhereWithAggregatesInput[]
+    OR?: WpRSSScalarWhereWithAggregatesInput[]
+    NOT?: WpRSSScalarWhereWithAggregatesInput | WpRSSScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"WpRSS"> | number
+    url?: StringWithAggregatesFilter<"WpRSS"> | string
+    image?: IntWithAggregatesFilter<"WpRSS"> | number
+    userId?: StringWithAggregatesFilter<"WpRSS"> | string
+  }
+
   export type CatalogueWhereInput = {
     AND?: CatalogueWhereInput | CatalogueWhereInput[]
     OR?: CatalogueWhereInput[]
@@ -8336,6 +12112,9 @@ export namespace Prisma {
     sessions?: SessionListRelationFilter
     catalogues?: CatalogueListRelationFilter
     websites?: WebsiteListRelationFilter
+    yt?: YtRSSListRelationFilter
+    wp?: WpRSSListRelationFilter
+    news?: NewsRSSListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -8350,6 +12129,9 @@ export namespace Prisma {
     sessions?: SessionOrderByRelationAggregateInput
     catalogues?: CatalogueOrderByRelationAggregateInput
     websites?: WebsiteOrderByRelationAggregateInput
+    yt?: YtRSSOrderByRelationAggregateInput
+    wp?: WpRSSOrderByRelationAggregateInput
+    news?: NewsRSSOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -8367,6 +12149,9 @@ export namespace Prisma {
     sessions?: SessionListRelationFilter
     catalogues?: CatalogueListRelationFilter
     websites?: WebsiteListRelationFilter
+    yt?: YtRSSListRelationFilter
+    wp?: WpRSSListRelationFilter
+    news?: NewsRSSListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -8591,6 +12376,127 @@ export namespace Prisma {
     expires?: DateTimeWithAggregatesFilter<"VerificationToken"> | Date | string
   }
 
+  export type YtRSSCreateInput = {
+    channelId: string
+    user: UserCreateNestedOneWithoutYtInput
+  }
+
+  export type YtRSSUncheckedCreateInput = {
+    id?: number
+    channelId: string
+    userId: string
+  }
+
+  export type YtRSSUpdateInput = {
+    channelId?: StringFieldUpdateOperationsInput | string
+    user?: UserUpdateOneRequiredWithoutYtNestedInput
+  }
+
+  export type YtRSSUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    channelId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type YtRSSCreateManyInput = {
+    id?: number
+    channelId: string
+    userId: string
+  }
+
+  export type YtRSSUpdateManyMutationInput = {
+    channelId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type YtRSSUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    channelId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type NewsRSSCreateInput = {
+    url: string
+    user: UserCreateNestedOneWithoutNewsInput
+  }
+
+  export type NewsRSSUncheckedCreateInput = {
+    id?: number
+    url: string
+    userId: string
+  }
+
+  export type NewsRSSUpdateInput = {
+    url?: StringFieldUpdateOperationsInput | string
+    user?: UserUpdateOneRequiredWithoutNewsNestedInput
+  }
+
+  export type NewsRSSUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type NewsRSSCreateManyInput = {
+    id?: number
+    url: string
+    userId: string
+  }
+
+  export type NewsRSSUpdateManyMutationInput = {
+    url?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type NewsRSSUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type WpRSSCreateInput = {
+    url: string
+    image: number
+    user: UserCreateNestedOneWithoutWpInput
+  }
+
+  export type WpRSSUncheckedCreateInput = {
+    id?: number
+    url: string
+    image: number
+    userId: string
+  }
+
+  export type WpRSSUpdateInput = {
+    url?: StringFieldUpdateOperationsInput | string
+    image?: IntFieldUpdateOperationsInput | number
+    user?: UserUpdateOneRequiredWithoutWpNestedInput
+  }
+
+  export type WpRSSUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
+    image?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type WpRSSCreateManyInput = {
+    id?: number
+    url: string
+    image: number
+    userId: string
+  }
+
+  export type WpRSSUpdateManyMutationInput = {
+    url?: StringFieldUpdateOperationsInput | string
+    image?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type WpRSSUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
+    image?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
   export type CatalogueCreateInput = {
     name: string
     websites?: WebsiteCreateNestedManyWithoutCatalogueInput
@@ -8703,6 +12609,9 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     catalogues?: CatalogueCreateNestedManyWithoutUserInput
     websites?: WebsiteCreateNestedManyWithoutUserInput
+    yt?: YtRSSCreateNestedManyWithoutUserInput
+    wp?: WpRSSCreateNestedManyWithoutUserInput
+    news?: NewsRSSCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -8717,6 +12626,9 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     catalogues?: CatalogueUncheckedCreateNestedManyWithoutUserInput
     websites?: WebsiteUncheckedCreateNestedManyWithoutUserInput
+    yt?: YtRSSUncheckedCreateNestedManyWithoutUserInput
+    wp?: WpRSSUncheckedCreateNestedManyWithoutUserInput
+    news?: NewsRSSUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -8731,6 +12643,9 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     catalogues?: CatalogueUpdateManyWithoutUserNestedInput
     websites?: WebsiteUpdateManyWithoutUserNestedInput
+    yt?: YtRSSUpdateManyWithoutUserNestedInput
+    wp?: WpRSSUpdateManyWithoutUserNestedInput
+    news?: NewsRSSUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -8745,6 +12660,9 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     catalogues?: CatalogueUncheckedUpdateManyWithoutUserNestedInput
     websites?: WebsiteUncheckedUpdateManyWithoutUserNestedInput
+    yt?: YtRSSUncheckedUpdateManyWithoutUserNestedInput
+    wp?: WpRSSUncheckedUpdateManyWithoutUserNestedInput
+    news?: NewsRSSUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -9011,49 +12929,39 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type WebsiteListRelationFilter = {
-    every?: WebsiteWhereInput
-    some?: WebsiteWhereInput
-    none?: WebsiteWhereInput
-  }
-
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
   }
 
-  export type WebsiteOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type CatalogueUser_catalogue_name_uniqueCompoundUniqueInput = {
+  export type YtRSSUser_ytrss_channelId_uniqueCompoundUniqueInput = {
     userId: string
-    name: string
+    channelId: string
   }
 
-  export type CatalogueCountOrderByAggregateInput = {
+  export type YtRSSCountOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    channelId?: SortOrder
     userId?: SortOrder
   }
 
-  export type CatalogueAvgOrderByAggregateInput = {
+  export type YtRSSAvgOrderByAggregateInput = {
     id?: SortOrder
   }
 
-  export type CatalogueMaxOrderByAggregateInput = {
+  export type YtRSSMaxOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    channelId?: SortOrder
     userId?: SortOrder
   }
 
-  export type CatalogueMinOrderByAggregateInput = {
+  export type YtRSSMinOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    channelId?: SortOrder
     userId?: SortOrder
   }
 
-  export type CatalogueSumOrderByAggregateInput = {
+  export type YtRSSSumOrderByAggregateInput = {
     id?: SortOrder
   }
 
@@ -9089,6 +12997,114 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NewsRSSUser_newsrss_url_uniqueCompoundUniqueInput = {
+    userId: string
+    url: string
+  }
+
+  export type NewsRSSCountOrderByAggregateInput = {
+    id?: SortOrder
+    url?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type NewsRSSAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type NewsRSSMaxOrderByAggregateInput = {
+    id?: SortOrder
+    url?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type NewsRSSMinOrderByAggregateInput = {
+    id?: SortOrder
+    url?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type NewsRSSSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type WpRSSUser_wprss_url_uniqueCompoundUniqueInput = {
+    userId: string
+    url: string
+  }
+
+  export type WpRSSCountOrderByAggregateInput = {
+    id?: SortOrder
+    url?: SortOrder
+    image?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type WpRSSAvgOrderByAggregateInput = {
+    id?: SortOrder
+    image?: SortOrder
+  }
+
+  export type WpRSSMaxOrderByAggregateInput = {
+    id?: SortOrder
+    url?: SortOrder
+    image?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type WpRSSMinOrderByAggregateInput = {
+    id?: SortOrder
+    url?: SortOrder
+    image?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type WpRSSSumOrderByAggregateInput = {
+    id?: SortOrder
+    image?: SortOrder
+  }
+
+  export type WebsiteListRelationFilter = {
+    every?: WebsiteWhereInput
+    some?: WebsiteWhereInput
+    none?: WebsiteWhereInput
+  }
+
+  export type WebsiteOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CatalogueUser_catalogue_name_uniqueCompoundUniqueInput = {
+    userId: string
+    name: string
+  }
+
+  export type CatalogueCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type CatalogueAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type CatalogueMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type CatalogueMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type CatalogueSumOrderByAggregateInput = {
+    id?: SortOrder
   }
 
   export type CatalogueScalarRelationFilter = {
@@ -9198,6 +13214,24 @@ export namespace Prisma {
     none?: CatalogueWhereInput
   }
 
+  export type YtRSSListRelationFilter = {
+    every?: YtRSSWhereInput
+    some?: YtRSSWhereInput
+    none?: YtRSSWhereInput
+  }
+
+  export type WpRSSListRelationFilter = {
+    every?: WpRSSWhereInput
+    some?: WpRSSWhereInput
+    none?: WpRSSWhereInput
+  }
+
+  export type NewsRSSListRelationFilter = {
+    every?: NewsRSSWhereInput
+    some?: NewsRSSWhereInput
+    none?: NewsRSSWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -9212,6 +13246,18 @@ export namespace Prisma {
   }
 
   export type CatalogueOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type YtRSSOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type WpRSSOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type NewsRSSOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -9426,6 +13472,60 @@ export namespace Prisma {
     expires?: SortOrder
   }
 
+  export type UserCreateNestedOneWithoutYtInput = {
+    create?: XOR<UserCreateWithoutYtInput, UserUncheckedCreateWithoutYtInput>
+    connectOrCreate?: UserCreateOrConnectWithoutYtInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
+  export type UserUpdateOneRequiredWithoutYtNestedInput = {
+    create?: XOR<UserCreateWithoutYtInput, UserUncheckedCreateWithoutYtInput>
+    connectOrCreate?: UserCreateOrConnectWithoutYtInput
+    upsert?: UserUpsertWithoutYtInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutYtInput, UserUpdateWithoutYtInput>, UserUncheckedUpdateWithoutYtInput>
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type UserCreateNestedOneWithoutNewsInput = {
+    create?: XOR<UserCreateWithoutNewsInput, UserUncheckedCreateWithoutNewsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutNewsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutNewsNestedInput = {
+    create?: XOR<UserCreateWithoutNewsInput, UserUncheckedCreateWithoutNewsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutNewsInput
+    upsert?: UserUpsertWithoutNewsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNewsInput, UserUpdateWithoutNewsInput>, UserUncheckedUpdateWithoutNewsInput>
+  }
+
+  export type UserCreateNestedOneWithoutWpInput = {
+    create?: XOR<UserCreateWithoutWpInput, UserUncheckedCreateWithoutWpInput>
+    connectOrCreate?: UserCreateOrConnectWithoutWpInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutWpNestedInput = {
+    create?: XOR<UserCreateWithoutWpInput, UserUncheckedCreateWithoutWpInput>
+    connectOrCreate?: UserCreateOrConnectWithoutWpInput
+    upsert?: UserUpsertWithoutWpInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutWpInput, UserUpdateWithoutWpInput>, UserUncheckedUpdateWithoutWpInput>
+  }
+
   export type WebsiteCreateNestedManyWithoutCatalogueInput = {
     create?: XOR<WebsiteCreateWithoutCatalogueInput, WebsiteUncheckedCreateWithoutCatalogueInput> | WebsiteCreateWithoutCatalogueInput[] | WebsiteUncheckedCreateWithoutCatalogueInput[]
     connectOrCreate?: WebsiteCreateOrConnectWithoutCatalogueInput | WebsiteCreateOrConnectWithoutCatalogueInput[]
@@ -9444,10 +13544,6 @@ export namespace Prisma {
     connectOrCreate?: WebsiteCreateOrConnectWithoutCatalogueInput | WebsiteCreateOrConnectWithoutCatalogueInput[]
     createMany?: WebsiteCreateManyCatalogueInputEnvelope
     connect?: WebsiteWhereUniqueInput | WebsiteWhereUniqueInput[]
-  }
-
-  export type StringFieldUpdateOperationsInput = {
-    set?: string
   }
 
   export type WebsiteUpdateManyWithoutCatalogueNestedInput = {
@@ -9470,14 +13566,6 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutCataloguesInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCataloguesInput, UserUpdateWithoutCataloguesInput>, UserUncheckedUpdateWithoutCataloguesInput>
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type WebsiteUncheckedUpdateManyWithoutCatalogueNestedInput = {
@@ -9550,6 +13638,27 @@ export namespace Prisma {
     connect?: WebsiteWhereUniqueInput | WebsiteWhereUniqueInput[]
   }
 
+  export type YtRSSCreateNestedManyWithoutUserInput = {
+    create?: XOR<YtRSSCreateWithoutUserInput, YtRSSUncheckedCreateWithoutUserInput> | YtRSSCreateWithoutUserInput[] | YtRSSUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: YtRSSCreateOrConnectWithoutUserInput | YtRSSCreateOrConnectWithoutUserInput[]
+    createMany?: YtRSSCreateManyUserInputEnvelope
+    connect?: YtRSSWhereUniqueInput | YtRSSWhereUniqueInput[]
+  }
+
+  export type WpRSSCreateNestedManyWithoutUserInput = {
+    create?: XOR<WpRSSCreateWithoutUserInput, WpRSSUncheckedCreateWithoutUserInput> | WpRSSCreateWithoutUserInput[] | WpRSSUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: WpRSSCreateOrConnectWithoutUserInput | WpRSSCreateOrConnectWithoutUserInput[]
+    createMany?: WpRSSCreateManyUserInputEnvelope
+    connect?: WpRSSWhereUniqueInput | WpRSSWhereUniqueInput[]
+  }
+
+  export type NewsRSSCreateNestedManyWithoutUserInput = {
+    create?: XOR<NewsRSSCreateWithoutUserInput, NewsRSSUncheckedCreateWithoutUserInput> | NewsRSSCreateWithoutUserInput[] | NewsRSSUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NewsRSSCreateOrConnectWithoutUserInput | NewsRSSCreateOrConnectWithoutUserInput[]
+    createMany?: NewsRSSCreateManyUserInputEnvelope
+    connect?: NewsRSSWhereUniqueInput | NewsRSSWhereUniqueInput[]
+  }
+
   export type AccountUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -9576,6 +13685,27 @@ export namespace Prisma {
     connectOrCreate?: WebsiteCreateOrConnectWithoutUserInput | WebsiteCreateOrConnectWithoutUserInput[]
     createMany?: WebsiteCreateManyUserInputEnvelope
     connect?: WebsiteWhereUniqueInput | WebsiteWhereUniqueInput[]
+  }
+
+  export type YtRSSUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<YtRSSCreateWithoutUserInput, YtRSSUncheckedCreateWithoutUserInput> | YtRSSCreateWithoutUserInput[] | YtRSSUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: YtRSSCreateOrConnectWithoutUserInput | YtRSSCreateOrConnectWithoutUserInput[]
+    createMany?: YtRSSCreateManyUserInputEnvelope
+    connect?: YtRSSWhereUniqueInput | YtRSSWhereUniqueInput[]
+  }
+
+  export type WpRSSUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<WpRSSCreateWithoutUserInput, WpRSSUncheckedCreateWithoutUserInput> | WpRSSCreateWithoutUserInput[] | WpRSSUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: WpRSSCreateOrConnectWithoutUserInput | WpRSSCreateOrConnectWithoutUserInput[]
+    createMany?: WpRSSCreateManyUserInputEnvelope
+    connect?: WpRSSWhereUniqueInput | WpRSSWhereUniqueInput[]
+  }
+
+  export type NewsRSSUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<NewsRSSCreateWithoutUserInput, NewsRSSUncheckedCreateWithoutUserInput> | NewsRSSCreateWithoutUserInput[] | NewsRSSUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NewsRSSCreateOrConnectWithoutUserInput | NewsRSSCreateOrConnectWithoutUserInput[]
+    createMany?: NewsRSSCreateManyUserInputEnvelope
+    connect?: NewsRSSWhereUniqueInput | NewsRSSWhereUniqueInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -9646,6 +13776,48 @@ export namespace Prisma {
     deleteMany?: WebsiteScalarWhereInput | WebsiteScalarWhereInput[]
   }
 
+  export type YtRSSUpdateManyWithoutUserNestedInput = {
+    create?: XOR<YtRSSCreateWithoutUserInput, YtRSSUncheckedCreateWithoutUserInput> | YtRSSCreateWithoutUserInput[] | YtRSSUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: YtRSSCreateOrConnectWithoutUserInput | YtRSSCreateOrConnectWithoutUserInput[]
+    upsert?: YtRSSUpsertWithWhereUniqueWithoutUserInput | YtRSSUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: YtRSSCreateManyUserInputEnvelope
+    set?: YtRSSWhereUniqueInput | YtRSSWhereUniqueInput[]
+    disconnect?: YtRSSWhereUniqueInput | YtRSSWhereUniqueInput[]
+    delete?: YtRSSWhereUniqueInput | YtRSSWhereUniqueInput[]
+    connect?: YtRSSWhereUniqueInput | YtRSSWhereUniqueInput[]
+    update?: YtRSSUpdateWithWhereUniqueWithoutUserInput | YtRSSUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: YtRSSUpdateManyWithWhereWithoutUserInput | YtRSSUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: YtRSSScalarWhereInput | YtRSSScalarWhereInput[]
+  }
+
+  export type WpRSSUpdateManyWithoutUserNestedInput = {
+    create?: XOR<WpRSSCreateWithoutUserInput, WpRSSUncheckedCreateWithoutUserInput> | WpRSSCreateWithoutUserInput[] | WpRSSUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: WpRSSCreateOrConnectWithoutUserInput | WpRSSCreateOrConnectWithoutUserInput[]
+    upsert?: WpRSSUpsertWithWhereUniqueWithoutUserInput | WpRSSUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: WpRSSCreateManyUserInputEnvelope
+    set?: WpRSSWhereUniqueInput | WpRSSWhereUniqueInput[]
+    disconnect?: WpRSSWhereUniqueInput | WpRSSWhereUniqueInput[]
+    delete?: WpRSSWhereUniqueInput | WpRSSWhereUniqueInput[]
+    connect?: WpRSSWhereUniqueInput | WpRSSWhereUniqueInput[]
+    update?: WpRSSUpdateWithWhereUniqueWithoutUserInput | WpRSSUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: WpRSSUpdateManyWithWhereWithoutUserInput | WpRSSUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: WpRSSScalarWhereInput | WpRSSScalarWhereInput[]
+  }
+
+  export type NewsRSSUpdateManyWithoutUserNestedInput = {
+    create?: XOR<NewsRSSCreateWithoutUserInput, NewsRSSUncheckedCreateWithoutUserInput> | NewsRSSCreateWithoutUserInput[] | NewsRSSUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NewsRSSCreateOrConnectWithoutUserInput | NewsRSSCreateOrConnectWithoutUserInput[]
+    upsert?: NewsRSSUpsertWithWhereUniqueWithoutUserInput | NewsRSSUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: NewsRSSCreateManyUserInputEnvelope
+    set?: NewsRSSWhereUniqueInput | NewsRSSWhereUniqueInput[]
+    disconnect?: NewsRSSWhereUniqueInput | NewsRSSWhereUniqueInput[]
+    delete?: NewsRSSWhereUniqueInput | NewsRSSWhereUniqueInput[]
+    connect?: NewsRSSWhereUniqueInput | NewsRSSWhereUniqueInput[]
+    update?: NewsRSSUpdateWithWhereUniqueWithoutUserInput | NewsRSSUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: NewsRSSUpdateManyWithWhereWithoutUserInput | NewsRSSUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: NewsRSSScalarWhereInput | NewsRSSScalarWhereInput[]
+  }
+
   export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -9700,6 +13872,48 @@ export namespace Prisma {
     update?: WebsiteUpdateWithWhereUniqueWithoutUserInput | WebsiteUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: WebsiteUpdateManyWithWhereWithoutUserInput | WebsiteUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: WebsiteScalarWhereInput | WebsiteScalarWhereInput[]
+  }
+
+  export type YtRSSUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<YtRSSCreateWithoutUserInput, YtRSSUncheckedCreateWithoutUserInput> | YtRSSCreateWithoutUserInput[] | YtRSSUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: YtRSSCreateOrConnectWithoutUserInput | YtRSSCreateOrConnectWithoutUserInput[]
+    upsert?: YtRSSUpsertWithWhereUniqueWithoutUserInput | YtRSSUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: YtRSSCreateManyUserInputEnvelope
+    set?: YtRSSWhereUniqueInput | YtRSSWhereUniqueInput[]
+    disconnect?: YtRSSWhereUniqueInput | YtRSSWhereUniqueInput[]
+    delete?: YtRSSWhereUniqueInput | YtRSSWhereUniqueInput[]
+    connect?: YtRSSWhereUniqueInput | YtRSSWhereUniqueInput[]
+    update?: YtRSSUpdateWithWhereUniqueWithoutUserInput | YtRSSUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: YtRSSUpdateManyWithWhereWithoutUserInput | YtRSSUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: YtRSSScalarWhereInput | YtRSSScalarWhereInput[]
+  }
+
+  export type WpRSSUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<WpRSSCreateWithoutUserInput, WpRSSUncheckedCreateWithoutUserInput> | WpRSSCreateWithoutUserInput[] | WpRSSUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: WpRSSCreateOrConnectWithoutUserInput | WpRSSCreateOrConnectWithoutUserInput[]
+    upsert?: WpRSSUpsertWithWhereUniqueWithoutUserInput | WpRSSUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: WpRSSCreateManyUserInputEnvelope
+    set?: WpRSSWhereUniqueInput | WpRSSWhereUniqueInput[]
+    disconnect?: WpRSSWhereUniqueInput | WpRSSWhereUniqueInput[]
+    delete?: WpRSSWhereUniqueInput | WpRSSWhereUniqueInput[]
+    connect?: WpRSSWhereUniqueInput | WpRSSWhereUniqueInput[]
+    update?: WpRSSUpdateWithWhereUniqueWithoutUserInput | WpRSSUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: WpRSSUpdateManyWithWhereWithoutUserInput | WpRSSUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: WpRSSScalarWhereInput | WpRSSScalarWhereInput[]
+  }
+
+  export type NewsRSSUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<NewsRSSCreateWithoutUserInput, NewsRSSUncheckedCreateWithoutUserInput> | NewsRSSCreateWithoutUserInput[] | NewsRSSUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NewsRSSCreateOrConnectWithoutUserInput | NewsRSSCreateOrConnectWithoutUserInput[]
+    upsert?: NewsRSSUpsertWithWhereUniqueWithoutUserInput | NewsRSSUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: NewsRSSCreateManyUserInputEnvelope
+    set?: NewsRSSWhereUniqueInput | NewsRSSWhereUniqueInput[]
+    disconnect?: NewsRSSWhereUniqueInput | NewsRSSWhereUniqueInput[]
+    delete?: NewsRSSWhereUniqueInput | NewsRSSWhereUniqueInput[]
+    connect?: NewsRSSWhereUniqueInput | NewsRSSWhereUniqueInput[]
+    update?: NewsRSSUpdateWithWhereUniqueWithoutUserInput | NewsRSSUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: NewsRSSUpdateManyWithWhereWithoutUserInput | NewsRSSUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: NewsRSSScalarWhereInput | NewsRSSScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutAccountsInput = {
@@ -9926,6 +14140,246 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
+  export type UserCreateWithoutYtInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    catalogues?: CatalogueCreateNestedManyWithoutUserInput
+    websites?: WebsiteCreateNestedManyWithoutUserInput
+    wp?: WpRSSCreateNestedManyWithoutUserInput
+    news?: NewsRSSCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutYtInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    catalogues?: CatalogueUncheckedCreateNestedManyWithoutUserInput
+    websites?: WebsiteUncheckedCreateNestedManyWithoutUserInput
+    wp?: WpRSSUncheckedCreateNestedManyWithoutUserInput
+    news?: NewsRSSUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutYtInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutYtInput, UserUncheckedCreateWithoutYtInput>
+  }
+
+  export type UserUpsertWithoutYtInput = {
+    update: XOR<UserUpdateWithoutYtInput, UserUncheckedUpdateWithoutYtInput>
+    create: XOR<UserCreateWithoutYtInput, UserUncheckedCreateWithoutYtInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutYtInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutYtInput, UserUncheckedUpdateWithoutYtInput>
+  }
+
+  export type UserUpdateWithoutYtInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    catalogues?: CatalogueUpdateManyWithoutUserNestedInput
+    websites?: WebsiteUpdateManyWithoutUserNestedInput
+    wp?: WpRSSUpdateManyWithoutUserNestedInput
+    news?: NewsRSSUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutYtInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    catalogues?: CatalogueUncheckedUpdateManyWithoutUserNestedInput
+    websites?: WebsiteUncheckedUpdateManyWithoutUserNestedInput
+    wp?: WpRSSUncheckedUpdateManyWithoutUserNestedInput
+    news?: NewsRSSUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutNewsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    catalogues?: CatalogueCreateNestedManyWithoutUserInput
+    websites?: WebsiteCreateNestedManyWithoutUserInput
+    yt?: YtRSSCreateNestedManyWithoutUserInput
+    wp?: WpRSSCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutNewsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    catalogues?: CatalogueUncheckedCreateNestedManyWithoutUserInput
+    websites?: WebsiteUncheckedCreateNestedManyWithoutUserInput
+    yt?: YtRSSUncheckedCreateNestedManyWithoutUserInput
+    wp?: WpRSSUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutNewsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutNewsInput, UserUncheckedCreateWithoutNewsInput>
+  }
+
+  export type UserUpsertWithoutNewsInput = {
+    update: XOR<UserUpdateWithoutNewsInput, UserUncheckedUpdateWithoutNewsInput>
+    create: XOR<UserCreateWithoutNewsInput, UserUncheckedCreateWithoutNewsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutNewsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutNewsInput, UserUncheckedUpdateWithoutNewsInput>
+  }
+
+  export type UserUpdateWithoutNewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    catalogues?: CatalogueUpdateManyWithoutUserNestedInput
+    websites?: WebsiteUpdateManyWithoutUserNestedInput
+    yt?: YtRSSUpdateManyWithoutUserNestedInput
+    wp?: WpRSSUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutNewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    catalogues?: CatalogueUncheckedUpdateManyWithoutUserNestedInput
+    websites?: WebsiteUncheckedUpdateManyWithoutUserNestedInput
+    yt?: YtRSSUncheckedUpdateManyWithoutUserNestedInput
+    wp?: WpRSSUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutWpInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    catalogues?: CatalogueCreateNestedManyWithoutUserInput
+    websites?: WebsiteCreateNestedManyWithoutUserInput
+    yt?: YtRSSCreateNestedManyWithoutUserInput
+    news?: NewsRSSCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutWpInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    catalogues?: CatalogueUncheckedCreateNestedManyWithoutUserInput
+    websites?: WebsiteUncheckedCreateNestedManyWithoutUserInput
+    yt?: YtRSSUncheckedCreateNestedManyWithoutUserInput
+    news?: NewsRSSUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutWpInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutWpInput, UserUncheckedCreateWithoutWpInput>
+  }
+
+  export type UserUpsertWithoutWpInput = {
+    update: XOR<UserUpdateWithoutWpInput, UserUncheckedUpdateWithoutWpInput>
+    create: XOR<UserCreateWithoutWpInput, UserUncheckedCreateWithoutWpInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutWpInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutWpInput, UserUncheckedUpdateWithoutWpInput>
+  }
+
+  export type UserUpdateWithoutWpInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    catalogues?: CatalogueUpdateManyWithoutUserNestedInput
+    websites?: WebsiteUpdateManyWithoutUserNestedInput
+    yt?: YtRSSUpdateManyWithoutUserNestedInput
+    news?: NewsRSSUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutWpInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    catalogues?: CatalogueUncheckedUpdateManyWithoutUserNestedInput
+    websites?: WebsiteUncheckedUpdateManyWithoutUserNestedInput
+    yt?: YtRSSUncheckedUpdateManyWithoutUserNestedInput
+    news?: NewsRSSUncheckedUpdateManyWithoutUserNestedInput
+  }
+
   export type WebsiteCreateWithoutCatalogueInput = {
     name: string
     url: string
@@ -9962,6 +14416,9 @@ export namespace Prisma {
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     websites?: WebsiteCreateNestedManyWithoutUserInput
+    yt?: YtRSSCreateNestedManyWithoutUserInput
+    wp?: WpRSSCreateNestedManyWithoutUserInput
+    news?: NewsRSSCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCataloguesInput = {
@@ -9975,6 +14432,9 @@ export namespace Prisma {
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     websites?: WebsiteUncheckedCreateNestedManyWithoutUserInput
+    yt?: YtRSSUncheckedCreateNestedManyWithoutUserInput
+    wp?: WpRSSUncheckedCreateNestedManyWithoutUserInput
+    news?: NewsRSSUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCataloguesInput = {
@@ -10032,6 +14492,9 @@ export namespace Prisma {
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     websites?: WebsiteUpdateManyWithoutUserNestedInput
+    yt?: YtRSSUpdateManyWithoutUserNestedInput
+    wp?: WpRSSUpdateManyWithoutUserNestedInput
+    news?: NewsRSSUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCataloguesInput = {
@@ -10045,6 +14508,9 @@ export namespace Prisma {
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     websites?: WebsiteUncheckedUpdateManyWithoutUserNestedInput
+    yt?: YtRSSUncheckedUpdateManyWithoutUserNestedInput
+    wp?: WpRSSUncheckedUpdateManyWithoutUserNestedInput
+    news?: NewsRSSUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutWebsitesInput = {
@@ -10058,6 +14524,9 @@ export namespace Prisma {
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     catalogues?: CatalogueCreateNestedManyWithoutUserInput
+    yt?: YtRSSCreateNestedManyWithoutUserInput
+    wp?: WpRSSCreateNestedManyWithoutUserInput
+    news?: NewsRSSCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutWebsitesInput = {
@@ -10071,6 +14540,9 @@ export namespace Prisma {
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     catalogues?: CatalogueUncheckedCreateNestedManyWithoutUserInput
+    yt?: YtRSSUncheckedCreateNestedManyWithoutUserInput
+    wp?: WpRSSUncheckedCreateNestedManyWithoutUserInput
+    news?: NewsRSSUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutWebsitesInput = {
@@ -10116,6 +14588,9 @@ export namespace Prisma {
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     catalogues?: CatalogueUpdateManyWithoutUserNestedInput
+    yt?: YtRSSUpdateManyWithoutUserNestedInput
+    wp?: WpRSSUpdateManyWithoutUserNestedInput
+    news?: NewsRSSUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutWebsitesInput = {
@@ -10129,6 +14604,9 @@ export namespace Prisma {
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     catalogues?: CatalogueUncheckedUpdateManyWithoutUserNestedInput
+    yt?: YtRSSUncheckedUpdateManyWithoutUserNestedInput
+    wp?: WpRSSUncheckedUpdateManyWithoutUserNestedInput
+    news?: NewsRSSUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CatalogueUpsertWithoutWebsitesInput = {
@@ -10263,6 +14741,65 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type YtRSSCreateWithoutUserInput = {
+    channelId: string
+  }
+
+  export type YtRSSUncheckedCreateWithoutUserInput = {
+    id?: number
+    channelId: string
+  }
+
+  export type YtRSSCreateOrConnectWithoutUserInput = {
+    where: YtRSSWhereUniqueInput
+    create: XOR<YtRSSCreateWithoutUserInput, YtRSSUncheckedCreateWithoutUserInput>
+  }
+
+  export type YtRSSCreateManyUserInputEnvelope = {
+    data: YtRSSCreateManyUserInput | YtRSSCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type WpRSSCreateWithoutUserInput = {
+    url: string
+    image: number
+  }
+
+  export type WpRSSUncheckedCreateWithoutUserInput = {
+    id?: number
+    url: string
+    image: number
+  }
+
+  export type WpRSSCreateOrConnectWithoutUserInput = {
+    where: WpRSSWhereUniqueInput
+    create: XOR<WpRSSCreateWithoutUserInput, WpRSSUncheckedCreateWithoutUserInput>
+  }
+
+  export type WpRSSCreateManyUserInputEnvelope = {
+    data: WpRSSCreateManyUserInput | WpRSSCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type NewsRSSCreateWithoutUserInput = {
+    url: string
+  }
+
+  export type NewsRSSUncheckedCreateWithoutUserInput = {
+    id?: number
+    url: string
+  }
+
+  export type NewsRSSCreateOrConnectWithoutUserInput = {
+    where: NewsRSSWhereUniqueInput
+    create: XOR<NewsRSSCreateWithoutUserInput, NewsRSSUncheckedCreateWithoutUserInput>
+  }
+
+  export type NewsRSSCreateManyUserInputEnvelope = {
+    data: NewsRSSCreateManyUserInput | NewsRSSCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type AccountUpsertWithWhereUniqueWithoutUserInput = {
     where: AccountWhereUniqueInput
     update: XOR<AccountUpdateWithoutUserInput, AccountUncheckedUpdateWithoutUserInput>
@@ -10366,6 +14903,82 @@ export namespace Prisma {
     data: XOR<WebsiteUpdateManyMutationInput, WebsiteUncheckedUpdateManyWithoutUserInput>
   }
 
+  export type YtRSSUpsertWithWhereUniqueWithoutUserInput = {
+    where: YtRSSWhereUniqueInput
+    update: XOR<YtRSSUpdateWithoutUserInput, YtRSSUncheckedUpdateWithoutUserInput>
+    create: XOR<YtRSSCreateWithoutUserInput, YtRSSUncheckedCreateWithoutUserInput>
+  }
+
+  export type YtRSSUpdateWithWhereUniqueWithoutUserInput = {
+    where: YtRSSWhereUniqueInput
+    data: XOR<YtRSSUpdateWithoutUserInput, YtRSSUncheckedUpdateWithoutUserInput>
+  }
+
+  export type YtRSSUpdateManyWithWhereWithoutUserInput = {
+    where: YtRSSScalarWhereInput
+    data: XOR<YtRSSUpdateManyMutationInput, YtRSSUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type YtRSSScalarWhereInput = {
+    AND?: YtRSSScalarWhereInput | YtRSSScalarWhereInput[]
+    OR?: YtRSSScalarWhereInput[]
+    NOT?: YtRSSScalarWhereInput | YtRSSScalarWhereInput[]
+    id?: IntFilter<"YtRSS"> | number
+    channelId?: StringFilter<"YtRSS"> | string
+    userId?: StringFilter<"YtRSS"> | string
+  }
+
+  export type WpRSSUpsertWithWhereUniqueWithoutUserInput = {
+    where: WpRSSWhereUniqueInput
+    update: XOR<WpRSSUpdateWithoutUserInput, WpRSSUncheckedUpdateWithoutUserInput>
+    create: XOR<WpRSSCreateWithoutUserInput, WpRSSUncheckedCreateWithoutUserInput>
+  }
+
+  export type WpRSSUpdateWithWhereUniqueWithoutUserInput = {
+    where: WpRSSWhereUniqueInput
+    data: XOR<WpRSSUpdateWithoutUserInput, WpRSSUncheckedUpdateWithoutUserInput>
+  }
+
+  export type WpRSSUpdateManyWithWhereWithoutUserInput = {
+    where: WpRSSScalarWhereInput
+    data: XOR<WpRSSUpdateManyMutationInput, WpRSSUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type WpRSSScalarWhereInput = {
+    AND?: WpRSSScalarWhereInput | WpRSSScalarWhereInput[]
+    OR?: WpRSSScalarWhereInput[]
+    NOT?: WpRSSScalarWhereInput | WpRSSScalarWhereInput[]
+    id?: IntFilter<"WpRSS"> | number
+    url?: StringFilter<"WpRSS"> | string
+    image?: IntFilter<"WpRSS"> | number
+    userId?: StringFilter<"WpRSS"> | string
+  }
+
+  export type NewsRSSUpsertWithWhereUniqueWithoutUserInput = {
+    where: NewsRSSWhereUniqueInput
+    update: XOR<NewsRSSUpdateWithoutUserInput, NewsRSSUncheckedUpdateWithoutUserInput>
+    create: XOR<NewsRSSCreateWithoutUserInput, NewsRSSUncheckedCreateWithoutUserInput>
+  }
+
+  export type NewsRSSUpdateWithWhereUniqueWithoutUserInput = {
+    where: NewsRSSWhereUniqueInput
+    data: XOR<NewsRSSUpdateWithoutUserInput, NewsRSSUncheckedUpdateWithoutUserInput>
+  }
+
+  export type NewsRSSUpdateManyWithWhereWithoutUserInput = {
+    where: NewsRSSScalarWhereInput
+    data: XOR<NewsRSSUpdateManyMutationInput, NewsRSSUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type NewsRSSScalarWhereInput = {
+    AND?: NewsRSSScalarWhereInput | NewsRSSScalarWhereInput[]
+    OR?: NewsRSSScalarWhereInput[]
+    NOT?: NewsRSSScalarWhereInput | NewsRSSScalarWhereInput[]
+    id?: IntFilter<"NewsRSS"> | number
+    url?: StringFilter<"NewsRSS"> | string
+    userId?: StringFilter<"NewsRSS"> | string
+  }
+
   export type UserCreateWithoutAccountsInput = {
     id?: string
     name?: string | null
@@ -10377,6 +14990,9 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     catalogues?: CatalogueCreateNestedManyWithoutUserInput
     websites?: WebsiteCreateNestedManyWithoutUserInput
+    yt?: YtRSSCreateNestedManyWithoutUserInput
+    wp?: WpRSSCreateNestedManyWithoutUserInput
+    news?: NewsRSSCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -10390,6 +15006,9 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     catalogues?: CatalogueUncheckedCreateNestedManyWithoutUserInput
     websites?: WebsiteUncheckedCreateNestedManyWithoutUserInput
+    yt?: YtRSSUncheckedCreateNestedManyWithoutUserInput
+    wp?: WpRSSUncheckedCreateNestedManyWithoutUserInput
+    news?: NewsRSSUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -10419,6 +15038,9 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     catalogues?: CatalogueUpdateManyWithoutUserNestedInput
     websites?: WebsiteUpdateManyWithoutUserNestedInput
+    yt?: YtRSSUpdateManyWithoutUserNestedInput
+    wp?: WpRSSUpdateManyWithoutUserNestedInput
+    news?: NewsRSSUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -10432,6 +15054,9 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     catalogues?: CatalogueUncheckedUpdateManyWithoutUserNestedInput
     websites?: WebsiteUncheckedUpdateManyWithoutUserNestedInput
+    yt?: YtRSSUncheckedUpdateManyWithoutUserNestedInput
+    wp?: WpRSSUncheckedUpdateManyWithoutUserNestedInput
+    news?: NewsRSSUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -10445,6 +15070,9 @@ export namespace Prisma {
     accounts?: AccountCreateNestedManyWithoutUserInput
     catalogues?: CatalogueCreateNestedManyWithoutUserInput
     websites?: WebsiteCreateNestedManyWithoutUserInput
+    yt?: YtRSSCreateNestedManyWithoutUserInput
+    wp?: WpRSSCreateNestedManyWithoutUserInput
+    news?: NewsRSSCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -10458,6 +15086,9 @@ export namespace Prisma {
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     catalogues?: CatalogueUncheckedCreateNestedManyWithoutUserInput
     websites?: WebsiteUncheckedCreateNestedManyWithoutUserInput
+    yt?: YtRSSUncheckedCreateNestedManyWithoutUserInput
+    wp?: WpRSSUncheckedCreateNestedManyWithoutUserInput
+    news?: NewsRSSUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -10487,6 +15118,9 @@ export namespace Prisma {
     accounts?: AccountUpdateManyWithoutUserNestedInput
     catalogues?: CatalogueUpdateManyWithoutUserNestedInput
     websites?: WebsiteUpdateManyWithoutUserNestedInput
+    yt?: YtRSSUpdateManyWithoutUserNestedInput
+    wp?: WpRSSUpdateManyWithoutUserNestedInput
+    news?: NewsRSSUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -10500,6 +15134,9 @@ export namespace Prisma {
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     catalogues?: CatalogueUncheckedUpdateManyWithoutUserNestedInput
     websites?: WebsiteUncheckedUpdateManyWithoutUserNestedInput
+    yt?: YtRSSUncheckedUpdateManyWithoutUserNestedInput
+    wp?: WpRSSUncheckedUpdateManyWithoutUserNestedInput
+    news?: NewsRSSUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type WebsiteCreateManyCatalogueInput = {
@@ -10566,6 +15203,22 @@ export namespace Prisma {
     name: string
     url: string
     favicon: string
+  }
+
+  export type YtRSSCreateManyUserInput = {
+    id?: number
+    channelId: string
+  }
+
+  export type WpRSSCreateManyUserInput = {
+    id?: number
+    url: string
+    image: number
+  }
+
+  export type NewsRSSCreateManyUserInput = {
+    id?: number
+    url: string
   }
 
   export type AccountUpdateWithoutUserInput = {
@@ -10671,6 +15324,51 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     favicon?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type YtRSSUpdateWithoutUserInput = {
+    channelId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type YtRSSUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    channelId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type YtRSSUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    channelId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type WpRSSUpdateWithoutUserInput = {
+    url?: StringFieldUpdateOperationsInput | string
+    image?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type WpRSSUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
+    image?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type WpRSSUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
+    image?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type NewsRSSUpdateWithoutUserInput = {
+    url?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type NewsRSSUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type NewsRSSUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
   }
 
 
