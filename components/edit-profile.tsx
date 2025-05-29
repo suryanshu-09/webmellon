@@ -36,7 +36,7 @@ export function EditProfile() {
   const user: Session["user"] | null = useAtomValue(userAtom);
 
   return (
-    <Card className="w-[300px] sm:w-[350px] mt-3">
+    <Card className="w-[90vw] sm:w-[350px] mt-3">
       <CardHeader>
         <div className="flex justify-between items-start">
           <div>

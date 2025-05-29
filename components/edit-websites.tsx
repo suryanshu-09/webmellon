@@ -21,7 +21,7 @@ export function EditWebsite() {
   const setName = useSetAtom(nameWebsiteAtom);
   const setUrl = useSetAtom(urlWebsiteAtom);
   return (
-    <Tabs defaultValue="edit" className="w-[300px] sm:w-[400px]">
+    <Tabs defaultValue="edit" className="w-[90vw] sm:w-[400px]">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="edit">Edit Websites</TabsTrigger>
         <TabsTrigger value="add">Add a Website</TabsTrigger>
