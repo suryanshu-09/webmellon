@@ -29,6 +29,10 @@ If you want to simply try the application, go to:
 
 👉 [https://webmellon.vercel.app](https://webmellon.vercel.app)
 
+Use **Guest Login** if you don't want to signup with your github or gmail account.
+
+\*Note: Guests cannot access special routes like edit and profile.
+
 ![A Glance at the App](./public/assets/demo.jpg)
 ![RSS Feed](./public/assets/demofeed.jpg)
 

@@ -8,7 +8,7 @@ import { EditFeed } from "@/components/edit-feed";
 export default function EditPage() {
   React.useEffect(() => {
     if (typeof window !== "undefined" && window.innerWidth > 768) {
-      return redirect("/edit/websites");
+      return redirect("/edit/catalogues");
     }
   });
 

@@ -16,7 +16,7 @@ export async function importJSON(file: File, userId: string) {
         create: { url: wp.url, userId, image: wp.image },
       });
     }
-    for (const yt of data.YouTube) {
+    for (const yt of data.Youtube) {
       await prisma.ytRSS.upsert({
         where: {
           user_ytrss_channelId_unique: { userId, channelId: yt.channelId },
