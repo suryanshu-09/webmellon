@@ -15,13 +15,13 @@ const protectedRoutes = [
   "/user",
 ];
 
-// const offLimits = [
-//   "/edit",
-//   "/edit/catalogues",
-//   "/edit/websites",
-//   "/edit/feed",
-//   "/user",
-// ];
+const offLimits = [
+  "/edit",
+  "/edit/catalogues",
+  "/edit/websites",
+  "/edit/feed",
+  "/user",
+];
 
 export async function middleware(request: NextRequest) {
   const token = await getToken({
@@ -35,11 +35,12 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith(route),
   );
 
-  // const isOffLimits = offLimits.some((route) => pathname.startsWith(route));
-  //
-  //   if (isOffLimits && token?.email == "pleaselogin") {
-  //     return NextResponse.redirect(new URL("/signin", request.url));
-  //   }
+  const isOffLimits = offLimits.some((route) => pathname.startsWith(route));
+
+  if (isOffLimits && token?.email == "pleaselogin") {
+    return NextResponse.redirect(new URL("/signin", request.url));
+  }
+
   if (isProtected && !token) {
     return NextResponse.redirect(new URL("/signin", request.url));
   }
