@@ -46,16 +46,18 @@ export default function CatalogueList() {
       const catalogues = everything.data as CatalogueWithWebsites[];
       if (catalogues?.length === 0) {
         return (
-          <div className="flex justify-center mt-4">
-            <div className="flex justify-center mt-6 text-lg">
-              Please go to the edit page to add
-              <span className="font-serif font-normal text-[#FB8500] text-2xl italic px-0.75 lg:px-1">
-                <Link href={"/edit/catalogues"}>Catalogue</Link>
-              </span>
-              and
-              <span className="font-serif font-normal text-[#FB8500] text-2xl italic px-1">
-                <Link href={"/edit/websites"}>Websites</Link>
-              </span>
+          <div className="flex justify-center mt-4 text-justify">
+            <div className="flex justify-center mt-6 text-lg text-center max-w-[90vw]">
+              <div>
+                Please go to the edit page to add
+                <span className="font-serif font-normal text-[#FB8500] text-2xl italic px-0.75 lg:px-1">
+                  <Link href={"/edit/catalogues"}>Catalogue</Link>
+                </span>
+                and
+                <span className="font-serif font-normal text-[#FB8500] text-2xl italic px-1">
+                  <Link href={"/edit/websites"}>Websites</Link>
+                </span>
+              </div>
             </div>
           </div>
         );
