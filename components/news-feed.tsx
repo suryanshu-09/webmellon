@@ -33,14 +33,14 @@ export default function NewsFeed() {
         <DisplayNEWSFeed newsFeed={newsFeed.data as NEWSFeed[]} />
       ) : newsFeed.state === "hasData" && newsFeed.data.length == 0 ? (
         <div>
-          <p className="flex justify-center mt-18 text-xl text-center max-w-[90vw] text-wrap">
+          <div className="flex justify-center mt-18 text-xl text-center max-w-[90vw] text-wrap">
             <div>
               Feed is empty, go to edit and add your favourite{" "}
               <span className="text-[#FB8500] font-serif italic text-2xl text-nowrap">
                 News Websites
               </span>
             </div>
-          </p>
+          </div>
         </div>
       ) : (
         <div>

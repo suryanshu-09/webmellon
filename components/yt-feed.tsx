@@ -3,7 +3,7 @@ import { usePersistedYTDashboardAtom } from "@/hooks/use-persisted-dashboard-ato
 import { ytFeedAtomLoadable } from "@/store/atoms/feedAtom";
 import { YoutubeFeed, YoutubeFeedItem } from "@/types/types";
 import { useAtomValue, useSetAtom } from "jotai";
-import { SearchYT } from "./search-yt";
+import { SearchYT } from "@/components/search-yt";
 import {
   Carousel,
   CarouselContent,
@@ -32,14 +32,14 @@ export default function YTFeed() {
         <DisplayYTFeed ytFeed={ytFeed.data as YoutubeFeed[]} />
       ) : ytFeed.state === "hasData" && ytFeed.data.length == 0 ? (
         <div>
-          <p className="flex justify-center mt-18 text-xl text-center max-w-[90vw] text-wrap">
+          <div className="flex justify-center mt-18 text-xl text-center max-w-[90vw] text-wrap">
             <div>
               Feed is empty, go to edit and add your favourite{" "}
               <span className="text-[#FB8500] font-serif italic text-2xl text-nowrap">
                 Youtube channels
               </span>
             </div>
-          </p>
+          </div>
         </div>
       ) : (
         <div>

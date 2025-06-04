@@ -13,7 +13,6 @@ import {
 import { useSetAtom, useAtomValue } from "jotai";
 import { ytDashboardAtom } from "@/store/atoms/dashboardAtom";
 import { ytFeedAtomLoadable } from "@/store/atoms/feedAtom";
-import { YoutubeFeed } from "@/types/types";
 
 export function SearchYT() {
   const [open, setOpen] = React.useState(false);
@@ -52,7 +51,7 @@ export function SearchYT() {
           <CommandGroup heading="Youtube Feed">
             {yt.state == "hasData" &&
               Array.isArray(yt.data) &&
-              yt.data.map((pub: YoutubeFeed) => {
+              yt.data.map((pub) => {
                 return (
                   <CommandItem
                     key={pub.title}
