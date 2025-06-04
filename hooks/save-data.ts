@@ -45,7 +45,9 @@ export function useSavedData() {
     if (rawYTFeed) {
       try {
         const storedYTFeed = JSON.parse(rawYTFeed);
-        setDataYT(storedYTFeed);
+        if (storedYTFeed.length > 0) {
+          setDataYT(storedYTFeed);
+        }
       } catch (err) {
         console.warn("Failed to parse ytfeed:", err);
       }
@@ -54,7 +56,9 @@ export function useSavedData() {
     if (rawWPFeed) {
       try {
         const storedWPFeed = JSON.parse(rawWPFeed);
-        setDataWP(storedWPFeed);
+        if (storedWPFeed.length != 0) {
+          setDataWP(storedWPFeed);
+        }
       } catch (err) {
         console.warn("Failed to parse wpfeed:", err);
       }
@@ -63,7 +67,9 @@ export function useSavedData() {
     if (rawNewsFeed) {
       try {
         const storedNewsFeed = JSON.parse(rawNewsFeed);
-        setDataNews(storedNewsFeed);
+        if (storedNewsFeed.length > 0) {
+          setDataNews(storedNewsFeed);
+        }
       } catch (err) {
         console.warn("Failed to parse newsfeed:", err);
       }

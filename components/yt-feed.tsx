@@ -3,7 +3,7 @@ import { usePersistedYTDashboardAtom } from "@/hooks/use-persisted-dashboard-ato
 import { ytFeedAtomLoadable } from "@/store/atoms/feedAtom";
 import { YoutubeFeed, YoutubeFeedItem } from "@/types/types";
 import { useAtomValue, useSetAtom } from "jotai";
-import { SearchYT } from "./search-yt";
+import { SearchYT } from "@/components/search-yt";
 import {
   Carousel,
   CarouselContent,

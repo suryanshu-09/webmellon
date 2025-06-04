@@ -2,6 +2,7 @@ import { getNewsFeed, getWPFeed, getYTFeed } from "@/actions/feed";
 import { atom } from "jotai";
 import { loadable } from "jotai/utils";
 import { NewsRSS, WpRSS, YtRSS } from "@/prisma/zod";
+import { NEWSFeed, WordpressFeed, YoutubeFeed } from "@/types/types";
 
 export const getYT = atom<YtRSS[] | null>(null);
 export const ytFeedAtom = atom(async (get) => {
@@ -11,13 +12,11 @@ export const ytFeedAtom = atom(async (get) => {
   sessionStorage.setItem("ytfeed", JSON.stringify(ytf));
   return ytf;
 });
-export const hydratedYTFeedAtom = atom<YtRSS[] | null>(null);
+export const hydratedYTFeedAtom = atom<YoutubeFeed[] | null>(null);
 
 export const ytFeedHydratedOrFetchAtom = atom(async (get) => {
   const hydrated = get(hydratedYTFeedAtom);
-  if (hydrated !== null) {
-    return hydrated;
-  }
+  if (hydrated) return hydrated;
 
   return await get(ytFeedAtom);
 });
@@ -34,13 +33,15 @@ export const newsFeedAtom = atom(async (get) => {
   const newsFeed = get(getNews);
   if (!newsFeed) return [];
   const nf = await getNewsFeed(newsFeed as NewsRSS[]);
-  sessionStorage.setItem("newsfeed", JSON.stringify(nf));
+  if (nf) {
+    sessionStorage.setItem("newsfeed", JSON.stringify(nf));
+  }
   return nf;
 });
-export const hydratedNewsFeedAtom = atom<NewsRSS[] | null>(null);
+export const hydratedNewsFeedAtom = atom<NEWSFeed[] | null>(null);
 export const newsFeedHydratedOrFetchAtom = atom(async (get) => {
   const hydrated = get(hydratedNewsFeedAtom);
-  if (hydrated !== null) return hydrated;
+  if (hydrated) return hydrated;
   return await get(newsFeedAtom);
 });
 export const newsFeedAtomLoadable = loadable(newsFeedHydratedOrFetchAtom);
@@ -59,10 +60,10 @@ export const wpFeedAtom = atom(async (get) => {
   sessionStorage.setItem("wpfeed", JSON.stringify(wpf));
   return wpf;
 });
-export const hydratedWPFeedAtom = atom<WpRSS[] | null>(null);
+export const hydratedWPFeedAtom = atom<WordpressFeed[] | null>(null);
 export const wpFeedHydratedOrFetchAtom = atom(async (get) => {
   const hydrated = get(hydratedWPFeedAtom);
-  if (hydrated !== null) return hydrated;
+  if (hydrated) return hydrated;
   return await get(wpFeedAtom);
 });
 
