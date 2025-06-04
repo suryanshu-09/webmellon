@@ -16,6 +16,7 @@ import { User } from "@/prisma/generated/zod/index";
 import { CatalogueWithWebsites } from "@/types/types";
 import { getNews, getWP, getYT } from "@/store/atoms/feedAtom";
 import { YtRSS, NewsRSS, WpRSS } from "@/prisma/zod";
+import { useSavedData } from "@/hooks/save-data";
 
 export const Providers = ({
   children,
@@ -39,6 +40,7 @@ export const Providers = ({
           session.user as User,
         );
         store.set(everythingAtom, everything);
+        sessionStorage.setItem("catalogues", JSON.stringify(everything));
 
         const wpFeed: WpRSS[] = await fetchWPFeed(session.user as User);
         store.set(getWP, wpFeed);
@@ -50,9 +52,11 @@ export const Providers = ({
         store.set(getNews, newsFeed);
       }
     };
+
     fetchData();
   }, [session, store]);
 
+  useSavedData();
   return (
     <JotaiProvider store={store}>
       <SessionProvider session={session}>{children}</SessionProvider>
