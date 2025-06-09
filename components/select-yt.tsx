@@ -20,7 +20,9 @@ export default function SelectYT() {
 
   const handleSelect = (value: string) => {
     if (yt.state == "hasData") {
-      const selected = yt.data.find(({ channelId }) => channelId == value);
+      const selected = yt.data.find(
+        ({ channelId }: { channelId: string }) => channelId == value,
+      );
       setSelectYT(selected?.channelId ?? "");
     }
   };
