@@ -8,17 +8,22 @@ export const getYT = atom<YtRSS[] | null>(null);
 export const ytFeedAtom = atom(async (get) => {
   const ytFeed = get(getYT);
   if (!ytFeed) return [];
-  const ytf = await getYTFeed(ytFeed as YtRSS[]);
-  sessionStorage.setItem("ytfeed", JSON.stringify(ytf));
-  return ytf;
+  return await getYTFeed(ytFeed as YtRSS[]);
 });
 export const hydratedYTFeedAtom = atom<YoutubeFeed[] | null>(null);
 
 export const ytFeedHydratedOrFetchAtom = atom(async (get) => {
+  const storedData = sessionStorage.getItem("ytfeed");
+  if (storedData && storedData.length > 2) {
+    const feed = JSON.parse(storedData);
+    return feed;
+  }
   const hydrated = get(hydratedYTFeedAtom);
   if (hydrated) return hydrated;
 
-  return await get(ytFeedAtom);
+  const ytf = await get(ytFeedAtom);
+  sessionStorage.setItem("ytfeed", JSON.stringify(ytf));
+  return ytf;
 });
 export const ytFeedAtomLoadable = loadable(ytFeedHydratedOrFetchAtom);
 
@@ -32,17 +37,21 @@ export const getNews = atom<NewsRSS[] | null>(null);
 export const newsFeedAtom = atom(async (get) => {
   const newsFeed = get(getNews);
   if (!newsFeed) return [];
-  const nf = await getNewsFeed(newsFeed as NewsRSS[]);
-  if (nf) {
-    sessionStorage.setItem("newsfeed", JSON.stringify(nf));
-  }
-  return nf;
+  return await getNewsFeed(newsFeed as NewsRSS[]);
 });
 export const hydratedNewsFeedAtom = atom<NEWSFeed[] | null>(null);
 export const newsFeedHydratedOrFetchAtom = atom(async (get) => {
+  const storedData = sessionStorage.getItem("newsfeed");
+  if (storedData && storedData.length > 2) {
+    const feed = JSON.parse(storedData);
+    return feed;
+  }
   const hydrated = get(hydratedNewsFeedAtom);
   if (hydrated) return hydrated;
-  return await get(newsFeedAtom);
+
+  const nf = await get(newsFeedAtom);
+  sessionStorage.setItem("newsfeed", JSON.stringify(nf));
+  return nf;
 });
 export const newsFeedAtomLoadable = loadable(newsFeedHydratedOrFetchAtom);
 
@@ -56,15 +65,20 @@ export const getWP = atom<WpRSS[] | null>(null);
 export const wpFeedAtom = atom(async (get) => {
   const wpFeed = get(getWP);
   if (!wpFeed) return [];
-  const wpf = await getWPFeed(wpFeed as WpRSS[]);
-  sessionStorage.setItem("wpfeed", JSON.stringify(wpf));
-  return wpf;
+  return await getWPFeed(wpFeed as WpRSS[]);
 });
 export const hydratedWPFeedAtom = atom<WordpressFeed[] | null>(null);
 export const wpFeedHydratedOrFetchAtom = atom(async (get) => {
+  const storedData = sessionStorage.getItem("wpfeed");
+  if (storedData && storedData.length > 2) {
+    const feed = JSON.parse(storedData);
+    return feed;
+  }
   const hydrated = get(hydratedWPFeedAtom);
   if (hydrated) return hydrated;
-  return await get(wpFeedAtom);
+  const wpf = await get(wpFeedAtom);
+  sessionStorage.setItem("wpfeed", JSON.stringify(wpf));
+  return wpf;
 });
 
 export const wpFeedAtomLoadable = loadable(wpFeedHydratedOrFetchAtom);
