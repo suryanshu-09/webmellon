@@ -19,7 +19,7 @@ export default function SelectWP() {
 
   const handleSelect = (value: string) => {
     if (wp.state == "hasData") {
-      const selected = wp.data.find(({ url }) => url == value);
+      const selected = wp.data.find(({ url }: { url: string }) => url == value);
       setSelectWP(selected?.url ?? "");
     }
   };

@@ -19,7 +19,9 @@ export default function SelectNews() {
 
   const handleSelect = (value: string) => {
     if (news.state == "hasData") {
-      const selected = news.data.find(({ url }) => url == value);
+      const selected = news.data.find(
+        ({ url }: { url: string }) => url == value,
+      );
       setSelectNews(selected?.url ?? "");
     }
   };

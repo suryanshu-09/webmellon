@@ -34,7 +34,6 @@ export function SonnerDeleteWebsite() {
     }
 
     try {
-      console.log(selectedWebsite.data);
       await deleteWebsite(selectedWebsite.data);
 
       toast.success("Website Deleted", {
