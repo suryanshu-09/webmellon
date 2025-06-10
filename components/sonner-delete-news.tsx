@@ -18,7 +18,7 @@ export function SonnerDeleteNews() {
         action: {
           label: "Close",
           onClick: () => {
-            window.location.reload();
+            // window.location.reload();
           },
         },
       });
@@ -28,6 +28,7 @@ export function SonnerDeleteNews() {
     try {
       await deleteNews({ url: selectedPub, userId: user?.id ?? "" });
 
+      sessionStorage.setItem("newsfeed", "");
       toast.success("Publication Deleted", {
         description: `Successfully deleted ${selectedPub}`,
         action: {
@@ -37,6 +38,7 @@ export function SonnerDeleteNews() {
           },
         },
       });
+      setTimeout(() => window.location.reload(), 2000);
     } catch {
       toast.error("Error", {
         description: "Something went wrong while deleting the publication.",
@@ -47,6 +49,7 @@ export function SonnerDeleteNews() {
           },
         },
       });
+      setTimeout(() => window.location.reload(), 2000);
     }
   };
 

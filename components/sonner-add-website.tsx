@@ -24,7 +24,7 @@ export function SonnerAddWebsite() {
         action: {
           label: "Close",
           onClick: () => {
-            window.location.reload();
+            // window.location.reload();
           },
         },
       });
@@ -43,6 +43,7 @@ export function SonnerAddWebsite() {
         await putWebsite(website);
       }
 
+      sessionStorage.setItem("catalogues", "");
       toast.success("Website Added", {
         description: `Successfully added ${name}`,
         action: {
@@ -53,7 +54,7 @@ export function SonnerAddWebsite() {
         },
       });
 
-      // Reload if you're not managing state updates manually
+      setTimeout(() => window.location.reload(), 2000);
     } catch {
       toast.error("Error", {
         description: "Something went wrong while adding the website.",
@@ -64,6 +65,7 @@ export function SonnerAddWebsite() {
           },
         },
       });
+      setTimeout(() => window.location.reload(), 2000);
     }
   };
 

@@ -26,7 +26,7 @@ export function SonnerDeleteWebsite() {
         action: {
           label: "Close",
           onClick: () => {
-            window.location.reload();
+            // window.location.reload();
           },
         },
       });
@@ -36,6 +36,7 @@ export function SonnerDeleteWebsite() {
     try {
       await deleteWebsite(selectedWebsite.data);
 
+      sessionStorage.setItem("catalogues", "");
       toast.success("Website Deleted", {
         description: `Successfully deleted ${selectedWebsite.data.name}`,
         action: {
@@ -46,7 +47,7 @@ export function SonnerDeleteWebsite() {
         },
       });
 
-      // Reload if you're not managing state updates manually
+      setTimeout(() => window.location.reload(), 2000);
     } catch {
       toast.error("Error", {
         description: "Something went wrong while deleting the website.",
@@ -57,6 +58,7 @@ export function SonnerDeleteWebsite() {
           },
         },
       });
+      setTimeout(() => window.location.reload(), 2000);
     }
   };
 

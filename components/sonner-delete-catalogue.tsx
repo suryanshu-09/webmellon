@@ -26,7 +26,7 @@ export function SonnerDeleteCatalogue() {
         action: {
           label: "Close",
           onClick: () => {
-            window.location.reload();
+            // window.location.reload();
           },
         },
       });
@@ -36,6 +36,7 @@ export function SonnerDeleteCatalogue() {
     try {
       await deleteCatalogue(selectedCatalogue.data);
 
+      sessionStorage.setItem("catalogues", "");
       toast.success("Catalogue Deleted", {
         description: `Successfully deleted ${selectedCatalogue.data.name}`,
         action: {
@@ -46,7 +47,7 @@ export function SonnerDeleteCatalogue() {
         },
       });
 
-      // Reload if you're not managing state updates manually
+      setTimeout(() => window.location.reload(), 2000);
     } catch {
       toast.error("Error", {
         description: "Something went wrong while deleting the catalogue.",
@@ -57,6 +58,7 @@ export function SonnerDeleteCatalogue() {
           },
         },
       });
+      setTimeout(() => window.location.reload(), 2000);
     }
   };
 

@@ -38,14 +38,14 @@ export function SonnerUpdateCatalogue() {
     }
 
     try {
-      // Update catalogue with the new name (or retain old name if not updated)
       const updatedCatalogue = {
         ...selectedCatalogue.data,
         name: newName || selectedCatalogue.data.name,
       };
 
-      await updateCatalogue(updatedCatalogue); // Send updated catalogue
+      await updateCatalogue(updatedCatalogue);
 
+      sessionStorage.setItem("catalogues", "");
       toast.success("Catalogue has been updated", {
         description: `Successfully updated ${updatedCatalogue.name}`,
         action: {
@@ -55,6 +55,7 @@ export function SonnerUpdateCatalogue() {
           },
         },
       });
+      setTimeout(() => window.location.reload(), 2000);
     } catch {
       toast.error("Update failed", {
         description: "Something went wrong while updating.",
@@ -65,6 +66,7 @@ export function SonnerUpdateCatalogue() {
           },
         },
       });
+      setTimeout(() => window.location.reload(), 2000);
     }
   };
 
