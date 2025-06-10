@@ -29,6 +29,7 @@ export default function ImportData() {
           },
         },
       });
+      setTimeout(() => window.location.reload(), 2000);
     } catch {
       toast.error("Data NOT imported", {
         description: "Please verify your json and try again",
@@ -39,7 +40,8 @@ export default function ImportData() {
           },
         },
       });
-      throw new Error("Whoopsie we got an error");
+      setTimeout(() => window.location.reload(), 2000);
+      throw Error("Whoopsie we got an error");
     }
   };
 

@@ -18,7 +18,7 @@ export function SonnerAddNews() {
         action: {
           label: "Close",
           onClick: () => {
-            window.location.reload();
+            // window.location.reload();
           },
         },
       });
@@ -30,6 +30,7 @@ export function SonnerAddNews() {
         await putNews({ userId: user?.id ?? "", url: newPub });
       }
 
+      sessionStorage.setItem("newsfeed", "");
       toast.success("Publication Added", {
         description: `Successfully added ${newPub}`,
         action: {
@@ -39,6 +40,7 @@ export function SonnerAddNews() {
           },
         },
       });
+      setTimeout(() => window.location.reload(), 2000);
     } catch {
       toast.error("Error", {
         description: "Something went wrong while adding the publication.",
@@ -49,6 +51,7 @@ export function SonnerAddNews() {
           },
         },
       });
+      setTimeout(() => window.location.reload(), 2000);
     }
   };
 

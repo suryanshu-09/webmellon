@@ -32,7 +32,7 @@ export function SonnerUpdateWebsite() {
         action: {
           label: "Close",
           onClick: () => {
-            window.location.reload();
+            // window.location.reload();
           },
         },
       });
@@ -40,7 +40,6 @@ export function SonnerUpdateWebsite() {
     }
 
     try {
-      // Update website with the new name (or retain old name if not updated)
       const updatedWebsite = {
         ...selectedWebsite.data,
         name: newName || selectedWebsite.data.name,
@@ -48,8 +47,9 @@ export function SonnerUpdateWebsite() {
         favicon: `https://www.google.com/s2/favicons?sz=64&domain=${new URL(newUrl || selectedWebsite.data.url).hostname}`,
       };
 
-      await updateWebsite(updatedWebsite); // Send updated website
+      await updateWebsite(updatedWebsite);
 
+      sessionStorage.setItem("catalogues", "");
       toast.success("Catalogue has been updated", {
         description: `Successfully updated ${updatedWebsite.name}`,
         action: {
@@ -59,6 +59,7 @@ export function SonnerUpdateWebsite() {
           },
         },
       });
+      setTimeout(() => window.location.reload(), 2000);
     } catch {
       toast.error("Update failed", {
         description: "Something went wrong while updating.",
@@ -69,6 +70,7 @@ export function SonnerUpdateWebsite() {
           },
         },
       });
+      setTimeout(() => window.location.reload(), 2000);
     }
   };
 

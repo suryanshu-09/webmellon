@@ -18,7 +18,7 @@ export function SonnerDeleteYT() {
         action: {
           label: "Close",
           onClick: () => {
-            window.location.reload();
+            // window.location.reload();
           },
         },
       });
@@ -28,6 +28,7 @@ export function SonnerDeleteYT() {
     try {
       await deleteYT({ channelId: selectedChannel, userId: user?.id ?? "" });
 
+      sessionStorage.setItem("ytfeed", "");
       toast.success("Channel Deleted", {
         description: `Successfully deleted ${selectedChannel}`,
         action: {
@@ -37,6 +38,7 @@ export function SonnerDeleteYT() {
           },
         },
       });
+      setTimeout(() => window.location.reload(), 2000);
     } catch {
       toast.error("Error", {
         description: "Something went wrong while deleting the channel.",
@@ -47,6 +49,7 @@ export function SonnerDeleteYT() {
           },
         },
       });
+      setTimeout(() => window.location.reload(), 2000);
     }
   };
 

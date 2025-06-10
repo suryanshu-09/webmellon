@@ -19,7 +19,7 @@ export function SonnerAddWP() {
         action: {
           label: "Close",
           onClick: () => {
-            window.location.reload();
+            // window.location.reload();
           },
         },
       });
@@ -31,6 +31,7 @@ export function SonnerAddWP() {
         await putWP({ userId: user?.id ?? "", url: newPub, image: newImage });
       }
 
+      sessionStorage.setItem("wpfeed", "");
       toast.success("Publication Added", {
         description: `Successfully added ${newPub}`,
         action: {
@@ -40,6 +41,7 @@ export function SonnerAddWP() {
           },
         },
       });
+      setTimeout(() => window.location.reload(), 2000);
     } catch {
       toast.error("Error", {
         description: "Something went wrong while adding the publication.",
@@ -50,6 +52,7 @@ export function SonnerAddWP() {
           },
         },
       });
+      setTimeout(() => window.location.reload(), 2000);
     }
   };
 

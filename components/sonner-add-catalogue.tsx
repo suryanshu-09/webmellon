@@ -18,7 +18,7 @@ export function SonnerAddCatalogue() {
         action: {
           label: "Close",
           onClick: () => {
-            window.location.reload();
+            // window.location.reload();
           },
         },
       });
@@ -29,6 +29,7 @@ export function SonnerAddCatalogue() {
       const catalogue = { name, userId: user?.id ?? "" };
       await putCatalogue(catalogue);
 
+      sessionStorage.setItem("catalogues", "");
       toast.success("Catalogue Added", {
         description: `Successfully added ${name}`,
         action: {
@@ -39,7 +40,7 @@ export function SonnerAddCatalogue() {
         },
       });
 
-      // Reload if you're not managing state updates manually
+      setTimeout(() => window.location.reload(), 2000);
     } catch {
       toast.error("Error", {
         description: "Something went wrong while adding the catalogue.",
@@ -50,6 +51,8 @@ export function SonnerAddCatalogue() {
           },
         },
       });
+
+      setTimeout(() => window.location.reload(), 2000);
     }
   };
 

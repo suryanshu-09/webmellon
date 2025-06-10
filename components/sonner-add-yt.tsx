@@ -18,7 +18,7 @@ export function SonnerAddYT() {
         action: {
           label: "Close",
           onClick: () => {
-            window.location.reload();
+            // window.location.reload();
           },
         },
       });
@@ -30,6 +30,7 @@ export function SonnerAddYT() {
         await putYT({ userId: user?.id ?? "", channelId: newChannel });
       }
 
+      sessionStorage.setItem("ytfeed", "");
       toast.success("Channel Added", {
         description: `Successfully added ${newChannel}`,
         action: {
@@ -40,7 +41,7 @@ export function SonnerAddYT() {
         },
       });
 
-      // Reload if you're not managing state updates manually
+      setTimeout(() => window.location.reload(), 2000);
     } catch {
       toast.error("Error", {
         description: "Something went wrong while adding the channel.",
@@ -51,6 +52,7 @@ export function SonnerAddYT() {
           },
         },
       });
+      setTimeout(() => window.location.reload(), 2000);
     }
   };
 
