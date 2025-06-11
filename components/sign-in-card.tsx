@@ -43,7 +43,7 @@ export function SignInCard() {
       >
         <div>
           <svg
-            className="w-6 h-6 text-gray-800 dark:text-white"
+            className="w-6 h-6 text-gray-800"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -60,7 +60,7 @@ export function SignInCard() {
         </div>
         <div>Login as Guest</div>
       </Label>
-      <div className="w-[250px] text-center mt-3 text-wrap">
+      <div className="w-[250px] text-center mt-3 text-wrap dark:text-white">
         <span className="text-red-700">*Note:</span> Guests cannot access
         special routes like edit and profile.
       </div>
