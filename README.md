@@ -17,6 +17,7 @@ Now with **Feed** - an RSS reader for Youtube, WordPress and all your favourite 
 - **Session Handling**: JWT with secure cookies
 - **Deployment**: [Vercel](https://vercel.com/)
 - **Containerization**: Docker + Docker Compose
+- **Metrics:** Prometheus for local monitoring metrics and Grafana for visualisation [Dev branch]
 - **CI/CD Pipeline**: Github workflow and Vercel
 - **Database**: PostgreSQL
 - **RSS Parser**: rss-parser
@@ -73,7 +74,7 @@ GITHUB_SECRET=your_gihub_client_secret
 
 ```bash
 
-docker run --env-file .env -p 3000:3000 suryanshu09/webmellon
+docker compose up -d
 ```
 
 This will:
@@ -81,6 +82,9 @@ This will:
 - Spin up PostgreSQL database
 - Build and launch the Next.js app
 - Run migrations and seed if configured
+- Start up Prometheus and Grafana
+
+![prom-graf](./public/assets/grafana.png)
 
 ---
 
