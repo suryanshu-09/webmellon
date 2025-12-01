@@ -24,11 +24,12 @@ const offLimits = [
 ];
 
 export async function middleware(request: NextRequest) {
-  // const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET, cookieName: "__Secure-authjs.session-token" })
   const token = await getToken({
     req: request,
     secret: process.env.NEXTAUTH_SECRET,
+    cookieName: "__Secure-authjs.session-token",
   });
+  // const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET })
   const { pathname } = request.nextUrl;
   const isProtected = protectedRoutes.some((route) =>
     pathname.startsWith(route),
