@@ -1,11 +1,9 @@
 "use client";
-import { usePersistedNewsDashboardAtom } from "@/hooks/use-persisted-dashboard-atom";
-import { newsFeedAtomLoadable, paginatedNewsFeedAtom } from "@/store/atoms/feedAtom";
-import { NEWSFeed, NEWSFeedItem } from "@/types/types";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { wpFeedAtomLoadable } from "@/store/atoms/feedAtom";
+import { useAtomValue, useSetAtom } from "jotai";
+import { WordpressFeed, WordpressFeedItem } from "@/types/types";
 import Image from "next/image";
 import Link from "next/link";
-import { SearchNews } from "@/components/search-news";
 import {
   Carousel,
   CarouselContent,
@@ -14,56 +12,122 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
+import { SearchWP } from "@/components/search-wp";
 import { Skeleton } from "@/components/ui/skeleton";
-import { newsDashboardAtom } from "@/store/atoms/dashboardAtom";
-import { X } from "lucide-react";
+import { wpDashboardAtom } from "@/store/atoms/dashboardAtom";
+import { X, ArrowUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { newsFeedPaginationAtom, newsFeedTotalPagesAtom } from "@/store/atoms/paginationAtom";
-import { FeedPagination } from "@/components/feed-pagination";
-import { useEffect } from "react";
+import { usePersistedWPDashboardAtom } from "@/hooks/use-persisted-dashboard-atom";
+import { useState, useEffect } from "react";
+import { useInView } from "react-intersection-observer";
 
-export default function NewsFeed() {
-  usePersistedNewsDashboardAtom();
-  const newsFeed = useAtomValue(newsFeedAtomLoadable);
-  const paginatedFeed = useAtomValue(paginatedNewsFeedAtom);
-  const [pagination, setPagination] = useAtom(newsFeedPaginationAtom);
-  const totalPages = useAtomValue(newsFeedTotalPagesAtom);
+export default function WPFeedInfinite() {
+  usePersistedWPDashboardAtom();
+  const wpFeed = useAtomValue(wpFeedAtomLoadable);
+  const [displayedItems, setDisplayedItems] = useState(10);
+  const [showBackToTop, setShowBackToTop] = useState(false);
+  const { ref, inView } = useInView({ threshold: 0.5 });
 
-  // Update total items when feed data changes
+  // Calculate total items across all publications
+  const totalItems =
+    wpFeed.state === "hasData"
+      ? wpFeed.data.reduce((sum: number, pub: WordpressFeed) => sum + pub.items.length, 0)
+      : 0;
+
+  const hasMore = displayedItems < totalItems;
+
+  // Load more items when in view
   useEffect(() => {
-    if (paginatedFeed.totalItems !== pagination.totalItems) {
-      setPagination((prev) => ({
-        ...prev,
-        totalItems: paginatedFeed.totalItems,
-      }));
+    if (inView && hasMore) {
+      setDisplayedItems((prev) => Math.min(prev + 10, totalItems));
     }
-  }, [paginatedFeed.totalItems, pagination.totalItems, setPagination]);
+  }, [inView, hasMore, totalItems]);
 
-  const handlePageChange = (page: number) => {
-    setPagination((prev) => ({ ...prev, currentPage: page }));
+  // Track scroll position for back-to-top button
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBackToTop(window.scrollY > 500);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  // Create paginated feed data
+  const paginatedFeedData =
+    wpFeed.state === "hasData"
+      ? (() => {
+          const allItems: { pub: WordpressFeed; item: WordpressFeedItem }[] = [];
+          wpFeed.data.forEach((pub: WordpressFeed) => {
+            pub.items.forEach((item: WordpressFeedItem) => {
+              allItems.push({ pub, item });
+            });
+          });
+
+          // Group back by publication for display
+          const displayed = allItems.slice(0, displayedItems);
+          const groupedByPub: Map<string, { pub: WordpressFeed; items: WordpressFeedItem[] }> = new Map();
+
+          displayed.forEach(({ pub, item }) => {
+            if (!groupedByPub.has(pub.title)) {
+              groupedByPub.set(pub.title, { pub, items: [] });
+            }
+            groupedByPub.get(pub.title)!.items.push(item);
+          });
+
+          return Array.from(groupedByPub.values()).map(({ pub, items }) => ({
+            ...pub,
+            items,
+          }));
+        })()
+      : [];
 
   return (
     <div>
       <div className="flex justify-center text-2xl font-semibold text-[#FB8500]">
-        <SearchNews />
+        <SearchWP />
       </div>
-      {newsFeed.state === "hasData" && newsFeed.data.length > 0 ? (
+      {wpFeed.state === "hasData" && wpFeed.data.length > 0 ? (
         <>
-          <DisplayNEWSFeed newsFeed={paginatedFeed.data as NEWSFeed[]} />
-          <FeedPagination
-            currentPage={pagination.currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
+          <DisplayWPFeed wpFeed={paginatedFeedData as WordpressFeed[]} />
+          
+          {/* Loading indicator */}
+          {hasMore && (
+            <div ref={ref} className="flex justify-center py-8">
+              <Skeleton className="w-20 h-20 rounded-full" />
+              <p className="ml-4 text-gray-500">Loading more...</p>
+            </div>
+          )}
+
+          {/* End of feed indicator */}
+          {!hasMore && displayedItems > 0 && (
+            <div className="text-center py-8 text-gray-500">
+              You&apos;ve reached the end of your feed
+            </div>
+          )}
+
+          {/* Back to top button */}
+          {showBackToTop && (
+            <Button
+              className="fixed bottom-8 right-8 rounded-full w-12 h-12 p-0 shadow-lg"
+              onClick={scrollToTop}
+              aria-label="Back to top"
+            >
+              <ArrowUp className="h-6 w-6" />
+            </Button>
+          )}
         </>
-      ) : newsFeed.state === "hasData" && newsFeed.data.length == 0 ? (
+      ) : wpFeed.state === "hasData" && wpFeed.data.length == 0 ? (
         <div>
           <div className="flex justify-center mt-18 text-xl text-center max-w-[90vw] text-wrap">
             <div>
               Feed is empty, go to edit and add your favourite{" "}
               <span className="text-[#FB8500] font-serif italic text-2xl text-nowrap">
-                News Websites
+                WordPress Feed
               </span>
             </div>
           </div>
@@ -102,23 +166,22 @@ export default function NewsFeed() {
   );
 }
 
-function DisplayNEWSFeed({ newsFeed }: { newsFeed: NEWSFeed[] }) {
-  const { search, feedTitle } = useAtomValue(newsDashboardAtom);
-  const setnewsDashboardAtom = useSetAtom(newsDashboardAtom);
-
+function DisplayWPFeed({ wpFeed }: { wpFeed: WordpressFeed[] }) {
+  const { search, feedTitle } = useAtomValue(wpDashboardAtom);
+  const setwpDashboardAtom = useSetAtom(wpDashboardAtom);
   if (!search) {
     return (
       <div className="flex flex-col justify-center">
-        {newsFeed.map((pub: NEWSFeed) => (
+        {wpFeed.map((pub: WordpressFeed) => (
           <div key={pub.title} id={pub.title} className="mt-4">
             <div className="text-xl font-semibold">{pub.title}</div>
             <div className="flex justify-center mt-4">
               <Carousel>
                 <CarouselContent className="max-w-[80vw]">
-                  {pub.items.map((item: NEWSFeedItem) => (
+                  {pub.items.map((item: WordpressFeedItem) => (
                     <CarouselItem
                       key={item.guid}
-                      className={pub.items.length === 1 ? "" : "md:basis-1/2 xl:basis-1/3"}
+                      className="md:basis-1/2 xl:basis-1/3"
                     >
                       <Card>
                         <CardContent>
@@ -126,8 +189,11 @@ function DisplayNEWSFeed({ newsFeed }: { newsFeed: NEWSFeed[] }) {
                             <div className="relative w-full h-[240px] md:h-[360px]">
                               <Image
                                 src={
-                                  item["media:content"]?.$.url ??
-                                  "/assets/notfound.jpg"
+                                  item["media:content"]?.[
+                                    pub.image < item["media:content"]?.length
+                                      ? pub.image
+                                      : 0
+                                  ]?.$.url ?? "/assets/notfound.jpg"
                                 }
                                 alt={item.title}
                                 fill
@@ -155,33 +221,30 @@ function DisplayNEWSFeed({ newsFeed }: { newsFeed: NEWSFeed[] }) {
       </div>
     );
   }
-
-  const newNews = newsFeed.filter((pub) => pub.title === feedTitle);
+  const newWP = wpFeed.filter((pub) => pub.title === feedTitle);
   return (
     <>
       <div className="m-3">
         <div className="flex justify-end">
           <Button
             className="hover:cursor-pointer"
-            onClick={() =>
-              setnewsDashboardAtom({ search: false, feedTitle: "" })
-            }
+            onClick={() => setwpDashboardAtom({ search: false, feedTitle: "" })}
             variant={"destructive"}
           >
             <X />
           </Button>
         </div>
         <div className="flex flex-col justify-center">
-          {newNews.map((pub: NEWSFeed) => (
+          {newWP.map((pub: WordpressFeed) => (
             <div key={pub.title} id={pub.title} className="mt-4">
               <div className="text-xl font-semibold">{pub.title}</div>
               <div className="flex justify-center mt-4">
                 <Carousel>
                   <CarouselContent className="max-w-[80vw]">
-                    {pub.items.map((item: NEWSFeedItem) => (
+                    {pub.items.map((item: WordpressFeedItem) => (
                       <CarouselItem
                         key={item.guid}
-                        className={pub.items.length === 1 ? "" : "md:basis-1/2 xl:basis-1/3"}
+                        className="md:basis-1/2 xl:basis-1/3"
                       >
                         <Card>
                           <CardContent>
@@ -189,8 +252,11 @@ function DisplayNEWSFeed({ newsFeed }: { newsFeed: NEWSFeed[] }) {
                               <div className="relative w-full h-[240px] md:h-[360px]">
                                 <Image
                                   src={
-                                    item["media:content"]?.$.url ??
-                                    "/assets/notfound.jpg"
+                                    item["media:content"]?.[
+                                      pub.image < item["media:content"]?.length
+                                        ? pub.image
+                                        : 0
+                                    ]?.$.url ?? "/assets/notfound.jpg"
                                   }
                                   alt={item.title}
                                   fill

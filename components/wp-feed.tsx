@@ -1,6 +1,6 @@
 "use client";
-import { wpFeedAtomLoadable } from "@/store/atoms/feedAtom";
-import { useAtomValue, useSetAtom } from "jotai";
+import { wpFeedAtomLoadable, paginatedWPFeedAtom } from "@/store/atoms/feedAtom";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { WordpressFeed, WordpressFeedItem } from "@/types/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,11 +18,29 @@ import { wpDashboardAtom } from "@/store/atoms/dashboardAtom";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePersistedWPDashboardAtom } from "@/hooks/use-persisted-dashboard-atom";
+import { wpFeedPaginationAtom, wpFeedTotalPagesAtom } from "@/store/atoms/paginationAtom";
+import { FeedPagination } from "@/components/feed-pagination";
+import { useEffect } from "react";
 
-// TODO: Pagination, publication priority
 export default function WPFeed() {
   usePersistedWPDashboardAtom();
   const wpFeed = useAtomValue(wpFeedAtomLoadable);
+  const paginatedFeed = useAtomValue(paginatedWPFeedAtom);
+  const [pagination, setPagination] = useAtom(wpFeedPaginationAtom);
+  const totalPages = useAtomValue(wpFeedTotalPagesAtom);
+
+  useEffect(() => {
+    if (paginatedFeed.totalItems !== pagination.totalItems) {
+      setPagination((prev) => ({
+        ...prev,
+        totalItems: paginatedFeed.totalItems,
+      }));
+    }
+  }, [paginatedFeed.totalItems, pagination.totalItems, setPagination]);
+
+  const handlePageChange = (page: number) => {
+    setPagination((prev) => ({ ...prev, currentPage: page }));
+  };
 
   return (
     <div>
@@ -30,7 +48,14 @@ export default function WPFeed() {
         <SearchWP />
       </div>
       {wpFeed.state === "hasData" && wpFeed.data.length > 0 ? (
-        <DisplayWPFeed wpFeed={wpFeed.data as WordpressFeed[]} />
+        <>
+          <DisplayWPFeed wpFeed={paginatedFeed.data as WordpressFeed[]} />
+          <FeedPagination
+            currentPage={pagination.currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
+        </>
       ) : wpFeed.state === "hasData" && wpFeed.data.length == 0 ? (
         <div>
           <div className="flex justify-center mt-18 text-xl text-center max-w-[90vw] text-wrap">
@@ -91,7 +116,7 @@ function DisplayWPFeed({ wpFeed }: { wpFeed: WordpressFeed[] }) {
                   {pub.items.map((item: WordpressFeedItem) => (
                     <CarouselItem
                       key={item.guid}
-                      className="md:basis-1/2 xl:basis-1/3"
+                      className={pub.items.length === 1 ? "" : "md:basis-1/2 xl:basis-1/3"}
                     >
                       <Card>
                         <CardContent>
@@ -154,7 +179,7 @@ function DisplayWPFeed({ wpFeed }: { wpFeed: WordpressFeed[] }) {
                     {pub.items.map((item: WordpressFeedItem) => (
                       <CarouselItem
                         key={item.guid}
-                        className="md:basis-1/2 xl:basis-1/3"
+                        className={pub.items.length === 1 ? "" : "md:basis-1/2 xl:basis-1/3"}
                       >
                         <Card>
                           <CardContent>

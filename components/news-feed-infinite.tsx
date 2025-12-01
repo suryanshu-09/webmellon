@@ -1,8 +1,8 @@
 "use client";
 import { usePersistedNewsDashboardAtom } from "@/hooks/use-persisted-dashboard-atom";
-import { newsFeedAtomLoadable, paginatedNewsFeedAtom } from "@/store/atoms/feedAtom";
+import { newsFeedAtomLoadable } from "@/store/atoms/feedAtom";
 import { NEWSFeed, NEWSFeedItem } from "@/types/types";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import Image from "next/image";
 import Link from "next/link";
 import { SearchNews } from "@/components/search-news";
@@ -16,32 +16,75 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { newsDashboardAtom } from "@/store/atoms/dashboardAtom";
-import { X } from "lucide-react";
+import { X, ArrowUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { newsFeedPaginationAtom, newsFeedTotalPagesAtom } from "@/store/atoms/paginationAtom";
-import { FeedPagination } from "@/components/feed-pagination";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useInView } from "react-intersection-observer";
 
-export default function NewsFeed() {
+export default function NewsFeedInfinite() {
   usePersistedNewsDashboardAtom();
   const newsFeed = useAtomValue(newsFeedAtomLoadable);
-  const paginatedFeed = useAtomValue(paginatedNewsFeedAtom);
-  const [pagination, setPagination] = useAtom(newsFeedPaginationAtom);
-  const totalPages = useAtomValue(newsFeedTotalPagesAtom);
+  const [displayedItems, setDisplayedItems] = useState(10);
+  const [showBackToTop, setShowBackToTop] = useState(false);
+  const { ref, inView } = useInView({ threshold: 0.5 });
 
-  // Update total items when feed data changes
+  // Calculate total items across all publications
+  const totalItems =
+    newsFeed.state === "hasData"
+      ? newsFeed.data.reduce((sum: number, pub: NEWSFeed) => sum + pub.items.length, 0)
+      : 0;
+
+  const hasMore = displayedItems < totalItems;
+
+  // Load more items when in view
   useEffect(() => {
-    if (paginatedFeed.totalItems !== pagination.totalItems) {
-      setPagination((prev) => ({
-        ...prev,
-        totalItems: paginatedFeed.totalItems,
-      }));
+    if (inView && hasMore) {
+      setDisplayedItems((prev) => Math.min(prev + 10, totalItems));
     }
-  }, [paginatedFeed.totalItems, pagination.totalItems, setPagination]);
+  }, [inView, hasMore, totalItems]);
 
-  const handlePageChange = (page: number) => {
-    setPagination((prev) => ({ ...prev, currentPage: page }));
+  // Track scroll position for back-to-top button
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBackToTop(window.scrollY > 500);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  // Create paginated feed data
+  const paginatedFeedData =
+    newsFeed.state === "hasData"
+      ? (() => {
+          const allItems: { pub: NEWSFeed; item: NEWSFeedItem }[] = [];
+          newsFeed.data.forEach((pub: NEWSFeed) => {
+            pub.items.forEach((item: NEWSFeedItem) => {
+              allItems.push({ pub, item });
+            });
+          });
+
+          // Group back by publication for display
+          const displayed = allItems.slice(0, displayedItems);
+          const groupedByPub: Map<string, { pub: NEWSFeed; items: NEWSFeedItem[] }> = new Map();
+
+          displayed.forEach(({ pub, item }) => {
+            if (!groupedByPub.has(pub.title)) {
+              groupedByPub.set(pub.title, { pub, items: [] });
+            }
+            groupedByPub.get(pub.title)!.items.push(item);
+          });
+
+          return Array.from(groupedByPub.values()).map(({ pub, items }) => ({
+            ...pub,
+            items,
+          }));
+        })()
+      : [];
 
   return (
     <div>
@@ -50,12 +93,33 @@ export default function NewsFeed() {
       </div>
       {newsFeed.state === "hasData" && newsFeed.data.length > 0 ? (
         <>
-          <DisplayNEWSFeed newsFeed={paginatedFeed.data as NEWSFeed[]} />
-          <FeedPagination
-            currentPage={pagination.currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
+          <DisplayNEWSFeed newsFeed={paginatedFeedData as NEWSFeed[]} />
+          
+          {/* Loading indicator */}
+          {hasMore && (
+            <div ref={ref} className="flex justify-center py-8">
+              <Skeleton className="w-20 h-20 rounded-full" />
+              <p className="ml-4 text-gray-500">Loading more...</p>
+            </div>
+          )}
+
+          {/* End of feed indicator */}
+          {!hasMore && displayedItems > 0 && (
+            <div className="text-center py-8 text-gray-500">
+              You&apos;ve reached the end of your feed
+            </div>
+          )}
+
+          {/* Back to top button */}
+          {showBackToTop && (
+            <Button
+              className="fixed bottom-8 right-8 rounded-full w-12 h-12 p-0 shadow-lg"
+              onClick={scrollToTop}
+              aria-label="Back to top"
+            >
+              <ArrowUp className="h-6 w-6" />
+            </Button>
+          )}
         </>
       ) : newsFeed.state === "hasData" && newsFeed.data.length == 0 ? (
         <div>
@@ -118,7 +182,7 @@ function DisplayNEWSFeed({ newsFeed }: { newsFeed: NEWSFeed[] }) {
                   {pub.items.map((item: NEWSFeedItem) => (
                     <CarouselItem
                       key={item.guid}
-                      className={pub.items.length === 1 ? "" : "md:basis-1/2 xl:basis-1/3"}
+                      className="md:basis-1/2 xl:basis-1/3"
                     >
                       <Card>
                         <CardContent>
@@ -181,7 +245,7 @@ function DisplayNEWSFeed({ newsFeed }: { newsFeed: NEWSFeed[] }) {
                     {pub.items.map((item: NEWSFeedItem) => (
                       <CarouselItem
                         key={item.guid}
-                        className={pub.items.length === 1 ? "" : "md:basis-1/2 xl:basis-1/3"}
+                        className="md:basis-1/2 xl:basis-1/3"
                       >
                         <Card>
                           <CardContent>

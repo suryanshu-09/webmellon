@@ -1629,22 +1629,22 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     accounts: number
-    sessions: number
     catalogues: number
-    websites: number
-    yt: number
-    wp: number
     news: number
+    sessions: number
+    websites: number
+    wp: number
+    yt: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
-    sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     catalogues?: boolean | UserCountOutputTypeCountCataloguesArgs
-    websites?: boolean | UserCountOutputTypeCountWebsitesArgs
-    yt?: boolean | UserCountOutputTypeCountYtArgs
-    wp?: boolean | UserCountOutputTypeCountWpArgs
     news?: boolean | UserCountOutputTypeCountNewsArgs
+    sessions?: boolean | UserCountOutputTypeCountSessionsArgs
+    websites?: boolean | UserCountOutputTypeCountWebsitesArgs
+    wp?: boolean | UserCountOutputTypeCountWpArgs
+    yt?: boolean | UserCountOutputTypeCountYtArgs
   }
 
   // Custom InputTypes
@@ -1668,15 +1668,22 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SessionWhereInput
+  export type UserCountOutputTypeCountCataloguesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CatalogueWhereInput
   }
 
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountCataloguesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CatalogueWhereInput
+  export type UserCountOutputTypeCountNewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NewsRSSWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SessionWhereInput
   }
 
   /**
@@ -1689,13 +1696,6 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountYtArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: YtRSSWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
   export type UserCountOutputTypeCountWpArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: WpRSSWhereInput
   }
@@ -1703,8 +1703,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountNewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: NewsRSSWhereInput
+  export type UserCountOutputTypeCountYtArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: YtRSSWhereInput
   }
 
 
@@ -3869,22 +3869,22 @@ export namespace Prisma {
   export type WpRSSMinAggregateOutputType = {
     id: number | null
     url: string | null
-    image: number | null
     userId: string | null
+    image: number | null
   }
 
   export type WpRSSMaxAggregateOutputType = {
     id: number | null
     url: string | null
-    image: number | null
     userId: string | null
+    image: number | null
   }
 
   export type WpRSSCountAggregateOutputType = {
     id: number
     url: number
-    image: number
     userId: number
+    image: number
     _all: number
   }
 
@@ -3902,22 +3902,22 @@ export namespace Prisma {
   export type WpRSSMinAggregateInputType = {
     id?: true
     url?: true
-    image?: true
     userId?: true
+    image?: true
   }
 
   export type WpRSSMaxAggregateInputType = {
     id?: true
     url?: true
-    image?: true
     userId?: true
+    image?: true
   }
 
   export type WpRSSCountAggregateInputType = {
     id?: true
     url?: true
-    image?: true
     userId?: true
+    image?: true
     _all?: true
   }
 
@@ -4010,8 +4010,8 @@ export namespace Prisma {
   export type WpRSSGroupByOutputType = {
     id: number
     url: string
-    image: number
     userId: string
+    image: number
     _count: WpRSSCountAggregateOutputType | null
     _avg: WpRSSAvgAggregateOutputType | null
     _sum: WpRSSSumAggregateOutputType | null
@@ -4036,35 +4036,35 @@ export namespace Prisma {
   export type WpRSSSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     url?: boolean
-    image?: boolean
     userId?: boolean
+    image?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["wpRSS"]>
 
   export type WpRSSSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     url?: boolean
-    image?: boolean
     userId?: boolean
+    image?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["wpRSS"]>
 
   export type WpRSSSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     url?: boolean
-    image?: boolean
     userId?: boolean
+    image?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["wpRSS"]>
 
   export type WpRSSSelectScalar = {
     id?: boolean
     url?: boolean
-    image?: boolean
     userId?: boolean
+    image?: boolean
   }
 
-  export type WpRSSOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "image" | "userId", ExtArgs["result"]["wpRSS"]>
+  export type WpRSSOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "userId" | "image", ExtArgs["result"]["wpRSS"]>
   export type WpRSSInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -4083,8 +4083,8 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       url: string
-      image: number
       userId: string
+      image: number
     }, ExtArgs["result"]["wpRSS"]>
     composites: {}
   }
@@ -4511,8 +4511,8 @@ export namespace Prisma {
   interface WpRSSFieldRefs {
     readonly id: FieldRef<"WpRSS", 'Int'>
     readonly url: FieldRef<"WpRSS", 'String'>
-    readonly image: FieldRef<"WpRSS", 'Int'>
     readonly userId: FieldRef<"WpRSS", 'String'>
+    readonly image: FieldRef<"WpRSS", 'Int'>
   }
     
 
@@ -5109,8 +5109,8 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     userId?: boolean
-    websites?: boolean | Catalogue$websitesArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
+    websites?: boolean | Catalogue$websitesArgs<ExtArgs>
     _count?: boolean | CatalogueCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["catalogue"]>
 
@@ -5136,8 +5136,8 @@ export namespace Prisma {
 
   export type CatalogueOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "userId", ExtArgs["result"]["catalogue"]>
   export type CatalogueInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    websites?: boolean | Catalogue$websitesArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
+    websites?: boolean | Catalogue$websitesArgs<ExtArgs>
     _count?: boolean | CatalogueCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CatalogueIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5150,8 +5150,8 @@ export namespace Prisma {
   export type $CataloguePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Catalogue"
     objects: {
-      websites: Prisma.$WebsitePayload<ExtArgs>[]
       user: Prisma.$UserPayload<ExtArgs>
+      websites: Prisma.$WebsitePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -5551,8 +5551,8 @@ export namespace Prisma {
    */
   export interface Prisma__CatalogueClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    websites<T extends Catalogue$websitesArgs<ExtArgs> = {}>(args?: Subset<T, Catalogue$websitesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WebsitePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    websites<T extends Catalogue$websitesArgs<ExtArgs> = {}>(args?: Subset<T, Catalogue$websitesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WebsitePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6047,29 +6047,29 @@ export namespace Prisma {
 
   export type WebsiteMinAggregateOutputType = {
     id: number | null
-    userId: string | null
     catalogueId: number | null
     name: string | null
     url: string | null
     favicon: string | null
+    userId: string | null
   }
 
   export type WebsiteMaxAggregateOutputType = {
     id: number | null
-    userId: string | null
     catalogueId: number | null
     name: string | null
     url: string | null
     favicon: string | null
+    userId: string | null
   }
 
   export type WebsiteCountAggregateOutputType = {
     id: number
-    userId: number
     catalogueId: number
     name: number
     url: number
     favicon: number
+    userId: number
     _all: number
   }
 
@@ -6086,29 +6086,29 @@ export namespace Prisma {
 
   export type WebsiteMinAggregateInputType = {
     id?: true
-    userId?: true
     catalogueId?: true
     name?: true
     url?: true
     favicon?: true
+    userId?: true
   }
 
   export type WebsiteMaxAggregateInputType = {
     id?: true
-    userId?: true
     catalogueId?: true
     name?: true
     url?: true
     favicon?: true
+    userId?: true
   }
 
   export type WebsiteCountAggregateInputType = {
     id?: true
-    userId?: true
     catalogueId?: true
     name?: true
     url?: true
     favicon?: true
+    userId?: true
     _all?: true
   }
 
@@ -6200,11 +6200,11 @@ export namespace Prisma {
 
   export type WebsiteGroupByOutputType = {
     id: number
-    userId: string
     catalogueId: number
     name: string
     url: string
     favicon: string
+    userId: string
     _count: WebsiteCountAggregateOutputType | null
     _avg: WebsiteAvgAggregateOutputType | null
     _sum: WebsiteSumAggregateOutputType | null
@@ -6228,73 +6228,73 @@ export namespace Prisma {
 
   export type WebsiteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
     catalogueId?: boolean
     name?: boolean
     url?: boolean
     favicon?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    userId?: boolean
     catalogue?: boolean | CatalogueDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["website"]>
 
   export type WebsiteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
     catalogueId?: boolean
     name?: boolean
     url?: boolean
     favicon?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    userId?: boolean
     catalogue?: boolean | CatalogueDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["website"]>
 
   export type WebsiteSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
     catalogueId?: boolean
     name?: boolean
     url?: boolean
     favicon?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    userId?: boolean
     catalogue?: boolean | CatalogueDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["website"]>
 
   export type WebsiteSelectScalar = {
     id?: boolean
-    userId?: boolean
     catalogueId?: boolean
     name?: boolean
     url?: boolean
     favicon?: boolean
+    userId?: boolean
   }
 
-  export type WebsiteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "catalogueId" | "name" | "url" | "favicon", ExtArgs["result"]["website"]>
+  export type WebsiteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "catalogueId" | "name" | "url" | "favicon" | "userId", ExtArgs["result"]["website"]>
   export type WebsiteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     catalogue?: boolean | CatalogueDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type WebsiteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     catalogue?: boolean | CatalogueDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type WebsiteIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     catalogue?: boolean | CatalogueDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $WebsitePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Website"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
       catalogue: Prisma.$CataloguePayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      userId: string
       catalogueId: number
       name: string
       url: string
       favicon: string
+      userId: string
     }, ExtArgs["result"]["website"]>
     composites: {}
   }
@@ -6689,8 +6689,8 @@ export namespace Prisma {
    */
   export interface Prisma__WebsiteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     catalogue<T extends CatalogueDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CatalogueDefaultArgs<ExtArgs>>): Prisma__CatalogueClient<$Result.GetResult<Prisma.$CataloguePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6721,11 +6721,11 @@ export namespace Prisma {
    */
   interface WebsiteFieldRefs {
     readonly id: FieldRef<"Website", 'Int'>
-    readonly userId: FieldRef<"Website", 'String'>
     readonly catalogueId: FieldRef<"Website", 'Int'>
     readonly name: FieldRef<"Website", 'String'>
     readonly url: FieldRef<"Website", 'String'>
     readonly favicon: FieldRef<"Website", 'String'>
+    readonly userId: FieldRef<"Website", 'String'>
   }
     
 
@@ -7176,6 +7176,7 @@ export namespace Prisma {
     email: number
     emailVerified: number
     image: number
+    preferences: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -7208,6 +7209,7 @@ export namespace Prisma {
     email?: true
     emailVerified?: true
     image?: true
+    preferences?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -7291,6 +7293,7 @@ export namespace Prisma {
     email: string
     emailVerified: Date | null
     image: string | null
+    preferences: JsonValue | null
     createdAt: Date
     updatedAt: Date
     _count: UserCountAggregateOutputType | null
@@ -7318,15 +7321,16 @@ export namespace Prisma {
     email?: boolean
     emailVerified?: boolean
     image?: boolean
+    preferences?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     accounts?: boolean | User$accountsArgs<ExtArgs>
-    sessions?: boolean | User$sessionsArgs<ExtArgs>
     catalogues?: boolean | User$cataloguesArgs<ExtArgs>
-    websites?: boolean | User$websitesArgs<ExtArgs>
-    yt?: boolean | User$ytArgs<ExtArgs>
-    wp?: boolean | User$wpArgs<ExtArgs>
     news?: boolean | User$newsArgs<ExtArgs>
+    sessions?: boolean | User$sessionsArgs<ExtArgs>
+    websites?: boolean | User$websitesArgs<ExtArgs>
+    wp?: boolean | User$wpArgs<ExtArgs>
+    yt?: boolean | User$ytArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -7336,6 +7340,7 @@ export namespace Prisma {
     email?: boolean
     emailVerified?: boolean
     image?: boolean
+    preferences?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -7346,6 +7351,7 @@ export namespace Prisma {
     email?: boolean
     emailVerified?: boolean
     image?: boolean
+    preferences?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -7356,19 +7362,20 @@ export namespace Prisma {
     email?: boolean
     emailVerified?: boolean
     image?: boolean
+    preferences?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "preferences" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | User$accountsArgs<ExtArgs>
-    sessions?: boolean | User$sessionsArgs<ExtArgs>
     catalogues?: boolean | User$cataloguesArgs<ExtArgs>
-    websites?: boolean | User$websitesArgs<ExtArgs>
-    yt?: boolean | User$ytArgs<ExtArgs>
-    wp?: boolean | User$wpArgs<ExtArgs>
     news?: boolean | User$newsArgs<ExtArgs>
+    sessions?: boolean | User$sessionsArgs<ExtArgs>
+    websites?: boolean | User$websitesArgs<ExtArgs>
+    wp?: boolean | User$wpArgs<ExtArgs>
+    yt?: boolean | User$ytArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -7378,12 +7385,12 @@ export namespace Prisma {
     name: "User"
     objects: {
       accounts: Prisma.$AccountPayload<ExtArgs>[]
-      sessions: Prisma.$SessionPayload<ExtArgs>[]
       catalogues: Prisma.$CataloguePayload<ExtArgs>[]
-      websites: Prisma.$WebsitePayload<ExtArgs>[]
-      yt: Prisma.$YtRSSPayload<ExtArgs>[]
-      wp: Prisma.$WpRSSPayload<ExtArgs>[]
       news: Prisma.$NewsRSSPayload<ExtArgs>[]
+      sessions: Prisma.$SessionPayload<ExtArgs>[]
+      websites: Prisma.$WebsitePayload<ExtArgs>[]
+      wp: Prisma.$WpRSSPayload<ExtArgs>[]
+      yt: Prisma.$YtRSSPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -7391,6 +7398,7 @@ export namespace Prisma {
       email: string
       emailVerified: Date | null
       image: string | null
+      preferences: Prisma.JsonValue | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["user"]>
@@ -7788,12 +7796,12 @@ export namespace Prisma {
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     catalogues<T extends User$cataloguesArgs<ExtArgs> = {}>(args?: Subset<T, User$cataloguesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CataloguePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    websites<T extends User$websitesArgs<ExtArgs> = {}>(args?: Subset<T, User$websitesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WebsitePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    yt<T extends User$ytArgs<ExtArgs> = {}>(args?: Subset<T, User$ytArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$YtRSSPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    wp<T extends User$wpArgs<ExtArgs> = {}>(args?: Subset<T, User$wpArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WpRSSPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     news<T extends User$newsArgs<ExtArgs> = {}>(args?: Subset<T, User$newsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsRSSPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    websites<T extends User$websitesArgs<ExtArgs> = {}>(args?: Subset<T, User$websitesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WebsitePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    wp<T extends User$wpArgs<ExtArgs> = {}>(args?: Subset<T, User$wpArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WpRSSPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    yt<T extends User$ytArgs<ExtArgs> = {}>(args?: Subset<T, User$ytArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$YtRSSPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7828,6 +7836,7 @@ export namespace Prisma {
     readonly email: FieldRef<"User", 'String'>
     readonly emailVerified: FieldRef<"User", 'DateTime'>
     readonly image: FieldRef<"User", 'String'>
+    readonly preferences: FieldRef<"User", 'Json'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
@@ -8242,30 +8251,6 @@ export namespace Prisma {
   }
 
   /**
-   * User.sessions
-   */
-  export type User$sessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Session
-     */
-    select?: SessionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Session
-     */
-    omit?: SessionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SessionInclude<ExtArgs> | null
-    where?: SessionWhereInput
-    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
-    cursor?: SessionWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
-  }
-
-  /**
    * User.catalogues
    */
   export type User$cataloguesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8287,6 +8272,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: CatalogueScalarFieldEnum | CatalogueScalarFieldEnum[]
+  }
+
+  /**
+   * User.news
+   */
+  export type User$newsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsRSS
+     */
+    select?: NewsRSSSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsRSS
+     */
+    omit?: NewsRSSOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsRSSInclude<ExtArgs> | null
+    where?: NewsRSSWhereInput
+    orderBy?: NewsRSSOrderByWithRelationInput | NewsRSSOrderByWithRelationInput[]
+    cursor?: NewsRSSWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NewsRSSScalarFieldEnum | NewsRSSScalarFieldEnum[]
+  }
+
+  /**
+   * User.sessions
+   */
+  export type User$sessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    where?: SessionWhereInput
+    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
+    cursor?: SessionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
   }
 
   /**
@@ -8314,30 +8347,6 @@ export namespace Prisma {
   }
 
   /**
-   * User.yt
-   */
-  export type User$ytArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the YtRSS
-     */
-    select?: YtRSSSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the YtRSS
-     */
-    omit?: YtRSSOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: YtRSSInclude<ExtArgs> | null
-    where?: YtRSSWhereInput
-    orderBy?: YtRSSOrderByWithRelationInput | YtRSSOrderByWithRelationInput[]
-    cursor?: YtRSSWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: YtRSSScalarFieldEnum | YtRSSScalarFieldEnum[]
-  }
-
-  /**
    * User.wp
    */
   export type User$wpArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8362,27 +8371,27 @@ export namespace Prisma {
   }
 
   /**
-   * User.news
+   * User.yt
    */
-  export type User$newsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$ytArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the NewsRSS
+     * Select specific fields to fetch from the YtRSS
      */
-    select?: NewsRSSSelect<ExtArgs> | null
+    select?: YtRSSSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the NewsRSS
+     * Omit specific fields from the YtRSS
      */
-    omit?: NewsRSSOmit<ExtArgs> | null
+    omit?: YtRSSOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: NewsRSSInclude<ExtArgs> | null
-    where?: NewsRSSWhereInput
-    orderBy?: NewsRSSOrderByWithRelationInput | NewsRSSOrderByWithRelationInput[]
-    cursor?: NewsRSSWhereUniqueInput
+    include?: YtRSSInclude<ExtArgs> | null
+    where?: YtRSSWhereInput
+    orderBy?: YtRSSOrderByWithRelationInput | YtRSSOrderByWithRelationInput[]
+    cursor?: YtRSSWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: NewsRSSScalarFieldEnum | NewsRSSScalarFieldEnum[]
+    distinct?: YtRSSScalarFieldEnum | YtRSSScalarFieldEnum[]
   }
 
   /**
@@ -11662,8 +11671,8 @@ export namespace Prisma {
   export const WpRSSScalarFieldEnum: {
     id: 'id',
     url: 'url',
-    image: 'image',
-    userId: 'userId'
+    userId: 'userId',
+    image: 'image'
   };
 
   export type WpRSSScalarFieldEnum = (typeof WpRSSScalarFieldEnum)[keyof typeof WpRSSScalarFieldEnum]
@@ -11680,11 +11689,11 @@ export namespace Prisma {
 
   export const WebsiteScalarFieldEnum: {
     id: 'id',
-    userId: 'userId',
     catalogueId: 'catalogueId',
     name: 'name',
     url: 'url',
-    favicon: 'favicon'
+    favicon: 'favicon',
+    userId: 'userId'
   };
 
   export type WebsiteScalarFieldEnum = (typeof WebsiteScalarFieldEnum)[keyof typeof WebsiteScalarFieldEnum]
@@ -11696,6 +11705,7 @@ export namespace Prisma {
     email: 'email',
     emailVerified: 'emailVerified',
     image: 'image',
+    preferences: 'preferences',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -11750,12 +11760,29 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const NullableJsonNullValueInput: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull
+  };
+
+  export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
   export const QueryMode: {
     default: 'default',
     insensitive: 'insensitive'
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   export const NullsOrder: {
@@ -11810,6 +11837,20 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -11932,16 +11973,16 @@ export namespace Prisma {
     NOT?: WpRSSWhereInput | WpRSSWhereInput[]
     id?: IntFilter<"WpRSS"> | number
     url?: StringFilter<"WpRSS"> | string
-    image?: IntFilter<"WpRSS"> | number
     userId?: StringFilter<"WpRSS"> | string
+    image?: IntFilter<"WpRSS"> | number
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type WpRSSOrderByWithRelationInput = {
     id?: SortOrder
     url?: SortOrder
-    image?: SortOrder
     userId?: SortOrder
+    image?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
@@ -11952,16 +11993,16 @@ export namespace Prisma {
     OR?: WpRSSWhereInput[]
     NOT?: WpRSSWhereInput | WpRSSWhereInput[]
     url?: StringFilter<"WpRSS"> | string
-    image?: IntFilter<"WpRSS"> | number
     userId?: StringFilter<"WpRSS"> | string
+    image?: IntFilter<"WpRSS"> | number
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "user_wprss_url_unique">
 
   export type WpRSSOrderByWithAggregationInput = {
     id?: SortOrder
     url?: SortOrder
-    image?: SortOrder
     userId?: SortOrder
+    image?: SortOrder
     _count?: WpRSSCountOrderByAggregateInput
     _avg?: WpRSSAvgOrderByAggregateInput
     _max?: WpRSSMaxOrderByAggregateInput
@@ -11975,8 +12016,8 @@ export namespace Prisma {
     NOT?: WpRSSScalarWhereWithAggregatesInput | WpRSSScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"WpRSS"> | number
     url?: StringWithAggregatesFilter<"WpRSS"> | string
-    image?: IntWithAggregatesFilter<"WpRSS"> | number
     userId?: StringWithAggregatesFilter<"WpRSS"> | string
+    image?: IntWithAggregatesFilter<"WpRSS"> | number
   }
 
   export type CatalogueWhereInput = {
@@ -11986,16 +12027,16 @@ export namespace Prisma {
     id?: IntFilter<"Catalogue"> | number
     name?: StringFilter<"Catalogue"> | string
     userId?: StringFilter<"Catalogue"> | string
-    websites?: WebsiteListRelationFilter
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    websites?: WebsiteListRelationFilter
   }
 
   export type CatalogueOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
     userId?: SortOrder
-    websites?: WebsiteOrderByRelationAggregateInput
     user?: UserOrderByWithRelationInput
+    websites?: WebsiteOrderByRelationAggregateInput
   }
 
   export type CatalogueWhereUniqueInput = Prisma.AtLeast<{
@@ -12006,8 +12047,8 @@ export namespace Prisma {
     NOT?: CatalogueWhereInput | CatalogueWhereInput[]
     name?: StringFilter<"Catalogue"> | string
     userId?: StringFilter<"Catalogue"> | string
-    websites?: WebsiteListRelationFilter
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    websites?: WebsiteListRelationFilter
   }, "id" | "user_catalogue_name_unique">
 
   export type CatalogueOrderByWithAggregationInput = {
@@ -12035,24 +12076,24 @@ export namespace Prisma {
     OR?: WebsiteWhereInput[]
     NOT?: WebsiteWhereInput | WebsiteWhereInput[]
     id?: IntFilter<"Website"> | number
-    userId?: StringFilter<"Website"> | string
     catalogueId?: IntFilter<"Website"> | number
     name?: StringFilter<"Website"> | string
     url?: StringFilter<"Website"> | string
     favicon?: StringFilter<"Website"> | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    userId?: StringFilter<"Website"> | string
     catalogue?: XOR<CatalogueScalarRelationFilter, CatalogueWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type WebsiteOrderByWithRelationInput = {
     id?: SortOrder
-    userId?: SortOrder
     catalogueId?: SortOrder
     name?: SortOrder
     url?: SortOrder
     favicon?: SortOrder
-    user?: UserOrderByWithRelationInput
+    userId?: SortOrder
     catalogue?: CatalogueOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type WebsiteWhereUniqueInput = Prisma.AtLeast<{
@@ -12062,22 +12103,22 @@ export namespace Prisma {
     AND?: WebsiteWhereInput | WebsiteWhereInput[]
     OR?: WebsiteWhereInput[]
     NOT?: WebsiteWhereInput | WebsiteWhereInput[]
-    userId?: StringFilter<"Website"> | string
     catalogueId?: IntFilter<"Website"> | number
     name?: StringFilter<"Website"> | string
     url?: StringFilter<"Website"> | string
     favicon?: StringFilter<"Website"> | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    userId?: StringFilter<"Website"> | string
     catalogue?: XOR<CatalogueScalarRelationFilter, CatalogueWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "user_website_name_unique" | "user_website_url_unique">
 
   export type WebsiteOrderByWithAggregationInput = {
     id?: SortOrder
-    userId?: SortOrder
     catalogueId?: SortOrder
     name?: SortOrder
     url?: SortOrder
     favicon?: SortOrder
+    userId?: SortOrder
     _count?: WebsiteCountOrderByAggregateInput
     _avg?: WebsiteAvgOrderByAggregateInput
     _max?: WebsiteMaxOrderByAggregateInput
@@ -12090,11 +12131,11 @@ export namespace Prisma {
     OR?: WebsiteScalarWhereWithAggregatesInput[]
     NOT?: WebsiteScalarWhereWithAggregatesInput | WebsiteScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Website"> | number
-    userId?: StringWithAggregatesFilter<"Website"> | string
     catalogueId?: IntWithAggregatesFilter<"Website"> | number
     name?: StringWithAggregatesFilter<"Website"> | string
     url?: StringWithAggregatesFilter<"Website"> | string
     favicon?: StringWithAggregatesFilter<"Website"> | string
+    userId?: StringWithAggregatesFilter<"Website"> | string
   }
 
   export type UserWhereInput = {
@@ -12106,15 +12147,16 @@ export namespace Prisma {
     email?: StringFilter<"User"> | string
     emailVerified?: DateTimeNullableFilter<"User"> | Date | string | null
     image?: StringNullableFilter<"User"> | string | null
+    preferences?: JsonNullableFilter<"User">
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     accounts?: AccountListRelationFilter
-    sessions?: SessionListRelationFilter
     catalogues?: CatalogueListRelationFilter
-    websites?: WebsiteListRelationFilter
-    yt?: YtRSSListRelationFilter
-    wp?: WpRSSListRelationFilter
     news?: NewsRSSListRelationFilter
+    sessions?: SessionListRelationFilter
+    websites?: WebsiteListRelationFilter
+    wp?: WpRSSListRelationFilter
+    yt?: YtRSSListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -12123,15 +12165,16 @@ export namespace Prisma {
     email?: SortOrder
     emailVerified?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
+    preferences?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     accounts?: AccountOrderByRelationAggregateInput
-    sessions?: SessionOrderByRelationAggregateInput
     catalogues?: CatalogueOrderByRelationAggregateInput
-    websites?: WebsiteOrderByRelationAggregateInput
-    yt?: YtRSSOrderByRelationAggregateInput
-    wp?: WpRSSOrderByRelationAggregateInput
     news?: NewsRSSOrderByRelationAggregateInput
+    sessions?: SessionOrderByRelationAggregateInput
+    websites?: WebsiteOrderByRelationAggregateInput
+    wp?: WpRSSOrderByRelationAggregateInput
+    yt?: YtRSSOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -12143,15 +12186,16 @@ export namespace Prisma {
     name?: StringNullableFilter<"User"> | string | null
     emailVerified?: DateTimeNullableFilter<"User"> | Date | string | null
     image?: StringNullableFilter<"User"> | string | null
+    preferences?: JsonNullableFilter<"User">
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     accounts?: AccountListRelationFilter
-    sessions?: SessionListRelationFilter
     catalogues?: CatalogueListRelationFilter
-    websites?: WebsiteListRelationFilter
-    yt?: YtRSSListRelationFilter
-    wp?: WpRSSListRelationFilter
     news?: NewsRSSListRelationFilter
+    sessions?: SessionListRelationFilter
+    websites?: WebsiteListRelationFilter
+    wp?: WpRSSListRelationFilter
+    yt?: YtRSSListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -12160,6 +12204,7 @@ export namespace Prisma {
     email?: SortOrder
     emailVerified?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
+    preferences?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -12176,6 +12221,7 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"User"> | string
     emailVerified?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
+    preferences?: JsonNullableWithAggregatesFilter<"User">
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -12461,8 +12507,8 @@ export namespace Prisma {
   export type WpRSSUncheckedCreateInput = {
     id?: number
     url: string
-    image: number
     userId: string
+    image: number
   }
 
   export type WpRSSUpdateInput = {
@@ -12474,15 +12520,15 @@ export namespace Prisma {
   export type WpRSSUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
-    image?: IntFieldUpdateOperationsInput | number
     userId?: StringFieldUpdateOperationsInput | string
+    image?: IntFieldUpdateOperationsInput | number
   }
 
   export type WpRSSCreateManyInput = {
     id?: number
     url: string
-    image: number
     userId: string
+    image: number
   }
 
   export type WpRSSUpdateManyMutationInput = {
@@ -12493,14 +12539,14 @@ export namespace Prisma {
   export type WpRSSUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
-    image?: IntFieldUpdateOperationsInput | number
     userId?: StringFieldUpdateOperationsInput | string
+    image?: IntFieldUpdateOperationsInput | number
   }
 
   export type CatalogueCreateInput = {
     name: string
-    websites?: WebsiteCreateNestedManyWithoutCatalogueInput
     user: UserCreateNestedOneWithoutCataloguesInput
+    websites?: WebsiteCreateNestedManyWithoutCatalogueInput
   }
 
   export type CatalogueUncheckedCreateInput = {
@@ -12512,8 +12558,8 @@ export namespace Prisma {
 
   export type CatalogueUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
-    websites?: WebsiteUpdateManyWithoutCatalogueNestedInput
     user?: UserUpdateOneRequiredWithoutCataloguesNestedInput
+    websites?: WebsiteUpdateManyWithoutCatalogueNestedInput
   }
 
   export type CatalogueUncheckedUpdateInput = {
@@ -12543,43 +12589,43 @@ export namespace Prisma {
     name: string
     url: string
     favicon: string
-    user: UserCreateNestedOneWithoutWebsitesInput
     catalogue: CatalogueCreateNestedOneWithoutWebsitesInput
+    user: UserCreateNestedOneWithoutWebsitesInput
   }
 
   export type WebsiteUncheckedCreateInput = {
     id?: number
-    userId: string
     catalogueId: number
     name: string
     url: string
     favicon: string
+    userId: string
   }
 
   export type WebsiteUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     favicon?: StringFieldUpdateOperationsInput | string
-    user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
     catalogue?: CatalogueUpdateOneRequiredWithoutWebsitesNestedInput
+    user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
   }
 
   export type WebsiteUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    userId?: StringFieldUpdateOperationsInput | string
     catalogueId?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     favicon?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type WebsiteCreateManyInput = {
     id?: number
-    userId: string
     catalogueId: number
     name: string
     url: string
     favicon: string
+    userId: string
   }
 
   export type WebsiteUpdateManyMutationInput = {
@@ -12590,11 +12636,11 @@ export namespace Prisma {
 
   export type WebsiteUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    userId?: StringFieldUpdateOperationsInput | string
     catalogueId?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     favicon?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserCreateInput = {
@@ -12603,15 +12649,16 @@ export namespace Prisma {
     email: string
     emailVerified?: Date | string | null
     image?: string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
     catalogues?: CatalogueCreateNestedManyWithoutUserInput
-    websites?: WebsiteCreateNestedManyWithoutUserInput
-    yt?: YtRSSCreateNestedManyWithoutUserInput
-    wp?: WpRSSCreateNestedManyWithoutUserInput
     news?: NewsRSSCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    websites?: WebsiteCreateNestedManyWithoutUserInput
+    wp?: WpRSSCreateNestedManyWithoutUserInput
+    yt?: YtRSSCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -12620,15 +12667,16 @@ export namespace Prisma {
     email: string
     emailVerified?: Date | string | null
     image?: string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     catalogues?: CatalogueUncheckedCreateNestedManyWithoutUserInput
-    websites?: WebsiteUncheckedCreateNestedManyWithoutUserInput
-    yt?: YtRSSUncheckedCreateNestedManyWithoutUserInput
-    wp?: WpRSSUncheckedCreateNestedManyWithoutUserInput
     news?: NewsRSSUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    websites?: WebsiteUncheckedCreateNestedManyWithoutUserInput
+    wp?: WpRSSUncheckedCreateNestedManyWithoutUserInput
+    yt?: YtRSSUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -12637,15 +12685,16 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
     catalogues?: CatalogueUpdateManyWithoutUserNestedInput
-    websites?: WebsiteUpdateManyWithoutUserNestedInput
-    yt?: YtRSSUpdateManyWithoutUserNestedInput
-    wp?: WpRSSUpdateManyWithoutUserNestedInput
     news?: NewsRSSUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    websites?: WebsiteUpdateManyWithoutUserNestedInput
+    wp?: WpRSSUpdateManyWithoutUserNestedInput
+    yt?: YtRSSUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -12654,15 +12703,16 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     catalogues?: CatalogueUncheckedUpdateManyWithoutUserNestedInput
-    websites?: WebsiteUncheckedUpdateManyWithoutUserNestedInput
-    yt?: YtRSSUncheckedUpdateManyWithoutUserNestedInput
-    wp?: WpRSSUncheckedUpdateManyWithoutUserNestedInput
     news?: NewsRSSUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    websites?: WebsiteUncheckedUpdateManyWithoutUserNestedInput
+    wp?: WpRSSUncheckedUpdateManyWithoutUserNestedInput
+    yt?: YtRSSUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -12671,6 +12721,7 @@ export namespace Prisma {
     email: string
     emailVerified?: Date | string | null
     image?: string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -12681,6 +12732,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12691,6 +12743,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13038,8 +13091,8 @@ export namespace Prisma {
   export type WpRSSCountOrderByAggregateInput = {
     id?: SortOrder
     url?: SortOrder
-    image?: SortOrder
     userId?: SortOrder
+    image?: SortOrder
   }
 
   export type WpRSSAvgOrderByAggregateInput = {
@@ -13050,15 +13103,15 @@ export namespace Prisma {
   export type WpRSSMaxOrderByAggregateInput = {
     id?: SortOrder
     url?: SortOrder
-    image?: SortOrder
     userId?: SortOrder
+    image?: SortOrder
   }
 
   export type WpRSSMinOrderByAggregateInput = {
     id?: SortOrder
     url?: SortOrder
-    image?: SortOrder
     userId?: SortOrder
+    image?: SortOrder
   }
 
   export type WpRSSSumOrderByAggregateInput = {
@@ -13124,11 +13177,11 @@ export namespace Prisma {
 
   export type WebsiteCountOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
     catalogueId?: SortOrder
     name?: SortOrder
     url?: SortOrder
     favicon?: SortOrder
+    userId?: SortOrder
   }
 
   export type WebsiteAvgOrderByAggregateInput = {
@@ -13138,20 +13191,20 @@ export namespace Prisma {
 
   export type WebsiteMaxOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
     catalogueId?: SortOrder
     name?: SortOrder
     url?: SortOrder
     favicon?: SortOrder
+    userId?: SortOrder
   }
 
   export type WebsiteMinOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
     catalogueId?: SortOrder
     name?: SortOrder
     url?: SortOrder
     favicon?: SortOrder
+    userId?: SortOrder
   }
 
   export type WebsiteSumOrderByAggregateInput = {
@@ -13184,6 +13237,29 @@ export namespace Prisma {
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
+  export type JsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
@@ -13202,22 +13278,22 @@ export namespace Prisma {
     none?: AccountWhereInput
   }
 
-  export type SessionListRelationFilter = {
-    every?: SessionWhereInput
-    some?: SessionWhereInput
-    none?: SessionWhereInput
-  }
-
   export type CatalogueListRelationFilter = {
     every?: CatalogueWhereInput
     some?: CatalogueWhereInput
     none?: CatalogueWhereInput
   }
 
-  export type YtRSSListRelationFilter = {
-    every?: YtRSSWhereInput
-    some?: YtRSSWhereInput
-    none?: YtRSSWhereInput
+  export type NewsRSSListRelationFilter = {
+    every?: NewsRSSWhereInput
+    some?: NewsRSSWhereInput
+    none?: NewsRSSWhereInput
+  }
+
+  export type SessionListRelationFilter = {
+    every?: SessionWhereInput
+    some?: SessionWhereInput
+    none?: SessionWhereInput
   }
 
   export type WpRSSListRelationFilter = {
@@ -13226,10 +13302,10 @@ export namespace Prisma {
     none?: WpRSSWhereInput
   }
 
-  export type NewsRSSListRelationFilter = {
-    every?: NewsRSSWhereInput
-    some?: NewsRSSWhereInput
-    none?: NewsRSSWhereInput
+  export type YtRSSListRelationFilter = {
+    every?: YtRSSWhereInput
+    some?: YtRSSWhereInput
+    none?: YtRSSWhereInput
   }
 
   export type SortOrderInput = {
@@ -13241,15 +13317,15 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type SessionOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type CatalogueOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type YtRSSOrderByRelationAggregateInput = {
+  export type NewsRSSOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SessionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -13257,7 +13333,7 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type NewsRSSOrderByRelationAggregateInput = {
+  export type YtRSSOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -13267,6 +13343,7 @@ export namespace Prisma {
     email?: SortOrder
     emailVerified?: SortOrder
     image?: SortOrder
+    preferences?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -13321,6 +13398,32 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -13526,6 +13629,12 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutWpInput, UserUpdateWithoutWpInput>, UserUncheckedUpdateWithoutWpInput>
   }
 
+  export type UserCreateNestedOneWithoutCataloguesInput = {
+    create?: XOR<UserCreateWithoutCataloguesInput, UserUncheckedCreateWithoutCataloguesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCataloguesInput
+    connect?: UserWhereUniqueInput
+  }
+
   export type WebsiteCreateNestedManyWithoutCatalogueInput = {
     create?: XOR<WebsiteCreateWithoutCatalogueInput, WebsiteUncheckedCreateWithoutCatalogueInput> | WebsiteCreateWithoutCatalogueInput[] | WebsiteUncheckedCreateWithoutCatalogueInput[]
     connectOrCreate?: WebsiteCreateOrConnectWithoutCatalogueInput | WebsiteCreateOrConnectWithoutCatalogueInput[]
@@ -13533,17 +13642,19 @@ export namespace Prisma {
     connect?: WebsiteWhereUniqueInput | WebsiteWhereUniqueInput[]
   }
 
-  export type UserCreateNestedOneWithoutCataloguesInput = {
-    create?: XOR<UserCreateWithoutCataloguesInput, UserUncheckedCreateWithoutCataloguesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutCataloguesInput
-    connect?: UserWhereUniqueInput
-  }
-
   export type WebsiteUncheckedCreateNestedManyWithoutCatalogueInput = {
     create?: XOR<WebsiteCreateWithoutCatalogueInput, WebsiteUncheckedCreateWithoutCatalogueInput> | WebsiteCreateWithoutCatalogueInput[] | WebsiteUncheckedCreateWithoutCatalogueInput[]
     connectOrCreate?: WebsiteCreateOrConnectWithoutCatalogueInput | WebsiteCreateOrConnectWithoutCatalogueInput[]
     createMany?: WebsiteCreateManyCatalogueInputEnvelope
     connect?: WebsiteWhereUniqueInput | WebsiteWhereUniqueInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutCataloguesNestedInput = {
+    create?: XOR<UserCreateWithoutCataloguesInput, UserUncheckedCreateWithoutCataloguesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCataloguesInput
+    upsert?: UserUpsertWithoutCataloguesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCataloguesInput, UserUpdateWithoutCataloguesInput>, UserUncheckedUpdateWithoutCataloguesInput>
   }
 
   export type WebsiteUpdateManyWithoutCatalogueNestedInput = {
@@ -13560,14 +13671,6 @@ export namespace Prisma {
     deleteMany?: WebsiteScalarWhereInput | WebsiteScalarWhereInput[]
   }
 
-  export type UserUpdateOneRequiredWithoutCataloguesNestedInput = {
-    create?: XOR<UserCreateWithoutCataloguesInput, UserUncheckedCreateWithoutCataloguesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutCataloguesInput
-    upsert?: UserUpsertWithoutCataloguesInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCataloguesInput, UserUpdateWithoutCataloguesInput>, UserUncheckedUpdateWithoutCataloguesInput>
-  }
-
   export type WebsiteUncheckedUpdateManyWithoutCatalogueNestedInput = {
     create?: XOR<WebsiteCreateWithoutCatalogueInput, WebsiteUncheckedCreateWithoutCatalogueInput> | WebsiteCreateWithoutCatalogueInput[] | WebsiteUncheckedCreateWithoutCatalogueInput[]
     connectOrCreate?: WebsiteCreateOrConnectWithoutCatalogueInput | WebsiteCreateOrConnectWithoutCatalogueInput[]
@@ -13582,24 +13685,16 @@ export namespace Prisma {
     deleteMany?: WebsiteScalarWhereInput | WebsiteScalarWhereInput[]
   }
 
-  export type UserCreateNestedOneWithoutWebsitesInput = {
-    create?: XOR<UserCreateWithoutWebsitesInput, UserUncheckedCreateWithoutWebsitesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutWebsitesInput
-    connect?: UserWhereUniqueInput
-  }
-
   export type CatalogueCreateNestedOneWithoutWebsitesInput = {
     create?: XOR<CatalogueCreateWithoutWebsitesInput, CatalogueUncheckedCreateWithoutWebsitesInput>
     connectOrCreate?: CatalogueCreateOrConnectWithoutWebsitesInput
     connect?: CatalogueWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutWebsitesNestedInput = {
+  export type UserCreateNestedOneWithoutWebsitesInput = {
     create?: XOR<UserCreateWithoutWebsitesInput, UserUncheckedCreateWithoutWebsitesInput>
     connectOrCreate?: UserCreateOrConnectWithoutWebsitesInput
-    upsert?: UserUpsertWithoutWebsitesInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutWebsitesInput, UserUpdateWithoutWebsitesInput>, UserUncheckedUpdateWithoutWebsitesInput>
   }
 
   export type CatalogueUpdateOneRequiredWithoutWebsitesNestedInput = {
@@ -13610,18 +13705,19 @@ export namespace Prisma {
     update?: XOR<XOR<CatalogueUpdateToOneWithWhereWithoutWebsitesInput, CatalogueUpdateWithoutWebsitesInput>, CatalogueUncheckedUpdateWithoutWebsitesInput>
   }
 
+  export type UserUpdateOneRequiredWithoutWebsitesNestedInput = {
+    create?: XOR<UserCreateWithoutWebsitesInput, UserUncheckedCreateWithoutWebsitesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutWebsitesInput
+    upsert?: UserUpsertWithoutWebsitesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutWebsitesInput, UserUpdateWithoutWebsitesInput>, UserUncheckedUpdateWithoutWebsitesInput>
+  }
+
   export type AccountCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
     createMany?: AccountCreateManyUserInputEnvelope
     connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-  }
-
-  export type SessionCreateNestedManyWithoutUserInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
-    createMany?: SessionCreateManyUserInputEnvelope
-    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
   }
 
   export type CatalogueCreateNestedManyWithoutUserInput = {
@@ -13631,18 +13727,25 @@ export namespace Prisma {
     connect?: CatalogueWhereUniqueInput | CatalogueWhereUniqueInput[]
   }
 
+  export type NewsRSSCreateNestedManyWithoutUserInput = {
+    create?: XOR<NewsRSSCreateWithoutUserInput, NewsRSSUncheckedCreateWithoutUserInput> | NewsRSSCreateWithoutUserInput[] | NewsRSSUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NewsRSSCreateOrConnectWithoutUserInput | NewsRSSCreateOrConnectWithoutUserInput[]
+    createMany?: NewsRSSCreateManyUserInputEnvelope
+    connect?: NewsRSSWhereUniqueInput | NewsRSSWhereUniqueInput[]
+  }
+
+  export type SessionCreateNestedManyWithoutUserInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+  }
+
   export type WebsiteCreateNestedManyWithoutUserInput = {
     create?: XOR<WebsiteCreateWithoutUserInput, WebsiteUncheckedCreateWithoutUserInput> | WebsiteCreateWithoutUserInput[] | WebsiteUncheckedCreateWithoutUserInput[]
     connectOrCreate?: WebsiteCreateOrConnectWithoutUserInput | WebsiteCreateOrConnectWithoutUserInput[]
     createMany?: WebsiteCreateManyUserInputEnvelope
     connect?: WebsiteWhereUniqueInput | WebsiteWhereUniqueInput[]
-  }
-
-  export type YtRSSCreateNestedManyWithoutUserInput = {
-    create?: XOR<YtRSSCreateWithoutUserInput, YtRSSUncheckedCreateWithoutUserInput> | YtRSSCreateWithoutUserInput[] | YtRSSUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: YtRSSCreateOrConnectWithoutUserInput | YtRSSCreateOrConnectWithoutUserInput[]
-    createMany?: YtRSSCreateManyUserInputEnvelope
-    connect?: YtRSSWhereUniqueInput | YtRSSWhereUniqueInput[]
   }
 
   export type WpRSSCreateNestedManyWithoutUserInput = {
@@ -13652,11 +13755,11 @@ export namespace Prisma {
     connect?: WpRSSWhereUniqueInput | WpRSSWhereUniqueInput[]
   }
 
-  export type NewsRSSCreateNestedManyWithoutUserInput = {
-    create?: XOR<NewsRSSCreateWithoutUserInput, NewsRSSUncheckedCreateWithoutUserInput> | NewsRSSCreateWithoutUserInput[] | NewsRSSUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NewsRSSCreateOrConnectWithoutUserInput | NewsRSSCreateOrConnectWithoutUserInput[]
-    createMany?: NewsRSSCreateManyUserInputEnvelope
-    connect?: NewsRSSWhereUniqueInput | NewsRSSWhereUniqueInput[]
+  export type YtRSSCreateNestedManyWithoutUserInput = {
+    create?: XOR<YtRSSCreateWithoutUserInput, YtRSSUncheckedCreateWithoutUserInput> | YtRSSCreateWithoutUserInput[] | YtRSSUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: YtRSSCreateOrConnectWithoutUserInput | YtRSSCreateOrConnectWithoutUserInput[]
+    createMany?: YtRSSCreateManyUserInputEnvelope
+    connect?: YtRSSWhereUniqueInput | YtRSSWhereUniqueInput[]
   }
 
   export type AccountUncheckedCreateNestedManyWithoutUserInput = {
@@ -13666,18 +13769,25 @@ export namespace Prisma {
     connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
   }
 
-  export type SessionUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
-    createMany?: SessionCreateManyUserInputEnvelope
-    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-  }
-
   export type CatalogueUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<CatalogueCreateWithoutUserInput, CatalogueUncheckedCreateWithoutUserInput> | CatalogueCreateWithoutUserInput[] | CatalogueUncheckedCreateWithoutUserInput[]
     connectOrCreate?: CatalogueCreateOrConnectWithoutUserInput | CatalogueCreateOrConnectWithoutUserInput[]
     createMany?: CatalogueCreateManyUserInputEnvelope
     connect?: CatalogueWhereUniqueInput | CatalogueWhereUniqueInput[]
+  }
+
+  export type NewsRSSUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<NewsRSSCreateWithoutUserInput, NewsRSSUncheckedCreateWithoutUserInput> | NewsRSSCreateWithoutUserInput[] | NewsRSSUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NewsRSSCreateOrConnectWithoutUserInput | NewsRSSCreateOrConnectWithoutUserInput[]
+    createMany?: NewsRSSCreateManyUserInputEnvelope
+    connect?: NewsRSSWhereUniqueInput | NewsRSSWhereUniqueInput[]
+  }
+
+  export type SessionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
   }
 
   export type WebsiteUncheckedCreateNestedManyWithoutUserInput = {
@@ -13687,13 +13797,6 @@ export namespace Prisma {
     connect?: WebsiteWhereUniqueInput | WebsiteWhereUniqueInput[]
   }
 
-  export type YtRSSUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<YtRSSCreateWithoutUserInput, YtRSSUncheckedCreateWithoutUserInput> | YtRSSCreateWithoutUserInput[] | YtRSSUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: YtRSSCreateOrConnectWithoutUserInput | YtRSSCreateOrConnectWithoutUserInput[]
-    createMany?: YtRSSCreateManyUserInputEnvelope
-    connect?: YtRSSWhereUniqueInput | YtRSSWhereUniqueInput[]
-  }
-
   export type WpRSSUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<WpRSSCreateWithoutUserInput, WpRSSUncheckedCreateWithoutUserInput> | WpRSSCreateWithoutUserInput[] | WpRSSUncheckedCreateWithoutUserInput[]
     connectOrCreate?: WpRSSCreateOrConnectWithoutUserInput | WpRSSCreateOrConnectWithoutUserInput[]
@@ -13701,11 +13804,11 @@ export namespace Prisma {
     connect?: WpRSSWhereUniqueInput | WpRSSWhereUniqueInput[]
   }
 
-  export type NewsRSSUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<NewsRSSCreateWithoutUserInput, NewsRSSUncheckedCreateWithoutUserInput> | NewsRSSCreateWithoutUserInput[] | NewsRSSUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NewsRSSCreateOrConnectWithoutUserInput | NewsRSSCreateOrConnectWithoutUserInput[]
-    createMany?: NewsRSSCreateManyUserInputEnvelope
-    connect?: NewsRSSWhereUniqueInput | NewsRSSWhereUniqueInput[]
+  export type YtRSSUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<YtRSSCreateWithoutUserInput, YtRSSUncheckedCreateWithoutUserInput> | YtRSSCreateWithoutUserInput[] | YtRSSUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: YtRSSCreateOrConnectWithoutUserInput | YtRSSCreateOrConnectWithoutUserInput[]
+    createMany?: YtRSSCreateManyUserInputEnvelope
+    connect?: YtRSSWhereUniqueInput | YtRSSWhereUniqueInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -13734,20 +13837,6 @@ export namespace Prisma {
     deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
   }
 
-  export type SessionUpdateManyWithoutUserNestedInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
-    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: SessionCreateManyUserInputEnvelope
-    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
-  }
-
   export type CatalogueUpdateManyWithoutUserNestedInput = {
     create?: XOR<CatalogueCreateWithoutUserInput, CatalogueUncheckedCreateWithoutUserInput> | CatalogueCreateWithoutUserInput[] | CatalogueUncheckedCreateWithoutUserInput[]
     connectOrCreate?: CatalogueCreateOrConnectWithoutUserInput | CatalogueCreateOrConnectWithoutUserInput[]
@@ -13760,48 +13849,6 @@ export namespace Prisma {
     update?: CatalogueUpdateWithWhereUniqueWithoutUserInput | CatalogueUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: CatalogueUpdateManyWithWhereWithoutUserInput | CatalogueUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: CatalogueScalarWhereInput | CatalogueScalarWhereInput[]
-  }
-
-  export type WebsiteUpdateManyWithoutUserNestedInput = {
-    create?: XOR<WebsiteCreateWithoutUserInput, WebsiteUncheckedCreateWithoutUserInput> | WebsiteCreateWithoutUserInput[] | WebsiteUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: WebsiteCreateOrConnectWithoutUserInput | WebsiteCreateOrConnectWithoutUserInput[]
-    upsert?: WebsiteUpsertWithWhereUniqueWithoutUserInput | WebsiteUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: WebsiteCreateManyUserInputEnvelope
-    set?: WebsiteWhereUniqueInput | WebsiteWhereUniqueInput[]
-    disconnect?: WebsiteWhereUniqueInput | WebsiteWhereUniqueInput[]
-    delete?: WebsiteWhereUniqueInput | WebsiteWhereUniqueInput[]
-    connect?: WebsiteWhereUniqueInput | WebsiteWhereUniqueInput[]
-    update?: WebsiteUpdateWithWhereUniqueWithoutUserInput | WebsiteUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: WebsiteUpdateManyWithWhereWithoutUserInput | WebsiteUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: WebsiteScalarWhereInput | WebsiteScalarWhereInput[]
-  }
-
-  export type YtRSSUpdateManyWithoutUserNestedInput = {
-    create?: XOR<YtRSSCreateWithoutUserInput, YtRSSUncheckedCreateWithoutUserInput> | YtRSSCreateWithoutUserInput[] | YtRSSUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: YtRSSCreateOrConnectWithoutUserInput | YtRSSCreateOrConnectWithoutUserInput[]
-    upsert?: YtRSSUpsertWithWhereUniqueWithoutUserInput | YtRSSUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: YtRSSCreateManyUserInputEnvelope
-    set?: YtRSSWhereUniqueInput | YtRSSWhereUniqueInput[]
-    disconnect?: YtRSSWhereUniqueInput | YtRSSWhereUniqueInput[]
-    delete?: YtRSSWhereUniqueInput | YtRSSWhereUniqueInput[]
-    connect?: YtRSSWhereUniqueInput | YtRSSWhereUniqueInput[]
-    update?: YtRSSUpdateWithWhereUniqueWithoutUserInput | YtRSSUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: YtRSSUpdateManyWithWhereWithoutUserInput | YtRSSUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: YtRSSScalarWhereInput | YtRSSScalarWhereInput[]
-  }
-
-  export type WpRSSUpdateManyWithoutUserNestedInput = {
-    create?: XOR<WpRSSCreateWithoutUserInput, WpRSSUncheckedCreateWithoutUserInput> | WpRSSCreateWithoutUserInput[] | WpRSSUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: WpRSSCreateOrConnectWithoutUserInput | WpRSSCreateOrConnectWithoutUserInput[]
-    upsert?: WpRSSUpsertWithWhereUniqueWithoutUserInput | WpRSSUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: WpRSSCreateManyUserInputEnvelope
-    set?: WpRSSWhereUniqueInput | WpRSSWhereUniqueInput[]
-    disconnect?: WpRSSWhereUniqueInput | WpRSSWhereUniqueInput[]
-    delete?: WpRSSWhereUniqueInput | WpRSSWhereUniqueInput[]
-    connect?: WpRSSWhereUniqueInput | WpRSSWhereUniqueInput[]
-    update?: WpRSSUpdateWithWhereUniqueWithoutUserInput | WpRSSUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: WpRSSUpdateManyWithWhereWithoutUserInput | WpRSSUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: WpRSSScalarWhereInput | WpRSSScalarWhereInput[]
   }
 
   export type NewsRSSUpdateManyWithoutUserNestedInput = {
@@ -13818,6 +13865,62 @@ export namespace Prisma {
     deleteMany?: NewsRSSScalarWhereInput | NewsRSSScalarWhereInput[]
   }
 
+  export type SessionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
+  }
+
+  export type WebsiteUpdateManyWithoutUserNestedInput = {
+    create?: XOR<WebsiteCreateWithoutUserInput, WebsiteUncheckedCreateWithoutUserInput> | WebsiteCreateWithoutUserInput[] | WebsiteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: WebsiteCreateOrConnectWithoutUserInput | WebsiteCreateOrConnectWithoutUserInput[]
+    upsert?: WebsiteUpsertWithWhereUniqueWithoutUserInput | WebsiteUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: WebsiteCreateManyUserInputEnvelope
+    set?: WebsiteWhereUniqueInput | WebsiteWhereUniqueInput[]
+    disconnect?: WebsiteWhereUniqueInput | WebsiteWhereUniqueInput[]
+    delete?: WebsiteWhereUniqueInput | WebsiteWhereUniqueInput[]
+    connect?: WebsiteWhereUniqueInput | WebsiteWhereUniqueInput[]
+    update?: WebsiteUpdateWithWhereUniqueWithoutUserInput | WebsiteUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: WebsiteUpdateManyWithWhereWithoutUserInput | WebsiteUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: WebsiteScalarWhereInput | WebsiteScalarWhereInput[]
+  }
+
+  export type WpRSSUpdateManyWithoutUserNestedInput = {
+    create?: XOR<WpRSSCreateWithoutUserInput, WpRSSUncheckedCreateWithoutUserInput> | WpRSSCreateWithoutUserInput[] | WpRSSUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: WpRSSCreateOrConnectWithoutUserInput | WpRSSCreateOrConnectWithoutUserInput[]
+    upsert?: WpRSSUpsertWithWhereUniqueWithoutUserInput | WpRSSUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: WpRSSCreateManyUserInputEnvelope
+    set?: WpRSSWhereUniqueInput | WpRSSWhereUniqueInput[]
+    disconnect?: WpRSSWhereUniqueInput | WpRSSWhereUniqueInput[]
+    delete?: WpRSSWhereUniqueInput | WpRSSWhereUniqueInput[]
+    connect?: WpRSSWhereUniqueInput | WpRSSWhereUniqueInput[]
+    update?: WpRSSUpdateWithWhereUniqueWithoutUserInput | WpRSSUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: WpRSSUpdateManyWithWhereWithoutUserInput | WpRSSUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: WpRSSScalarWhereInput | WpRSSScalarWhereInput[]
+  }
+
+  export type YtRSSUpdateManyWithoutUserNestedInput = {
+    create?: XOR<YtRSSCreateWithoutUserInput, YtRSSUncheckedCreateWithoutUserInput> | YtRSSCreateWithoutUserInput[] | YtRSSUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: YtRSSCreateOrConnectWithoutUserInput | YtRSSCreateOrConnectWithoutUserInput[]
+    upsert?: YtRSSUpsertWithWhereUniqueWithoutUserInput | YtRSSUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: YtRSSCreateManyUserInputEnvelope
+    set?: YtRSSWhereUniqueInput | YtRSSWhereUniqueInput[]
+    disconnect?: YtRSSWhereUniqueInput | YtRSSWhereUniqueInput[]
+    delete?: YtRSSWhereUniqueInput | YtRSSWhereUniqueInput[]
+    connect?: YtRSSWhereUniqueInput | YtRSSWhereUniqueInput[]
+    update?: YtRSSUpdateWithWhereUniqueWithoutUserInput | YtRSSUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: YtRSSUpdateManyWithWhereWithoutUserInput | YtRSSUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: YtRSSScalarWhereInput | YtRSSScalarWhereInput[]
+  }
+
   export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -13830,20 +13933,6 @@ export namespace Prisma {
     update?: AccountUpdateWithWhereUniqueWithoutUserInput | AccountUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: AccountUpdateManyWithWhereWithoutUserInput | AccountUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
-  }
-
-  export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
-    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: SessionCreateManyUserInputEnvelope
-    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
   }
 
   export type CatalogueUncheckedUpdateManyWithoutUserNestedInput = {
@@ -13860,6 +13949,34 @@ export namespace Prisma {
     deleteMany?: CatalogueScalarWhereInput | CatalogueScalarWhereInput[]
   }
 
+  export type NewsRSSUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<NewsRSSCreateWithoutUserInput, NewsRSSUncheckedCreateWithoutUserInput> | NewsRSSCreateWithoutUserInput[] | NewsRSSUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NewsRSSCreateOrConnectWithoutUserInput | NewsRSSCreateOrConnectWithoutUserInput[]
+    upsert?: NewsRSSUpsertWithWhereUniqueWithoutUserInput | NewsRSSUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: NewsRSSCreateManyUserInputEnvelope
+    set?: NewsRSSWhereUniqueInput | NewsRSSWhereUniqueInput[]
+    disconnect?: NewsRSSWhereUniqueInput | NewsRSSWhereUniqueInput[]
+    delete?: NewsRSSWhereUniqueInput | NewsRSSWhereUniqueInput[]
+    connect?: NewsRSSWhereUniqueInput | NewsRSSWhereUniqueInput[]
+    update?: NewsRSSUpdateWithWhereUniqueWithoutUserInput | NewsRSSUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: NewsRSSUpdateManyWithWhereWithoutUserInput | NewsRSSUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: NewsRSSScalarWhereInput | NewsRSSScalarWhereInput[]
+  }
+
+  export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
+  }
+
   export type WebsiteUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<WebsiteCreateWithoutUserInput, WebsiteUncheckedCreateWithoutUserInput> | WebsiteCreateWithoutUserInput[] | WebsiteUncheckedCreateWithoutUserInput[]
     connectOrCreate?: WebsiteCreateOrConnectWithoutUserInput | WebsiteCreateOrConnectWithoutUserInput[]
@@ -13872,20 +13989,6 @@ export namespace Prisma {
     update?: WebsiteUpdateWithWhereUniqueWithoutUserInput | WebsiteUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: WebsiteUpdateManyWithWhereWithoutUserInput | WebsiteUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: WebsiteScalarWhereInput | WebsiteScalarWhereInput[]
-  }
-
-  export type YtRSSUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<YtRSSCreateWithoutUserInput, YtRSSUncheckedCreateWithoutUserInput> | YtRSSCreateWithoutUserInput[] | YtRSSUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: YtRSSCreateOrConnectWithoutUserInput | YtRSSCreateOrConnectWithoutUserInput[]
-    upsert?: YtRSSUpsertWithWhereUniqueWithoutUserInput | YtRSSUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: YtRSSCreateManyUserInputEnvelope
-    set?: YtRSSWhereUniqueInput | YtRSSWhereUniqueInput[]
-    disconnect?: YtRSSWhereUniqueInput | YtRSSWhereUniqueInput[]
-    delete?: YtRSSWhereUniqueInput | YtRSSWhereUniqueInput[]
-    connect?: YtRSSWhereUniqueInput | YtRSSWhereUniqueInput[]
-    update?: YtRSSUpdateWithWhereUniqueWithoutUserInput | YtRSSUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: YtRSSUpdateManyWithWhereWithoutUserInput | YtRSSUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: YtRSSScalarWhereInput | YtRSSScalarWhereInput[]
   }
 
   export type WpRSSUncheckedUpdateManyWithoutUserNestedInput = {
@@ -13902,18 +14005,18 @@ export namespace Prisma {
     deleteMany?: WpRSSScalarWhereInput | WpRSSScalarWhereInput[]
   }
 
-  export type NewsRSSUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<NewsRSSCreateWithoutUserInput, NewsRSSUncheckedCreateWithoutUserInput> | NewsRSSCreateWithoutUserInput[] | NewsRSSUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NewsRSSCreateOrConnectWithoutUserInput | NewsRSSCreateOrConnectWithoutUserInput[]
-    upsert?: NewsRSSUpsertWithWhereUniqueWithoutUserInput | NewsRSSUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: NewsRSSCreateManyUserInputEnvelope
-    set?: NewsRSSWhereUniqueInput | NewsRSSWhereUniqueInput[]
-    disconnect?: NewsRSSWhereUniqueInput | NewsRSSWhereUniqueInput[]
-    delete?: NewsRSSWhereUniqueInput | NewsRSSWhereUniqueInput[]
-    connect?: NewsRSSWhereUniqueInput | NewsRSSWhereUniqueInput[]
-    update?: NewsRSSUpdateWithWhereUniqueWithoutUserInput | NewsRSSUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: NewsRSSUpdateManyWithWhereWithoutUserInput | NewsRSSUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: NewsRSSScalarWhereInput | NewsRSSScalarWhereInput[]
+  export type YtRSSUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<YtRSSCreateWithoutUserInput, YtRSSUncheckedCreateWithoutUserInput> | YtRSSCreateWithoutUserInput[] | YtRSSUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: YtRSSCreateOrConnectWithoutUserInput | YtRSSCreateOrConnectWithoutUserInput[]
+    upsert?: YtRSSUpsertWithWhereUniqueWithoutUserInput | YtRSSUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: YtRSSCreateManyUserInputEnvelope
+    set?: YtRSSWhereUniqueInput | YtRSSWhereUniqueInput[]
+    disconnect?: YtRSSWhereUniqueInput | YtRSSWhereUniqueInput[]
+    delete?: YtRSSWhereUniqueInput | YtRSSWhereUniqueInput[]
+    connect?: YtRSSWhereUniqueInput | YtRSSWhereUniqueInput[]
+    update?: YtRSSUpdateWithWhereUniqueWithoutUserInput | YtRSSUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: YtRSSUpdateManyWithWhereWithoutUserInput | YtRSSUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: YtRSSScalarWhereInput | YtRSSScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutAccountsInput = {
@@ -14098,6 +14201,29 @@ export namespace Prisma {
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
+  export type NestedJsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
@@ -14146,14 +14272,15 @@ export namespace Prisma {
     email: string
     emailVerified?: Date | string | null
     image?: string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
     catalogues?: CatalogueCreateNestedManyWithoutUserInput
+    news?: NewsRSSCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
     websites?: WebsiteCreateNestedManyWithoutUserInput
     wp?: WpRSSCreateNestedManyWithoutUserInput
-    news?: NewsRSSCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutYtInput = {
@@ -14162,14 +14289,15 @@ export namespace Prisma {
     email: string
     emailVerified?: Date | string | null
     image?: string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     catalogues?: CatalogueUncheckedCreateNestedManyWithoutUserInput
+    news?: NewsRSSUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     websites?: WebsiteUncheckedCreateNestedManyWithoutUserInput
     wp?: WpRSSUncheckedCreateNestedManyWithoutUserInput
-    news?: NewsRSSUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutYtInput = {
@@ -14194,14 +14322,15 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
     catalogues?: CatalogueUpdateManyWithoutUserNestedInput
+    news?: NewsRSSUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
     websites?: WebsiteUpdateManyWithoutUserNestedInput
     wp?: WpRSSUpdateManyWithoutUserNestedInput
-    news?: NewsRSSUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutYtInput = {
@@ -14210,14 +14339,15 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     catalogues?: CatalogueUncheckedUpdateManyWithoutUserNestedInput
+    news?: NewsRSSUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     websites?: WebsiteUncheckedUpdateManyWithoutUserNestedInput
     wp?: WpRSSUncheckedUpdateManyWithoutUserNestedInput
-    news?: NewsRSSUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutNewsInput = {
@@ -14226,14 +14356,15 @@ export namespace Prisma {
     email: string
     emailVerified?: Date | string | null
     image?: string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
     catalogues?: CatalogueCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
     websites?: WebsiteCreateNestedManyWithoutUserInput
-    yt?: YtRSSCreateNestedManyWithoutUserInput
     wp?: WpRSSCreateNestedManyWithoutUserInput
+    yt?: YtRSSCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNewsInput = {
@@ -14242,14 +14373,15 @@ export namespace Prisma {
     email: string
     emailVerified?: Date | string | null
     image?: string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     catalogues?: CatalogueUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     websites?: WebsiteUncheckedCreateNestedManyWithoutUserInput
-    yt?: YtRSSUncheckedCreateNestedManyWithoutUserInput
     wp?: WpRSSUncheckedCreateNestedManyWithoutUserInput
+    yt?: YtRSSUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNewsInput = {
@@ -14274,14 +14406,15 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
     catalogues?: CatalogueUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
     websites?: WebsiteUpdateManyWithoutUserNestedInput
-    yt?: YtRSSUpdateManyWithoutUserNestedInput
     wp?: WpRSSUpdateManyWithoutUserNestedInput
+    yt?: YtRSSUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNewsInput = {
@@ -14290,14 +14423,15 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     catalogues?: CatalogueUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     websites?: WebsiteUncheckedUpdateManyWithoutUserNestedInput
-    yt?: YtRSSUncheckedUpdateManyWithoutUserNestedInput
     wp?: WpRSSUncheckedUpdateManyWithoutUserNestedInput
+    yt?: YtRSSUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutWpInput = {
@@ -14306,14 +14440,15 @@ export namespace Prisma {
     email: string
     emailVerified?: Date | string | null
     image?: string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
     catalogues?: CatalogueCreateNestedManyWithoutUserInput
+    news?: NewsRSSCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
     websites?: WebsiteCreateNestedManyWithoutUserInput
     yt?: YtRSSCreateNestedManyWithoutUserInput
-    news?: NewsRSSCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutWpInput = {
@@ -14322,14 +14457,15 @@ export namespace Prisma {
     email: string
     emailVerified?: Date | string | null
     image?: string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     catalogues?: CatalogueUncheckedCreateNestedManyWithoutUserInput
+    news?: NewsRSSUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     websites?: WebsiteUncheckedCreateNestedManyWithoutUserInput
     yt?: YtRSSUncheckedCreateNestedManyWithoutUserInput
-    news?: NewsRSSUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutWpInput = {
@@ -14354,14 +14490,15 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
     catalogues?: CatalogueUpdateManyWithoutUserNestedInput
+    news?: NewsRSSUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
     websites?: WebsiteUpdateManyWithoutUserNestedInput
     yt?: YtRSSUpdateManyWithoutUserNestedInput
-    news?: NewsRSSUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutWpInput = {
@@ -14370,14 +14507,54 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     catalogues?: CatalogueUncheckedUpdateManyWithoutUserNestedInput
+    news?: NewsRSSUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     websites?: WebsiteUncheckedUpdateManyWithoutUserNestedInput
     yt?: YtRSSUncheckedUpdateManyWithoutUserNestedInput
-    news?: NewsRSSUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutCataloguesInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    news?: NewsRSSCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    websites?: WebsiteCreateNestedManyWithoutUserInput
+    wp?: WpRSSCreateNestedManyWithoutUserInput
+    yt?: YtRSSCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutCataloguesInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    news?: NewsRSSUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    websites?: WebsiteUncheckedCreateNestedManyWithoutUserInput
+    wp?: WpRSSUncheckedCreateNestedManyWithoutUserInput
+    yt?: YtRSSUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCataloguesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCataloguesInput, UserUncheckedCreateWithoutCataloguesInput>
   }
 
   export type WebsiteCreateWithoutCatalogueInput = {
@@ -14389,10 +14566,10 @@ export namespace Prisma {
 
   export type WebsiteUncheckedCreateWithoutCatalogueInput = {
     id?: number
-    userId: string
     name: string
     url: string
     favicon: string
+    userId: string
   }
 
   export type WebsiteCreateOrConnectWithoutCatalogueInput = {
@@ -14405,41 +14582,49 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type UserCreateWithoutCataloguesInput = {
-    id?: string
-    name?: string | null
-    email: string
-    emailVerified?: Date | string | null
-    image?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    websites?: WebsiteCreateNestedManyWithoutUserInput
-    yt?: YtRSSCreateNestedManyWithoutUserInput
-    wp?: WpRSSCreateNestedManyWithoutUserInput
-    news?: NewsRSSCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutCataloguesInput = {
-    id?: string
-    name?: string | null
-    email: string
-    emailVerified?: Date | string | null
-    image?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    websites?: WebsiteUncheckedCreateNestedManyWithoutUserInput
-    yt?: YtRSSUncheckedCreateNestedManyWithoutUserInput
-    wp?: WpRSSUncheckedCreateNestedManyWithoutUserInput
-    news?: NewsRSSUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutCataloguesInput = {
-    where: UserWhereUniqueInput
+  export type UserUpsertWithoutCataloguesInput = {
+    update: XOR<UserUpdateWithoutCataloguesInput, UserUncheckedUpdateWithoutCataloguesInput>
     create: XOR<UserCreateWithoutCataloguesInput, UserUncheckedCreateWithoutCataloguesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCataloguesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCataloguesInput, UserUncheckedUpdateWithoutCataloguesInput>
+  }
+
+  export type UserUpdateWithoutCataloguesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    news?: NewsRSSUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    websites?: WebsiteUpdateManyWithoutUserNestedInput
+    wp?: WpRSSUpdateManyWithoutUserNestedInput
+    yt?: YtRSSUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCataloguesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    news?: NewsRSSUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    websites?: WebsiteUncheckedUpdateManyWithoutUserNestedInput
+    wp?: WpRSSUncheckedUpdateManyWithoutUserNestedInput
+    yt?: YtRSSUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type WebsiteUpsertWithWhereUniqueWithoutCatalogueInput = {
@@ -14463,91 +14648,11 @@ export namespace Prisma {
     OR?: WebsiteScalarWhereInput[]
     NOT?: WebsiteScalarWhereInput | WebsiteScalarWhereInput[]
     id?: IntFilter<"Website"> | number
-    userId?: StringFilter<"Website"> | string
     catalogueId?: IntFilter<"Website"> | number
     name?: StringFilter<"Website"> | string
     url?: StringFilter<"Website"> | string
     favicon?: StringFilter<"Website"> | string
-  }
-
-  export type UserUpsertWithoutCataloguesInput = {
-    update: XOR<UserUpdateWithoutCataloguesInput, UserUncheckedUpdateWithoutCataloguesInput>
-    create: XOR<UserCreateWithoutCataloguesInput, UserUncheckedCreateWithoutCataloguesInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutCataloguesInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutCataloguesInput, UserUncheckedUpdateWithoutCataloguesInput>
-  }
-
-  export type UserUpdateWithoutCataloguesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: StringFieldUpdateOperationsInput | string
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    websites?: WebsiteUpdateManyWithoutUserNestedInput
-    yt?: YtRSSUpdateManyWithoutUserNestedInput
-    wp?: WpRSSUpdateManyWithoutUserNestedInput
-    news?: NewsRSSUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutCataloguesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: StringFieldUpdateOperationsInput | string
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    websites?: WebsiteUncheckedUpdateManyWithoutUserNestedInput
-    yt?: YtRSSUncheckedUpdateManyWithoutUserNestedInput
-    wp?: WpRSSUncheckedUpdateManyWithoutUserNestedInput
-    news?: NewsRSSUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserCreateWithoutWebsitesInput = {
-    id?: string
-    name?: string | null
-    email: string
-    emailVerified?: Date | string | null
-    image?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    catalogues?: CatalogueCreateNestedManyWithoutUserInput
-    yt?: YtRSSCreateNestedManyWithoutUserInput
-    wp?: WpRSSCreateNestedManyWithoutUserInput
-    news?: NewsRSSCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutWebsitesInput = {
-    id?: string
-    name?: string | null
-    email: string
-    emailVerified?: Date | string | null
-    image?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    catalogues?: CatalogueUncheckedCreateNestedManyWithoutUserInput
-    yt?: YtRSSUncheckedCreateNestedManyWithoutUserInput
-    wp?: WpRSSUncheckedCreateNestedManyWithoutUserInput
-    news?: NewsRSSUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutWebsitesInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutWebsitesInput, UserUncheckedCreateWithoutWebsitesInput>
+    userId?: StringFilter<"Website"> | string
   }
 
   export type CatalogueCreateWithoutWebsitesInput = {
@@ -14566,47 +14671,43 @@ export namespace Prisma {
     create: XOR<CatalogueCreateWithoutWebsitesInput, CatalogueUncheckedCreateWithoutWebsitesInput>
   }
 
-  export type UserUpsertWithoutWebsitesInput = {
-    update: XOR<UserUpdateWithoutWebsitesInput, UserUncheckedUpdateWithoutWebsitesInput>
+  export type UserCreateWithoutWebsitesInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    catalogues?: CatalogueCreateNestedManyWithoutUserInput
+    news?: NewsRSSCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    wp?: WpRSSCreateNestedManyWithoutUserInput
+    yt?: YtRSSCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutWebsitesInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    catalogues?: CatalogueUncheckedCreateNestedManyWithoutUserInput
+    news?: NewsRSSUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    wp?: WpRSSUncheckedCreateNestedManyWithoutUserInput
+    yt?: YtRSSUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutWebsitesInput = {
+    where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutWebsitesInput, UserUncheckedCreateWithoutWebsitesInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutWebsitesInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutWebsitesInput, UserUncheckedUpdateWithoutWebsitesInput>
-  }
-
-  export type UserUpdateWithoutWebsitesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: StringFieldUpdateOperationsInput | string
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    catalogues?: CatalogueUpdateManyWithoutUserNestedInput
-    yt?: YtRSSUpdateManyWithoutUserNestedInput
-    wp?: WpRSSUpdateManyWithoutUserNestedInput
-    news?: NewsRSSUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutWebsitesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: StringFieldUpdateOperationsInput | string
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    catalogues?: CatalogueUncheckedUpdateManyWithoutUserNestedInput
-    yt?: YtRSSUncheckedUpdateManyWithoutUserNestedInput
-    wp?: WpRSSUncheckedUpdateManyWithoutUserNestedInput
-    news?: NewsRSSUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CatalogueUpsertWithoutWebsitesInput = {
@@ -14629,6 +14730,51 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UserUpsertWithoutWebsitesInput = {
+    update: XOR<UserUpdateWithoutWebsitesInput, UserUncheckedUpdateWithoutWebsitesInput>
+    create: XOR<UserCreateWithoutWebsitesInput, UserUncheckedCreateWithoutWebsitesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutWebsitesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutWebsitesInput, UserUncheckedUpdateWithoutWebsitesInput>
+  }
+
+  export type UserUpdateWithoutWebsitesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    catalogues?: CatalogueUpdateManyWithoutUserNestedInput
+    news?: NewsRSSUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    wp?: WpRSSUpdateManyWithoutUserNestedInput
+    yt?: YtRSSUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutWebsitesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    catalogues?: CatalogueUncheckedUpdateManyWithoutUserNestedInput
+    news?: NewsRSSUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    wp?: WpRSSUncheckedUpdateManyWithoutUserNestedInput
+    yt?: YtRSSUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AccountCreateWithoutUserInput = {
@@ -14671,6 +14817,46 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type CatalogueCreateWithoutUserInput = {
+    name: string
+    websites?: WebsiteCreateNestedManyWithoutCatalogueInput
+  }
+
+  export type CatalogueUncheckedCreateWithoutUserInput = {
+    id?: number
+    name: string
+    websites?: WebsiteUncheckedCreateNestedManyWithoutCatalogueInput
+  }
+
+  export type CatalogueCreateOrConnectWithoutUserInput = {
+    where: CatalogueWhereUniqueInput
+    create: XOR<CatalogueCreateWithoutUserInput, CatalogueUncheckedCreateWithoutUserInput>
+  }
+
+  export type CatalogueCreateManyUserInputEnvelope = {
+    data: CatalogueCreateManyUserInput | CatalogueCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type NewsRSSCreateWithoutUserInput = {
+    url: string
+  }
+
+  export type NewsRSSUncheckedCreateWithoutUserInput = {
+    id?: number
+    url: string
+  }
+
+  export type NewsRSSCreateOrConnectWithoutUserInput = {
+    where: NewsRSSWhereUniqueInput
+    create: XOR<NewsRSSCreateWithoutUserInput, NewsRSSUncheckedCreateWithoutUserInput>
+  }
+
+  export type NewsRSSCreateManyUserInputEnvelope = {
+    data: NewsRSSCreateManyUserInput | NewsRSSCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type SessionCreateWithoutUserInput = {
     sessionToken: string
     expires: Date | string
@@ -14692,27 +14878,6 @@ export namespace Prisma {
 
   export type SessionCreateManyUserInputEnvelope = {
     data: SessionCreateManyUserInput | SessionCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type CatalogueCreateWithoutUserInput = {
-    name: string
-    websites?: WebsiteCreateNestedManyWithoutCatalogueInput
-  }
-
-  export type CatalogueUncheckedCreateWithoutUserInput = {
-    id?: number
-    name: string
-    websites?: WebsiteUncheckedCreateNestedManyWithoutCatalogueInput
-  }
-
-  export type CatalogueCreateOrConnectWithoutUserInput = {
-    where: CatalogueWhereUniqueInput
-    create: XOR<CatalogueCreateWithoutUserInput, CatalogueUncheckedCreateWithoutUserInput>
-  }
-
-  export type CatalogueCreateManyUserInputEnvelope = {
-    data: CatalogueCreateManyUserInput | CatalogueCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -14741,25 +14906,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type YtRSSCreateWithoutUserInput = {
-    channelId: string
-  }
-
-  export type YtRSSUncheckedCreateWithoutUserInput = {
-    id?: number
-    channelId: string
-  }
-
-  export type YtRSSCreateOrConnectWithoutUserInput = {
-    where: YtRSSWhereUniqueInput
-    create: XOR<YtRSSCreateWithoutUserInput, YtRSSUncheckedCreateWithoutUserInput>
-  }
-
-  export type YtRSSCreateManyUserInputEnvelope = {
-    data: YtRSSCreateManyUserInput | YtRSSCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
   export type WpRSSCreateWithoutUserInput = {
     url: string
     image: number
@@ -14781,22 +14927,22 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type NewsRSSCreateWithoutUserInput = {
-    url: string
+  export type YtRSSCreateWithoutUserInput = {
+    channelId: string
   }
 
-  export type NewsRSSUncheckedCreateWithoutUserInput = {
+  export type YtRSSUncheckedCreateWithoutUserInput = {
     id?: number
-    url: string
+    channelId: string
   }
 
-  export type NewsRSSCreateOrConnectWithoutUserInput = {
-    where: NewsRSSWhereUniqueInput
-    create: XOR<NewsRSSCreateWithoutUserInput, NewsRSSUncheckedCreateWithoutUserInput>
+  export type YtRSSCreateOrConnectWithoutUserInput = {
+    where: YtRSSWhereUniqueInput
+    create: XOR<YtRSSCreateWithoutUserInput, YtRSSUncheckedCreateWithoutUserInput>
   }
 
-  export type NewsRSSCreateManyUserInputEnvelope = {
-    data: NewsRSSCreateManyUserInput | NewsRSSCreateManyUserInput[]
+  export type YtRSSCreateManyUserInputEnvelope = {
+    data: YtRSSCreateManyUserInput | YtRSSCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -14835,33 +14981,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Account"> | Date | string
   }
 
-  export type SessionUpsertWithWhereUniqueWithoutUserInput = {
-    where: SessionWhereUniqueInput
-    update: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
-    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
-  }
-
-  export type SessionUpdateWithWhereUniqueWithoutUserInput = {
-    where: SessionWhereUniqueInput
-    data: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
-  }
-
-  export type SessionUpdateManyWithWhereWithoutUserInput = {
-    where: SessionScalarWhereInput
-    data: XOR<SessionUpdateManyMutationInput, SessionUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type SessionScalarWhereInput = {
-    AND?: SessionScalarWhereInput | SessionScalarWhereInput[]
-    OR?: SessionScalarWhereInput[]
-    NOT?: SessionScalarWhereInput | SessionScalarWhereInput[]
-    sessionToken?: StringFilter<"Session"> | string
-    userId?: StringFilter<"Session"> | string
-    expires?: DateTimeFilter<"Session"> | Date | string
-    createdAt?: DateTimeFilter<"Session"> | Date | string
-    updatedAt?: DateTimeFilter<"Session"> | Date | string
-  }
-
   export type CatalogueUpsertWithWhereUniqueWithoutUserInput = {
     where: CatalogueWhereUniqueInput
     update: XOR<CatalogueUpdateWithoutUserInput, CatalogueUncheckedUpdateWithoutUserInput>
@@ -14885,73 +15004,6 @@ export namespace Prisma {
     id?: IntFilter<"Catalogue"> | number
     name?: StringFilter<"Catalogue"> | string
     userId?: StringFilter<"Catalogue"> | string
-  }
-
-  export type WebsiteUpsertWithWhereUniqueWithoutUserInput = {
-    where: WebsiteWhereUniqueInput
-    update: XOR<WebsiteUpdateWithoutUserInput, WebsiteUncheckedUpdateWithoutUserInput>
-    create: XOR<WebsiteCreateWithoutUserInput, WebsiteUncheckedCreateWithoutUserInput>
-  }
-
-  export type WebsiteUpdateWithWhereUniqueWithoutUserInput = {
-    where: WebsiteWhereUniqueInput
-    data: XOR<WebsiteUpdateWithoutUserInput, WebsiteUncheckedUpdateWithoutUserInput>
-  }
-
-  export type WebsiteUpdateManyWithWhereWithoutUserInput = {
-    where: WebsiteScalarWhereInput
-    data: XOR<WebsiteUpdateManyMutationInput, WebsiteUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type YtRSSUpsertWithWhereUniqueWithoutUserInput = {
-    where: YtRSSWhereUniqueInput
-    update: XOR<YtRSSUpdateWithoutUserInput, YtRSSUncheckedUpdateWithoutUserInput>
-    create: XOR<YtRSSCreateWithoutUserInput, YtRSSUncheckedCreateWithoutUserInput>
-  }
-
-  export type YtRSSUpdateWithWhereUniqueWithoutUserInput = {
-    where: YtRSSWhereUniqueInput
-    data: XOR<YtRSSUpdateWithoutUserInput, YtRSSUncheckedUpdateWithoutUserInput>
-  }
-
-  export type YtRSSUpdateManyWithWhereWithoutUserInput = {
-    where: YtRSSScalarWhereInput
-    data: XOR<YtRSSUpdateManyMutationInput, YtRSSUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type YtRSSScalarWhereInput = {
-    AND?: YtRSSScalarWhereInput | YtRSSScalarWhereInput[]
-    OR?: YtRSSScalarWhereInput[]
-    NOT?: YtRSSScalarWhereInput | YtRSSScalarWhereInput[]
-    id?: IntFilter<"YtRSS"> | number
-    channelId?: StringFilter<"YtRSS"> | string
-    userId?: StringFilter<"YtRSS"> | string
-  }
-
-  export type WpRSSUpsertWithWhereUniqueWithoutUserInput = {
-    where: WpRSSWhereUniqueInput
-    update: XOR<WpRSSUpdateWithoutUserInput, WpRSSUncheckedUpdateWithoutUserInput>
-    create: XOR<WpRSSCreateWithoutUserInput, WpRSSUncheckedCreateWithoutUserInput>
-  }
-
-  export type WpRSSUpdateWithWhereUniqueWithoutUserInput = {
-    where: WpRSSWhereUniqueInput
-    data: XOR<WpRSSUpdateWithoutUserInput, WpRSSUncheckedUpdateWithoutUserInput>
-  }
-
-  export type WpRSSUpdateManyWithWhereWithoutUserInput = {
-    where: WpRSSScalarWhereInput
-    data: XOR<WpRSSUpdateManyMutationInput, WpRSSUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type WpRSSScalarWhereInput = {
-    AND?: WpRSSScalarWhereInput | WpRSSScalarWhereInput[]
-    OR?: WpRSSScalarWhereInput[]
-    NOT?: WpRSSScalarWhereInput | WpRSSScalarWhereInput[]
-    id?: IntFilter<"WpRSS"> | number
-    url?: StringFilter<"WpRSS"> | string
-    image?: IntFilter<"WpRSS"> | number
-    userId?: StringFilter<"WpRSS"> | string
   }
 
   export type NewsRSSUpsertWithWhereUniqueWithoutUserInput = {
@@ -14979,20 +15031,115 @@ export namespace Prisma {
     userId?: StringFilter<"NewsRSS"> | string
   }
 
+  export type SessionUpsertWithWhereUniqueWithoutUserInput = {
+    where: SessionWhereUniqueInput
+    update: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
+    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
+  }
+
+  export type SessionUpdateWithWhereUniqueWithoutUserInput = {
+    where: SessionWhereUniqueInput
+    data: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type SessionUpdateManyWithWhereWithoutUserInput = {
+    where: SessionScalarWhereInput
+    data: XOR<SessionUpdateManyMutationInput, SessionUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type SessionScalarWhereInput = {
+    AND?: SessionScalarWhereInput | SessionScalarWhereInput[]
+    OR?: SessionScalarWhereInput[]
+    NOT?: SessionScalarWhereInput | SessionScalarWhereInput[]
+    sessionToken?: StringFilter<"Session"> | string
+    userId?: StringFilter<"Session"> | string
+    expires?: DateTimeFilter<"Session"> | Date | string
+    createdAt?: DateTimeFilter<"Session"> | Date | string
+    updatedAt?: DateTimeFilter<"Session"> | Date | string
+  }
+
+  export type WebsiteUpsertWithWhereUniqueWithoutUserInput = {
+    where: WebsiteWhereUniqueInput
+    update: XOR<WebsiteUpdateWithoutUserInput, WebsiteUncheckedUpdateWithoutUserInput>
+    create: XOR<WebsiteCreateWithoutUserInput, WebsiteUncheckedCreateWithoutUserInput>
+  }
+
+  export type WebsiteUpdateWithWhereUniqueWithoutUserInput = {
+    where: WebsiteWhereUniqueInput
+    data: XOR<WebsiteUpdateWithoutUserInput, WebsiteUncheckedUpdateWithoutUserInput>
+  }
+
+  export type WebsiteUpdateManyWithWhereWithoutUserInput = {
+    where: WebsiteScalarWhereInput
+    data: XOR<WebsiteUpdateManyMutationInput, WebsiteUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type WpRSSUpsertWithWhereUniqueWithoutUserInput = {
+    where: WpRSSWhereUniqueInput
+    update: XOR<WpRSSUpdateWithoutUserInput, WpRSSUncheckedUpdateWithoutUserInput>
+    create: XOR<WpRSSCreateWithoutUserInput, WpRSSUncheckedCreateWithoutUserInput>
+  }
+
+  export type WpRSSUpdateWithWhereUniqueWithoutUserInput = {
+    where: WpRSSWhereUniqueInput
+    data: XOR<WpRSSUpdateWithoutUserInput, WpRSSUncheckedUpdateWithoutUserInput>
+  }
+
+  export type WpRSSUpdateManyWithWhereWithoutUserInput = {
+    where: WpRSSScalarWhereInput
+    data: XOR<WpRSSUpdateManyMutationInput, WpRSSUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type WpRSSScalarWhereInput = {
+    AND?: WpRSSScalarWhereInput | WpRSSScalarWhereInput[]
+    OR?: WpRSSScalarWhereInput[]
+    NOT?: WpRSSScalarWhereInput | WpRSSScalarWhereInput[]
+    id?: IntFilter<"WpRSS"> | number
+    url?: StringFilter<"WpRSS"> | string
+    userId?: StringFilter<"WpRSS"> | string
+    image?: IntFilter<"WpRSS"> | number
+  }
+
+  export type YtRSSUpsertWithWhereUniqueWithoutUserInput = {
+    where: YtRSSWhereUniqueInput
+    update: XOR<YtRSSUpdateWithoutUserInput, YtRSSUncheckedUpdateWithoutUserInput>
+    create: XOR<YtRSSCreateWithoutUserInput, YtRSSUncheckedCreateWithoutUserInput>
+  }
+
+  export type YtRSSUpdateWithWhereUniqueWithoutUserInput = {
+    where: YtRSSWhereUniqueInput
+    data: XOR<YtRSSUpdateWithoutUserInput, YtRSSUncheckedUpdateWithoutUserInput>
+  }
+
+  export type YtRSSUpdateManyWithWhereWithoutUserInput = {
+    where: YtRSSScalarWhereInput
+    data: XOR<YtRSSUpdateManyMutationInput, YtRSSUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type YtRSSScalarWhereInput = {
+    AND?: YtRSSScalarWhereInput | YtRSSScalarWhereInput[]
+    OR?: YtRSSScalarWhereInput[]
+    NOT?: YtRSSScalarWhereInput | YtRSSScalarWhereInput[]
+    id?: IntFilter<"YtRSS"> | number
+    channelId?: StringFilter<"YtRSS"> | string
+    userId?: StringFilter<"YtRSS"> | string
+  }
+
   export type UserCreateWithoutAccountsInput = {
     id?: string
     name?: string | null
     email: string
     emailVerified?: Date | string | null
     image?: string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
-    sessions?: SessionCreateNestedManyWithoutUserInput
     catalogues?: CatalogueCreateNestedManyWithoutUserInput
-    websites?: WebsiteCreateNestedManyWithoutUserInput
-    yt?: YtRSSCreateNestedManyWithoutUserInput
-    wp?: WpRSSCreateNestedManyWithoutUserInput
     news?: NewsRSSCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    websites?: WebsiteCreateNestedManyWithoutUserInput
+    wp?: WpRSSCreateNestedManyWithoutUserInput
+    yt?: YtRSSCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -15001,14 +15148,15 @@ export namespace Prisma {
     email: string
     emailVerified?: Date | string | null
     image?: string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     catalogues?: CatalogueUncheckedCreateNestedManyWithoutUserInput
-    websites?: WebsiteUncheckedCreateNestedManyWithoutUserInput
-    yt?: YtRSSUncheckedCreateNestedManyWithoutUserInput
-    wp?: WpRSSUncheckedCreateNestedManyWithoutUserInput
     news?: NewsRSSUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    websites?: WebsiteUncheckedCreateNestedManyWithoutUserInput
+    wp?: WpRSSUncheckedCreateNestedManyWithoutUserInput
+    yt?: YtRSSUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -15033,14 +15181,15 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    sessions?: SessionUpdateManyWithoutUserNestedInput
     catalogues?: CatalogueUpdateManyWithoutUserNestedInput
-    websites?: WebsiteUpdateManyWithoutUserNestedInput
-    yt?: YtRSSUpdateManyWithoutUserNestedInput
-    wp?: WpRSSUpdateManyWithoutUserNestedInput
     news?: NewsRSSUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    websites?: WebsiteUpdateManyWithoutUserNestedInput
+    wp?: WpRSSUpdateManyWithoutUserNestedInput
+    yt?: YtRSSUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -15049,14 +15198,15 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     catalogues?: CatalogueUncheckedUpdateManyWithoutUserNestedInput
-    websites?: WebsiteUncheckedUpdateManyWithoutUserNestedInput
-    yt?: YtRSSUncheckedUpdateManyWithoutUserNestedInput
-    wp?: WpRSSUncheckedUpdateManyWithoutUserNestedInput
     news?: NewsRSSUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    websites?: WebsiteUncheckedUpdateManyWithoutUserNestedInput
+    wp?: WpRSSUncheckedUpdateManyWithoutUserNestedInput
+    yt?: YtRSSUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -15065,14 +15215,15 @@ export namespace Prisma {
     email: string
     emailVerified?: Date | string | null
     image?: string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     catalogues?: CatalogueCreateNestedManyWithoutUserInput
-    websites?: WebsiteCreateNestedManyWithoutUserInput
-    yt?: YtRSSCreateNestedManyWithoutUserInput
-    wp?: WpRSSCreateNestedManyWithoutUserInput
     news?: NewsRSSCreateNestedManyWithoutUserInput
+    websites?: WebsiteCreateNestedManyWithoutUserInput
+    wp?: WpRSSCreateNestedManyWithoutUserInput
+    yt?: YtRSSCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -15081,14 +15232,15 @@ export namespace Prisma {
     email: string
     emailVerified?: Date | string | null
     image?: string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     catalogues?: CatalogueUncheckedCreateNestedManyWithoutUserInput
-    websites?: WebsiteUncheckedCreateNestedManyWithoutUserInput
-    yt?: YtRSSUncheckedCreateNestedManyWithoutUserInput
-    wp?: WpRSSUncheckedCreateNestedManyWithoutUserInput
     news?: NewsRSSUncheckedCreateNestedManyWithoutUserInput
+    websites?: WebsiteUncheckedCreateNestedManyWithoutUserInput
+    wp?: WpRSSUncheckedCreateNestedManyWithoutUserInput
+    yt?: YtRSSUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -15113,14 +15265,15 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     catalogues?: CatalogueUpdateManyWithoutUserNestedInput
-    websites?: WebsiteUpdateManyWithoutUserNestedInput
-    yt?: YtRSSUpdateManyWithoutUserNestedInput
-    wp?: WpRSSUpdateManyWithoutUserNestedInput
     news?: NewsRSSUpdateManyWithoutUserNestedInput
+    websites?: WebsiteUpdateManyWithoutUserNestedInput
+    wp?: WpRSSUpdateManyWithoutUserNestedInput
+    yt?: YtRSSUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -15129,22 +15282,23 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    preferences?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     catalogues?: CatalogueUncheckedUpdateManyWithoutUserNestedInput
-    websites?: WebsiteUncheckedUpdateManyWithoutUserNestedInput
-    yt?: YtRSSUncheckedUpdateManyWithoutUserNestedInput
-    wp?: WpRSSUncheckedUpdateManyWithoutUserNestedInput
     news?: NewsRSSUncheckedUpdateManyWithoutUserNestedInput
+    websites?: WebsiteUncheckedUpdateManyWithoutUserNestedInput
+    wp?: WpRSSUncheckedUpdateManyWithoutUserNestedInput
+    yt?: YtRSSUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type WebsiteCreateManyCatalogueInput = {
     id?: number
-    userId: string
     name: string
     url: string
     favicon: string
+    userId: string
   }
 
   export type WebsiteUpdateWithoutCatalogueInput = {
@@ -15156,18 +15310,18 @@ export namespace Prisma {
 
   export type WebsiteUncheckedUpdateWithoutCatalogueInput = {
     id?: IntFieldUpdateOperationsInput | number
-    userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     favicon?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type WebsiteUncheckedUpdateManyWithoutCatalogueInput = {
     id?: IntFieldUpdateOperationsInput | number
-    userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     favicon?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type AccountCreateManyUserInput = {
@@ -15185,16 +15339,21 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type CatalogueCreateManyUserInput = {
+    id?: number
+    name: string
+  }
+
+  export type NewsRSSCreateManyUserInput = {
+    id?: number
+    url: string
+  }
+
   export type SessionCreateManyUserInput = {
     sessionToken: string
     expires: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
-  }
-
-  export type CatalogueCreateManyUserInput = {
-    id?: number
-    name: string
   }
 
   export type WebsiteCreateManyUserInput = {
@@ -15205,20 +15364,15 @@ export namespace Prisma {
     favicon: string
   }
 
-  export type YtRSSCreateManyUserInput = {
-    id?: number
-    channelId: string
-  }
-
   export type WpRSSCreateManyUserInput = {
     id?: number
     url: string
     image: number
   }
 
-  export type NewsRSSCreateManyUserInput = {
+  export type YtRSSCreateManyUserInput = {
     id?: number
-    url: string
+    channelId: string
   }
 
   export type AccountUpdateWithoutUserInput = {
@@ -15266,6 +15420,36 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type CatalogueUpdateWithoutUserInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    websites?: WebsiteUpdateManyWithoutCatalogueNestedInput
+  }
+
+  export type CatalogueUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    websites?: WebsiteUncheckedUpdateManyWithoutCatalogueNestedInput
+  }
+
+  export type CatalogueUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type NewsRSSUpdateWithoutUserInput = {
+    url?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type NewsRSSUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type NewsRSSUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
+  }
+
   export type SessionUpdateWithoutUserInput = {
     sessionToken?: StringFieldUpdateOperationsInput | string
     expires?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15285,22 +15469,6 @@ export namespace Prisma {
     expires?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type CatalogueUpdateWithoutUserInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    websites?: WebsiteUpdateManyWithoutCatalogueNestedInput
-  }
-
-  export type CatalogueUncheckedUpdateWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    websites?: WebsiteUncheckedUpdateManyWithoutCatalogueNestedInput
-  }
-
-  export type CatalogueUncheckedUpdateManyWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
   }
 
   export type WebsiteUpdateWithoutUserInput = {
@@ -15326,20 +15494,6 @@ export namespace Prisma {
     favicon?: StringFieldUpdateOperationsInput | string
   }
 
-  export type YtRSSUpdateWithoutUserInput = {
-    channelId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type YtRSSUncheckedUpdateWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    channelId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type YtRSSUncheckedUpdateManyWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    channelId?: StringFieldUpdateOperationsInput | string
-  }
-
   export type WpRSSUpdateWithoutUserInput = {
     url?: StringFieldUpdateOperationsInput | string
     image?: IntFieldUpdateOperationsInput | number
@@ -15357,18 +15511,18 @@ export namespace Prisma {
     image?: IntFieldUpdateOperationsInput | number
   }
 
-  export type NewsRSSUpdateWithoutUserInput = {
-    url?: StringFieldUpdateOperationsInput | string
+  export type YtRSSUpdateWithoutUserInput = {
+    channelId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type NewsRSSUncheckedUpdateWithoutUserInput = {
+  export type YtRSSUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
-    url?: StringFieldUpdateOperationsInput | string
+    channelId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type NewsRSSUncheckedUpdateManyWithoutUserInput = {
+  export type YtRSSUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
-    url?: StringFieldUpdateOperationsInput | string
+    channelId?: StringFieldUpdateOperationsInput | string
   }
 
 
