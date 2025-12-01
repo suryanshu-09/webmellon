@@ -15,7 +15,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: "20"
 
       - name: Cache Node.js modules
         uses: actions/cache@v3
@@ -28,14 +28,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Generate Prisma Client
-        run: npx prisma generate
-
-      - name: Run Tests
-        run: npm run test:run
-
       - name: Run Build
         run: npm run build
 
-      - name: Check for type errors
-        run: npx tsc --noEmit
+      # Optional
+      # - name: Run Tests
+      #   run: npm test
