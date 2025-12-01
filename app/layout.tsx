@@ -4,7 +4,8 @@ import { Providers } from "./providers";
 import "./globals.css";
 import { auth } from "@/lib/auth";
 import { Toaster } from "@/components/ui/sonner";
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeProvider } from "@/components/theme-provider";
+import { WebVitals } from "@/components/web-vitals";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,6 +39,7 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange >
           <Providers session={session}>
+            <WebVitals />
             <div className="bg-[#F6F8E3] dark:bg-zinc-800">
               {children}
             </div>
