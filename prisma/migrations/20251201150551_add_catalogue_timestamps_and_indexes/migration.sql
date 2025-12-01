@@ -2,6 +2,9 @@
 ALTER TABLE "Catalogue" ADD COLUMN "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 ADD COLUMN "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;
 
+-- AlterTable
+ALTER TABLE "User" ADD COLUMN "preferences" JSONB;
+
 -- CreateIndex
 CREATE INDEX "Catalogue_userId_name_idx" ON "Catalogue"("userId", "name");
 
