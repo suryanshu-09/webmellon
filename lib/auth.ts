@@ -72,12 +72,17 @@ export const authOptions: NextAuthConfig = {
           email = primary?.email || fallback?.email || null;
         }
 
+        // Fallback email for users with private GitHub emails
+        // Uses GitHub's noreply email format
+        if (!email) {
+          email = `${profile.id}+${profile.login}@users.noreply.github.com`;
+        }
+
         return {
           id: profile.id?.toString(),
           name: profile.name || profile.login,
           email,
           image: profile.avatar_url,
-          isGuest: false,
         };
       },
     }),
@@ -90,7 +95,6 @@ export const authOptions: NextAuthConfig = {
           name: profile.name,
           email: profile.email,
           image: profile.picture,
-          isGuest: false,
         };
       },
     }),
