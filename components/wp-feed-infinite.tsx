@@ -2,8 +2,7 @@
 import { wpFeedAtomLoadable } from "@/store/atoms/feedAtom";
 import { useAtomValue, useSetAtom } from "jotai";
 import { WordpressFeed, WordpressFeedItem } from "@/types/types";
-import Image from "next/image";
-import Link from "next/link";
+import { SearchWP } from "@/components/search-wp";
 import {
   Carousel,
   CarouselContent,
@@ -12,14 +11,15 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
-import { SearchWP } from "@/components/search-wp";
 import { Skeleton } from "@/components/ui/skeleton";
 import { wpDashboardAtom } from "@/store/atoms/dashboardAtom";
 import { X, ArrowUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePersistedWPDashboardAtom } from "@/hooks/use-persisted-dashboard-atom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback, memo } from "react";
 import { useInView } from "react-intersection-observer";
+import { useVirtualizer } from "@tanstack/react-virtual";
+import { FeedCard } from "@/components/feed-card";
 
 export default function WPFeedInfinite() {
   usePersistedWPDashboardAtom();
@@ -53,9 +53,9 @@ export default function WPFeedInfinite() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToTop = () => {
+  const scrollToTop = useCallback(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  }, []);
 
   // Create paginated feed data
   const paginatedFeedData =
@@ -133,80 +133,30 @@ export default function WPFeedInfinite() {
           </div>
         </div>
       ) : (
-        <div>
-          <div className="flex flex-col justify-center">
-            {Array.from({ length: 3 }).map((_, outerIdx) => (
-              <div key={outerIdx} className="mt-4">
-                <div className="flex justify-center mt-4">
-                  <Carousel>
-                    <CarouselContent className="max-w-[80vw]">
-                      {Array.from({ length: 6 }).map((_, InnerIdx) => (
-                        <CarouselItem
-                          key={InnerIdx}
-                          className="md:basis-1/2 xl:basis-1/3"
-                        >
-                          <Card className="w-[75vw] sm:w-[60vw] md:w-[35vw] xl:w-[25vw]">
-                            <CardContent>
-                              <Skeleton className="w-[100%] h-[360px]" />
-                            </CardContent>
-                          </Card>
-                        </CarouselItem>
-                      ))}
-                    </CarouselContent>
-                    <CarouselPrevious />
-                    <CarouselNext />
-                  </Carousel>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        <LoadingSkeleton />
       )}
     </div>
   );
 }
 
-function DisplayWPFeed({ wpFeed }: { wpFeed: WordpressFeed[] }) {
-  const { search, feedTitle } = useAtomValue(wpDashboardAtom);
-  const setwpDashboardAtom = useSetAtom(wpDashboardAtom);
-  if (!search) {
-    return (
+// Memoized loading skeleton
+const LoadingSkeleton = memo(function LoadingSkeleton() {
+  return (
+    <div>
       <div className="flex flex-col justify-center">
-        {wpFeed.map((pub: WordpressFeed) => (
-          <div key={pub.title} id={pub.title} className="mt-4">
-            <div className="text-xl font-semibold">{pub.title}</div>
+        {Array.from({ length: 3 }).map((_, outerIdx) => (
+          <div key={outerIdx} className="mt-4">
             <div className="flex justify-center mt-4">
               <Carousel>
                 <CarouselContent className="max-w-[80vw]">
-                  {pub.items.map((item: WordpressFeedItem) => (
+                  {Array.from({ length: 6 }).map((_, InnerIdx) => (
                     <CarouselItem
-                      key={item.guid}
+                      key={InnerIdx}
                       className="md:basis-1/2 xl:basis-1/3"
                     >
-                      <Card>
+                      <Card className="w-[75vw] sm:w-[60vw] md:w-[35vw] xl:w-[25vw]">
                         <CardContent>
-                          <Link href={item.link} target="_blank">
-                            <div className="relative w-full h-[240px] md:h-[360px]">
-                              <Image
-                                src={
-                                  item["media:content"]?.[
-                                    pub.image < item["media:content"]?.length
-                                      ? pub.image
-                                      : 0
-                                  ]?.$.url ?? "/assets/notfound.jpg"
-                                }
-                                alt={item.title}
-                                fill
-                                className="rounded-lg object-cover"
-                              />
-                            </div>
-                            <p className="truncate mt-2 max-w-[426px] font-semibold text-lg">
-                              {item.title}
-                            </p>
-                            <p className="line-clamp-3 mt-2 max-w-[426px] text-sm">
-                              {item.contentSnippet}
-                            </p>
-                          </Link>
+                          <Skeleton className="w-[100%] h-[360px]" />
                         </CardContent>
                       </Card>
                     </CarouselItem>
@@ -219,8 +169,141 @@ function DisplayWPFeed({ wpFeed }: { wpFeed: WordpressFeed[] }) {
           </div>
         ))}
       </div>
+    </div>
+  );
+});
+
+// Helper to get WordPress image URL
+function getWPImageUrl(item: WordpressFeedItem, imageIndex: number): string {
+  if (!item["media:content"]) return "/assets/notfound.jpg";
+  const safeIndex = imageIndex < item["media:content"].length ? imageIndex : 0;
+  return item["media:content"][safeIndex]?.$.url ?? "/assets/notfound.jpg";
+}
+
+// Memoized carousel item for feed items
+const WPCarouselItem = memo(function WPCarouselItem({
+  item,
+  imageIndex,
+  index,
+}: {
+  item: WordpressFeedItem;
+  imageIndex: number;
+  index: number;
+}) {
+  return (
+    <CarouselItem className="md:basis-1/2 xl:basis-1/3">
+      <FeedCard
+        title={item.title}
+        link={item.link}
+        imageUrl={getWPImageUrl(item, imageIndex)}
+        snippet={item.contentSnippet}
+        index={index}
+      />
+    </CarouselItem>
+  );
+});
+
+// Memoized publication section
+const PublicationSection = memo(function PublicationSection({
+  pub,
+}: {
+  pub: WordpressFeed;
+}) {
+  return (
+    <div id={pub.title} className="mt-4">
+      <div className="text-xl font-semibold">{pub.title}</div>
+      <div className="flex justify-center mt-4">
+        <Carousel>
+          <CarouselContent className="max-w-[80vw]">
+            {pub.items.map((item: WordpressFeedItem, index: number) => (
+              <WPCarouselItem
+                key={item.guid}
+                item={item}
+                imageIndex={pub.image}
+                index={index}
+              />
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+      </div>
+    </div>
+  );
+});
+
+// Virtualized display for large feeds
+function VirtualizedWPFeed({ wpFeed }: { wpFeed: WordpressFeed[] }) {
+  const parentRef = useRef<HTMLDivElement>(null);
+
+  const virtualizer = useVirtualizer({
+    count: wpFeed.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 500, // Estimated height per publication section
+    overscan: 2,
+  });
+
+  return (
+    <div
+      ref={parentRef}
+      className="h-[calc(100vh-200px)] overflow-auto"
+    >
+      <div
+        style={{
+          height: `${virtualizer.getTotalSize()}px`,
+          width: "100%",
+          position: "relative",
+        }}
+      >
+        {virtualizer.getVirtualItems().map((virtualItem) => {
+          const pub = wpFeed[virtualItem.index];
+          return (
+            <div
+              key={pub.title}
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                transform: `translateY(${virtualItem.start}px)`,
+              }}
+            >
+              <PublicationSection pub={pub} />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function DisplayWPFeed({ wpFeed }: { wpFeed: WordpressFeed[] }) {
+  const { search, feedTitle } = useAtomValue(wpDashboardAtom);
+  const setwpDashboardAtom = useSetAtom(wpDashboardAtom);
+
+  const handleClearSearch = useCallback(() => {
+    setwpDashboardAtom({ search: false, feedTitle: "" });
+  }, [setwpDashboardAtom]);
+
+  if (!search) {
+    // Use virtualization for feeds with many publications (more than 5)
+    if (wpFeed.length > 5) {
+      return (
+        <div className="flex flex-col justify-center">
+          <VirtualizedWPFeed wpFeed={wpFeed} />
+        </div>
+      );
+    }
+
+    return (
+      <div className="flex flex-col justify-center">
+        {wpFeed.map((pub: WordpressFeed) => (
+          <PublicationSection key={pub.title} pub={pub} />
+        ))}
+      </div>
     );
   }
+
   const newWP = wpFeed.filter((pub) => pub.title === feedTitle);
   return (
     <>
@@ -228,7 +311,7 @@ function DisplayWPFeed({ wpFeed }: { wpFeed: WordpressFeed[] }) {
         <div className="flex justify-end">
           <Button
             className="hover:cursor-pointer"
-            onClick={() => setwpDashboardAtom({ search: false, feedTitle: "" })}
+            onClick={handleClearSearch}
             variant={"destructive"}
           >
             <X />
@@ -236,50 +319,7 @@ function DisplayWPFeed({ wpFeed }: { wpFeed: WordpressFeed[] }) {
         </div>
         <div className="flex flex-col justify-center">
           {newWP.map((pub: WordpressFeed) => (
-            <div key={pub.title} id={pub.title} className="mt-4">
-              <div className="text-xl font-semibold">{pub.title}</div>
-              <div className="flex justify-center mt-4">
-                <Carousel>
-                  <CarouselContent className="max-w-[80vw]">
-                    {pub.items.map((item: WordpressFeedItem) => (
-                      <CarouselItem
-                        key={item.guid}
-                        className="md:basis-1/2 xl:basis-1/3"
-                      >
-                        <Card>
-                          <CardContent>
-                            <Link href={item.link} target="_blank">
-                              <div className="relative w-full h-[240px] md:h-[360px]">
-                                <Image
-                                  src={
-                                    item["media:content"]?.[
-                                      pub.image < item["media:content"]?.length
-                                        ? pub.image
-                                        : 0
-                                    ]?.$.url ?? "/assets/notfound.jpg"
-                                  }
-                                  alt={item.title}
-                                  fill
-                                  className="rounded-lg object-cover"
-                                />
-                              </div>
-                              <p className="truncate mt-2 max-w-[426px] font-semibold text-lg">
-                                {item.title}
-                              </p>
-                              <p className="line-clamp-3 mt-2 max-w-[426px] text-sm">
-                                {item.contentSnippet}
-                              </p>
-                            </Link>
-                          </CardContent>
-                        </Card>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                  <CarouselPrevious />
-                  <CarouselNext />
-                </Carousel>
-              </div>
-            </div>
+            <PublicationSection key={pub.title} pub={pub} />
           ))}
         </div>
       </div>

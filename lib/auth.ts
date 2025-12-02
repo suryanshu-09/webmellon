@@ -5,6 +5,28 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@/lib/db";
 
+// Extend the session user type to include isGuest flag
+declare module "next-auth" {
+  interface User {
+    isGuest?: boolean;
+  }
+  interface Session {
+    user: {
+      id: string;
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+      isGuest?: boolean;
+    };
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    isGuest?: boolean;
+  }
+}
+
 export const authOptions: NextAuthConfig = {
   // cookies: {
   //   sessionToken: {
@@ -26,10 +48,10 @@ export const authOptions: NextAuthConfig = {
       async authorize() {
         return {
           id: process.env.GUEST_ID,
-          name: "WM",
-          email: "pleaselogin",
+          name: "Guest",
+          email: "guest@webmellon.local",
           image: "",
-          userType: "guest",
+          isGuest: true, // Flag for permission checks
         };
       },
     }),
@@ -55,6 +77,7 @@ export const authOptions: NextAuthConfig = {
           name: profile.name || profile.login,
           email,
           image: profile.avatar_url,
+          isGuest: false,
         };
       },
     }),
@@ -67,26 +90,31 @@ export const authOptions: NextAuthConfig = {
           name: profile.name,
           email: profile.email,
           image: profile.picture,
+          isGuest: false,
         };
       },
     }),
   ],
   adapter: PrismaAdapter(prisma),
   trustHost: true,
-  debug: true,
+  debug: process.env.NODE_ENV === "development",
   session: {
     strategy: "jwt",
+    // Guest sessions expire faster (1 hour) for security
+    maxAge: 24 * 60 * 60, // 24 hours for regular users
   },
   callbacks: {
     async session({ session, token }) {
       if (token?.sub && session.user) {
         session.user.id = token.sub;
+        session.user.isGuest = token.isGuest ?? false;
       }
       return session;
     },
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
+        token.isGuest = user.isGuest ?? false;
       }
       return token;
     },

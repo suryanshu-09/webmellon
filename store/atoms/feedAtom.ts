@@ -1,4 +1,3 @@
-import { getNewsFeed, getWPFeed, getYTFeed } from "@/actions/feed";
 import { atom } from "jotai";
 import { loadable } from "jotai/utils";
 import { NewsRSS, WpRSS, YtRSS } from "@/prisma/zod";
@@ -16,92 +15,98 @@ import {
   ytFeedPaginationAtom,
 } from "./paginationAtom";
 
-export const getYT = atom<YtRSS[] | null>(null);
+// ============================================================================
+// RSS Subscription Atoms (Database Records)
+// These store the user's RSS subscriptions fetched from the database
+// ============================================================================
+
+/** YouTube RSS subscriptions from database */
+export const ytRssAtom = atom<YtRSS[] | null>(null);
+/** WordPress RSS subscriptions from database */
+export const wpRssAtom = atom<WpRSS[] | null>(null);
+/** News RSS subscriptions from database */
+export const newsRssAtom = atom<NewsRSS[] | null>(null);
+
+// Legacy exports for backwards compatibility
+export const getYT = ytRssAtom;
+export const getWP = wpRssAtom;
+export const getNews = newsRssAtom;
+
+// ============================================================================
+// Parsed Feed Data Atoms
+// These store the actual parsed feed content
+// Note: Using flexible types as RSS parser returns loosely typed data
+// ============================================================================
+
+/** Parsed YouTube feed data - using any[] to accommodate RSS parser output */
+export const ytFeedDataAtom = atom<YoutubeFeed[] | any[] | null>(null);
+/** Parsed WordPress feed data - using any[] to accommodate RSS parser output */
+export const wpFeedDataAtom = atom<WordpressFeed[] | any[] | null>(null);
+/** Parsed News feed data - using any[] to accommodate RSS parser output */
+export const newsFeedDataAtom = atom<NEWSFeed[] | any[] | null>(null);
+
+// Async wrappers that return empty arrays when null
 export const ytFeedAtom = atom(async (get) => {
-  const ytFeed = get(getYT);
-  if (!ytFeed) return [];
-  return await getYTFeed(ytFeed as YtRSS[]);
+  const data = get(ytFeedDataAtom);
+  return data ?? [];
 });
+
+export const wpFeedAtom = atom(async (get) => {
+  const data = get(wpFeedDataAtom);
+  return data ?? [];
+});
+
+export const newsFeedAtom = atom(async (get) => {
+  const data = get(newsFeedDataAtom);
+  return data ?? [];
+});
+
+// Loadable wrappers for components
+export const ytFeedAtomLoadable = loadable(ytFeedAtom);
+export const wpFeedAtomLoadable = loadable(wpFeedAtom);
+export const newsFeedAtomLoadable = loadable(newsFeedAtom);
+
+/**
+ * @deprecated These hydration atoms are no longer needed.
+ * React Query now handles caching, and DataSynchronizer syncs data to Jotai.
+ * Kept for backwards compatibility during migration.
+ */
 export const hydratedYTFeedAtom = atom<YoutubeFeed[] | null>(null);
+export const hydratedNewsFeedAtom = atom<NEWSFeed[] | null>(null);
+export const hydratedWPFeedAtom = atom<WordpressFeed[] | null>(null);
 
-export const ytFeedHydratedOrFetchAtom = atom(async (get) => {
-  const storedData = sessionStorage.getItem("ytfeed");
-  if (storedData && storedData.length > 2) {
-    const feed = JSON.parse(storedData);
-    return feed;
-  }
-  const hydrated = get(hydratedYTFeedAtom);
-  if (hydrated) return hydrated;
-
-  const ytf = await get(ytFeedAtom);
-  sessionStorage.setItem("ytfeed", JSON.stringify(ytf));
-  return ytf;
-});
-export const ytFeedAtomLoadable = loadable(ytFeedHydratedOrFetchAtom);
+// ============================================================================
+// Title Getters (Derived Atoms)
+// ============================================================================
 
 export const getYTTitles = atom(async (get) => {
-  const ytTitles = await get(ytFeedAtom);
-  const titles = ytTitles.map(({ title }) => title);
-  return titles;
+  const ytData = await get(ytFeedAtom);
+  return ytData.map(({ title }) => title);
 });
-
-export const getNews = atom<NewsRSS[] | null>(null);
-export const newsFeedAtom = atom(async (get) => {
-  const newsFeed = get(getNews);
-  if (!newsFeed) return [];
-  return await getNewsFeed(newsFeed as NewsRSS[]);
-});
-export const hydratedNewsFeedAtom = atom<NEWSFeed[] | null>(null);
-export const newsFeedHydratedOrFetchAtom = atom(async (get) => {
-  const storedData = sessionStorage.getItem("newsfeed");
-  if (storedData && storedData.length > 2) {
-    const feed = JSON.parse(storedData);
-    return feed;
-  }
-  const hydrated = get(hydratedNewsFeedAtom);
-  if (hydrated) return hydrated;
-
-  const nf = await get(newsFeedAtom);
-  sessionStorage.setItem("newsfeed", JSON.stringify(nf));
-  return nf;
-});
-export const newsFeedAtomLoadable = loadable(newsFeedHydratedOrFetchAtom);
 
 export const getNewsTitles = atom(async (get) => {
-  const newsTitles = await get(newsFeedAtom);
-  const titles = newsTitles.map(({ title }) => title);
-  return titles;
+  const newsData = await get(newsFeedAtom);
+  return newsData.map(({ title }) => title);
 });
-
-export const getWP = atom<WpRSS[] | null>(null);
-export const wpFeedAtom = atom(async (get) => {
-  const wpFeed = get(getWP);
-  if (!wpFeed) return [];
-  return await getWPFeed(wpFeed as WpRSS[]);
-});
-export const hydratedWPFeedAtom = atom<WordpressFeed[] | null>(null);
-export const wpFeedHydratedOrFetchAtom = atom(async (get) => {
-  const storedData = sessionStorage.getItem("wpfeed");
-  if (storedData && storedData.length > 2) {
-    const feed = JSON.parse(storedData);
-    return feed;
-  }
-  const hydrated = get(hydratedWPFeedAtom);
-  if (hydrated) return hydrated;
-  const wpf = await get(wpFeedAtom);
-  sessionStorage.setItem("wpfeed", JSON.stringify(wpf));
-  return wpf;
-});
-
-export const wpFeedAtomLoadable = loadable(wpFeedHydratedOrFetchAtom);
 
 export const getWPTitles = atom(async (get) => {
-  const wpTitles = await get(wpFeedAtom);
-  const titles = wpTitles.map(({ title }) => title);
-  return titles;
+  const wpData = await get(wpFeedAtom);
+  return wpData.map(({ title }) => title);
 });
 
-// Paginated News Feed
+// ============================================================================
+// Paginated Feed Atoms
+// ============================================================================
+
+// Helper types for items with publication info
+type NewsItemWithPub = NEWSFeedItem & { publication: string; publicationUrl: string };
+type WPItemWithPub = WordpressFeedItem & { publication: string; publicationUrl: string; image: number };
+type YTItemWithChannel = YoutubeFeedItem & { channelTitle?: string; channelId: string };
+
+/**
+ * Paginated News Feed Atom
+ * Flattens all items, sorts by date, and paginates
+ */
 export const paginatedNewsFeedAtom = atom((get) => {
   const fullFeed = get(newsFeedAtomLoadable);
   const pagination = get(newsFeedPaginationAtom);
@@ -117,7 +122,6 @@ export const paginatedNewsFeedAtom = atom((get) => {
   );
 
   // Flatten all items with their publication info
-  type NewsItemWithPub = NEWSFeedItem & { publication: string; publicationUrl: string };
   const allItems: NewsItemWithPub[] = fullFeed.data.flatMap((pub: NEWSFeed) =>
     pub.items.map((item) => ({ ...item, publication: pub.title, publicationUrl: pub.url }))
   );
@@ -154,7 +158,9 @@ export const paginatedNewsFeedAtom = atom((get) => {
   };
 });
 
-// Paginated WordPress Feed
+/**
+ * Paginated WordPress Feed Atom
+ */
 export const paginatedWPFeedAtom = atom((get) => {
   const fullFeed = get(wpFeedAtomLoadable);
   const pagination = get(wpFeedPaginationAtom);
@@ -168,7 +174,6 @@ export const paginatedWPFeedAtom = atom((get) => {
     0
   );
 
-  type WPItemWithPub = WordpressFeedItem & { publication: string; publicationUrl: string; image: number };
   const allItems: WPItemWithPub[] = fullFeed.data.flatMap((pub: WordpressFeed) =>
     pub.items.map((item) => ({ 
       ...item, 
@@ -208,7 +213,9 @@ export const paginatedWPFeedAtom = atom((get) => {
   };
 });
 
-// Paginated YouTube Feed
+/**
+ * Paginated YouTube Feed Atom
+ */
 export const paginatedYTFeedAtom = atom((get) => {
   const fullFeed = get(ytFeedAtomLoadable);
   const pagination = get(ytFeedPaginationAtom);
@@ -222,7 +229,6 @@ export const paginatedYTFeedAtom = atom((get) => {
     0
   );
 
-  type YTItemWithChannel = YoutubeFeedItem & { channelTitle?: string; channelId: string };
   const allItems: YTItemWithChannel[] = fullFeed.data.flatMap((pub: YoutubeFeed) =>
     pub.items.map((item) => ({ 
       ...item, 

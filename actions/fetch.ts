@@ -28,8 +28,9 @@ export async function fetchEverything(user: UserLike) {
     },
   });
 
+  // Return empty array for new users who don't have data yet
   if (!everything) {
-    throw new Error(`Data not found`);
+    return [];
   }
   return everything.catalogues;
 }
@@ -120,10 +121,7 @@ export async function fetchYTFeed(user: UserLike) {
     },
   });
 
-  if (!ytFeed) {
-    throw new Error(`ytFeed not found`);
-  }
-
+  // findMany returns empty array if no results, never null
   return ytFeed;
 }
 
@@ -134,10 +132,7 @@ export async function fetchWPFeed(user: UserLike) {
     },
   });
 
-  if (!wpFeed) {
-    throw new Error(`wpFeed not found`);
-  }
-
+  // findMany returns empty array if no results, never null
   return wpFeed;
 }
 
@@ -148,10 +143,7 @@ export async function fetchNewsFeed(user: UserLike) {
     },
   });
 
-  if (!newsFeed) {
-    throw new Error(`newsFeed not found`);
-  }
-
+  // findMany returns empty array if no results, never null
   return newsFeed;
 }
 

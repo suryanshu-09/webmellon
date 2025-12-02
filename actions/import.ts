@@ -1,6 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/db";
+import { logger } from "@/lib/logger";
 
 export async function importJSON(file: File, userId: string) {
   const text = await file.text();
@@ -69,17 +70,23 @@ export async function importJSON(file: File, userId: string) {
             });
           } catch (err) {
             if (err instanceof Error) {
-              console.error(`Error processing site:`, {
-                name: site.name,
-                url: site.url,
-                catalogue: catalogue.name,
-                error: err.message,
-              });
+              logger.error(
+                {
+                  name: site.name,
+                  url: site.url,
+                  catalogue: catalogue.name,
+                  error: err.message,
+                },
+                "Error processing site during import"
+              );
             } else {
-              console.error("Unknown error processing site:", {
-                site,
-                error: err,
-              });
+              logger.error(
+                {
+                  site,
+                  error: err,
+                },
+                "Unknown error processing site during import"
+              );
             }
             continue;
           }
@@ -87,7 +94,7 @@ export async function importJSON(file: File, userId: string) {
       }
     }
   } catch (err) {
-    console.error("Import error:", err);
+    logger.error({ error: err, userId }, "Import error");
     throw new Error("Failed to import data");
   }
 }

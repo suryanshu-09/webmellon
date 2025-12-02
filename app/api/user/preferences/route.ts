@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
+import { logger } from "@/lib/logger";
 
 export async function GET() {
   try {
@@ -21,7 +22,7 @@ export async function GET() {
 
     return NextResponse.json(user.preferences || {});
   } catch (error) {
-    console.error("Error fetching user preferences:", error);
+    logger.error({ error, userId: (await auth())?.user?.id }, "Error fetching user preferences");
     return NextResponse.json(
       { error: "Failed to fetch preferences" },
       { status: 500 }
@@ -47,7 +48,7 @@ export async function PUT(request: NextRequest) {
 
     return NextResponse.json(updatedUser.preferences);
   } catch (error) {
-    console.error("Error updating user preferences:", error);
+    logger.error({ error, userId: (await auth())?.user?.id }, "Error updating user preferences");
     return NextResponse.json(
       { error: "Failed to update preferences" },
       { status: 500 }

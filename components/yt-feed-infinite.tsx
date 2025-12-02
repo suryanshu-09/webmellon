@@ -16,9 +16,10 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { ytDashboardAtom } from "@/store/atoms/dashboardAtom";
 import { X, ArrowUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback, memo } from "react";
 import { useInView } from "react-intersection-observer";
+import { useVirtualizer } from "@tanstack/react-virtual";
+import { YouTubeCard } from "@/components/feed-card";
 
 export default function YTFeedInfinite() {
   usePersistedYTDashboardAtom();
@@ -52,9 +53,9 @@ export default function YTFeedInfinite() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToTop = () => {
+  const scrollToTop = useCallback(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  }, []);
 
   // Create paginated feed data
   const paginatedFeedData =
@@ -133,77 +134,30 @@ export default function YTFeedInfinite() {
           </div>
         </div>
       ) : (
-        <div>
-          <div className="flex flex-col justify-center">
-            {Array.from({ length: 3 }).map((_, outerIdx) => (
-              <div key={outerIdx} className="mt-4">
-                <div className="flex justify-center mt-4">
-                  <Carousel>
-                    <CarouselContent className="max-w-[80vw]">
-                      {Array.from({ length: 6 }).map((_, InnerIdx) => (
-                        <CarouselItem
-                          key={InnerIdx}
-                          className="md:basis-1/2 xl:basis-1/3"
-                        >
-                          <Card className="w-[75vw] md:w-[35vw] xl:w-[25vw]">
-                            <CardContent>
-                              <Skeleton className="w-[100%] h-[240px]" />
-                            </CardContent>
-                          </Card>
-                        </CarouselItem>
-                      ))}
-                    </CarouselContent>
-                    <CarouselPrevious />
-                    <CarouselNext />
-                  </Carousel>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        <LoadingSkeleton />
       )}
     </div>
   );
 }
 
-function DisplayYTFeed({ ytFeed }: { ytFeed: YoutubeFeed[] }) {
-  const { search, feedTitle } = useAtomValue(ytDashboardAtom);
-  const setwpDashboardAtom = useSetAtom(ytDashboardAtom);
-
-  if (!search) {
-    return (
+// Memoized loading skeleton
+const LoadingSkeleton = memo(function LoadingSkeleton() {
+  return (
+    <div>
       <div className="flex flex-col justify-center">
-        {ytFeed.map((pub: YoutubeFeed) => (
-          <div key={pub.title || pub.channelId} id={pub.title || pub.channelId} className="mt-4">
-            <div className="text-xl font-semibold">{pub.title || pub.channelId}</div>
+        {Array.from({ length: 3 }).map((_, outerIdx) => (
+          <div key={outerIdx} className="mt-4">
             <div className="flex justify-center mt-4">
               <Carousel>
                 <CarouselContent className="max-w-[80vw]">
-                  {pub.items.map((item: YoutubeFeedItem) => (
+                  {Array.from({ length: 6 }).map((_, InnerIdx) => (
                     <CarouselItem
-                      key={item.title}
+                      key={InnerIdx}
                       className="md:basis-1/2 xl:basis-1/3"
                     >
-                      <Card>
+                      <Card className="w-[75vw] md:w-[35vw] xl:w-[25vw]">
                         <CardContent>
-                          <Link href={item.link || "#"} target="_blank">
-                            <div
-                              key={item.id}
-                              className="relative rounded-xl border overflow-hidden w-full h-[240px]"
-                            >
-                              <iframe
-                                src={`https://www.youtube.com/embed/${(item.link || "").slice(32)}`}
-                                title={item.title || "YouTube video player"}
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerPolicy="strict-origin-when-cross-origin"
-                                className="absolute top-0 left-0 w-full h-full"
-                                allowFullScreen
-                              ></iframe>
-                            </div>
-                            <p className="truncate mt-2 max-w-[426px] font-medium text-lg">
-                              {item.title}
-                            </p>
-                          </Link>
+                          <Skeleton className="w-[100%] h-[240px]" />
                         </CardContent>
                       </Card>
                     </CarouselItem>
@@ -216,6 +170,131 @@ function DisplayYTFeed({ ytFeed }: { ytFeed: YoutubeFeed[] }) {
           </div>
         ))}
       </div>
+    </div>
+  );
+});
+
+// Helper to extract video ID from YouTube link
+function getVideoId(link: string): string {
+  return (link || "").slice(32);
+}
+
+// Memoized carousel item for YouTube videos
+const YTCarouselItem = memo(function YTCarouselItem({
+  item,
+  index,
+}: {
+  item: YoutubeFeedItem;
+  index: number;
+}) {
+  return (
+    <CarouselItem className="md:basis-1/2 xl:basis-1/3">
+      <YouTubeCard
+        title={item.title}
+        link={item.link}
+        videoId={getVideoId(item.link)}
+        index={index}
+      />
+    </CarouselItem>
+  );
+});
+
+// Memoized channel section
+const ChannelSection = memo(function ChannelSection({
+  pub,
+}: {
+  pub: YoutubeFeed;
+}) {
+  const channelTitle = pub.title || pub.channelId;
+  
+  return (
+    <div id={channelTitle} className="mt-4">
+      <div className="text-xl font-semibold">{channelTitle}</div>
+      <div className="flex justify-center mt-4">
+        <Carousel>
+          <CarouselContent className="max-w-[80vw]">
+            {pub.items.map((item: YoutubeFeedItem, index: number) => (
+              <YTCarouselItem key={item.title} item={item} index={index} />
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+      </div>
+    </div>
+  );
+});
+
+// Virtualized display for large feeds
+function VirtualizedYTFeed({ ytFeed }: { ytFeed: YoutubeFeed[] }) {
+  const parentRef = useRef<HTMLDivElement>(null);
+
+  const virtualizer = useVirtualizer({
+    count: ytFeed.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 400, // Estimated height per channel section
+    overscan: 2,
+  });
+
+  return (
+    <div
+      ref={parentRef}
+      className="h-[calc(100vh-200px)] overflow-auto"
+    >
+      <div
+        style={{
+          height: `${virtualizer.getTotalSize()}px`,
+          width: "100%",
+          position: "relative",
+        }}
+      >
+        {virtualizer.getVirtualItems().map((virtualItem) => {
+          const pub = ytFeed[virtualItem.index];
+          const channelKey = pub.title || pub.channelId;
+          return (
+            <div
+              key={channelKey}
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                transform: `translateY(${virtualItem.start}px)`,
+              }}
+            >
+              <ChannelSection pub={pub} />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function DisplayYTFeed({ ytFeed }: { ytFeed: YoutubeFeed[] }) {
+  const { search, feedTitle } = useAtomValue(ytDashboardAtom);
+  const setytDashboardAtom = useSetAtom(ytDashboardAtom);
+
+  const handleClearSearch = useCallback(() => {
+    setytDashboardAtom({ search: false, feedTitle: "" });
+  }, [setytDashboardAtom]);
+
+  if (!search) {
+    // Use virtualization for feeds with many channels (more than 5)
+    if (ytFeed.length > 5) {
+      return (
+        <div className="flex flex-col justify-center">
+          <VirtualizedYTFeed ytFeed={ytFeed} />
+        </div>
+      );
+    }
+
+    return (
+      <div className="flex flex-col justify-center">
+        {ytFeed.map((pub: YoutubeFeed) => (
+          <ChannelSection key={pub.title || pub.channelId} pub={pub} />
+        ))}
+      </div>
     );
   }
 
@@ -226,7 +305,7 @@ function DisplayYTFeed({ ytFeed }: { ytFeed: YoutubeFeed[] }) {
         <div className="flex justify-end">
           <Button
             className="hover:cursor-pointer"
-            onClick={() => setwpDashboardAtom({ search: false, feedTitle: "" })}
+            onClick={handleClearSearch}
             variant={"destructive"}
           >
             <X />
@@ -234,46 +313,7 @@ function DisplayYTFeed({ ytFeed }: { ytFeed: YoutubeFeed[] }) {
         </div>
         <div className="flex flex-col justify-center">
           {newYT.map((pub: YoutubeFeed) => (
-            <div key={pub.title || pub.channelId} id={pub.title || pub.channelId} className="mt-4">
-              <div className="text-xl font-semibold">{pub.title || pub.channelId}</div>
-              <div className="flex justify-center mt-4">
-                <Carousel>
-                  <CarouselContent className="max-w-[80vw]">
-                    {pub.items.map((item: YoutubeFeedItem) => (
-                      <CarouselItem
-                        key={item.title}
-                        className="md:basis-1/2 xl:basis-1/3"
-                      >
-                        <Card>
-                          <CardContent>
-                            <Link href={item.link || "#"} target="_blank">
-                              <div
-                                key={item.id}
-                                className="relative rounded-xl border overflow-hidden w-full h-[240px]"
-                              >
-                                <iframe
-                                  src={`https://www.youtube.com/embed/${(item.link || "").slice(32)}`}
-                                  title={item.title || "YouTube video player"}
-                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                  referrerPolicy="strict-origin-when-cross-origin"
-                                  className="absolute top-0 left-0 w-full h-full"
-                                  allowFullScreen
-                                ></iframe>
-                              </div>
-                              <p className="truncate mt-2 max-w-[426px] font-medium text-lg">
-                                {item.title}
-                              </p>
-                            </Link>
-                          </CardContent>
-                        </Card>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                  <CarouselPrevious />
-                  <CarouselNext />
-                </Carousel>
-              </div>
-            </div>
+            <ChannelSection key={pub.title || pub.channelId} pub={pub} />
           ))}
         </div>
       </div>

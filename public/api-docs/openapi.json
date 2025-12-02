@@ -1,0 +1,482 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "WebMellon API",
+    "description": "API documentation for WebMellon - A bookmark aggregator with RSS feed integration",
+    "version": "3.0.0",
+    "contact": {
+      "name": "WebMellon Support"
+    },
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Development server"
+    },
+    {
+      "url": "https://webmellon.app",
+      "description": "Production server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "System",
+      "description": "System health and status endpoints"
+    },
+    {
+      "name": "Catalogues",
+      "description": "Catalogue management endpoints"
+    },
+    {
+      "name": "Websites",
+      "description": "Website bookmark management"
+    },
+    {
+      "name": "Feeds",
+      "description": "RSS feed management (YouTube, WordPress, News)"
+    }
+  ],
+  "paths": {
+    "/api/health": {
+      "get": {
+        "summary": "Health check",
+        "description": "Returns the health status of the application and database connectivity",
+        "tags": ["System"],
+        "responses": {
+          "200": {
+            "description": "Application is healthy",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                },
+                "example": {
+                  "status": "healthy",
+                  "timestamp": "2024-12-02T10:00:00.000Z",
+                  "database": "connected"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Application is unhealthy",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponseError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/catalogues": {
+      "get": {
+        "summary": "Get paginated catalogues",
+        "description": "Retrieves a paginated list of catalogues for the authenticated user",
+        "tags": ["Catalogues"],
+        "security": [
+          {
+            "sessionAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number (1-indexed)",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of items per page",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 10
+            }
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "Field to sort by",
+            "schema": {
+              "type": "string",
+              "enum": ["name", "createdAt", "updatedAt"],
+              "default": "name"
+            }
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "description": "Sort direction",
+            "schema": {
+              "type": "string",
+              "enum": ["asc", "desc"],
+              "default": "asc"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Search query for filtering by name (case-insensitive)",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved catalogues",
+            "headers": {
+              "Cache-Control": {
+                "description": "Caching directive",
+                "schema": {
+                  "type": "string",
+                  "example": "private, s-maxage=60, stale-while-revalidate=300"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedCataloguesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalidPagination": {
+                    "value": {
+                      "error": "Invalid pagination parameters"
+                    }
+                  },
+                  "invalidSortBy": {
+                    "value": {
+                      "error": "Invalid sortBy parameter"
+                    }
+                  },
+                  "invalidSortOrder": {
+                    "value": {
+                      "error": "Invalid sortOrder parameter"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": "Unauthorized"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": "Failed to fetch catalogues"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "sessionAuth": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "next-auth.session-token",
+        "description": "NextAuth.js session cookie for authentication"
+      }
+    },
+    "schemas": {
+      "HealthResponse": {
+        "type": "object",
+        "required": ["status", "timestamp", "database"],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": ["healthy"],
+            "description": "Health status of the application"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO 8601 timestamp of the health check"
+          },
+          "database": {
+            "type": "string",
+            "enum": ["connected"],
+            "description": "Database connection status"
+          }
+        }
+      },
+      "HealthResponseError": {
+        "type": "object",
+        "required": ["status", "timestamp", "database"],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": ["unhealthy"]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "database": {
+            "type": "string",
+            "enum": ["disconnected"]
+          },
+          "error": {
+            "type": "string",
+            "description": "Error message describing the issue"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "required": ["error"],
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error message"
+          }
+        }
+      },
+      "Catalogue": {
+        "type": "object",
+        "required": ["id", "name", "userId", "createdAt", "updatedAt"],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier for the catalogue"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 100,
+            "description": "Name of the catalogue"
+          },
+          "userId": {
+            "type": "string",
+            "description": "ID of the user who owns the catalogue"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Creation timestamp"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Last update timestamp"
+          },
+          "deletedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "Soft delete timestamp (null if not deleted)"
+          },
+          "websites": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Website"
+            },
+            "description": "Websites in this catalogue (limited to 20 per page)"
+          }
+        }
+      },
+      "Website": {
+        "type": "object",
+        "required": ["id", "name", "url", "favicon", "catalogueId", "userId"],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier for the website"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 100,
+            "description": "Name/title of the website"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL of the website"
+          },
+          "favicon": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL of the website's favicon"
+          },
+          "catalogueId": {
+            "type": "integer",
+            "description": "ID of the parent catalogue"
+          },
+          "userId": {
+            "type": "string",
+            "description": "ID of the user who owns the website"
+          },
+          "deletedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "Soft delete timestamp"
+          }
+        }
+      },
+      "PaginationInfo": {
+        "type": "object",
+        "required": ["currentPage", "totalPages", "totalItems", "itemsPerPage", "hasNextPage", "hasPrevPage"],
+        "properties": {
+          "currentPage": {
+            "type": "integer",
+            "description": "Current page number (1-indexed)"
+          },
+          "totalPages": {
+            "type": "integer",
+            "description": "Total number of pages"
+          },
+          "totalItems": {
+            "type": "integer",
+            "description": "Total number of items across all pages"
+          },
+          "itemsPerPage": {
+            "type": "integer",
+            "description": "Number of items per page"
+          },
+          "hasNextPage": {
+            "type": "boolean",
+            "description": "Whether there is a next page"
+          },
+          "hasPrevPage": {
+            "type": "boolean",
+            "description": "Whether there is a previous page"
+          }
+        }
+      },
+      "PaginatedCataloguesResponse": {
+        "type": "object",
+        "required": ["catalogues", "pagination"],
+        "properties": {
+          "catalogues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Catalogue"
+            }
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/PaginationInfo"
+          }
+        }
+      },
+      "YtRSS": {
+        "type": "object",
+        "required": ["id", "channelId", "userId"],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier"
+          },
+          "channelId": {
+            "type": "string",
+            "description": "YouTube channel ID"
+          },
+          "userId": {
+            "type": "string",
+            "description": "ID of the user who added this feed"
+          }
+        }
+      },
+      "WpRSS": {
+        "type": "object",
+        "required": ["id", "url", "image", "userId"],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "WordPress feed URL"
+          },
+          "image": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10,
+            "description": "Image display preference"
+          },
+          "userId": {
+            "type": "string",
+            "description": "ID of the user who added this feed"
+          }
+        }
+      },
+      "NewsRSS": {
+        "type": "object",
+        "required": ["id", "url", "userId"],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "News RSS feed URL"
+          },
+          "userId": {
+            "type": "string",
+            "description": "ID of the user who added this feed"
+          }
+        }
+      },
+      "BatchOperationResult": {
+        "type": "object",
+        "required": ["count", "message"],
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "Number of items affected"
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable result message"
+          }
+        }
+      }
+    }
+  }
+}

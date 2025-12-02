@@ -9,7 +9,9 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 
 # Install dependencies with clean install for reproducible builds
-RUN npm ci --prefer-offline --no-audit
+# Use BuildKit cache mount for faster rebuilds
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci --prefer-offline --no-audit
 
 # Stage 2: Builder
 FROM node:20-alpine AS builder
