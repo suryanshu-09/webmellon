@@ -20,7 +20,7 @@ export interface PaginationState {
  */
 export const newsFeedPaginationAtom = atom<PaginationState>({
   currentPage: 1,
-  itemsPerPage: 10,
+  itemsPerPage: 5,
   totalItems: 0,
 });
 
@@ -41,7 +41,7 @@ export const newsFeedTotalPagesAtom = atom((get) => {
  */
 export const wpFeedPaginationAtom = atom<PaginationState>({
   currentPage: 1,
-  itemsPerPage: 10,
+  itemsPerPage: 5,
   totalItems: 0,
 });
 
@@ -61,7 +61,7 @@ export const wpFeedTotalPagesAtom = atom((get) => {
  */
 export const ytFeedPaginationAtom = atom<PaginationState>({
   currentPage: 1,
-  itemsPerPage: 6,
+  itemsPerPage: 3,
   totalItems: 0,
 });
 
@@ -102,7 +102,7 @@ export interface CataloguePaginationState {
  */
 export const cataloguePaginationAtom = atom<CataloguePaginationState>({
   currentPage: 1,
-  itemsPerPage: 10,
+  itemsPerPage: 5,
   totalItems: 0,
   totalPages: 0,
   sortBy: "name",
@@ -140,18 +140,18 @@ export const resetPaginationAtom = atom(
   ) => {
     switch (feedType) {
       case "news":
-        set(newsFeedPaginationAtom, { currentPage: 1, itemsPerPage: 10, totalItems: 0 });
+        set(newsFeedPaginationAtom, { currentPage: 1, itemsPerPage: 5, totalItems: 0 });
         break;
       case "wp":
-        set(wpFeedPaginationAtom, { currentPage: 1, itemsPerPage: 10, totalItems: 0 });
+        set(wpFeedPaginationAtom, { currentPage: 1, itemsPerPage: 5, totalItems: 0 });
         break;
       case "yt":
-        set(ytFeedPaginationAtom, { currentPage: 1, itemsPerPage: 6, totalItems: 0 });
+        set(ytFeedPaginationAtom, { currentPage: 1, itemsPerPage: 3, totalItems: 0 });
         break;
       case "catalogue":
         set(cataloguePaginationAtom, {
           currentPage: 1,
-          itemsPerPage: 10,
+          itemsPerPage: 5,
           totalItems: 0,
           totalPages: 0,
           sortBy: "name",
