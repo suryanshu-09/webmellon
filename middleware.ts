@@ -48,7 +48,7 @@ export async function middleware(request: NextRequest) {
 
   // Apply rate limiting to API routes
   const isRateLimited = rateLimitedPaths.some((path) =>
-    pathname.startsWith(path)
+    pathname.startsWith(path),
   );
 
   if (isRateLimited) {
@@ -73,18 +73,20 @@ export async function middleware(request: NextRequest) {
     const host = request.headers.get("host");
 
     if (origin && host && !origin.includes(host)) {
-      return NextResponse.json(
-        { error: "Invalid origin" },
-        { status: 403 }
-      );
+      return NextResponse.json({ error: "Invalid origin" }, { status: 403 });
     }
   }
 
-  // const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET })
   const token = await getToken({
     req: request,
     secret: process.env.NEXTAUTH_SECRET,
+    cookieName: "__Secure-authjs.session-token",
   });
+
+  // const token = await getToken({
+  //   req: request,
+  //   secret: process.env.NEXTAUTH_SECRET,
+  // });
   const isProtected = protectedRoutes.some((route) =>
     pathname.startsWith(route),
   );
