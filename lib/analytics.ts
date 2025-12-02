@@ -1,4 +1,6 @@
 // lib/analytics.ts
+import { logger } from "./logger";
+
 export function sendWebVitalsToAnalytics(metric: {
   id: string;
   name: string;
@@ -28,7 +30,9 @@ export function sendWebVitalsToAnalytics(metric: {
           "Content-Type": "application/json",
         },
         keepalive: true,
-      }).catch(console.error);
+      }).catch((error) => {
+        logger.error({ error, metric: metric.name }, "Failed to send web vitals metric");
+      });
     }
   }
 }
@@ -55,6 +59,8 @@ export function trackPaginationPerformance(
       headers: {
         "Content-Type": "application/json",
       },
-    }).catch(console.error);
+    }).catch((error) => {
+      logger.error({ error, pagType: type, action }, "Failed to track pagination performance");
+    });
   }
 }

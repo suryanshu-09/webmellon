@@ -1,10 +1,17 @@
-const nextConfig = {
+import type { NextConfig } from "next";
+
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
+
+const nextConfig: NextConfig = {
   output: "standalone",
   eslint: {
     ignoreDuringBuilds: true,
   },
   images: {
     remotePatterns: [
+      // OAuth provider avatars
       {
         protocol: "https",
         hostname: "avatars.githubusercontent.com",
@@ -15,9 +22,102 @@ const nextConfig = {
         hostname: "lh3.googleusercontent.com",
         pathname: "/**",
       },
+      // YouTube thumbnails
       {
         protocol: "https",
-        hostname: "**",
+        hostname: "i.ytimg.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "img.youtube.com",
+        pathname: "/**",
+      },
+      // WordPress/Medium common image hosts
+      {
+        protocol: "https",
+        hostname: "*.medium.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "miro.medium.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn-images-1.medium.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "*.wordpress.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "*.wp.com",
+        pathname: "/**",
+      },
+      // Google favicon service
+      {
+        protocol: "https",
+        hostname: "www.google.com",
+        pathname: "/s2/favicons/**",
+      },
+      // Common CDN providers for RSS feed images
+      {
+        protocol: "https",
+        hostname: "*.cloudinary.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "*.imgix.net",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**",
+      },
+      // Common news/blog image hosts
+      {
+        protocol: "https",
+        hostname: "*.substack.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "substackcdn.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "*.ghost.io",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "*.ghost.org",
+        pathname: "/**",
+      },
+      // RSS feed aggregator images
+      {
+        protocol: "https",
+        hostname: "*.feedburner.com",
+        pathname: "/**",
+      },
+      // Gravatar for author images
+      {
+        protocol: "https",
+        hostname: "*.gravatar.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "secure.gravatar.com",
+        pathname: "/**",
       },
     ],
     // Performance optimizations for images
@@ -42,4 +142,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withBundleAnalyzer(nextConfig);

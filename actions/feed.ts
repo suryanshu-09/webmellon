@@ -1,37 +1,32 @@
 "use server";
 import { NewsRSS, WpRSS, YtRSS } from "@/prisma/zod";
 import Parser from "rss-parser";
+import { getCachedFeed } from "@/lib/cache";
 
 const ytParser = new Parser({});
 
 export async function getYTFeed(yt_channels: YtRSS[]) {
-  const ytFeed = [];
+  if (!Array.isArray(yt_channels) || yt_channels.length === 0) return [];
 
-  if (Array.isArray(yt_channels)) {
-    for (const channel of yt_channels) {
-      try {
+  const results = await Promise.allSettled(
+    yt_channels.map(async (channel) => {
+      const channelId = channel.channelId.trim();
+      return getCachedFeed(`yt:${channelId}`, async () => {
         const feed = await ytParser.parseURL(
-          `https://www.youtube.com/feeds/videos.xml?channel_id=${channel.channelId.trim()}`,
+          `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`
         );
+        return {
+          title: feed.title,
+          items: JSON.parse(JSON.stringify(feed.items)),
+          channelId: channelId,
+        };
+      });
+    })
+  );
 
-        if (feed) {
-          const safeItems = JSON.parse(JSON.stringify(feed.items));
-          ytFeed.push({
-            title: feed.title,
-            items: safeItems,
-            channelId: channel.channelId,
-          });
-        }
-      } catch (error) {
-        console.error(
-          `Failed to fetch feed for channel ID ${channel.channelId}:`,
-          error,
-        );
-      }
-    }
-  }
-
-  return ytFeed;
+  return results
+    .filter((r): r is PromiseFulfilledResult<{ title: string | undefined; items: unknown[]; channelId: string }> => r.status === "fulfilled")
+    .map((r) => r.value);
 }
 
 const newsParser = new Parser({
@@ -41,28 +36,25 @@ const newsParser = new Parser({
 });
 
 export async function getNewsFeed(news: NewsRSS[]) {
-  const newsFeed = [];
+  if (!Array.isArray(news) || news.length === 0) return [];
 
-  if (Array.isArray(news)) {
-    for (const site of news) {
-      try {
-        const feed = await newsParser.parseURL(site.url.trim());
+  const results = await Promise.allSettled(
+    news.map(async (site) => {
+      const url = site.url.trim();
+      return getCachedFeed(`news:${url}`, async () => {
+        const feed = await newsParser.parseURL(url);
+        return {
+          title: feed.title,
+          items: JSON.parse(JSON.stringify(feed.items)),
+          url: url,
+        };
+      });
+    })
+  );
 
-        if (feed) {
-          const safeItems = JSON.parse(JSON.stringify(feed.items));
-          newsFeed.push({
-            title: feed.title,
-            items: safeItems,
-            url: site.url.trim(),
-          });
-        }
-      } catch (error) {
-        console.error(`Failed to fetch news feed from ${site.url}:`, error);
-      }
-    }
-  }
-
-  return newsFeed;
+  return results
+    .filter((r): r is PromiseFulfilledResult<{ title: string | undefined; items: unknown[]; url: string }> => r.status === "fulfilled")
+    .map((r) => r.value);
 }
 
 const wpParser = new Parser({
@@ -72,27 +64,24 @@ const wpParser = new Parser({
 });
 
 export async function getWPFeed(wp: WpRSS[]) {
-  const wpFeed = [];
+  if (!Array.isArray(wp) || wp.length === 0) return [];
 
-  if (Array.isArray(wp)) {
-    for (const blog of wp) {
-      try {
-        const feed = await wpParser.parseURL(`${blog.url.trim()}/feed`);
+  const results = await Promise.allSettled(
+    wp.map(async (blog) => {
+      const url = blog.url.trim();
+      return getCachedFeed(`wp:${url}`, async () => {
+        const feed = await wpParser.parseURL(`${url}/feed`);
+        return {
+          title: feed.title,
+          items: JSON.parse(JSON.stringify(feed.items)),
+          image: blog.image,
+          url: url,
+        };
+      });
+    })
+  );
 
-        if (feed) {
-          const safeItems = JSON.parse(JSON.stringify(feed.items));
-          wpFeed.push({
-            title: feed.title,
-            items: safeItems,
-            image: blog.image,
-            url: blog.url.trim(),
-          });
-        }
-      } catch (error) {
-        console.error(`Failed to fetch WP feed from ${blog.url}:`, error);
-      }
-    }
-  }
-
-  return wpFeed;
+  return results
+    .filter((r): r is PromiseFulfilledResult<{ title: string | undefined; items: unknown[]; image: number; url: string }> => r.status === "fulfilled")
+    .map((r) => r.value);
 }

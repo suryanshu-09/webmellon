@@ -3,8 +3,6 @@ import { usePersistedNewsDashboardAtom } from "@/hooks/use-persisted-dashboard-a
 import { newsFeedAtomLoadable } from "@/store/atoms/feedAtom";
 import { NEWSFeed, NEWSFeedItem } from "@/types/types";
 import { useAtomValue, useSetAtom } from "jotai";
-import Image from "next/image";
-import Link from "next/link";
 import { SearchNews } from "@/components/search-news";
 import {
   Carousel,
@@ -18,8 +16,10 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { newsDashboardAtom } from "@/store/atoms/dashboardAtom";
 import { X, ArrowUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback, memo } from "react";
 import { useInView } from "react-intersection-observer";
+import { useVirtualizer } from "@tanstack/react-virtual";
+import { FeedCard } from "@/components/feed-card";
 
 export default function NewsFeedInfinite() {
   usePersistedNewsDashboardAtom();
@@ -53,9 +53,9 @@ export default function NewsFeedInfinite() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToTop = () => {
+  const scrollToTop = useCallback(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  }, []);
 
   // Create paginated feed data
   const paginatedFeedData =
@@ -133,78 +133,30 @@ export default function NewsFeedInfinite() {
           </div>
         </div>
       ) : (
-        <div>
-          <div className="flex flex-col justify-center">
-            {Array.from({ length: 3 }).map((_, outerIdx) => (
-              <div key={outerIdx} className="mt-4">
-                <div className="flex justify-center mt-4">
-                  <Carousel>
-                    <CarouselContent className="max-w-[80vw]">
-                      {Array.from({ length: 6 }).map((_, InnerIdx) => (
-                        <CarouselItem
-                          key={InnerIdx}
-                          className="md:basis-1/2 xl:basis-1/3"
-                        >
-                          <Card className="w-[75vw] sm:w-[60vw] md:w-[35vw] xl:w-[25vw]">
-                            <CardContent>
-                              <Skeleton className="w-[100%] h-[360px]" />
-                            </CardContent>
-                          </Card>
-                        </CarouselItem>
-                      ))}
-                    </CarouselContent>
-                    <CarouselPrevious />
-                    <CarouselNext />
-                  </Carousel>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        <LoadingSkeleton />
       )}
     </div>
   );
 }
 
-function DisplayNEWSFeed({ newsFeed }: { newsFeed: NEWSFeed[] }) {
-  const { search, feedTitle } = useAtomValue(newsDashboardAtom);
-  const setnewsDashboardAtom = useSetAtom(newsDashboardAtom);
-
-  if (!search) {
-    return (
+// Memoized loading skeleton
+const LoadingSkeleton = memo(function LoadingSkeleton() {
+  return (
+    <div>
       <div className="flex flex-col justify-center">
-        {newsFeed.map((pub: NEWSFeed) => (
-          <div key={pub.title} id={pub.title} className="mt-4">
-            <div className="text-xl font-semibold">{pub.title}</div>
+        {Array.from({ length: 3 }).map((_, outerIdx) => (
+          <div key={outerIdx} className="mt-4">
             <div className="flex justify-center mt-4">
               <Carousel>
                 <CarouselContent className="max-w-[80vw]">
-                  {pub.items.map((item: NEWSFeedItem) => (
+                  {Array.from({ length: 6 }).map((_, InnerIdx) => (
                     <CarouselItem
-                      key={item.guid}
+                      key={InnerIdx}
                       className="md:basis-1/2 xl:basis-1/3"
                     >
-                      <Card>
+                      <Card className="w-[75vw] sm:w-[60vw] md:w-[35vw] xl:w-[25vw]">
                         <CardContent>
-                          <Link href={item.link} target="_blank">
-                            <div className="relative w-full h-[240px] md:h-[360px]">
-                              <Image
-                                src={
-                                  item["media:content"]?.$.url ??
-                                  "/assets/notfound.jpg"
-                                }
-                                alt={item.title}
-                                fill
-                                className="rounded-lg object-cover"
-                              />
-                            </div>
-                            <p className="truncate mt-2 max-w-[426px] font-semibold text-lg">
-                              {item.title}
-                            </p>
-                            <p className="line-clamp-3 mt-2 max-w-[426px] text-sm">
-                              {item.contentSnippet}
-                            </p>
-                          </Link>
+                          <Skeleton className="w-[100%] h-[360px]" />
                         </CardContent>
                       </Card>
                     </CarouselItem>
@@ -217,6 +169,124 @@ function DisplayNEWSFeed({ newsFeed }: { newsFeed: NEWSFeed[] }) {
           </div>
         ))}
       </div>
+    </div>
+  );
+});
+
+// Memoized carousel item for feed items
+const NewsCarouselItem = memo(function NewsCarouselItem({
+  item,
+  index,
+}: {
+  item: NEWSFeedItem;
+  index: number;
+}) {
+  return (
+    <CarouselItem className="md:basis-1/2 xl:basis-1/3">
+      <FeedCard
+        title={item.title}
+        link={item.link}
+        imageUrl={item["media:content"]?.$.url}
+        snippet={item.contentSnippet}
+        index={index}
+      />
+    </CarouselItem>
+  );
+});
+
+// Memoized publication section
+const PublicationSection = memo(function PublicationSection({
+  pub,
+}: {
+  pub: NEWSFeed;
+}) {
+  return (
+    <div id={pub.title} className="mt-4">
+      <div className="text-xl font-semibold">{pub.title}</div>
+      <div className="flex justify-center mt-4">
+        <Carousel>
+          <CarouselContent className="max-w-[80vw]">
+            {pub.items.map((item: NEWSFeedItem, index: number) => (
+              <NewsCarouselItem key={item.guid} item={item} index={index} />
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+      </div>
+    </div>
+  );
+});
+
+// Virtualized display for large feeds
+function VirtualizedNewsFeed({ newsFeed }: { newsFeed: NEWSFeed[] }) {
+  const parentRef = useRef<HTMLDivElement>(null);
+
+  const virtualizer = useVirtualizer({
+    count: newsFeed.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 500, // Estimated height per publication section
+    overscan: 2,
+  });
+
+  return (
+    <div
+      ref={parentRef}
+      className="h-[calc(100vh-200px)] overflow-auto"
+    >
+      <div
+        style={{
+          height: `${virtualizer.getTotalSize()}px`,
+          width: "100%",
+          position: "relative",
+        }}
+      >
+        {virtualizer.getVirtualItems().map((virtualItem) => {
+          const pub = newsFeed[virtualItem.index];
+          return (
+            <div
+              key={pub.title}
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                transform: `translateY(${virtualItem.start}px)`,
+              }}
+            >
+              <PublicationSection pub={pub} />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function DisplayNEWSFeed({ newsFeed }: { newsFeed: NEWSFeed[] }) {
+  const { search, feedTitle } = useAtomValue(newsDashboardAtom);
+  const setnewsDashboardAtom = useSetAtom(newsDashboardAtom);
+
+  const handleClearSearch = useCallback(() => {
+    setnewsDashboardAtom({ search: false, feedTitle: "" });
+  }, [setnewsDashboardAtom]);
+
+  if (!search) {
+    // Use virtualization for feeds with many publications (more than 5)
+    if (newsFeed.length > 5) {
+      return (
+        <div className="flex flex-col justify-center">
+          <VirtualizedNewsFeed newsFeed={newsFeed} />
+        </div>
+      );
+    }
+
+    return (
+      <div className="flex flex-col justify-center">
+        {newsFeed.map((pub: NEWSFeed) => (
+          <PublicationSection key={pub.title} pub={pub} />
+        ))}
+      </div>
     );
   }
 
@@ -227,9 +297,7 @@ function DisplayNEWSFeed({ newsFeed }: { newsFeed: NEWSFeed[] }) {
         <div className="flex justify-end">
           <Button
             className="hover:cursor-pointer"
-            onClick={() =>
-              setnewsDashboardAtom({ search: false, feedTitle: "" })
-            }
+            onClick={handleClearSearch}
             variant={"destructive"}
           >
             <X />
@@ -237,47 +305,7 @@ function DisplayNEWSFeed({ newsFeed }: { newsFeed: NEWSFeed[] }) {
         </div>
         <div className="flex flex-col justify-center">
           {newNews.map((pub: NEWSFeed) => (
-            <div key={pub.title} id={pub.title} className="mt-4">
-              <div className="text-xl font-semibold">{pub.title}</div>
-              <div className="flex justify-center mt-4">
-                <Carousel>
-                  <CarouselContent className="max-w-[80vw]">
-                    {pub.items.map((item: NEWSFeedItem) => (
-                      <CarouselItem
-                        key={item.guid}
-                        className="md:basis-1/2 xl:basis-1/3"
-                      >
-                        <Card>
-                          <CardContent>
-                            <Link href={item.link} target="_blank">
-                              <div className="relative w-full h-[240px] md:h-[360px]">
-                                <Image
-                                  src={
-                                    item["media:content"]?.$.url ??
-                                    "/assets/notfound.jpg"
-                                  }
-                                  alt={item.title}
-                                  fill
-                                  className="rounded-lg object-cover"
-                                />
-                              </div>
-                              <p className="truncate mt-2 max-w-[426px] font-semibold text-lg">
-                                {item.title}
-                              </p>
-                              <p className="line-clamp-3 mt-2 max-w-[426px] text-sm">
-                                {item.contentSnippet}
-                              </p>
-                            </Link>
-                          </CardContent>
-                        </Card>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                  <CarouselPrevious />
-                  <CarouselNext />
-                </Carousel>
-              </div>
-            </div>
+            <PublicationSection key={pub.title} pub={pub} />
           ))}
         </div>
       </div>

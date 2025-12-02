@@ -168,6 +168,6 @@
   }
 }
 
-*{
- @apply transition-colors duration-300;
-}
+/* Removed global transition CSS - was causing unnecessary repaints
+ * Apply transitions only to specific interactive elements as needed
+ */

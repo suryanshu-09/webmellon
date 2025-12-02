@@ -1,8 +1,10 @@
+import { memo } from "react";
 import { CatalogueWithWebsites } from "@/types/types";
 import DisplayWebsite from "@/components/display-website";
 import { Website } from "@/prisma/generated/zod";
 
-export default function DisplayCatalogue({
+// Memoized DisplayCatalogue component to prevent unnecessary re-renders
+const DisplayCatalogue = memo(function DisplayCatalogue({
   catalogue,
 }: {
   catalogue: CatalogueWithWebsites;
@@ -28,4 +30,6 @@ export default function DisplayCatalogue({
       )}
     </div>
   );
-}
+});
+
+export default DisplayCatalogue;

@@ -4951,18 +4951,27 @@ export namespace Prisma {
     id: number | null
     name: string | null
     userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    deletedAt: Date | null
   }
 
   export type CatalogueMaxAggregateOutputType = {
     id: number | null
     name: string | null
     userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    deletedAt: Date | null
   }
 
   export type CatalogueCountAggregateOutputType = {
     id: number
     name: number
     userId: number
+    createdAt: number
+    updatedAt: number
+    deletedAt: number
     _all: number
   }
 
@@ -4979,18 +4988,27 @@ export namespace Prisma {
     id?: true
     name?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
   }
 
   export type CatalogueMaxAggregateInputType = {
     id?: true
     name?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
   }
 
   export type CatalogueCountAggregateInputType = {
     id?: true
     name?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
     _all?: true
   }
 
@@ -5084,6 +5102,9 @@ export namespace Prisma {
     id: number
     name: string
     userId: string
+    createdAt: Date
+    updatedAt: Date
+    deletedAt: Date | null
     _count: CatalogueCountAggregateOutputType | null
     _avg: CatalogueAvgAggregateOutputType | null
     _sum: CatalogueSumAggregateOutputType | null
@@ -5109,6 +5130,9 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     websites?: boolean | Catalogue$websitesArgs<ExtArgs>
     _count?: boolean | CatalogueCountOutputTypeDefaultArgs<ExtArgs>
@@ -5118,6 +5142,9 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["catalogue"]>
 
@@ -5125,6 +5152,9 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["catalogue"]>
 
@@ -5132,9 +5162,12 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
   }
 
-  export type CatalogueOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "userId", ExtArgs["result"]["catalogue"]>
+  export type CatalogueOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "userId" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["catalogue"]>
   export type CatalogueInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     websites?: boolean | Catalogue$websitesArgs<ExtArgs>
@@ -5157,6 +5190,9 @@ export namespace Prisma {
       id: number
       name: string
       userId: string
+      createdAt: Date
+      updatedAt: Date
+      deletedAt: Date | null
     }, ExtArgs["result"]["catalogue"]>
     composites: {}
   }
@@ -5585,6 +5621,9 @@ export namespace Prisma {
     readonly id: FieldRef<"Catalogue", 'Int'>
     readonly name: FieldRef<"Catalogue", 'String'>
     readonly userId: FieldRef<"Catalogue", 'String'>
+    readonly createdAt: FieldRef<"Catalogue", 'DateTime'>
+    readonly updatedAt: FieldRef<"Catalogue", 'DateTime'>
+    readonly deletedAt: FieldRef<"Catalogue", 'DateTime'>
   }
     
 
@@ -6052,6 +6091,7 @@ export namespace Prisma {
     url: string | null
     favicon: string | null
     userId: string | null
+    deletedAt: Date | null
   }
 
   export type WebsiteMaxAggregateOutputType = {
@@ -6061,6 +6101,7 @@ export namespace Prisma {
     url: string | null
     favicon: string | null
     userId: string | null
+    deletedAt: Date | null
   }
 
   export type WebsiteCountAggregateOutputType = {
@@ -6070,6 +6111,7 @@ export namespace Prisma {
     url: number
     favicon: number
     userId: number
+    deletedAt: number
     _all: number
   }
 
@@ -6091,6 +6133,7 @@ export namespace Prisma {
     url?: true
     favicon?: true
     userId?: true
+    deletedAt?: true
   }
 
   export type WebsiteMaxAggregateInputType = {
@@ -6100,6 +6143,7 @@ export namespace Prisma {
     url?: true
     favicon?: true
     userId?: true
+    deletedAt?: true
   }
 
   export type WebsiteCountAggregateInputType = {
@@ -6109,6 +6153,7 @@ export namespace Prisma {
     url?: true
     favicon?: true
     userId?: true
+    deletedAt?: true
     _all?: true
   }
 
@@ -6205,6 +6250,7 @@ export namespace Prisma {
     url: string
     favicon: string
     userId: string
+    deletedAt: Date | null
     _count: WebsiteCountAggregateOutputType | null
     _avg: WebsiteAvgAggregateOutputType | null
     _sum: WebsiteSumAggregateOutputType | null
@@ -6233,6 +6279,7 @@ export namespace Prisma {
     url?: boolean
     favicon?: boolean
     userId?: boolean
+    deletedAt?: boolean
     catalogue?: boolean | CatalogueDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["website"]>
@@ -6244,6 +6291,7 @@ export namespace Prisma {
     url?: boolean
     favicon?: boolean
     userId?: boolean
+    deletedAt?: boolean
     catalogue?: boolean | CatalogueDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["website"]>
@@ -6255,6 +6303,7 @@ export namespace Prisma {
     url?: boolean
     favicon?: boolean
     userId?: boolean
+    deletedAt?: boolean
     catalogue?: boolean | CatalogueDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["website"]>
@@ -6266,9 +6315,10 @@ export namespace Prisma {
     url?: boolean
     favicon?: boolean
     userId?: boolean
+    deletedAt?: boolean
   }
 
-  export type WebsiteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "catalogueId" | "name" | "url" | "favicon" | "userId", ExtArgs["result"]["website"]>
+  export type WebsiteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "catalogueId" | "name" | "url" | "favicon" | "userId" | "deletedAt", ExtArgs["result"]["website"]>
   export type WebsiteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     catalogue?: boolean | CatalogueDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -6295,6 +6345,7 @@ export namespace Prisma {
       url: string
       favicon: string
       userId: string
+      deletedAt: Date | null
     }, ExtArgs["result"]["website"]>
     composites: {}
   }
@@ -6726,6 +6777,7 @@ export namespace Prisma {
     readonly url: FieldRef<"Website", 'String'>
     readonly favicon: FieldRef<"Website", 'String'>
     readonly userId: FieldRef<"Website", 'String'>
+    readonly deletedAt: FieldRef<"Website", 'DateTime'>
   }
     
 
@@ -11681,7 +11733,10 @@ export namespace Prisma {
   export const CatalogueScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    userId: 'userId'
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt'
   };
 
   export type CatalogueScalarFieldEnum = (typeof CatalogueScalarFieldEnum)[keyof typeof CatalogueScalarFieldEnum]
@@ -11693,7 +11748,8 @@ export namespace Prisma {
     name: 'name',
     url: 'url',
     favicon: 'favicon',
-    userId: 'userId'
+    userId: 'userId',
+    deletedAt: 'deletedAt'
   };
 
   export type WebsiteScalarFieldEnum = (typeof WebsiteScalarFieldEnum)[keyof typeof WebsiteScalarFieldEnum]
@@ -11776,6 +11832,14 @@ export namespace Prisma {
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
   export const JsonNullValueFilter: {
     DbNull: typeof DbNull,
     JsonNull: typeof JsonNull,
@@ -11783,14 +11847,6 @@ export namespace Prisma {
   };
 
   export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
-
-
-  export const NullsOrder: {
-    first: 'first',
-    last: 'last'
-  };
-
-  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -12027,6 +12083,9 @@ export namespace Prisma {
     id?: IntFilter<"Catalogue"> | number
     name?: StringFilter<"Catalogue"> | string
     userId?: StringFilter<"Catalogue"> | string
+    createdAt?: DateTimeFilter<"Catalogue"> | Date | string
+    updatedAt?: DateTimeFilter<"Catalogue"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"Catalogue"> | Date | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     websites?: WebsiteListRelationFilter
   }
@@ -12035,6 +12094,9 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
     websites?: WebsiteOrderByRelationAggregateInput
   }
@@ -12047,6 +12109,9 @@ export namespace Prisma {
     NOT?: CatalogueWhereInput | CatalogueWhereInput[]
     name?: StringFilter<"Catalogue"> | string
     userId?: StringFilter<"Catalogue"> | string
+    createdAt?: DateTimeFilter<"Catalogue"> | Date | string
+    updatedAt?: DateTimeFilter<"Catalogue"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"Catalogue"> | Date | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     websites?: WebsiteListRelationFilter
   }, "id" | "user_catalogue_name_unique">
@@ -12055,6 +12120,9 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     _count?: CatalogueCountOrderByAggregateInput
     _avg?: CatalogueAvgOrderByAggregateInput
     _max?: CatalogueMaxOrderByAggregateInput
@@ -12069,6 +12137,9 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Catalogue"> | number
     name?: StringWithAggregatesFilter<"Catalogue"> | string
     userId?: StringWithAggregatesFilter<"Catalogue"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Catalogue"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Catalogue"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"Catalogue"> | Date | string | null
   }
 
   export type WebsiteWhereInput = {
@@ -12081,6 +12152,7 @@ export namespace Prisma {
     url?: StringFilter<"Website"> | string
     favicon?: StringFilter<"Website"> | string
     userId?: StringFilter<"Website"> | string
+    deletedAt?: DateTimeNullableFilter<"Website"> | Date | string | null
     catalogue?: XOR<CatalogueScalarRelationFilter, CatalogueWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
@@ -12092,6 +12164,7 @@ export namespace Prisma {
     url?: SortOrder
     favicon?: SortOrder
     userId?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     catalogue?: CatalogueOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
   }
@@ -12108,6 +12181,7 @@ export namespace Prisma {
     url?: StringFilter<"Website"> | string
     favicon?: StringFilter<"Website"> | string
     userId?: StringFilter<"Website"> | string
+    deletedAt?: DateTimeNullableFilter<"Website"> | Date | string | null
     catalogue?: XOR<CatalogueScalarRelationFilter, CatalogueWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "user_website_name_unique" | "user_website_url_unique">
@@ -12119,6 +12193,7 @@ export namespace Prisma {
     url?: SortOrder
     favicon?: SortOrder
     userId?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     _count?: WebsiteCountOrderByAggregateInput
     _avg?: WebsiteAvgOrderByAggregateInput
     _max?: WebsiteMaxOrderByAggregateInput
@@ -12136,6 +12211,7 @@ export namespace Prisma {
     url?: StringWithAggregatesFilter<"Website"> | string
     favicon?: StringWithAggregatesFilter<"Website"> | string
     userId?: StringWithAggregatesFilter<"Website"> | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"Website"> | Date | string | null
   }
 
   export type UserWhereInput = {
@@ -12545,6 +12621,9 @@ export namespace Prisma {
 
   export type CatalogueCreateInput = {
     name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutCataloguesInput
     websites?: WebsiteCreateNestedManyWithoutCatalogueInput
   }
@@ -12553,11 +12632,17 @@ export namespace Prisma {
     id?: number
     name: string
     userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
     websites?: WebsiteUncheckedCreateNestedManyWithoutCatalogueInput
   }
 
   export type CatalogueUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutCataloguesNestedInput
     websites?: WebsiteUpdateManyWithoutCatalogueNestedInput
   }
@@ -12566,6 +12651,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     websites?: WebsiteUncheckedUpdateManyWithoutCatalogueNestedInput
   }
 
@@ -12573,22 +12661,32 @@ export namespace Prisma {
     id?: number
     name: string
     userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
   }
 
   export type CatalogueUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type CatalogueUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type WebsiteCreateInput = {
     name: string
     url: string
     favicon: string
+    deletedAt?: Date | string | null
     catalogue: CatalogueCreateNestedOneWithoutWebsitesInput
     user: UserCreateNestedOneWithoutWebsitesInput
   }
@@ -12600,12 +12698,14 @@ export namespace Prisma {
     url: string
     favicon: string
     userId: string
+    deletedAt?: Date | string | null
   }
 
   export type WebsiteUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     favicon?: StringFieldUpdateOperationsInput | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     catalogue?: CatalogueUpdateOneRequiredWithoutWebsitesNestedInput
     user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
   }
@@ -12617,6 +12717,7 @@ export namespace Prisma {
     url?: StringFieldUpdateOperationsInput | string
     favicon?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type WebsiteCreateManyInput = {
@@ -12626,12 +12727,14 @@ export namespace Prisma {
     url: string
     favicon: string
     userId: string
+    deletedAt?: Date | string | null
   }
 
   export type WebsiteUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     favicon?: StringFieldUpdateOperationsInput | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type WebsiteUncheckedUpdateManyInput = {
@@ -12641,6 +12744,7 @@ export namespace Prisma {
     url?: StringFieldUpdateOperationsInput | string
     favicon?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserCreateInput = {
@@ -13119,10 +13223,37 @@ export namespace Prisma {
     image?: SortOrder
   }
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type WebsiteListRelationFilter = {
     every?: WebsiteWhereInput
     some?: WebsiteWhereInput
     none?: WebsiteWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type WebsiteOrderByRelationAggregateInput = {
@@ -13138,6 +13269,9 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
   }
 
   export type CatalogueAvgOrderByAggregateInput = {
@@ -13148,16 +13282,50 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
   }
 
   export type CatalogueMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
   }
 
   export type CatalogueSumOrderByAggregateInput = {
     id?: SortOrder
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type CatalogueScalarRelationFilter = {
@@ -13182,6 +13350,7 @@ export namespace Prisma {
     url?: SortOrder
     favicon?: SortOrder
     userId?: SortOrder
+    deletedAt?: SortOrder
   }
 
   export type WebsiteAvgOrderByAggregateInput = {
@@ -13196,6 +13365,7 @@ export namespace Prisma {
     url?: SortOrder
     favicon?: SortOrder
     userId?: SortOrder
+    deletedAt?: SortOrder
   }
 
   export type WebsiteMinOrderByAggregateInput = {
@@ -13205,6 +13375,7 @@ export namespace Prisma {
     url?: SortOrder
     favicon?: SortOrder
     userId?: SortOrder
+    deletedAt?: SortOrder
   }
 
   export type WebsiteSumOrderByAggregateInput = {
@@ -13225,17 +13396,6 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
   export type JsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -13259,17 +13419,6 @@ export namespace Prisma {
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
-
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type AccountListRelationFilter = {
@@ -13306,11 +13455,6 @@ export namespace Prisma {
     every?: YtRSSWhereInput
     some?: YtRSSWhereInput
     none?: YtRSSWhereInput
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
   }
 
   export type AccountOrderByRelationAggregateInput = {
@@ -13385,20 +13529,6 @@ export namespace Prisma {
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
-
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
   export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
     | PatchUndefined<
         Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
@@ -13424,20 +13554,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedJsonNullableFilter<$PrismaModel>
     _max?: NestedJsonNullableFilter<$PrismaModel>
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type IntNullableFilter<$PrismaModel = never> = {
@@ -13649,6 +13765,14 @@ export namespace Prisma {
     connect?: WebsiteWhereUniqueInput | WebsiteWhereUniqueInput[]
   }
 
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
   export type UserUpdateOneRequiredWithoutCataloguesNestedInput = {
     create?: XOR<UserCreateWithoutCataloguesInput, UserUncheckedCreateWithoutCataloguesInput>
     connectOrCreate?: UserCreateOrConnectWithoutCataloguesInput
@@ -13813,14 +13937,6 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
   }
 
   export type AccountUpdateManyWithoutUserNestedInput = {
@@ -14124,18 +14240,15 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
@@ -14149,7 +14262,7 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
     notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -14157,7 +14270,49 @@ export namespace Prisma {
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -14175,31 +14330,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
   export type NestedJsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -14223,20 +14353,6 @@ export namespace Prisma {
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -14561,6 +14677,7 @@ export namespace Prisma {
     name: string
     url: string
     favicon: string
+    deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutWebsitesInput
   }
 
@@ -14570,6 +14687,7 @@ export namespace Prisma {
     url: string
     favicon: string
     userId: string
+    deletedAt?: Date | string | null
   }
 
   export type WebsiteCreateOrConnectWithoutCatalogueInput = {
@@ -14653,10 +14771,14 @@ export namespace Prisma {
     url?: StringFilter<"Website"> | string
     favicon?: StringFilter<"Website"> | string
     userId?: StringFilter<"Website"> | string
+    deletedAt?: DateTimeNullableFilter<"Website"> | Date | string | null
   }
 
   export type CatalogueCreateWithoutWebsitesInput = {
     name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutCataloguesInput
   }
 
@@ -14664,6 +14786,9 @@ export namespace Prisma {
     id?: number
     name: string
     userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
   }
 
   export type CatalogueCreateOrConnectWithoutWebsitesInput = {
@@ -14723,6 +14848,9 @@ export namespace Prisma {
 
   export type CatalogueUpdateWithoutWebsitesInput = {
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutCataloguesNestedInput
   }
 
@@ -14730,6 +14858,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserUpsertWithoutWebsitesInput = {
@@ -14819,12 +14950,18 @@ export namespace Prisma {
 
   export type CatalogueCreateWithoutUserInput = {
     name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
     websites?: WebsiteCreateNestedManyWithoutCatalogueInput
   }
 
   export type CatalogueUncheckedCreateWithoutUserInput = {
     id?: number
     name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
     websites?: WebsiteUncheckedCreateNestedManyWithoutCatalogueInput
   }
 
@@ -14885,6 +15022,7 @@ export namespace Prisma {
     name: string
     url: string
     favicon: string
+    deletedAt?: Date | string | null
     catalogue: CatalogueCreateNestedOneWithoutWebsitesInput
   }
 
@@ -14894,6 +15032,7 @@ export namespace Prisma {
     name: string
     url: string
     favicon: string
+    deletedAt?: Date | string | null
   }
 
   export type WebsiteCreateOrConnectWithoutUserInput = {
@@ -15004,6 +15143,9 @@ export namespace Prisma {
     id?: IntFilter<"Catalogue"> | number
     name?: StringFilter<"Catalogue"> | string
     userId?: StringFilter<"Catalogue"> | string
+    createdAt?: DateTimeFilter<"Catalogue"> | Date | string
+    updatedAt?: DateTimeFilter<"Catalogue"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"Catalogue"> | Date | string | null
   }
 
   export type NewsRSSUpsertWithWhereUniqueWithoutUserInput = {
@@ -15299,12 +15441,14 @@ export namespace Prisma {
     url: string
     favicon: string
     userId: string
+    deletedAt?: Date | string | null
   }
 
   export type WebsiteUpdateWithoutCatalogueInput = {
     name?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     favicon?: StringFieldUpdateOperationsInput | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
   }
 
@@ -15314,6 +15458,7 @@ export namespace Prisma {
     url?: StringFieldUpdateOperationsInput | string
     favicon?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type WebsiteUncheckedUpdateManyWithoutCatalogueInput = {
@@ -15322,6 +15467,7 @@ export namespace Prisma {
     url?: StringFieldUpdateOperationsInput | string
     favicon?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type AccountCreateManyUserInput = {
@@ -15342,6 +15488,9 @@ export namespace Prisma {
   export type CatalogueCreateManyUserInput = {
     id?: number
     name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
   }
 
   export type NewsRSSCreateManyUserInput = {
@@ -15362,6 +15511,7 @@ export namespace Prisma {
     name: string
     url: string
     favicon: string
+    deletedAt?: Date | string | null
   }
 
   export type WpRSSCreateManyUserInput = {
@@ -15422,18 +15572,27 @@ export namespace Prisma {
 
   export type CatalogueUpdateWithoutUserInput = {
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     websites?: WebsiteUpdateManyWithoutCatalogueNestedInput
   }
 
   export type CatalogueUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     websites?: WebsiteUncheckedUpdateManyWithoutCatalogueNestedInput
   }
 
   export type CatalogueUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type NewsRSSUpdateWithoutUserInput = {
@@ -15475,6 +15634,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     favicon?: StringFieldUpdateOperationsInput | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     catalogue?: CatalogueUpdateOneRequiredWithoutWebsitesNestedInput
   }
 
@@ -15484,6 +15644,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     favicon?: StringFieldUpdateOperationsInput | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type WebsiteUncheckedUpdateManyWithoutUserInput = {
@@ -15492,6 +15653,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     favicon?: StringFieldUpdateOperationsInput | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type WpRSSUpdateWithoutUserInput = {

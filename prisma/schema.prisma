@@ -20,6 +20,7 @@ model YtRSS {
   user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, channelId], name: "user_ytrss_channelId_unique")
+  @@index([userId])
 }
 
 model NewsRSS {
@@ -29,6 +30,7 @@ model NewsRSS {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, url], name: "user_newsrss_url_unique")
+  @@index([userId])
 }
 
 model WpRSS {
@@ -39,6 +41,7 @@ model WpRSS {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, url], name: "user_wprss_url_unique")
+  @@index([userId])
 }
 
 model Catalogue {
@@ -47,6 +50,7 @@ model Catalogue {
   userId    String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
   user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   websites  Website[]
 
@@ -54,21 +58,24 @@ model Catalogue {
   @@index([userId, name])
   @@index([userId, createdAt])
   @@index([userId, updatedAt])
+  @@index([userId, deletedAt])
 }
 
 model Website {
-  id          Int       @id @default(autoincrement())
+  id          Int        @id @default(autoincrement())
   catalogueId Int
   name        String
   url         String
   favicon     String
   userId      String
-  catalogue   Catalogue @relation(fields: [catalogueId], references: [id], onDelete: Cascade)
-  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  deletedAt   DateTime?
+  catalogue   Catalogue  @relation(fields: [catalogueId], references: [id], onDelete: Cascade)
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, name], name: "user_website_name_unique")
   @@unique([userId, url], name: "user_website_url_unique")
   @@index([catalogueId, name])
+  @@index([userId, catalogueId])
 }
 
 model User {

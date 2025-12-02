@@ -1,4 +1,5 @@
 import { atom } from "jotai";
+import { logger } from "@/lib/logger";
 
 export interface UserPreferences {
   paginationType: "pages" | "infinite" | "virtual";
@@ -58,7 +59,7 @@ export const saveUserPreferencesAtom = atom(
       
       return updatedPrefs;
     } catch (error) {
-      console.error("Error saving preferences:", error);
+      logger.error({ error, preferences }, "Error saving user preferences");
       throw error;
     }
   }

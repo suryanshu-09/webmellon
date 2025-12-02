@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { fetchCataloguesPaginated } from "@/actions/fetch";
 import { User } from "@/lib/generated/prisma";
+import { logger } from "@/lib/logger";
 
 export async function GET(request: Request) {
   try {
@@ -57,11 +58,11 @@ export async function GET(request: Request) {
     return NextResponse.json(result, {
       status: 200,
       headers: {
-        "Cache-Control": "private, max-age=60, must-revalidate",
+        "Cache-Control": "private, s-maxage=60, stale-while-revalidate=300",
       },
     });
   } catch (error) {
-    console.error("Error fetching paginated catalogues:", error);
+    logger.error({ error, userId: (await auth())?.user?.id }, "Error fetching paginated catalogues");
     return NextResponse.json(
       { error: "Failed to fetch catalogues" },
       { status: 500 }

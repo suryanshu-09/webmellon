@@ -62,9 +62,9 @@ export const NewsRSSScalarFieldEnumSchema = z.enum(['id','url','userId']);
 
 export const WpRSSScalarFieldEnumSchema = z.enum(['id','url','userId','image']);
 
-export const CatalogueScalarFieldEnumSchema = z.enum(['id','name','userId']);
+export const CatalogueScalarFieldEnumSchema = z.enum(['id','name','userId','createdAt','updatedAt','deletedAt']);
 
-export const WebsiteScalarFieldEnumSchema = z.enum(['id','catalogueId','name','url','favicon','userId']);
+export const WebsiteScalarFieldEnumSchema = z.enum(['id','catalogueId','name','url','favicon','userId','deletedAt']);
 
 export const UserScalarFieldEnumSchema = z.enum(['id','name','email','emailVerified','image','preferences','createdAt','updatedAt']);
 
@@ -80,9 +80,9 @@ export const NullableJsonNullValueInputSchema = z.enum(['DbNull','JsonNull',]).t
 
 export const QueryModeSchema = z.enum(['default','insensitive']);
 
-export const JsonNullValueFilterSchema = z.enum(['DbNull','JsonNull','AnyNull',]).transform((value) => value === 'JsonNull' ? Prisma.JsonNull : value === 'DbNull' ? Prisma.JsonNull : value === 'AnyNull' ? Prisma.AnyNull : value);
-
 export const NullsOrderSchema = z.enum(['first','last']);
+
+export const JsonNullValueFilterSchema = z.enum(['DbNull','JsonNull','AnyNull',]).transform((value) => value === 'JsonNull' ? Prisma.JsonNull : value === 'DbNull' ? Prisma.JsonNull : value === 'AnyNull' ? Prisma.AnyNull : value);
 /////////////////////////////////////////
 // MODELS
 /////////////////////////////////////////
@@ -132,6 +132,9 @@ export const CatalogueSchema = z.object({
   id: z.number().int(),
   name: z.string(),
   userId: z.string(),
+  createdAt: z.coerce.date(),
+  updatedAt: z.coerce.date(),
+  deletedAt: z.coerce.date().nullable(),
 })
 
 export type Catalogue = z.infer<typeof CatalogueSchema>
@@ -147,6 +150,7 @@ export const WebsiteSchema = z.object({
   url: z.string(),
   favicon: z.string(),
   userId: z.string(),
+  deletedAt: z.coerce.date().nullable(),
 })
 
 export type Website = z.infer<typeof WebsiteSchema>
@@ -304,6 +308,9 @@ export const CatalogueSelectSchema: z.ZodType<Prisma.CatalogueSelect> = z.object
   id: z.boolean().optional(),
   name: z.boolean().optional(),
   userId: z.boolean().optional(),
+  createdAt: z.boolean().optional(),
+  updatedAt: z.boolean().optional(),
+  deletedAt: z.boolean().optional(),
   user: z.union([z.boolean(),z.lazy(() => UserArgsSchema)]).optional(),
   websites: z.union([z.boolean(),z.lazy(() => WebsiteFindManyArgsSchema)]).optional(),
   _count: z.union([z.boolean(),z.lazy(() => CatalogueCountOutputTypeArgsSchema)]).optional(),
@@ -329,6 +336,7 @@ export const WebsiteSelectSchema: z.ZodType<Prisma.WebsiteSelect> = z.object({
   url: z.boolean().optional(),
   favicon: z.boolean().optional(),
   userId: z.boolean().optional(),
+  deletedAt: z.boolean().optional(),
   catalogue: z.union([z.boolean(),z.lazy(() => CatalogueArgsSchema)]).optional(),
   user: z.union([z.boolean(),z.lazy(() => UserArgsSchema)]).optional(),
 }).strict()
@@ -641,6 +649,9 @@ export const CatalogueWhereInputSchema: z.ZodType<Prisma.CatalogueWhereInput> = 
   id: z.union([ z.lazy(() => IntFilterSchema),z.number() ]).optional(),
   name: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   userId: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  createdAt: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
+  updatedAt: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
+  deletedAt: z.union([ z.lazy(() => DateTimeNullableFilterSchema),z.coerce.date() ]).optional().nullable(),
   user: z.union([ z.lazy(() => UserScalarRelationFilterSchema),z.lazy(() => UserWhereInputSchema) ]).optional(),
   websites: z.lazy(() => WebsiteListRelationFilterSchema).optional()
 }).strict();
@@ -649,6 +660,9 @@ export const CatalogueOrderByWithRelationInputSchema: z.ZodType<Prisma.Catalogue
   id: z.lazy(() => SortOrderSchema).optional(),
   name: z.lazy(() => SortOrderSchema).optional(),
   userId: z.lazy(() => SortOrderSchema).optional(),
+  createdAt: z.lazy(() => SortOrderSchema).optional(),
+  updatedAt: z.lazy(() => SortOrderSchema).optional(),
+  deletedAt: z.union([ z.lazy(() => SortOrderSchema),z.lazy(() => SortOrderInputSchema) ]).optional(),
   user: z.lazy(() => UserOrderByWithRelationInputSchema).optional(),
   websites: z.lazy(() => WebsiteOrderByRelationAggregateInputSchema).optional()
 }).strict();
@@ -673,6 +687,9 @@ export const CatalogueWhereUniqueInputSchema: z.ZodType<Prisma.CatalogueWhereUni
   NOT: z.union([ z.lazy(() => CatalogueWhereInputSchema),z.lazy(() => CatalogueWhereInputSchema).array() ]).optional(),
   name: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   userId: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  createdAt: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
+  updatedAt: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
+  deletedAt: z.union([ z.lazy(() => DateTimeNullableFilterSchema),z.coerce.date() ]).optional().nullable(),
   user: z.union([ z.lazy(() => UserScalarRelationFilterSchema),z.lazy(() => UserWhereInputSchema) ]).optional(),
   websites: z.lazy(() => WebsiteListRelationFilterSchema).optional()
 }).strict());
@@ -681,6 +698,9 @@ export const CatalogueOrderByWithAggregationInputSchema: z.ZodType<Prisma.Catalo
   id: z.lazy(() => SortOrderSchema).optional(),
   name: z.lazy(() => SortOrderSchema).optional(),
   userId: z.lazy(() => SortOrderSchema).optional(),
+  createdAt: z.lazy(() => SortOrderSchema).optional(),
+  updatedAt: z.lazy(() => SortOrderSchema).optional(),
+  deletedAt: z.union([ z.lazy(() => SortOrderSchema),z.lazy(() => SortOrderInputSchema) ]).optional(),
   _count: z.lazy(() => CatalogueCountOrderByAggregateInputSchema).optional(),
   _avg: z.lazy(() => CatalogueAvgOrderByAggregateInputSchema).optional(),
   _max: z.lazy(() => CatalogueMaxOrderByAggregateInputSchema).optional(),
@@ -695,6 +715,9 @@ export const CatalogueScalarWhereWithAggregatesInputSchema: z.ZodType<Prisma.Cat
   id: z.union([ z.lazy(() => IntWithAggregatesFilterSchema),z.number() ]).optional(),
   name: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
   userId: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  createdAt: z.union([ z.lazy(() => DateTimeWithAggregatesFilterSchema),z.coerce.date() ]).optional(),
+  updatedAt: z.union([ z.lazy(() => DateTimeWithAggregatesFilterSchema),z.coerce.date() ]).optional(),
+  deletedAt: z.union([ z.lazy(() => DateTimeNullableWithAggregatesFilterSchema),z.coerce.date() ]).optional().nullable(),
 }).strict();
 
 export const WebsiteWhereInputSchema: z.ZodType<Prisma.WebsiteWhereInput> = z.object({
@@ -707,6 +730,7 @@ export const WebsiteWhereInputSchema: z.ZodType<Prisma.WebsiteWhereInput> = z.ob
   url: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   favicon: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   userId: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  deletedAt: z.union([ z.lazy(() => DateTimeNullableFilterSchema),z.coerce.date() ]).optional().nullable(),
   catalogue: z.union([ z.lazy(() => CatalogueScalarRelationFilterSchema),z.lazy(() => CatalogueWhereInputSchema) ]).optional(),
   user: z.union([ z.lazy(() => UserScalarRelationFilterSchema),z.lazy(() => UserWhereInputSchema) ]).optional(),
 }).strict();
@@ -718,6 +742,7 @@ export const WebsiteOrderByWithRelationInputSchema: z.ZodType<Prisma.WebsiteOrde
   url: z.lazy(() => SortOrderSchema).optional(),
   favicon: z.lazy(() => SortOrderSchema).optional(),
   userId: z.lazy(() => SortOrderSchema).optional(),
+  deletedAt: z.union([ z.lazy(() => SortOrderSchema),z.lazy(() => SortOrderInputSchema) ]).optional(),
   catalogue: z.lazy(() => CatalogueOrderByWithRelationInputSchema).optional(),
   user: z.lazy(() => UserOrderByWithRelationInputSchema).optional()
 }).strict();
@@ -762,6 +787,7 @@ export const WebsiteWhereUniqueInputSchema: z.ZodType<Prisma.WebsiteWhereUniqueI
   url: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   favicon: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   userId: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  deletedAt: z.union([ z.lazy(() => DateTimeNullableFilterSchema),z.coerce.date() ]).optional().nullable(),
   catalogue: z.union([ z.lazy(() => CatalogueScalarRelationFilterSchema),z.lazy(() => CatalogueWhereInputSchema) ]).optional(),
   user: z.union([ z.lazy(() => UserScalarRelationFilterSchema),z.lazy(() => UserWhereInputSchema) ]).optional(),
 }).strict());
@@ -773,6 +799,7 @@ export const WebsiteOrderByWithAggregationInputSchema: z.ZodType<Prisma.WebsiteO
   url: z.lazy(() => SortOrderSchema).optional(),
   favicon: z.lazy(() => SortOrderSchema).optional(),
   userId: z.lazy(() => SortOrderSchema).optional(),
+  deletedAt: z.union([ z.lazy(() => SortOrderSchema),z.lazy(() => SortOrderInputSchema) ]).optional(),
   _count: z.lazy(() => WebsiteCountOrderByAggregateInputSchema).optional(),
   _avg: z.lazy(() => WebsiteAvgOrderByAggregateInputSchema).optional(),
   _max: z.lazy(() => WebsiteMaxOrderByAggregateInputSchema).optional(),
@@ -790,6 +817,7 @@ export const WebsiteScalarWhereWithAggregatesInputSchema: z.ZodType<Prisma.Websi
   url: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
   favicon: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
   userId: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  deletedAt: z.union([ z.lazy(() => DateTimeNullableWithAggregatesFilterSchema),z.coerce.date() ]).optional().nullable(),
 }).strict();
 
 export const UserWhereInputSchema: z.ZodType<Prisma.UserWhereInput> = z.object({
@@ -1220,6 +1248,9 @@ export const WpRSSUncheckedUpdateManyInputSchema: z.ZodType<Prisma.WpRSSUnchecke
 
 export const CatalogueCreateInputSchema: z.ZodType<Prisma.CatalogueCreateInput> = z.object({
   name: z.string(),
+  createdAt: z.coerce.date().optional(),
+  updatedAt: z.coerce.date().optional(),
+  deletedAt: z.coerce.date().optional().nullable(),
   user: z.lazy(() => UserCreateNestedOneWithoutCataloguesInputSchema),
   websites: z.lazy(() => WebsiteCreateNestedManyWithoutCatalogueInputSchema).optional()
 }).strict();
@@ -1228,11 +1259,17 @@ export const CatalogueUncheckedCreateInputSchema: z.ZodType<Prisma.CatalogueUnch
   id: z.number().int().optional(),
   name: z.string(),
   userId: z.string(),
+  createdAt: z.coerce.date().optional(),
+  updatedAt: z.coerce.date().optional(),
+  deletedAt: z.coerce.date().optional().nullable(),
   websites: z.lazy(() => WebsiteUncheckedCreateNestedManyWithoutCatalogueInputSchema).optional()
 }).strict();
 
 export const CatalogueUpdateInputSchema: z.ZodType<Prisma.CatalogueUpdateInput> = z.object({
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  deletedAt: z.union([ z.coerce.date(),z.lazy(() => NullableDateTimeFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   user: z.lazy(() => UserUpdateOneRequiredWithoutCataloguesNestedInputSchema).optional(),
   websites: z.lazy(() => WebsiteUpdateManyWithoutCatalogueNestedInputSchema).optional()
 }).strict();
@@ -1241,29 +1278,42 @@ export const CatalogueUncheckedUpdateInputSchema: z.ZodType<Prisma.CatalogueUnch
   id: z.union([ z.number().int(),z.lazy(() => IntFieldUpdateOperationsInputSchema) ]).optional(),
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   userId: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  deletedAt: z.union([ z.coerce.date(),z.lazy(() => NullableDateTimeFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   websites: z.lazy(() => WebsiteUncheckedUpdateManyWithoutCatalogueNestedInputSchema).optional()
 }).strict();
 
 export const CatalogueCreateManyInputSchema: z.ZodType<Prisma.CatalogueCreateManyInput> = z.object({
   id: z.number().int().optional(),
   name: z.string(),
-  userId: z.string()
+  userId: z.string(),
+  createdAt: z.coerce.date().optional(),
+  updatedAt: z.coerce.date().optional(),
+  deletedAt: z.coerce.date().optional().nullable()
 }).strict();
 
 export const CatalogueUpdateManyMutationInputSchema: z.ZodType<Prisma.CatalogueUpdateManyMutationInput> = z.object({
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  deletedAt: z.union([ z.coerce.date(),z.lazy(() => NullableDateTimeFieldUpdateOperationsInputSchema) ]).optional().nullable(),
 }).strict();
 
 export const CatalogueUncheckedUpdateManyInputSchema: z.ZodType<Prisma.CatalogueUncheckedUpdateManyInput> = z.object({
   id: z.union([ z.number().int(),z.lazy(() => IntFieldUpdateOperationsInputSchema) ]).optional(),
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   userId: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  deletedAt: z.union([ z.coerce.date(),z.lazy(() => NullableDateTimeFieldUpdateOperationsInputSchema) ]).optional().nullable(),
 }).strict();
 
 export const WebsiteCreateInputSchema: z.ZodType<Prisma.WebsiteCreateInput> = z.object({
   name: z.string(),
   url: z.string(),
   favicon: z.string(),
+  deletedAt: z.coerce.date().optional().nullable(),
   catalogue: z.lazy(() => CatalogueCreateNestedOneWithoutWebsitesInputSchema),
   user: z.lazy(() => UserCreateNestedOneWithoutWebsitesInputSchema)
 }).strict();
@@ -1274,13 +1324,15 @@ export const WebsiteUncheckedCreateInputSchema: z.ZodType<Prisma.WebsiteUnchecke
   name: z.string(),
   url: z.string(),
   favicon: z.string(),
-  userId: z.string()
+  userId: z.string(),
+  deletedAt: z.coerce.date().optional().nullable()
 }).strict();
 
 export const WebsiteUpdateInputSchema: z.ZodType<Prisma.WebsiteUpdateInput> = z.object({
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   url: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   favicon: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  deletedAt: z.union([ z.coerce.date(),z.lazy(() => NullableDateTimeFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   catalogue: z.lazy(() => CatalogueUpdateOneRequiredWithoutWebsitesNestedInputSchema).optional(),
   user: z.lazy(() => UserUpdateOneRequiredWithoutWebsitesNestedInputSchema).optional()
 }).strict();
@@ -1292,6 +1344,7 @@ export const WebsiteUncheckedUpdateInputSchema: z.ZodType<Prisma.WebsiteUnchecke
   url: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   favicon: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   userId: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  deletedAt: z.union([ z.coerce.date(),z.lazy(() => NullableDateTimeFieldUpdateOperationsInputSchema) ]).optional().nullable(),
 }).strict();
 
 export const WebsiteCreateManyInputSchema: z.ZodType<Prisma.WebsiteCreateManyInput> = z.object({
@@ -1300,13 +1353,15 @@ export const WebsiteCreateManyInputSchema: z.ZodType<Prisma.WebsiteCreateManyInp
   name: z.string(),
   url: z.string(),
   favicon: z.string(),
-  userId: z.string()
+  userId: z.string(),
+  deletedAt: z.coerce.date().optional().nullable()
 }).strict();
 
 export const WebsiteUpdateManyMutationInputSchema: z.ZodType<Prisma.WebsiteUpdateManyMutationInput> = z.object({
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   url: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   favicon: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  deletedAt: z.union([ z.coerce.date(),z.lazy(() => NullableDateTimeFieldUpdateOperationsInputSchema) ]).optional().nullable(),
 }).strict();
 
 export const WebsiteUncheckedUpdateManyInputSchema: z.ZodType<Prisma.WebsiteUncheckedUpdateManyInput> = z.object({
@@ -1316,6 +1371,7 @@ export const WebsiteUncheckedUpdateManyInputSchema: z.ZodType<Prisma.WebsiteUnch
   url: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   favicon: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   userId: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  deletedAt: z.union([ z.coerce.date(),z.lazy(() => NullableDateTimeFieldUpdateOperationsInputSchema) ]).optional().nullable(),
 }).strict();
 
 export const UserCreateInputSchema: z.ZodType<Prisma.UserCreateInput> = z.object({
@@ -1794,10 +1850,37 @@ export const WpRSSSumOrderByAggregateInputSchema: z.ZodType<Prisma.WpRSSSumOrder
   image: z.lazy(() => SortOrderSchema).optional()
 }).strict();
 
+export const DateTimeFilterSchema: z.ZodType<Prisma.DateTimeFilter> = z.object({
+  equals: z.coerce.date().optional(),
+  in: z.coerce.date().array().optional(),
+  notIn: z.coerce.date().array().optional(),
+  lt: z.coerce.date().optional(),
+  lte: z.coerce.date().optional(),
+  gt: z.coerce.date().optional(),
+  gte: z.coerce.date().optional(),
+  not: z.union([ z.coerce.date(),z.lazy(() => NestedDateTimeFilterSchema) ]).optional(),
+}).strict();
+
+export const DateTimeNullableFilterSchema: z.ZodType<Prisma.DateTimeNullableFilter> = z.object({
+  equals: z.coerce.date().optional().nullable(),
+  in: z.coerce.date().array().optional().nullable(),
+  notIn: z.coerce.date().array().optional().nullable(),
+  lt: z.coerce.date().optional(),
+  lte: z.coerce.date().optional(),
+  gt: z.coerce.date().optional(),
+  gte: z.coerce.date().optional(),
+  not: z.union([ z.coerce.date(),z.lazy(() => NestedDateTimeNullableFilterSchema) ]).optional().nullable(),
+}).strict();
+
 export const WebsiteListRelationFilterSchema: z.ZodType<Prisma.WebsiteListRelationFilter> = z.object({
   every: z.lazy(() => WebsiteWhereInputSchema).optional(),
   some: z.lazy(() => WebsiteWhereInputSchema).optional(),
   none: z.lazy(() => WebsiteWhereInputSchema).optional()
+}).strict();
+
+export const SortOrderInputSchema: z.ZodType<Prisma.SortOrderInput> = z.object({
+  sort: z.lazy(() => SortOrderSchema),
+  nulls: z.lazy(() => NullsOrderSchema).optional()
 }).strict();
 
 export const WebsiteOrderByRelationAggregateInputSchema: z.ZodType<Prisma.WebsiteOrderByRelationAggregateInput> = z.object({
@@ -1812,7 +1895,10 @@ export const CatalogueUser_catalogue_name_uniqueCompoundUniqueInputSchema: z.Zod
 export const CatalogueCountOrderByAggregateInputSchema: z.ZodType<Prisma.CatalogueCountOrderByAggregateInput> = z.object({
   id: z.lazy(() => SortOrderSchema).optional(),
   name: z.lazy(() => SortOrderSchema).optional(),
-  userId: z.lazy(() => SortOrderSchema).optional()
+  userId: z.lazy(() => SortOrderSchema).optional(),
+  createdAt: z.lazy(() => SortOrderSchema).optional(),
+  updatedAt: z.lazy(() => SortOrderSchema).optional(),
+  deletedAt: z.lazy(() => SortOrderSchema).optional()
 }).strict();
 
 export const CatalogueAvgOrderByAggregateInputSchema: z.ZodType<Prisma.CatalogueAvgOrderByAggregateInput> = z.object({
@@ -1822,17 +1908,51 @@ export const CatalogueAvgOrderByAggregateInputSchema: z.ZodType<Prisma.Catalogue
 export const CatalogueMaxOrderByAggregateInputSchema: z.ZodType<Prisma.CatalogueMaxOrderByAggregateInput> = z.object({
   id: z.lazy(() => SortOrderSchema).optional(),
   name: z.lazy(() => SortOrderSchema).optional(),
-  userId: z.lazy(() => SortOrderSchema).optional()
+  userId: z.lazy(() => SortOrderSchema).optional(),
+  createdAt: z.lazy(() => SortOrderSchema).optional(),
+  updatedAt: z.lazy(() => SortOrderSchema).optional(),
+  deletedAt: z.lazy(() => SortOrderSchema).optional()
 }).strict();
 
 export const CatalogueMinOrderByAggregateInputSchema: z.ZodType<Prisma.CatalogueMinOrderByAggregateInput> = z.object({
   id: z.lazy(() => SortOrderSchema).optional(),
   name: z.lazy(() => SortOrderSchema).optional(),
-  userId: z.lazy(() => SortOrderSchema).optional()
+  userId: z.lazy(() => SortOrderSchema).optional(),
+  createdAt: z.lazy(() => SortOrderSchema).optional(),
+  updatedAt: z.lazy(() => SortOrderSchema).optional(),
+  deletedAt: z.lazy(() => SortOrderSchema).optional()
 }).strict();
 
 export const CatalogueSumOrderByAggregateInputSchema: z.ZodType<Prisma.CatalogueSumOrderByAggregateInput> = z.object({
   id: z.lazy(() => SortOrderSchema).optional()
+}).strict();
+
+export const DateTimeWithAggregatesFilterSchema: z.ZodType<Prisma.DateTimeWithAggregatesFilter> = z.object({
+  equals: z.coerce.date().optional(),
+  in: z.coerce.date().array().optional(),
+  notIn: z.coerce.date().array().optional(),
+  lt: z.coerce.date().optional(),
+  lte: z.coerce.date().optional(),
+  gt: z.coerce.date().optional(),
+  gte: z.coerce.date().optional(),
+  not: z.union([ z.coerce.date(),z.lazy(() => NestedDateTimeWithAggregatesFilterSchema) ]).optional(),
+  _count: z.lazy(() => NestedIntFilterSchema).optional(),
+  _min: z.lazy(() => NestedDateTimeFilterSchema).optional(),
+  _max: z.lazy(() => NestedDateTimeFilterSchema).optional()
+}).strict();
+
+export const DateTimeNullableWithAggregatesFilterSchema: z.ZodType<Prisma.DateTimeNullableWithAggregatesFilter> = z.object({
+  equals: z.coerce.date().optional().nullable(),
+  in: z.coerce.date().array().optional().nullable(),
+  notIn: z.coerce.date().array().optional().nullable(),
+  lt: z.coerce.date().optional(),
+  lte: z.coerce.date().optional(),
+  gt: z.coerce.date().optional(),
+  gte: z.coerce.date().optional(),
+  not: z.union([ z.coerce.date(),z.lazy(() => NestedDateTimeNullableWithAggregatesFilterSchema) ]).optional().nullable(),
+  _count: z.lazy(() => NestedIntNullableFilterSchema).optional(),
+  _min: z.lazy(() => NestedDateTimeNullableFilterSchema).optional(),
+  _max: z.lazy(() => NestedDateTimeNullableFilterSchema).optional()
 }).strict();
 
 export const CatalogueScalarRelationFilterSchema: z.ZodType<Prisma.CatalogueScalarRelationFilter> = z.object({
@@ -1856,7 +1976,8 @@ export const WebsiteCountOrderByAggregateInputSchema: z.ZodType<Prisma.WebsiteCo
   name: z.lazy(() => SortOrderSchema).optional(),
   url: z.lazy(() => SortOrderSchema).optional(),
   favicon: z.lazy(() => SortOrderSchema).optional(),
-  userId: z.lazy(() => SortOrderSchema).optional()
+  userId: z.lazy(() => SortOrderSchema).optional(),
+  deletedAt: z.lazy(() => SortOrderSchema).optional()
 }).strict();
 
 export const WebsiteAvgOrderByAggregateInputSchema: z.ZodType<Prisma.WebsiteAvgOrderByAggregateInput> = z.object({
@@ -1870,7 +1991,8 @@ export const WebsiteMaxOrderByAggregateInputSchema: z.ZodType<Prisma.WebsiteMaxO
   name: z.lazy(() => SortOrderSchema).optional(),
   url: z.lazy(() => SortOrderSchema).optional(),
   favicon: z.lazy(() => SortOrderSchema).optional(),
-  userId: z.lazy(() => SortOrderSchema).optional()
+  userId: z.lazy(() => SortOrderSchema).optional(),
+  deletedAt: z.lazy(() => SortOrderSchema).optional()
 }).strict();
 
 export const WebsiteMinOrderByAggregateInputSchema: z.ZodType<Prisma.WebsiteMinOrderByAggregateInput> = z.object({
@@ -1879,7 +2001,8 @@ export const WebsiteMinOrderByAggregateInputSchema: z.ZodType<Prisma.WebsiteMinO
   name: z.lazy(() => SortOrderSchema).optional(),
   url: z.lazy(() => SortOrderSchema).optional(),
   favicon: z.lazy(() => SortOrderSchema).optional(),
-  userId: z.lazy(() => SortOrderSchema).optional()
+  userId: z.lazy(() => SortOrderSchema).optional(),
+  deletedAt: z.lazy(() => SortOrderSchema).optional()
 }).strict();
 
 export const WebsiteSumOrderByAggregateInputSchema: z.ZodType<Prisma.WebsiteSumOrderByAggregateInput> = z.object({
@@ -1902,17 +2025,6 @@ export const StringNullableFilterSchema: z.ZodType<Prisma.StringNullableFilter> 
   not: z.union([ z.string(),z.lazy(() => NestedStringNullableFilterSchema) ]).optional().nullable(),
 }).strict();
 
-export const DateTimeNullableFilterSchema: z.ZodType<Prisma.DateTimeNullableFilter> = z.object({
-  equals: z.coerce.date().optional().nullable(),
-  in: z.coerce.date().array().optional().nullable(),
-  notIn: z.coerce.date().array().optional().nullable(),
-  lt: z.coerce.date().optional(),
-  lte: z.coerce.date().optional(),
-  gt: z.coerce.date().optional(),
-  gte: z.coerce.date().optional(),
-  not: z.union([ z.coerce.date(),z.lazy(() => NestedDateTimeNullableFilterSchema) ]).optional().nullable(),
-}).strict();
-
 export const JsonNullableFilterSchema: z.ZodType<Prisma.JsonNullableFilter> = z.object({
   equals: InputJsonValueSchema.optional(),
   path: z.string().array().optional(),
@@ -1928,17 +2040,6 @@ export const JsonNullableFilterSchema: z.ZodType<Prisma.JsonNullableFilter> = z.
   gt: InputJsonValueSchema.optional(),
   gte: InputJsonValueSchema.optional(),
   not: InputJsonValueSchema.optional()
-}).strict();
-
-export const DateTimeFilterSchema: z.ZodType<Prisma.DateTimeFilter> = z.object({
-  equals: z.coerce.date().optional(),
-  in: z.coerce.date().array().optional(),
-  notIn: z.coerce.date().array().optional(),
-  lt: z.coerce.date().optional(),
-  lte: z.coerce.date().optional(),
-  gt: z.coerce.date().optional(),
-  gte: z.coerce.date().optional(),
-  not: z.union([ z.coerce.date(),z.lazy(() => NestedDateTimeFilterSchema) ]).optional(),
 }).strict();
 
 export const AccountListRelationFilterSchema: z.ZodType<Prisma.AccountListRelationFilter> = z.object({
@@ -1975,11 +2076,6 @@ export const YtRSSListRelationFilterSchema: z.ZodType<Prisma.YtRSSListRelationFi
   every: z.lazy(() => YtRSSWhereInputSchema).optional(),
   some: z.lazy(() => YtRSSWhereInputSchema).optional(),
   none: z.lazy(() => YtRSSWhereInputSchema).optional()
-}).strict();
-
-export const SortOrderInputSchema: z.ZodType<Prisma.SortOrderInput> = z.object({
-  sort: z.lazy(() => SortOrderSchema),
-  nulls: z.lazy(() => NullsOrderSchema).optional()
 }).strict();
 
 export const AccountOrderByRelationAggregateInputSchema: z.ZodType<Prisma.AccountOrderByRelationAggregateInput> = z.object({
@@ -2055,20 +2151,6 @@ export const StringNullableWithAggregatesFilterSchema: z.ZodType<Prisma.StringNu
   _max: z.lazy(() => NestedStringNullableFilterSchema).optional()
 }).strict();
 
-export const DateTimeNullableWithAggregatesFilterSchema: z.ZodType<Prisma.DateTimeNullableWithAggregatesFilter> = z.object({
-  equals: z.coerce.date().optional().nullable(),
-  in: z.coerce.date().array().optional().nullable(),
-  notIn: z.coerce.date().array().optional().nullable(),
-  lt: z.coerce.date().optional(),
-  lte: z.coerce.date().optional(),
-  gt: z.coerce.date().optional(),
-  gte: z.coerce.date().optional(),
-  not: z.union([ z.coerce.date(),z.lazy(() => NestedDateTimeNullableWithAggregatesFilterSchema) ]).optional().nullable(),
-  _count: z.lazy(() => NestedIntNullableFilterSchema).optional(),
-  _min: z.lazy(() => NestedDateTimeNullableFilterSchema).optional(),
-  _max: z.lazy(() => NestedDateTimeNullableFilterSchema).optional()
-}).strict();
-
 export const JsonNullableWithAggregatesFilterSchema: z.ZodType<Prisma.JsonNullableWithAggregatesFilter> = z.object({
   equals: InputJsonValueSchema.optional(),
   path: z.string().array().optional(),
@@ -2087,20 +2169,6 @@ export const JsonNullableWithAggregatesFilterSchema: z.ZodType<Prisma.JsonNullab
   _count: z.lazy(() => NestedIntNullableFilterSchema).optional(),
   _min: z.lazy(() => NestedJsonNullableFilterSchema).optional(),
   _max: z.lazy(() => NestedJsonNullableFilterSchema).optional()
-}).strict();
-
-export const DateTimeWithAggregatesFilterSchema: z.ZodType<Prisma.DateTimeWithAggregatesFilter> = z.object({
-  equals: z.coerce.date().optional(),
-  in: z.coerce.date().array().optional(),
-  notIn: z.coerce.date().array().optional(),
-  lt: z.coerce.date().optional(),
-  lte: z.coerce.date().optional(),
-  gt: z.coerce.date().optional(),
-  gte: z.coerce.date().optional(),
-  not: z.union([ z.coerce.date(),z.lazy(() => NestedDateTimeWithAggregatesFilterSchema) ]).optional(),
-  _count: z.lazy(() => NestedIntFilterSchema).optional(),
-  _min: z.lazy(() => NestedDateTimeFilterSchema).optional(),
-  _max: z.lazy(() => NestedDateTimeFilterSchema).optional()
 }).strict();
 
 export const IntNullableFilterSchema: z.ZodType<Prisma.IntNullableFilter> = z.object({
@@ -2312,6 +2380,14 @@ export const WebsiteUncheckedCreateNestedManyWithoutCatalogueInputSchema: z.ZodT
   connect: z.union([ z.lazy(() => WebsiteWhereUniqueInputSchema),z.lazy(() => WebsiteWhereUniqueInputSchema).array() ]).optional(),
 }).strict();
 
+export const DateTimeFieldUpdateOperationsInputSchema: z.ZodType<Prisma.DateTimeFieldUpdateOperationsInput> = z.object({
+  set: z.coerce.date().optional()
+}).strict();
+
+export const NullableDateTimeFieldUpdateOperationsInputSchema: z.ZodType<Prisma.NullableDateTimeFieldUpdateOperationsInput> = z.object({
+  set: z.coerce.date().optional().nullable()
+}).strict();
+
 export const UserUpdateOneRequiredWithoutCataloguesNestedInputSchema: z.ZodType<Prisma.UserUpdateOneRequiredWithoutCataloguesNestedInput> = z.object({
   create: z.union([ z.lazy(() => UserCreateWithoutCataloguesInputSchema),z.lazy(() => UserUncheckedCreateWithoutCataloguesInputSchema) ]).optional(),
   connectOrCreate: z.lazy(() => UserCreateOrConnectWithoutCataloguesInputSchema).optional(),
@@ -2476,14 +2552,6 @@ export const YtRSSUncheckedCreateNestedManyWithoutUserInputSchema: z.ZodType<Pri
 
 export const NullableStringFieldUpdateOperationsInputSchema: z.ZodType<Prisma.NullableStringFieldUpdateOperationsInput> = z.object({
   set: z.string().optional().nullable()
-}).strict();
-
-export const NullableDateTimeFieldUpdateOperationsInputSchema: z.ZodType<Prisma.NullableDateTimeFieldUpdateOperationsInput> = z.object({
-  set: z.coerce.date().optional().nullable()
-}).strict();
-
-export const DateTimeFieldUpdateOperationsInputSchema: z.ZodType<Prisma.DateTimeFieldUpdateOperationsInput> = z.object({
-  set: z.coerce.date().optional()
 }).strict();
 
 export const AccountUpdateManyWithoutUserNestedInputSchema: z.ZodType<Prisma.AccountUpdateManyWithoutUserNestedInput> = z.object({
@@ -2787,18 +2855,15 @@ export const NestedStringWithAggregatesFilterSchema: z.ZodType<Prisma.NestedStri
   _max: z.lazy(() => NestedStringFilterSchema).optional()
 }).strict();
 
-export const NestedStringNullableFilterSchema: z.ZodType<Prisma.NestedStringNullableFilter> = z.object({
-  equals: z.string().optional().nullable(),
-  in: z.string().array().optional().nullable(),
-  notIn: z.string().array().optional().nullable(),
-  lt: z.string().optional(),
-  lte: z.string().optional(),
-  gt: z.string().optional(),
-  gte: z.string().optional(),
-  contains: z.string().optional(),
-  startsWith: z.string().optional(),
-  endsWith: z.string().optional(),
-  not: z.union([ z.string(),z.lazy(() => NestedStringNullableFilterSchema) ]).optional().nullable(),
+export const NestedDateTimeFilterSchema: z.ZodType<Prisma.NestedDateTimeFilter> = z.object({
+  equals: z.coerce.date().optional(),
+  in: z.coerce.date().array().optional(),
+  notIn: z.coerce.date().array().optional(),
+  lt: z.coerce.date().optional(),
+  lte: z.coerce.date().optional(),
+  gt: z.coerce.date().optional(),
+  gte: z.coerce.date().optional(),
+  not: z.union([ z.coerce.date(),z.lazy(() => NestedDateTimeFilterSchema) ]).optional(),
 }).strict();
 
 export const NestedDateTimeNullableFilterSchema: z.ZodType<Prisma.NestedDateTimeNullableFilter> = z.object({
@@ -2812,7 +2877,7 @@ export const NestedDateTimeNullableFilterSchema: z.ZodType<Prisma.NestedDateTime
   not: z.union([ z.coerce.date(),z.lazy(() => NestedDateTimeNullableFilterSchema) ]).optional().nullable(),
 }).strict();
 
-export const NestedDateTimeFilterSchema: z.ZodType<Prisma.NestedDateTimeFilter> = z.object({
+export const NestedDateTimeWithAggregatesFilterSchema: z.ZodType<Prisma.NestedDateTimeWithAggregatesFilter> = z.object({
   equals: z.coerce.date().optional(),
   in: z.coerce.date().array().optional(),
   notIn: z.coerce.date().array().optional(),
@@ -2820,7 +2885,49 @@ export const NestedDateTimeFilterSchema: z.ZodType<Prisma.NestedDateTimeFilter> 
   lte: z.coerce.date().optional(),
   gt: z.coerce.date().optional(),
   gte: z.coerce.date().optional(),
-  not: z.union([ z.coerce.date(),z.lazy(() => NestedDateTimeFilterSchema) ]).optional(),
+  not: z.union([ z.coerce.date(),z.lazy(() => NestedDateTimeWithAggregatesFilterSchema) ]).optional(),
+  _count: z.lazy(() => NestedIntFilterSchema).optional(),
+  _min: z.lazy(() => NestedDateTimeFilterSchema).optional(),
+  _max: z.lazy(() => NestedDateTimeFilterSchema).optional()
+}).strict();
+
+export const NestedDateTimeNullableWithAggregatesFilterSchema: z.ZodType<Prisma.NestedDateTimeNullableWithAggregatesFilter> = z.object({
+  equals: z.coerce.date().optional().nullable(),
+  in: z.coerce.date().array().optional().nullable(),
+  notIn: z.coerce.date().array().optional().nullable(),
+  lt: z.coerce.date().optional(),
+  lte: z.coerce.date().optional(),
+  gt: z.coerce.date().optional(),
+  gte: z.coerce.date().optional(),
+  not: z.union([ z.coerce.date(),z.lazy(() => NestedDateTimeNullableWithAggregatesFilterSchema) ]).optional().nullable(),
+  _count: z.lazy(() => NestedIntNullableFilterSchema).optional(),
+  _min: z.lazy(() => NestedDateTimeNullableFilterSchema).optional(),
+  _max: z.lazy(() => NestedDateTimeNullableFilterSchema).optional()
+}).strict();
+
+export const NestedIntNullableFilterSchema: z.ZodType<Prisma.NestedIntNullableFilter> = z.object({
+  equals: z.number().optional().nullable(),
+  in: z.number().array().optional().nullable(),
+  notIn: z.number().array().optional().nullable(),
+  lt: z.number().optional(),
+  lte: z.number().optional(),
+  gt: z.number().optional(),
+  gte: z.number().optional(),
+  not: z.union([ z.number(),z.lazy(() => NestedIntNullableFilterSchema) ]).optional().nullable(),
+}).strict();
+
+export const NestedStringNullableFilterSchema: z.ZodType<Prisma.NestedStringNullableFilter> = z.object({
+  equals: z.string().optional().nullable(),
+  in: z.string().array().optional().nullable(),
+  notIn: z.string().array().optional().nullable(),
+  lt: z.string().optional(),
+  lte: z.string().optional(),
+  gt: z.string().optional(),
+  gte: z.string().optional(),
+  contains: z.string().optional(),
+  startsWith: z.string().optional(),
+  endsWith: z.string().optional(),
+  not: z.union([ z.string(),z.lazy(() => NestedStringNullableFilterSchema) ]).optional().nullable(),
 }).strict();
 
 export const NestedStringNullableWithAggregatesFilterSchema: z.ZodType<Prisma.NestedStringNullableWithAggregatesFilter> = z.object({
@@ -2840,31 +2947,6 @@ export const NestedStringNullableWithAggregatesFilterSchema: z.ZodType<Prisma.Ne
   _max: z.lazy(() => NestedStringNullableFilterSchema).optional()
 }).strict();
 
-export const NestedIntNullableFilterSchema: z.ZodType<Prisma.NestedIntNullableFilter> = z.object({
-  equals: z.number().optional().nullable(),
-  in: z.number().array().optional().nullable(),
-  notIn: z.number().array().optional().nullable(),
-  lt: z.number().optional(),
-  lte: z.number().optional(),
-  gt: z.number().optional(),
-  gte: z.number().optional(),
-  not: z.union([ z.number(),z.lazy(() => NestedIntNullableFilterSchema) ]).optional().nullable(),
-}).strict();
-
-export const NestedDateTimeNullableWithAggregatesFilterSchema: z.ZodType<Prisma.NestedDateTimeNullableWithAggregatesFilter> = z.object({
-  equals: z.coerce.date().optional().nullable(),
-  in: z.coerce.date().array().optional().nullable(),
-  notIn: z.coerce.date().array().optional().nullable(),
-  lt: z.coerce.date().optional(),
-  lte: z.coerce.date().optional(),
-  gt: z.coerce.date().optional(),
-  gte: z.coerce.date().optional(),
-  not: z.union([ z.coerce.date(),z.lazy(() => NestedDateTimeNullableWithAggregatesFilterSchema) ]).optional().nullable(),
-  _count: z.lazy(() => NestedIntNullableFilterSchema).optional(),
-  _min: z.lazy(() => NestedDateTimeNullableFilterSchema).optional(),
-  _max: z.lazy(() => NestedDateTimeNullableFilterSchema).optional()
-}).strict();
-
 export const NestedJsonNullableFilterSchema: z.ZodType<Prisma.NestedJsonNullableFilter> = z.object({
   equals: InputJsonValueSchema.optional(),
   path: z.string().array().optional(),
@@ -2880,20 +2962,6 @@ export const NestedJsonNullableFilterSchema: z.ZodType<Prisma.NestedJsonNullable
   gt: InputJsonValueSchema.optional(),
   gte: InputJsonValueSchema.optional(),
   not: InputJsonValueSchema.optional()
-}).strict();
-
-export const NestedDateTimeWithAggregatesFilterSchema: z.ZodType<Prisma.NestedDateTimeWithAggregatesFilter> = z.object({
-  equals: z.coerce.date().optional(),
-  in: z.coerce.date().array().optional(),
-  notIn: z.coerce.date().array().optional(),
-  lt: z.coerce.date().optional(),
-  lte: z.coerce.date().optional(),
-  gt: z.coerce.date().optional(),
-  gte: z.coerce.date().optional(),
-  not: z.union([ z.coerce.date(),z.lazy(() => NestedDateTimeWithAggregatesFilterSchema) ]).optional(),
-  _count: z.lazy(() => NestedIntFilterSchema).optional(),
-  _min: z.lazy(() => NestedDateTimeFilterSchema).optional(),
-  _max: z.lazy(() => NestedDateTimeFilterSchema).optional()
 }).strict();
 
 export const NestedIntNullableWithAggregatesFilterSchema: z.ZodType<Prisma.NestedIntNullableWithAggregatesFilter> = z.object({
@@ -3218,6 +3286,7 @@ export const WebsiteCreateWithoutCatalogueInputSchema: z.ZodType<Prisma.WebsiteC
   name: z.string(),
   url: z.string(),
   favicon: z.string(),
+  deletedAt: z.coerce.date().optional().nullable(),
   user: z.lazy(() => UserCreateNestedOneWithoutWebsitesInputSchema)
 }).strict();
 
@@ -3226,7 +3295,8 @@ export const WebsiteUncheckedCreateWithoutCatalogueInputSchema: z.ZodType<Prisma
   name: z.string(),
   url: z.string(),
   favicon: z.string(),
-  userId: z.string()
+  userId: z.string(),
+  deletedAt: z.coerce.date().optional().nullable()
 }).strict();
 
 export const WebsiteCreateOrConnectWithoutCatalogueInputSchema: z.ZodType<Prisma.WebsiteCreateOrConnectWithoutCatalogueInput> = z.object({
@@ -3310,17 +3380,24 @@ export const WebsiteScalarWhereInputSchema: z.ZodType<Prisma.WebsiteScalarWhereI
   url: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   favicon: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   userId: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  deletedAt: z.union([ z.lazy(() => DateTimeNullableFilterSchema),z.coerce.date() ]).optional().nullable(),
 }).strict();
 
 export const CatalogueCreateWithoutWebsitesInputSchema: z.ZodType<Prisma.CatalogueCreateWithoutWebsitesInput> = z.object({
   name: z.string(),
+  createdAt: z.coerce.date().optional(),
+  updatedAt: z.coerce.date().optional(),
+  deletedAt: z.coerce.date().optional().nullable(),
   user: z.lazy(() => UserCreateNestedOneWithoutCataloguesInputSchema)
 }).strict();
 
 export const CatalogueUncheckedCreateWithoutWebsitesInputSchema: z.ZodType<Prisma.CatalogueUncheckedCreateWithoutWebsitesInput> = z.object({
   id: z.number().int().optional(),
   name: z.string(),
-  userId: z.string()
+  userId: z.string(),
+  createdAt: z.coerce.date().optional(),
+  updatedAt: z.coerce.date().optional(),
+  deletedAt: z.coerce.date().optional().nullable()
 }).strict();
 
 export const CatalogueCreateOrConnectWithoutWebsitesInputSchema: z.ZodType<Prisma.CatalogueCreateOrConnectWithoutWebsitesInput> = z.object({
@@ -3380,6 +3457,9 @@ export const CatalogueUpdateToOneWithWhereWithoutWebsitesInputSchema: z.ZodType<
 
 export const CatalogueUpdateWithoutWebsitesInputSchema: z.ZodType<Prisma.CatalogueUpdateWithoutWebsitesInput> = z.object({
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  deletedAt: z.union([ z.coerce.date(),z.lazy(() => NullableDateTimeFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   user: z.lazy(() => UserUpdateOneRequiredWithoutCataloguesNestedInputSchema).optional()
 }).strict();
 
@@ -3387,6 +3467,9 @@ export const CatalogueUncheckedUpdateWithoutWebsitesInputSchema: z.ZodType<Prism
   id: z.union([ z.number().int(),z.lazy(() => IntFieldUpdateOperationsInputSchema) ]).optional(),
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   userId: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  deletedAt: z.union([ z.coerce.date(),z.lazy(() => NullableDateTimeFieldUpdateOperationsInputSchema) ]).optional().nullable(),
 }).strict();
 
 export const UserUpsertWithoutWebsitesInputSchema: z.ZodType<Prisma.UserUpsertWithoutWebsitesInput> = z.object({
@@ -3476,12 +3559,18 @@ export const AccountCreateManyUserInputEnvelopeSchema: z.ZodType<Prisma.AccountC
 
 export const CatalogueCreateWithoutUserInputSchema: z.ZodType<Prisma.CatalogueCreateWithoutUserInput> = z.object({
   name: z.string(),
+  createdAt: z.coerce.date().optional(),
+  updatedAt: z.coerce.date().optional(),
+  deletedAt: z.coerce.date().optional().nullable(),
   websites: z.lazy(() => WebsiteCreateNestedManyWithoutCatalogueInputSchema).optional()
 }).strict();
 
 export const CatalogueUncheckedCreateWithoutUserInputSchema: z.ZodType<Prisma.CatalogueUncheckedCreateWithoutUserInput> = z.object({
   id: z.number().int().optional(),
   name: z.string(),
+  createdAt: z.coerce.date().optional(),
+  updatedAt: z.coerce.date().optional(),
+  deletedAt: z.coerce.date().optional().nullable(),
   websites: z.lazy(() => WebsiteUncheckedCreateNestedManyWithoutCatalogueInputSchema).optional()
 }).strict();
 
@@ -3542,6 +3631,7 @@ export const WebsiteCreateWithoutUserInputSchema: z.ZodType<Prisma.WebsiteCreate
   name: z.string(),
   url: z.string(),
   favicon: z.string(),
+  deletedAt: z.coerce.date().optional().nullable(),
   catalogue: z.lazy(() => CatalogueCreateNestedOneWithoutWebsitesInputSchema)
 }).strict();
 
@@ -3550,7 +3640,8 @@ export const WebsiteUncheckedCreateWithoutUserInputSchema: z.ZodType<Prisma.Webs
   catalogueId: z.number().int(),
   name: z.string(),
   url: z.string(),
-  favicon: z.string()
+  favicon: z.string(),
+  deletedAt: z.coerce.date().optional().nullable()
 }).strict();
 
 export const WebsiteCreateOrConnectWithoutUserInputSchema: z.ZodType<Prisma.WebsiteCreateOrConnectWithoutUserInput> = z.object({
@@ -3661,6 +3752,9 @@ export const CatalogueScalarWhereInputSchema: z.ZodType<Prisma.CatalogueScalarWh
   id: z.union([ z.lazy(() => IntFilterSchema),z.number() ]).optional(),
   name: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   userId: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  createdAt: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
+  updatedAt: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
+  deletedAt: z.union([ z.lazy(() => DateTimeNullableFilterSchema),z.coerce.date() ]).optional().nullable(),
 }).strict();
 
 export const NewsRSSUpsertWithWhereUniqueWithoutUserInputSchema: z.ZodType<Prisma.NewsRSSUpsertWithWhereUniqueWithoutUserInput> = z.object({
@@ -3955,13 +4049,15 @@ export const WebsiteCreateManyCatalogueInputSchema: z.ZodType<Prisma.WebsiteCrea
   name: z.string(),
   url: z.string(),
   favicon: z.string(),
-  userId: z.string()
+  userId: z.string(),
+  deletedAt: z.coerce.date().optional().nullable()
 }).strict();
 
 export const WebsiteUpdateWithoutCatalogueInputSchema: z.ZodType<Prisma.WebsiteUpdateWithoutCatalogueInput> = z.object({
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   url: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   favicon: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  deletedAt: z.union([ z.coerce.date(),z.lazy(() => NullableDateTimeFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   user: z.lazy(() => UserUpdateOneRequiredWithoutWebsitesNestedInputSchema).optional()
 }).strict();
 
@@ -3971,6 +4067,7 @@ export const WebsiteUncheckedUpdateWithoutCatalogueInputSchema: z.ZodType<Prisma
   url: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   favicon: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   userId: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  deletedAt: z.union([ z.coerce.date(),z.lazy(() => NullableDateTimeFieldUpdateOperationsInputSchema) ]).optional().nullable(),
 }).strict();
 
 export const WebsiteUncheckedUpdateManyWithoutCatalogueInputSchema: z.ZodType<Prisma.WebsiteUncheckedUpdateManyWithoutCatalogueInput> = z.object({
@@ -3979,6 +4076,7 @@ export const WebsiteUncheckedUpdateManyWithoutCatalogueInputSchema: z.ZodType<Pr
   url: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   favicon: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   userId: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  deletedAt: z.union([ z.coerce.date(),z.lazy(() => NullableDateTimeFieldUpdateOperationsInputSchema) ]).optional().nullable(),
 }).strict();
 
 export const AccountCreateManyUserInputSchema: z.ZodType<Prisma.AccountCreateManyUserInput> = z.object({
@@ -3998,7 +4096,10 @@ export const AccountCreateManyUserInputSchema: z.ZodType<Prisma.AccountCreateMan
 
 export const CatalogueCreateManyUserInputSchema: z.ZodType<Prisma.CatalogueCreateManyUserInput> = z.object({
   id: z.number().int().optional(),
-  name: z.string()
+  name: z.string(),
+  createdAt: z.coerce.date().optional(),
+  updatedAt: z.coerce.date().optional(),
+  deletedAt: z.coerce.date().optional().nullable()
 }).strict();
 
 export const NewsRSSCreateManyUserInputSchema: z.ZodType<Prisma.NewsRSSCreateManyUserInput> = z.object({
@@ -4018,7 +4119,8 @@ export const WebsiteCreateManyUserInputSchema: z.ZodType<Prisma.WebsiteCreateMan
   catalogueId: z.number().int(),
   name: z.string(),
   url: z.string(),
-  favicon: z.string()
+  favicon: z.string(),
+  deletedAt: z.coerce.date().optional().nullable()
 }).strict();
 
 export const WpRSSCreateManyUserInputSchema: z.ZodType<Prisma.WpRSSCreateManyUserInput> = z.object({
@@ -4079,18 +4181,27 @@ export const AccountUncheckedUpdateManyWithoutUserInputSchema: z.ZodType<Prisma.
 
 export const CatalogueUpdateWithoutUserInputSchema: z.ZodType<Prisma.CatalogueUpdateWithoutUserInput> = z.object({
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  deletedAt: z.union([ z.coerce.date(),z.lazy(() => NullableDateTimeFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   websites: z.lazy(() => WebsiteUpdateManyWithoutCatalogueNestedInputSchema).optional()
 }).strict();
 
 export const CatalogueUncheckedUpdateWithoutUserInputSchema: z.ZodType<Prisma.CatalogueUncheckedUpdateWithoutUserInput> = z.object({
   id: z.union([ z.number().int(),z.lazy(() => IntFieldUpdateOperationsInputSchema) ]).optional(),
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  deletedAt: z.union([ z.coerce.date(),z.lazy(() => NullableDateTimeFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   websites: z.lazy(() => WebsiteUncheckedUpdateManyWithoutCatalogueNestedInputSchema).optional()
 }).strict();
 
 export const CatalogueUncheckedUpdateManyWithoutUserInputSchema: z.ZodType<Prisma.CatalogueUncheckedUpdateManyWithoutUserInput> = z.object({
   id: z.union([ z.number().int(),z.lazy(() => IntFieldUpdateOperationsInputSchema) ]).optional(),
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  deletedAt: z.union([ z.coerce.date(),z.lazy(() => NullableDateTimeFieldUpdateOperationsInputSchema) ]).optional().nullable(),
 }).strict();
 
 export const NewsRSSUpdateWithoutUserInputSchema: z.ZodType<Prisma.NewsRSSUpdateWithoutUserInput> = z.object({
@@ -4132,6 +4243,7 @@ export const WebsiteUpdateWithoutUserInputSchema: z.ZodType<Prisma.WebsiteUpdate
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   url: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   favicon: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  deletedAt: z.union([ z.coerce.date(),z.lazy(() => NullableDateTimeFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   catalogue: z.lazy(() => CatalogueUpdateOneRequiredWithoutWebsitesNestedInputSchema).optional()
 }).strict();
 
@@ -4141,6 +4253,7 @@ export const WebsiteUncheckedUpdateWithoutUserInputSchema: z.ZodType<Prisma.Webs
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   url: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   favicon: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  deletedAt: z.union([ z.coerce.date(),z.lazy(() => NullableDateTimeFieldUpdateOperationsInputSchema) ]).optional().nullable(),
 }).strict();
 
 export const WebsiteUncheckedUpdateManyWithoutUserInputSchema: z.ZodType<Prisma.WebsiteUncheckedUpdateManyWithoutUserInput> = z.object({
@@ -4149,6 +4262,7 @@ export const WebsiteUncheckedUpdateManyWithoutUserInputSchema: z.ZodType<Prisma.
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   url: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   favicon: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  deletedAt: z.union([ z.coerce.date(),z.lazy(() => NullableDateTimeFieldUpdateOperationsInputSchema) ]).optional().nullable(),
 }).strict();
 
 export const WpRSSUpdateWithoutUserInputSchema: z.ZodType<Prisma.WpRSSUpdateWithoutUserInput> = z.object({
