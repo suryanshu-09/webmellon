@@ -1,14 +1,9 @@
-import type { NextConfig } from "next";
-
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
 
-const nextConfig: NextConfig = {
+const nextConfig = {
   output: "standalone",
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   images: {
     remotePatterns: [
       // OAuth provider avatars
@@ -130,15 +125,16 @@ const nextConfig: NextConfig = {
   compress: true,
   poweredByHeader: false,
   generateEtags: true,
-  // Code splitting optimizations
-  // Disabled modularizeImports for lucide-react due to compatibility issues
-  // modularizeImports: {
-  //   'lucide-react': {
-  //     transform: 'lucide-react/dist/esm/icons/{{ kebabCase member }}',
-  //   },
-  // },
-  experimental: {
-    reactCompiler: true,
+  reactCompiler: true,
+  // Webpack config for handling pino/thread-stream compatibility
+  webpack: (config: any) => {
+    // Ignore test files in node_modules
+    config.module.rules.push({
+      test: /\.test\.(js|ts|mjs)$/,
+      loader: 'ignore-loader',
+    });
+    
+    return config;
   },
 };
 

@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
-    "build:analyze": "ANALYZE=true next build",
+    "build": "next build --webpack",
+    "build:analyze": "ANALYZE=true next build --webpack",
     "start": "next start",
     "lint": "next lint",
     "test": "vitest",
@@ -89,6 +89,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.3.0",
     "eslint-plugin-react-hooks": "^6.0.0-rc.1",
+    "ignore-loader": "^0.1.2",
     "jsdom": "^27.2.0",
     "postcss": "^8.5.3",
     "prisma": "^6.6.0",
