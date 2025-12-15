@@ -1,10 +1,6 @@
 import path from 'node:path'
-import { defineConfig } from 'prisma/config'
+import type { PrismaConfig } from 'prisma'
 
-export default defineConfig({
-  earlyAccess: true,
+export default {
   schema: path.join(__dirname, 'prisma', 'schema.prisma'),
-  seed: {
-    command: 'tsx prisma/seed.ts',
-  },
-})
+} satisfies PrismaConfig
