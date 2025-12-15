@@ -474,7 +474,7 @@ export const YtRSSOrderByWithRelationInputSchema: z.ZodType<Prisma.YtRSSOrderByW
   user: z.lazy(() => UserOrderByWithRelationInputSchema).optional()
 }).strict();
 
-export const YtRSSWhereUniqueInputSchema: z.ZodType<Prisma.YtRSSWhereUniqueInput> = z.union([
+export const YtRSSWhereUniqueInputSchema = z.union([
   z.object({
     id: z.number().int(),
     user_ytrss_channelId_unique: z.lazy(() => YtRSSUser_ytrss_channelId_uniqueCompoundUniqueInputSchema)
@@ -534,7 +534,7 @@ export const NewsRSSOrderByWithRelationInputSchema: z.ZodType<Prisma.NewsRSSOrde
   user: z.lazy(() => UserOrderByWithRelationInputSchema).optional()
 }).strict();
 
-export const NewsRSSWhereUniqueInputSchema: z.ZodType<Prisma.NewsRSSWhereUniqueInput> = z.union([
+export const NewsRSSWhereUniqueInputSchema = z.union([
   z.object({
     id: z.number().int(),
     user_newsrss_url_unique: z.lazy(() => NewsRSSUser_newsrss_url_uniqueCompoundUniqueInputSchema)
@@ -596,7 +596,7 @@ export const WpRSSOrderByWithRelationInputSchema: z.ZodType<Prisma.WpRSSOrderByW
   user: z.lazy(() => UserOrderByWithRelationInputSchema).optional()
 }).strict();
 
-export const WpRSSWhereUniqueInputSchema: z.ZodType<Prisma.WpRSSWhereUniqueInput> = z.union([
+export const WpRSSWhereUniqueInputSchema = z.union([
   z.object({
     id: z.number().int(),
     user_wprss_url_unique: z.lazy(() => WpRSSUser_wprss_url_uniqueCompoundUniqueInputSchema)
@@ -667,7 +667,7 @@ export const CatalogueOrderByWithRelationInputSchema: z.ZodType<Prisma.Catalogue
   websites: z.lazy(() => WebsiteOrderByRelationAggregateInputSchema).optional()
 }).strict();
 
-export const CatalogueWhereUniqueInputSchema: z.ZodType<Prisma.CatalogueWhereUniqueInput> = z.union([
+export const CatalogueWhereUniqueInputSchema = z.union([
   z.object({
     id: z.number().int(),
     user_catalogue_name_unique: z.lazy(() => CatalogueUser_catalogue_name_uniqueCompoundUniqueInputSchema)
@@ -747,7 +747,7 @@ export const WebsiteOrderByWithRelationInputSchema: z.ZodType<Prisma.WebsiteOrde
   user: z.lazy(() => UserOrderByWithRelationInputSchema).optional()
 }).strict();
 
-export const WebsiteWhereUniqueInputSchema: z.ZodType<Prisma.WebsiteWhereUniqueInput> = z.union([
+export const WebsiteWhereUniqueInputSchema = z.union([
   z.object({
     id: z.number().int(),
     user_website_name_unique: z.lazy(() => WebsiteUser_website_name_uniqueCompoundUniqueInputSchema),
@@ -859,7 +859,7 @@ export const UserOrderByWithRelationInputSchema: z.ZodType<Prisma.UserOrderByWit
   yt: z.lazy(() => YtRSSOrderByRelationAggregateInputSchema).optional()
 }).strict();
 
-export const UserWhereUniqueInputSchema: z.ZodType<Prisma.UserWhereUniqueInput> = z.union([
+export const UserWhereUniqueInputSchema = z.union([
   z.object({
     id: z.string().cuid(),
     email: z.string()
@@ -957,7 +957,7 @@ export const AccountOrderByWithRelationInputSchema: z.ZodType<Prisma.AccountOrde
   user: z.lazy(() => UserOrderByWithRelationInputSchema).optional()
 }).strict();
 
-export const AccountWhereUniqueInputSchema: z.ZodType<Prisma.AccountWhereUniqueInput> = z.object({
+export const AccountWhereUniqueInputSchema = z.object({
   provider_providerAccountId: z.lazy(() => AccountProviderProviderAccountIdCompoundUniqueInputSchema)
 })
 .and(z.object({
@@ -1042,7 +1042,7 @@ export const SessionOrderByWithRelationInputSchema: z.ZodType<Prisma.SessionOrde
   user: z.lazy(() => UserOrderByWithRelationInputSchema).optional()
 }).strict();
 
-export const SessionWhereUniqueInputSchema: z.ZodType<Prisma.SessionWhereUniqueInput> = z.object({
+export const SessionWhereUniqueInputSchema = z.object({
   sessionToken: z.string()
 })
 .and(z.object({
@@ -1094,7 +1094,7 @@ export const VerificationTokenOrderByWithRelationInputSchema: z.ZodType<Prisma.V
   expires: z.lazy(() => SortOrderSchema).optional()
 }).strict();
 
-export const VerificationTokenWhereUniqueInputSchema: z.ZodType<Prisma.VerificationTokenWhereUniqueInput> = z.object({
+export const VerificationTokenWhereUniqueInputSchema = z.object({
   identifier_token: z.lazy(() => VerificationTokenIdentifierTokenCompoundUniqueInputSchema)
 })
 .and(z.object({

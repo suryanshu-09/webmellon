@@ -16,7 +16,8 @@
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:report": "playwright show-report",
     "test:all": "npm run test:run && npm run test:e2e",
-    "db:deploy": "npx prisma migrate deploy && npx prisma generate",
+    "db:deploy": "npx prisma migrate deploy && npx prisma generate && node scripts/fix-zod-types.mjs",
+    "postgenerate": "node scripts/fix-zod-types.mjs",
     "db:seed": "tsx prisma/seed.ts",
     "db:reset": "npx prisma migrate reset && npm run db:seed"
   },
